@@ -1,0 +1,17 @@
+query UserPayments($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+  id 
+  payments {
+    amount
+    createdAt
+    description
+    image {
+      url
+    }
+    paymentFor
+    refNo
+    status
+    updatedAt
+}
+}
+}

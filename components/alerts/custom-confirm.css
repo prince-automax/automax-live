@@ -1,0 +1,51 @@
+.custom-confirm .modal-content {
+    box-shadow: none;
+    border: none;
+  }
+  
+  .custom-confirm .modal-dialog {
+    margin: 10px auto;
+    width: 350px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .custom-confirm .modal-header {
+    padding: 15px;
+    border-bottom: none;
+  }
+  
+  .custom-confirm .modal-body {
+    padding: 20px;
+  }
+  
+  .custom-confirm .modal-footer {
+    padding: 15px;
+    border-top: none;
+  }
+  
+  .custom-confirm .btn-ok {
+    background-color: #4caf50;
+    border-color: #4caf50;
+    color: #fff;
+  }
+  
+  .custom-confirm .btn-ok:hover {
+    background-color: #449d44;
+    border-color: #398439;
+    color: #fff;
+  }
+  
+  .custom-confirm .btn-cancel {
+    background-color: #f44336;
+    border-color: #f44336;
+    color: #fff;
+  }
+  
+  .custom-confirm .btn-cancel:hover {
+    background-color: #e53935;
+    border-color: #d32f2f;
+    color: #fff;
+  }
+  

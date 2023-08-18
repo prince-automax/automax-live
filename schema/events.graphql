@@ -1,0 +1,272 @@
+query Events($take: Int, $skip: Int!) {
+  events(take: $take, skip: $skip) {
+    id
+    eventNo
+    seller {
+      name
+    }
+    eventType {
+      name
+    }
+    eventCategory
+    status
+    startDate
+    endDate
+    noOfBids
+    location {
+      name
+      state {
+        name
+      }
+      country
+    }
+    ExcelFile {
+      file {
+        url
+      }
+    }
+    termsAndConditions
+    vehiclesCount
+  }
+}
+
+query LiveEvents($take: Int!, $skip: Int!, $where: EventWhereInput) {
+  liveEvents(take: $take, skip: $skip, where: $where) {
+    id
+    eventNo
+    seller {
+      name
+    }
+    eventType {
+      name
+    }
+    eventCategory
+    startDate
+    endDate
+    noOfBids
+    location {
+      name
+      country
+      state {
+        name
+      }
+      city
+    }
+    ExcelFile {
+      file {
+        url
+      }
+    }
+    downloadableFile {
+      url
+}
+    termsAndConditions
+    vehiclesCount
+  }
+}
+
+query UpcomingEvents($take: Int, $skip: Int!, $where: EventWhereInput) {
+  upcomingEvents(take: $take, skip: $skip, where: $where) {
+    id
+    vehiclesCount
+    eventNo
+    seller {
+      name
+    }
+    eventType {
+      name
+    }
+    eventCategory
+    startDate
+    noOfBids
+    endDate
+    location {
+      name
+      country
+      state {
+        name
+      }
+      city
+    }
+    downloadableFile {
+      url
+    }
+    termsAndConditions
+  }
+}
+
+query CompliedEvents($take: Int, $skip: Int!, $where: EventWhereInput) {
+  compliedEvents(take: $take, skip: $skip, where: $where) {
+    id
+    eventNo
+    seller {
+      name
+    }
+    eventType {
+      name
+    }
+    eventCategory
+    startDate
+    noOfBids
+    endDate
+    location {
+      name
+      country
+      state {
+        name
+      }
+      city
+    }
+    downloadableFile {
+      url
+    }
+    termsAndConditions
+  }
+}
+
+query GetEvent(
+  $where: EventWhereUniqueInput!
+  $orderBy: [VehicleOrderByInput!]!
+  $take: Int
+  $skip: Int!
+  $userVehicleBidsOrderBy2: [BidOrderByInput!]!
+) {
+  event(where: $where) {
+    id
+    eventNo
+    startDate
+    endDate
+    vehiclesCount
+    seller {
+      name
+    }
+    eventType {
+      name
+    }
+    noOfBids
+    location {
+      name
+      country
+      state {
+        name
+      }
+      city
+    }
+    ExcelFile {
+      file {
+        url
+      }
+    }
+    termsAndConditions
+    vehicles(orderBy: $orderBy) {
+      id
+      registrationNumber
+      loanAgreementNo
+      registeredOwnerName
+      make
+      model
+      watchedByCount
+      varient
+      categoty
+      fuel
+      type
+      rcStatus
+      yearOfManufacture
+      ownership
+      kmReading
+      startPrice
+      reservePrice
+      repoDt
+      currentBidAmount
+      veicleLocation
+      yardLocation
+      chassisNo
+      engineNo
+      frontImage
+      backImage
+      leftImage
+      rightImage
+      inspectionLink
+      currentBidUser {
+        id
+      }
+      bidTimeExpire
+      myBidRank
+      userVehicleBidsCount
+      userVehicleBids(
+        take: $take
+        skip: $skip
+        orderBy: $userVehicleBidsOrderBy2
+      ) {
+        amount
+      }
+      totalBids
+      quoteIncreament
+      watchedBy {
+    id  
+    
+}
+    }
+    bidLock
+  }
+}
+
+mutation CreateBid($data: BidCreateInput!) {
+  createBid(data: $data) {
+    id
+  }
+}
+
+query ActiveBids($take: Int, $orderBy: [BidOrderByInput!]!) {
+  authenticatedItem {
+    ... on User {
+      activeBids {
+        registrationNumber
+        event {
+          eventNo
+          seller {
+            name
+          }
+          eventType {
+            name
+          }
+          eventCategory
+          startDate
+          endDate
+          location {
+            state {
+              name
+            }
+          }
+        }
+        type
+        categoty
+        fuel
+        varient
+        make
+        registeredOwnerName
+        model
+        rcStatus
+        yearOfManufacture
+        ownership
+        kmReading
+        insuranceStatus
+        yardLocation
+        engineNo
+        chassisNo
+        userVehicleBids(take: $take, orderBy: $orderBy) {
+          amount
+        }
+        currentBidUser {
+          id
+          updatedAt
+        }
+        currentBidAmount
+        bidAmountUpdate
+        bidStatus
+        id
+        bidTimeExpire
+      }
+    }
+  }
+}

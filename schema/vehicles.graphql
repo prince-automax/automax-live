@@ -1,0 +1,175 @@
+mutation UpdateVehicle(
+  $where: VehicleWhereUniqueInput!
+  $data: VehicleUpdateInput!
+) {
+  updateVehicle(where: $where, data: $data) {
+    id
+  }
+}
+
+query Vehicles(
+  $where: VehicleWhereInput!
+  $take: Int
+  $skip: Int!
+  $userVehicleBidsOrderBy2: [BidOrderByInput!]!
+) {
+  vehicles(where: $where) {
+    vehicleEventStatus
+    registrationNumber
+    make
+    model
+    varient
+    categoty
+    fuel
+    type
+    rcStatus
+    yearOfManufacture
+    ownership
+    kmReading
+    insuranceStatus
+    frontImage
+    backImage
+    leftImage
+    rightImage
+    currentBidAmount
+    bidStartTime
+    bidTimeExpire
+    vehicleIndexNo
+    myBidRank
+    id
+    startPrice
+    powerSteering
+    shape
+    color
+    state
+    city
+    engineNo
+    chassisNo
+    permit
+    fitness
+    fitnessPermit
+    tax
+    insurance
+    insuranceValidTill
+    taxValidityDate
+    yardLocation
+    mileage
+    gearBox
+    paymentTerms
+    dateOfRegistration
+    hypothication
+    climateControl
+    doorCount
+    area
+    vehicleCondition
+    inspectionLink
+    event {
+      startDate
+      noOfBids
+      bidLock
+    }
+    userVehicleBidsCount
+    totalBids
+    myBidRank
+    quoteIncreament
+    userVehicleBids(
+      take: $take
+      skip: $skip
+      orderBy: $userVehicleBidsOrderBy2
+    ) {
+      amount
+    }
+    repoDt
+    veicleLocation
+    autobseContact
+    autobse_contact_person
+    clientContactPerson
+    clientContactNo
+    buyerFees
+    vehicleRemarks
+    registeredOwnerName
+    loanAgreementNo
+    parkingCharges
+    additionalRemarks
+    parkingRate
+  }
+}
+
+# query OpenAuctionVehicles($where: VehicleWhereInput!) {
+#   vehicles(where: $where) {
+#     vehicleEventStatus
+#     registrationNumber
+#     make
+#     model
+#     varient
+#     categoty
+#     fuel
+#     type
+#     rcStatus
+#     yearOfManufacture
+#     ownership
+#     kmReading
+#     insuranceStatus
+#     frontImage
+#     backImage
+#     leftImage
+#     rightImage
+#     currentBidAmount
+#     bidStartTime
+#     bidTimeExpire
+#     vehicleIndexNo
+#     myBidRank
+#     id
+#     startPrice
+#   }
+# }
+
+
+query OpenAuctionVehicles($where: VehicleWhereInput!) {
+  vehicles(where: $where) {
+    vehicleEventStatus
+    registrationNumber
+    make
+    model
+    varient
+    categoty
+    fuel
+    type
+    rcStatus
+    yearOfManufacture
+    ownership
+    kmReading
+    insuranceStatus
+    loanAgreementNo
+    mileage
+    yardLocation
+    veicleLocation
+    vehicleRemarks
+    engineNo
+    chassisNo
+    insuranceValidTill
+    repoDt
+    shape
+    
+    frontImage
+    backImage
+    leftImage
+    rightImage
+    currentBidAmount
+    bidStartTime
+    bidTimeExpire
+    vehicleIndexNo
+    myBidRank
+    id
+    bidStatus
+    quoteIncreament
+    startBidAmount
+    startPrice
+  event {
+    
+    gapInBetweenVehicles
+    endDate
+    status
+    }
+}
+}

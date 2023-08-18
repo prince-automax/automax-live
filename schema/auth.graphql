@@ -1,0 +1,38 @@
+mutation SendOTP($mobile: String!) {
+  sendUserMagicAuthLink(mobile: $mobile)
+}
+
+mutation VerifyOTP($mobile: String!, $token: String!) {
+  redeemUserMagicAuthToken(mobile: $mobile, token: $token) {
+    ... on RedeemUserMagicAuthTokenSuccess {
+      token
+      item {
+        firstName
+        lastName
+        id
+        mobile
+        email
+        status
+      }
+    }
+  }
+}
+
+mutation AuthenticateUserWithPassword($mobile: String!, $password: String!) {
+  authenticateUserWithPassword(mobile: $mobile, password: $password) {
+    ... on UserAuthenticationWithPasswordSuccess {
+      sessionToken
+      item {
+        id
+        lastName
+        email
+        firstName
+        username
+        mobile
+        status
+      }
+    }
+  }
+}
+
+

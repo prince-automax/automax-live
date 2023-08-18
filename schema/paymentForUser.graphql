@@ -1,0 +1,13 @@
+query PaymentsDetails($orderBy: [PaymentOrderByInput!]!, $skip: Int!, $take: Int, $where: PaymentWhereInput!) {
+  payments(orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
+    amount
+    image {
+      url
+      width
+      height
+    }
+    createdAt
+    paymentFor
+    description
+  }
+}

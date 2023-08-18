@@ -1,0 +1,9 @@
+query LiveWatchListItem($where: UserWhereUniqueInput!, $watchListWhere2: VehicleWhereInput!) {
+  user(where: $where) {
+    watchList(where: $watchListWhere2) {
+  id
+  registrationNumber
+
+}
+}
+}

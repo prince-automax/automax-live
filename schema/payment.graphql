@@ -1,0 +1,20 @@
+mutation CreatePayment($data: PaymentCreateInput!) {
+  createPayment(data: $data) {
+    amount
+    id
+  }
+}
+
+query Payments($orderBy: [PaymentOrderByInput!]!, $skip: Int!, $take: Int) {
+  payments(orderBy: $orderBy, skip: $skip, take: $take) {
+    amount
+    image {
+      url
+      width
+      height
+    }
+    createdAt
+    paymentFor
+    description
+  }
+}

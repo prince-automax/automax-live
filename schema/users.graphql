@@ -1,0 +1,198 @@
+query AuthenticatedUser {
+  authenticatedItem {
+    ... on User {
+      id
+      firstName
+      lastName
+      status
+      email
+      mobile
+    }
+  }
+}
+
+query getUser($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    id
+    firstName
+    lastName
+    email
+    mobile
+    status
+    pancard {
+      id
+      filesize
+      width
+      height
+      extension
+      url
+    }
+    password {
+      isSet
+    }
+    idProof {
+      id
+      filesize
+      height
+      width
+      extension
+      url
+    }
+    idProofType
+    idProofNo
+    country
+    states {
+      name
+    }
+    city
+    state
+    username
+    pancardNo
+    createdAt
+    idProofBack {
+      url
+      filesize
+      width
+      height
+      extension
+      id
+    }
+     payments {
+      paymentFor
+      status
+      RegistrationExpire
+    }
+    currentVehicleBuyingLimit {
+      vehicleBuyingLimit
+      specialVehicleBuyingLimit
+    }
+    specialVehicleBuyingLimit
+    vehicleBuyingLimit
+    
+  }
+}
+
+mutation CreateUserWithName($data: UserCreateInput!) {
+  createUser(data: $data) {
+    id
+    firstName
+    lastName
+    mobile
+  }
+}
+
+mutation CreateUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    id
+    username
+    mobile
+  }
+}
+
+mutation UpdateUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
+  updateUser(where: $where, data: $data) {
+    id
+    firstName
+    lastName
+    email
+    mobile
+  }
+}
+
+mutation ResetPassword($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
+  updateUser(where: $where, data: $data) {
+    password {
+      isSet
+    }
+  }
+}
+
+query Users($where: UserWhereInput!) {
+  users(where: $where) {
+    id
+  }
+}
+
+query Query {
+  time
+}
+
+mutation addToWatchList($data: [UserUpdateArgs!]!) {
+  updateUsers(data: $data) {
+    id
+  }
+}
+
+query duplicateDataCheck($where: UserWhereInput) {
+  sudoUsersCount(where: $where)
+}
+
+query WatchList(
+  $orderBy: [VehicleOrderByInput!]!
+  $take: Int
+  $skip: Int!
+  $userVehicleBidsOrderBy2: [BidOrderByInput!]!
+  $userVehicleBidsTake2: Int
+  $userVehicleBidsSkip2: Int!
+) {
+  authenticatedItem {
+    ... on User {
+      watchList(orderBy: $orderBy, take: $take, skip: $skip) {
+        id
+        registrationNumber
+        loanAgreementNo
+        registeredOwnerName
+        make
+        model
+        watchedByCount
+        varient
+        categoty
+        fuel
+        type
+        rcStatus
+        yearOfManufacture
+        ownership
+        kmReading
+        startPrice
+        reservePrice
+        currentBidAmount
+        veicleLocation
+        yardLocation
+        chassisNo
+        engineNo
+        frontImage
+           backImage
+        leftImage
+        rightImage
+
+        currentBidUser {
+          id
+        }
+        bidTimeExpire
+        myBidRank
+        userVehicleBidsCount
+        event {
+          seller {
+            name
+          }
+          noOfBids
+          bidLock
+          startDate
+        }
+        userVehicleBids(
+          orderBy: $userVehicleBidsOrderBy2
+          take: $userVehicleBidsTake2
+          skip: $userVehicleBidsSkip2
+        ) {
+          amount
+        }
+        totalBids
+        vehicleEventStatus
+        quoteIncreament
+        
+      }
+      
+    }
+     
+  }
+}

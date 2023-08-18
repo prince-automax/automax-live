@@ -1,0 +1,65 @@
+query MyQuotes(
+  $where: VehicleWhereInput!
+  $take: Int
+  $orderBy: [BidOrderByInput!]!
+  $vehiclesOrderBy2: [VehicleOrderByInput!]!
+) {
+  vehicles(where: $where, orderBy: $vehiclesOrderBy2) {
+    registrationNumber
+    event {
+      eventNo
+      seller {
+        name
+      }
+      eventType {
+        name
+      }
+      eventCategory
+      startDate
+      endDate
+      location {
+        state {
+          name
+        }
+      }
+    }
+    type
+    categoty
+    fuel
+    varient
+    make
+    registeredOwnerName
+    model
+    rcStatus
+    yearOfManufacture
+    ownership
+    kmReading
+    insuranceStatus
+    yardLocation
+    engineNo
+    chassisNo
+    userVehicleBids(take: $take, orderBy: $orderBy) {
+      amount
+      bidVehicle {
+        currentBidUser {
+          id
+        }
+      }
+    }
+    currentBidAmount
+    bidAmountUpdate
+    bidStatus
+    id
+    bidTimeExpire
+    vehicleEventStatus
+  }
+}
+
+query SudoBids($where: BidWhereInput) {
+  sudoBids(where: $where) {
+    userId
+      
+    amount
+    name
+  }
+}

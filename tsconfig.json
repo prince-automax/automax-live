@@ -1,0 +1,47 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "target": "es2015",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "baseUrl": "./",
+        "paths": {
+            "@assets/*": [
+                "./public/assets/*"
+            ],
+            "@utils/*": [
+                "./utils/*"
+            ],
+            "@components/*": [
+                "./components/*"
+            ],
+            "@/*": [
+                "./*"
+            ]
+        },
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "esnext"
+        ],
+        "esModuleInterop": true,
+        "strict": false,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "incremental": true
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx"
+, "pages/passbook.tsx", "pages/showworkbook.js"    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

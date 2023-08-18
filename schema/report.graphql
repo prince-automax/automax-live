@@ -1,0 +1,22 @@
+query Report($where: VehicleWhereInput!) {
+  vehicles(where: $where) {
+    id
+    bidStatus
+    chassisNo
+    registrationNumber
+    make
+    vehicleEventStatus
+    startPrice
+    currentBidAmount
+   
+    event {
+      seller {
+        name  
+        id
+
+      }
+      eventNo
+      endDate
+    }
+  }
+}
