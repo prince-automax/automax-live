@@ -264,44 +264,7 @@ function OpenAuctions() {
     graphQLClient({ Authorization: `Bearer ${accessToken}` })
   );
 
-  // async function CallBid(amount, vehicleId) {
-  //   const confirmed = await Swal.fire({
-  //     text: "Are you sure to bid for Rs. " + amount + "?",
-  //     title: "BID CONFIMATION",
-  //     icon: "question",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, bid for it!",
-  //     customClass: {
-  //       popup: "animated bounceInDown",
-  //       container: "custom-swal-container",
-  //     },
-  //   });
-  //   // const confirmed = confirm(`Are you sure to bid for\nRs. ${amount}`);
-  //   if (confirmed) {
-  //     callCreateBid
-  //       .mutateAsync({
-  //         data: {
-  //           amount: parseInt(amount),
-  //           bidVehicle: {
-  //             connect: {
-  //               id: vehicleId,
-  //             },
-  //           },
-  //         },
-  //       })
-  //       .then(() => {
-  //         // alert("Your bid has been submitted");
-  //         Swal.fire("Success!", "Your bid has been submitted.", "success");
-  //       })
-  //       .catch((error) => {
-  //       //  alert(error.message);
-     
-  //         // Swal.fire("error!", error.message);
-  //       });
-  //   }
-  // }
+  
 
 
   async function CallBid(amount, vehicleId) {
@@ -389,7 +352,7 @@ function OpenAuctions() {
     }
   }
 
-// console.log('return form upcomingSecondsLeft()',typeof(upcomingSecondsLeft()));
+
 
   function BindVehicleImage(vehicle) {
     if (vehicle) {
@@ -530,13 +493,13 @@ function OpenAuctions() {
                 >
                   <div className="w-full max-w-3xl mx-auto sm:block">
                     <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
-                      {upcoming && upcoming[1] && upcoming[1].frontImage && (
+                      {upcoming && upcoming[1] && upcoming[1].rightImage && (
                         <Tab.Panel key="i1">
                           <div className="text-sm py-2">
                             Reg No. : {upcoming[1].registrationNumber}
                           </div>
                           <Image
-                            src={upcoming[1].frontImage}
+                            src={upcoming[1].rightImage}
                             alt="i1"
                             className="w-full h-full object-center object-cover border border-red-500 border-8   sm:rounded-lg"
                             width={500}
@@ -732,16 +695,17 @@ function OpenAuctions() {
                       )} */}
 
 
-{liveItem?.frontImage && (
+{liveItem?.rightImage && (
                     <div
                       className="flex-none min-w-fit relative p-6 hover:cursor-pointer"
                       onClick={() => {
-                        BindVehicleImage(liveItem);
+                        // BindVehicleImage(liveItem);
+                        setImages((liveItem?.rightImage).split(','))
                         setShowImageCarouselModal(true);
                       }}
                     >
                       <Image
-                            src={liveItem.frontImage}
+                            src={liveItem?.rightImage}
                             alt="i1"
                             className="w-full h-full object-center object-cover sm:rounded-lg"
                             width={1000}

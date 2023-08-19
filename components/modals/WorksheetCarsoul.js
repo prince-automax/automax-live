@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
-export default function ImageCarouselModal({ open, close, ...props }) {
+export default function WorksheetCarsoul({ open, close, ...props }) {
   const options = {
     type: "loop",
     gap: "1rem",
@@ -79,7 +79,7 @@ export default function ImageCarouselModal({ open, close, ...props }) {
                           <div className="w-full h-full object-cover">
                             <Image
                               alt={`image${index}`}
-                              src={image}
+                              src={image.src}
                               width={900}
                               height={500}
                             />
@@ -99,6 +99,6 @@ export default function ImageCarouselModal({ open, close, ...props }) {
   );
 }
 
-ImageCarouselModal.defaultProps = {
+WorksheetCarsoul.defaultProps = {
   title: null,
 };

@@ -186,24 +186,7 @@ function ProfileUpdate() {
     return <Loader />;
   }
 
-  // const initialValues = {
-  //   id: data["user"]["id"],
-  //   firstName: data["user"]["firstName"],
-  //   lastName: data["user"]["lastName"],
-  //   email: data["user"]["email"],
-  //   city: data["user"]["city"] ? data["user"]["city"] : "Kochi-Kerala",
-  //   state: data["user"]["state"] ? data["user"]["state"] : "Kerala",
-  //   country: data["user"]["country"] ? data["user"]["country"] : "India",
-  //   password: "",
-  //   passwordConfirmation: "",
-  //   mobile: data["user"]["mobile"],
-  //   idProofType: "aadhar",
-  //   idProofNo: data["user"]["idProofNo"],
-  //   pancardNo: data["user"]["pancardNo"],
-  //   pancard: null,
-  //   idProof: null,
-  //   idProofBack: null,
-  // };
+
 
   const validationSchema = Yup.object({
     id: Yup.string().required(),

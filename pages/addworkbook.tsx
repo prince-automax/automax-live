@@ -71,17 +71,7 @@ function AddWorkBook() {
 
   const validationSchema = Yup.object().shape({
     RegistrationNo: Yup.string().required('Registration Number is required and must'),
-    // make: Yup.string().required('Make is required'),
-    // model: Yup.string().required('Model is required'),
-    // ChaissNo: Yup.string().required('Chaiss No is required'),
-    // EngineNo: Yup.string().required('Engine No is required'),
-    // Varient: Yup.string().required('Varient is required'),
-    // VehicleConditon: Yup.string().required('Vehicle Condition is required'),
-    // image1: Yup.mixed().required('Image 1 is required').nullable(),
-    // image2: Yup.mixed().required('Image 2 is required').nullable(),
-    // image3: Yup.mixed().required('Image 3 is required').nullable(),
-    // image4: Yup.mixed().required('Image 4 is required').nullable(),
-    // image5: Yup.mixed().required('Image 5 is required').nullable(),
+   
   });
 
  
@@ -167,6 +157,9 @@ function AddWorkBook() {
         input.value = ''; // Clear the value of the file input
       }
     });
+    toast.success(`Submitted successfully`);
+    Router.push("/showworkbook");
+   
   };
 
   return (

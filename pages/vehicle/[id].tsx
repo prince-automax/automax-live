@@ -92,8 +92,8 @@ function Vehicle() {
     }
   );
 
-  // console.log("this is the data from VECHILES",data);
-  console.log("001", vehicle);
+  console.log("11",data);
+  // console.log("001", vehicle);
   
 
   let [tabs] = useState({
@@ -110,48 +110,14 @@ function Vehicle() {
   }, [data]);
 
   useEffect(() => {
-    if (vehicle) {
-      const tempImages = [];
-      let count = 0;
-      if (vehicle?.frontImage !== "") {
-        tempImages.push({
-          id: 1,
-          name: "Front Image",
-          src: vehicle?.frontImage,
-          alt: "Front Image.",
-        });
-      }
-      if (vehicle?.backImage !== "") {
-        tempImages.push({
-          id: 2,
-          name: "Back Image",
-          src: vehicle?.backImage,
-          alt: "Back Image.",
-        });
-      }
-      if (vehicle?.leftImage !== "") {
-        tempImages.push({
-          id: 3,
-          name: "Left Image",
-          src: vehicle?.leftImage,
-          alt: "Left Image.",
-        });
-      }
-      if (vehicle?.rightImage !== "") {
-        tempImages.push({
-          id: 4,
-          name: "Right Image",
-          src: vehicle?.rightImage,
-          alt: "Right Image.",
-        });
-      }
-      setImages(tempImages);
-    } else {
-      setImages([]);
-    }
-  }, [vehicle]);
+    console.log('99',vehicle);
+    
+       setImages((vehicle?.rightImage)?.split(','))
+  } , [vehicle]);
 
-  console.log('this is images',images);
+  console.log("pop",vehicle?.rightImage);
+  
+  console.log('img',images);
   
   async function CallBid(amount, vehicleId) {
     const confirmed = await Swal.fire({
@@ -238,13 +204,13 @@ function Vehicle() {
               as="div"
               className="flex flex-col max-w-2xl justify-between"
             >
-              <div className="w-full max-w-3xl mx-auto sm:block">
+              <div className="w-full  max-w-3xl mx-auto sm:block">
                 <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
-                  {images.map((image, index) => (
+                  {images?.map((image, index) => (
                     <Tab.Panel key={image.id}>
                       <Image
                         alt={`image${index}`}
-                        src={image.src}
+                        src={image}
                         className="w-full h-full object-center object-cover sm:rounded-lg"
                         width={500}
                         height={300}
@@ -254,20 +220,20 @@ function Vehicle() {
                 </Tab.Panels>
               </div>
 
-              <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
+              <div className=" mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
                 <Tab.List className="grid grid-cols-4 gap-6">
-                  {images.map((image, index) => (
+                  {images?.map((image, index) => (
                     <Tab
-                      key={image.id}
+                      key={index}
                       className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
                     >
                       {({ selected }) => (
                         <>
-                          <span className="sr-only">{image.name}</span>
+                          {/* <span className="sr-only">{image.name}</span> */}
                           <span className="absolute inset-0 rounded-md overflow-hidden">
                             <Image
                               alt={`image${index}`}
-                              src={image.src}
+                              src={image}
                               className="w-full h-full object-center object-cover"
                               layout="fill"
                             />
@@ -293,15 +259,17 @@ function Vehicle() {
               <div className="mb-4 text-xl font-semibold text-gray-900">
                 Specifications
               </div>
-              <div className="w-full mt-4">
-                <Tab.Group>
-                  <Tab.List className="flex justify-between space-x-2 rounded-xl">
+              <div className="w-full  mt-4">
+                
+                <Tab.Group  >
+                  <Tab.List className="flex justify-between space-x-1 rounded-xl">
+                  {/* <div className="flex bg-amber-500"> */}
                     {Object.keys(tabs).map((tab) => (
                       <Tab
                         key={tab}
                         className={({ selected }) =>
                           classNames(
-                            "w-full px-4 rounded-lg py-2.5 text-sm font-medium leading-5 bg-gray-200",
+                            "w-full px-1 rounded-lg py-2.5 text-sm font-medium leading-5 bg-gray-200",
                             "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none",
                             selected
                               ? "bg-blue-900 text-white shadow"
@@ -312,8 +280,9 @@ function Vehicle() {
                         {tab}
                       </Tab>
                     ))}
+                    {/* </div> */}
                   </Tab.List>
-
+              
                   <Tab.Panels className="mt-4">
                     <Tab.Panel
                       className={"rounded-xl bg-white focus:outline-none"}
@@ -336,7 +305,9 @@ function Vehicle() {
                       <OtherDetailsTab vehicle={vehicle} />
                     </Tab.Panel>
                   </Tab.Panels>
+              
                 </Tab.Group>
+                
               </div>
             </div>
           </section>
