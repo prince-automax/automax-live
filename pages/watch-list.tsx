@@ -115,51 +115,51 @@ refetch()
     }
   );
 
-  function BindVehicleImage(vehicle) {
+  // function BindVehicleImage(vehicle) {
 
    
     
-    if (vehicle) {
-      const tempImages = [];
-      let count = 0;
-      if (vehicle?.frontImage !== "") {
-        tempImages.push({
-          id: 1,
-          name: "Front Image",
-          src: vehicle?.frontImage,
-          alt: "Front Image.",
-        });
-      }
-      if (vehicle?.backImage !== "") {
-        tempImages.push({
-          id: 2,
-          name: "Back Image",
-          src: vehicle?.backImage,
-          alt: "Back Image.",
-        });
-      }
-      if (vehicle?.leftImage !== "") {
-        tempImages.push({
-          id: 3,
-          name: "Left Image",
-          src: vehicle?.leftImage,
-          alt: "Left Image.",
-        });
-      }
-      if (vehicle?.rightImage !== "") {
-        tempImages.push({
-          id: 4,
-          name: "Right Image",
-          src: vehicle?.rightImage,
-          alt: "Right Image.",
-        });
-      }
+  //   if (vehicle) {
+  //     const tempImages = [];
+  //     let count = 0;
+  //     if (vehicle?.frontImage !== "") {
+  //       tempImages.push({
+  //         id: 1,
+  //         name: "Front Image",
+  //         src: vehicle?.frontImage,
+  //         alt: "Front Image.",
+  //       });
+  //     }
+  //     if (vehicle?.backImage !== "") {
+  //       tempImages.push({
+  //         id: 2,
+  //         name: "Back Image",
+  //         src: vehicle?.backImage,
+  //         alt: "Back Image.",
+  //       });
+  //     }
+  //     if (vehicle?.leftImage !== "") {
+  //       tempImages.push({
+  //         id: 3,
+  //         name: "Left Image",
+  //         src: vehicle?.leftImage,
+  //         alt: "Left Image.",
+  //       });
+  //     }
+  //     if (vehicle?.rightImage !== "") {
+  //       tempImages.push({
+  //         id: 4,
+  //         name: "Right Image",
+  //         src: vehicle?.rightImage,
+  //         alt: "Right Image.",
+  //       });
+  //     }
    
-      setImages(tempImages);
-    } else {
-      setImages([]);
-    }
-  }
+  //     setImages(tempImages);
+  //   } else {
+  //     setImages([]);
+  //   }
+  // }
 
   function SecondsLeft(item) {
     try {
@@ -298,16 +298,17 @@ refetch()
               >
                  
 
-                {item?.frontImage && (
+                {item?.rightImage && (
                   <div className="flex-none w-70 h-56  sm:max-md:h-56 sm:max-md:w-full md:h-auto sm:w-60 relative p-6 hover:cursor-pointer"
                   onClick={() => {
-                    BindVehicleImage(item);
+                    // BindVehicleImage(item);
+                    setImages((item?.rightImage).split(','))
                     setShowImageCarouselModal(true);
                   }}
                   >
                     <Image
                       alt=""
-                      src={item?.frontImage}
+                      src={item?.rightImage}
                       layout="fill"
                       className="absolute inset-0 w-full h-full object-cover rounded"
                     />

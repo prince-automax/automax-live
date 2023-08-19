@@ -21,7 +21,7 @@ import { faCar,faCashRegister,faCog,faImages,   } from '@fortawesome/free-solid-
   import graphQLClient from "@utils/useGQLQuery";
   import Router from "next/router";
   import Link from "next/link";
-  import ImageCarouselModal from "@components/modals/ImageCarouselModal";
+  import WorksheetCarsoul from "@components/modals/WorksheetCarsoul";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
   function WorkBooks() {
     const router = useRouter();
@@ -305,74 +305,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
             )}
 </div>
 
-            {/*  */}
-                         {/* <div className="col-span-6 sm:col-span-3">
-                      <p className="text-md leading-6 font-medium text-gray-900">
-                          Image 2
-                        </p>
-                        <input
-                          type="file"
-                          name="image2"
-                          
-                        
-                          width="w-full"
-                          placeholder="Back image"
-                          className="py-2 px-2 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 outline-none border border-gray-300 rounded-md"
-                         
-                        />
-                        
-                      </div>
-                      <div className="col-span-6 sm:col-span-3">
-                      <p className="text-md leading-6 font-medium text-gray-900">
-                         Image 3
-                        </p>
-                        <input
-                          type="file"
-                          name="image3"
-                          
-                        
-                          width="w-full"
-                          placeholder="Left image"
-                          className="py-2 px-2 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 outline-none border border-gray-300 rounded-md"
-                         
-                        />
-                        
-                      </div>
-                      <div className="col-span-6 sm:col-span-3">
-                      <p className="text-md leading-6 font-medium text-gray-900">
-                          Image 4
-                        </p>
-                          <input
-                            type="file"
-                          
-                            name="image4"
-                            
-                          
-                            width="w-full"
-                            placeholder="Select an image to upload"
-                            className="py-2 px-2 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 outline-none border border-gray-300 rounded-md"
-                            
-                          />
-                        
-                      </div>
-                      <div className="col-span-6 sm:col-span-3">
-                      <p className="text-md leading-6 font-medium text-gray-900">
-                          Image 5
-                        </p>
-                          <input
-                            type="file"
-                          
-                            name="image5"
-                            
-                           
-                            width="w-full"
-                            placeholder="Select an image to upload"
-                            className="py-2 px-2 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 outline-none border border-gray-300 rounded-md"
-                            
-                          />
-                        
-                      </div>  */}
-                     {/* <div className="col-span-6 sm:col-span-3"></div> */}
+            
                      </div>
 
                     
@@ -384,7 +317,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
         </div>
     
     </div>
-    <ImageCarouselModal
+    <WorksheetCarsoul
         color="blue"
         open={showImageCarouselModal}
         close={() => setShowImageCarouselModal(false)}
