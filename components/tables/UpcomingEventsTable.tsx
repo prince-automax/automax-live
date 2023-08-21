@@ -114,6 +114,7 @@ useEffect(()=>{
       {
         Header:"Vehicle",
         accessor:"vehiclesCount",
+        Cell: ({ cell: { value } }) => (value ? value : ""),
       },
       {
         Header: "Category",
@@ -350,7 +351,7 @@ function MobielViewCard({index1, event, allowDownload,registered,registeredStatu
               <span className="font-semibold">vehicles :</span>
 
               <span className=" ">
-                {event?.vehiclesCount}
+              {event?.vehiclesCount > 0 ? event?.vechileCount : ''}
               </span>
             </div>
             <div className="flex w-full  justify-between">
