@@ -114,6 +114,8 @@ refetch()
     {
       Header:"Vehicle",
       accessor:"vehiclesCount",
+      Cell: ({ cell: { value } }) => (value ? value : ""),
+     
     },
     {
       Header: "Location",
@@ -229,8 +231,27 @@ EventsTable.defaultProps = {
   allowDownload: false,
 };
 
+
+
+
+function vechileCount(value){
+
+  console.log('vechilecount',value);
+  
+
+  return  (
+
+    <div>
+      <span>{value}</span>
+    </div>
+  )
+
+}
+
+
 function View(value, eventCategory) {
 
+  console.log('view',eventCategory);
   
 
   return (
@@ -407,7 +428,7 @@ function MobielViewCard({
               <span className="font-semibold">Vehicles :</span>
 
               <span className=" ">
-                {event?.vehiclesCount}
+                {event?.vehiclesCount > 0 ? event?.vechileCount : ''}
               </span>
             </div>
             <div className="flex w-full  justify-between">
