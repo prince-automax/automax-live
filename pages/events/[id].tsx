@@ -421,14 +421,14 @@ refetch()
                               {item?.kmReading ?? "N/A"} km
                             </dd>
                           </div>
-                          <div className="sm:col-span-1 flex items-center justify-between sm:block">
+                          {/* <div className=" sm:col-span-1 flex items-center justify-between sm:block">
                             <dt className="text-sm font-bold sm:font-medium text-gray-500">
                               Ownership
                             </dt>
                             <dd className="text-sm font-medium sm:font-normal file: text-gray-900">
                               {item?.ownership}
                             </dd>
-                          </div>
+                          </div> */}
                           <div className="sm:col-span-1 flex items-center justify-between sm:block">
                             <dt className="text-sm font-bold sm:font-medium text-gray-500">
                               RC Book
@@ -611,7 +611,8 @@ refetch()
                           {" "}
                           {SecondsLeft(item)}
                         </span>
-                        <div className="flex flex-col md:items-start justify-left text-xs sm:max-md:text-sm text-gray-700">
+                        <div className="hidden sm:block">
+                        <div className=" flex flex-col md:items-start justify-left text-xs sm:max-md:text-sm text-gray-700">
                           <span className="font-semibold">Start Date</span>
                           <span>
                             {data.event.startDate
@@ -620,6 +621,7 @@ refetch()
                                 )
                               : "NA"}
                           </span>
+                        </div>
                         </div>
                         <div className="flex flex-col md:items-start text-xs sm:max-md:text-sm text-gray-700">
                           <span className="font-semibold">End Date</span>
