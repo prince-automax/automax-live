@@ -51,6 +51,10 @@ function Events() {
   const [showCode, setShowCode] = useState(false);
   const [isNotInWatchlist, setIsNotInWatchlist] = useState(true);
   const [wathclistVehicls, setWatchlistvehicls] = useState([]);
+  const [demo, setDemo] = useState([]);
+
+
+
 
 
   // Event handler function to toggle the showCode state
@@ -104,9 +108,11 @@ function Events() {
     { cacheTime: 5, refetchInterval: interval, enabled: accessToken !== "" }
   );
 
-  console.log('liveevent',data);
+  // console.log('liveevent',data);
   
+// console.log('demo',demo);
 
+  
   const { data:workbook, isLoading:workbookLoading, refetch } =
   useUserWorkBookQuery<UserWorkBookQueryVariables>(
     graphQLClient({ Authorization: `Bearer ${accessToken}` })
@@ -339,7 +345,8 @@ refetch()
  
 // console.log('find',find);
 
-
+      // console.log('item?.rightImage',item?.rightImage);
+      
            
               return (
                
@@ -362,6 +369,7 @@ refetch()
                       onClick={() => {
                         // BindVehicleImage(item);
                         setImages((item?.rightImage).split(','))
+                       
                         setShowImageCarouselModal(true);
                       }}
                     >
