@@ -15,6 +15,8 @@ export default function ImageCarouselModal({ open, close, ...props }) {
     resetProgress: false,
   };
 
+  // console.log('PROPS',props);
+
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog
@@ -78,8 +80,8 @@ export default function ImageCarouselModal({ open, close, ...props }) {
                         <SplideSlide key={`${index}slide`}>
                           <div className="w-full h-full object-cover">
                             <Image
-                              alt={`image${index}`}
-                              src={image}
+                              alt={`image${image}`}
+                              src={image.trim()}
                               width={900}
                               height={500}
                             />

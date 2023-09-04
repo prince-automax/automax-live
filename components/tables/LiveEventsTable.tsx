@@ -57,7 +57,7 @@ useEffect(()=>{
 refetch()
 },[data])
 
-// console.log("useLiveEventsQuery",data?.liveEvents);
+// console.log("useLiveEventsQuery",data);
 
   
 
