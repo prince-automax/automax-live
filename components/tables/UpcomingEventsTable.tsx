@@ -43,6 +43,7 @@ export default function UpcomingEventsTable({
   refetch()
  },[data])
 
+  // console.log('upcoming',data);
   
 
   
