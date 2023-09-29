@@ -59,8 +59,8 @@ function Datatable(props) {
     <div>
       {useSortBy}
       {!hideSearch && (
-        <div className="mt-0.5">
-          <div className="relative rounded-md shadow-sm max-w-sm">
+        <div className="mt-0.5 my-6">
+          <div className="relative rounded-md shadow-sm max-w-sm space-y-4">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <SearchIcon
                 className="h-5 w-5 text-gray-400"
@@ -82,10 +82,10 @@ function Datatable(props) {
       )}
 
       {!alternateLayout ? (
-        <div className="mt-2 ring-1 ring-gray-300 rounded-lg overflow-auto">
+        <div className="mt-2 ring-1 ring-gray-300 rounded-lg overflow-auto max-w-7xl mx-auto">
           <table
             {...getTableProps()}
-            className="min-w-full divide-y divide-gray-300 "
+            className=" w-full  divide-y divide-gray-300 "
           >
             <thead className="bg-primary rounded-lg ">
               {headerGroups.map((headerGroup, hgidx) => (

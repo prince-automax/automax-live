@@ -1,6 +1,3 @@
- import moment from "moment";
-import Image from "next/image";
-
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -50,6 +47,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
       { where: { id :id as string} }
     );
 
+  
    
     
     const make = data ? data["workSheet"]?.registrationNumber : "";

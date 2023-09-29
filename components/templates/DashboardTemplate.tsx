@@ -132,6 +132,12 @@ export default function DashboardTemplate({ children, heading, subHeading }) {
       icon: ReceiptTaxIcon,
       current: router.pathname == "/report" ? true : false,
     },
+    {
+      name: "OpenBidDetails",
+      href: "/openbiddetails",
+      icon: ReceiptTaxIcon,
+      current: router.pathname == "/openbiddetails" ? true : false,
+    },
   ];
 
   return (

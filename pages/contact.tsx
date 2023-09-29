@@ -125,7 +125,7 @@ export default function Contact() {
               />
             </svg>
           </div>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <div className="relative bg-white shadow-xl">
               <h2 id="contact-heading" className="sr-only">
                 Contact us
