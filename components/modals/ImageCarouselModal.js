@@ -15,7 +15,6 @@ export default function ImageCarouselModal({ open, close, ...props }) {
     resetProgress: false,
   };
 
-  // console.log('PROPS',props);
 
   return (
     <Transition appear show={open} as={Fragment}>
@@ -82,8 +81,8 @@ export default function ImageCarouselModal({ open, close, ...props }) {
                             <Image
                               alt={`image${image}`}
                               src={image.trim()}
-                              width={900}
-                              height={500}
+                              width={450}
+                              height={400}
                             />
                           </div>
                         </SplideSlide>

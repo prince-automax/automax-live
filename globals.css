@@ -12,6 +12,7 @@
     animation-duration: 1s;
     animation-fill-mode: both;
   }
+
   
   @keyframes bounceInDown {
     0% {
@@ -63,6 +64,10 @@
         @apply w-full flex items-center justify-center border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50;
     }
 }
+
+
+
+
 
 .blink {
     -webkit-animation: blinkanimation 1s infinite;

@@ -28,6 +28,10 @@ export default function PaymentForm() {
       value: "emd",
     },
     {
+      label: "Open Bid Payment",
+      value: "openBids",
+    },
+    {
       label: "Refund",
       value: "refund",
     },

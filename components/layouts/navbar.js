@@ -20,6 +20,8 @@ export default function Navbar() {
     setToken: (token) => state.setToken(token),
   }));
 
+ 
+
   const logout = () => {
    
     setToken(null);
@@ -55,6 +57,11 @@ export default function Navbar() {
       name: "Dashboard",
       href: "/dashboard",
       current: router.pathname == "/dashboard" ? true : false,
+    },
+    {
+      name: "Open Bids",
+      href: "/findauction",
+      current: router.pathname == "/findauction" ? true : false,
     },
   ];
 
@@ -138,6 +145,7 @@ export default function Navbar() {
               <div className="px-5 pt-4 flex items-center justify-between">
                 <Logo />
                 <div className="-mr-2">
+                  {/* closing button */}
                   <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                     <span className="sr-only">Close menu</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
@@ -146,12 +154,24 @@ export default function Navbar() {
               </div>
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
-                  <Link href={item.href} key={item.name}>
-                    <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                  <div key={item.index} className="flex">
+                                     <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+
+                        <Link href={item.href} key={item.name}>
+                      
+                    <a  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                       {item.name}
                     </a>
-                  </Link>
+                  </Link></Popover.Button>
+               
+                   {/* <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                   <span className="sr-only">Close menu</span>
+                 
+                   <Link href={item.href} key={item.name}>   {item?.name}</Link>
+                 </Popover.Button> */}
+                 </div>
                 ))}
+
               </div>
               <div className="flex justify-between">
                 {token ? (
