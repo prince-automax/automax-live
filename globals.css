@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind apply;
+
 
 .custom-swal-container {
   top: 0;
