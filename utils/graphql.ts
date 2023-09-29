@@ -870,6 +870,144 @@ export type FileFieldOutput = {
   url: Scalars['String'];
 };
 
+export type FindAuction = {
+  __typename?: 'FindAuction';
+  address?: Maybe<Scalars['String']>;
+  auctionEndDate?: Maybe<Scalars['DateTime']>;
+  auctionNotice?: Maybe<Scalars['String']>;
+  auctionStartDate?: Maybe<Scalars['DateTime']>;
+  city?: Maybe<Scalars['String']>;
+  contactDetails?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  emdAmount?: Maybe<Scalars['String']>;
+  emdSubmissionDate?: Maybe<Scalars['DateTime']>;
+  id: Scalars['ID'];
+  institution_details?: Maybe<Institution>;
+  listingId?: Maybe<Scalars['Int']>;
+  propertyType?: Maybe<FindAuctionPropertyTypeType>;
+  reservePrice?: Maybe<Scalars['String']>;
+  state?: Maybe<State>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  vehicleRegNo?: Maybe<Scalars['String']>;
+};
+
+export type FindAuctionCreateInput = {
+  address?: InputMaybe<Scalars['String']>;
+  auctionEndDate?: InputMaybe<Scalars['DateTime']>;
+  auctionNotice?: InputMaybe<Scalars['String']>;
+  auctionStartDate?: InputMaybe<Scalars['DateTime']>;
+  city?: InputMaybe<Scalars['String']>;
+  contactDetails?: InputMaybe<Scalars['String']>;
+  emdAmount?: InputMaybe<Scalars['String']>;
+  emdSubmissionDate?: InputMaybe<Scalars['DateTime']>;
+  institution_details?: InputMaybe<InstitutionRelateToOneForCreateInput>;
+  listingId?: InputMaybe<Scalars['Int']>;
+  propertyType?: InputMaybe<FindAuctionPropertyTypeType>;
+  reservePrice?: InputMaybe<Scalars['String']>;
+  state?: InputMaybe<StateRelateToOneForCreateInput>;
+  vehicleRegNo?: InputMaybe<Scalars['String']>;
+};
+
+export type FindAuctionManyRelationFilter = {
+  every?: InputMaybe<FindAuctionWhereInput>;
+  none?: InputMaybe<FindAuctionWhereInput>;
+  some?: InputMaybe<FindAuctionWhereInput>;
+};
+
+export type FindAuctionOrderByInput = {
+  address?: InputMaybe<OrderDirection>;
+  auctionEndDate?: InputMaybe<OrderDirection>;
+  auctionNotice?: InputMaybe<OrderDirection>;
+  auctionStartDate?: InputMaybe<OrderDirection>;
+  city?: InputMaybe<OrderDirection>;
+  contactDetails?: InputMaybe<OrderDirection>;
+  createdAt?: InputMaybe<OrderDirection>;
+  emdAmount?: InputMaybe<OrderDirection>;
+  emdSubmissionDate?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  listingId?: InputMaybe<OrderDirection>;
+  propertyType?: InputMaybe<OrderDirection>;
+  reservePrice?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+  vehicleRegNo?: InputMaybe<OrderDirection>;
+};
+
+export enum FindAuctionPropertyTypeType {
+  Flat = 'flat',
+  Gold = 'gold',
+  Mechinery = 'mechinery',
+  Other = 'other',
+  Vehicle = 'vehicle'
+}
+
+export type FindAuctionPropertyTypeTypeNullableFilter = {
+  equals?: InputMaybe<FindAuctionPropertyTypeType>;
+  in?: InputMaybe<Array<FindAuctionPropertyTypeType>>;
+  not?: InputMaybe<FindAuctionPropertyTypeTypeNullableFilter>;
+  notIn?: InputMaybe<Array<FindAuctionPropertyTypeType>>;
+};
+
+export type FindAuctionRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<FindAuctionWhereUniqueInput>>;
+  create?: InputMaybe<Array<FindAuctionCreateInput>>;
+};
+
+export type FindAuctionRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<FindAuctionWhereUniqueInput>>;
+  create?: InputMaybe<Array<FindAuctionCreateInput>>;
+  disconnect?: InputMaybe<Array<FindAuctionWhereUniqueInput>>;
+  set?: InputMaybe<Array<FindAuctionWhereUniqueInput>>;
+};
+
+export type FindAuctionUpdateArgs = {
+  data: FindAuctionUpdateInput;
+  where: FindAuctionWhereUniqueInput;
+};
+
+export type FindAuctionUpdateInput = {
+  address?: InputMaybe<Scalars['String']>;
+  auctionEndDate?: InputMaybe<Scalars['DateTime']>;
+  auctionNotice?: InputMaybe<Scalars['String']>;
+  auctionStartDate?: InputMaybe<Scalars['DateTime']>;
+  city?: InputMaybe<Scalars['String']>;
+  contactDetails?: InputMaybe<Scalars['String']>;
+  emdAmount?: InputMaybe<Scalars['String']>;
+  emdSubmissionDate?: InputMaybe<Scalars['DateTime']>;
+  institution_details?: InputMaybe<InstitutionRelateToOneForUpdateInput>;
+  listingId?: InputMaybe<Scalars['Int']>;
+  propertyType?: InputMaybe<FindAuctionPropertyTypeType>;
+  reservePrice?: InputMaybe<Scalars['String']>;
+  state?: InputMaybe<StateRelateToOneForUpdateInput>;
+  vehicleRegNo?: InputMaybe<Scalars['String']>;
+};
+
+export type FindAuctionWhereInput = {
+  AND?: InputMaybe<Array<FindAuctionWhereInput>>;
+  NOT?: InputMaybe<Array<FindAuctionWhereInput>>;
+  OR?: InputMaybe<Array<FindAuctionWhereInput>>;
+  address?: InputMaybe<StringFilter>;
+  auctionEndDate?: InputMaybe<DateTimeNullableFilter>;
+  auctionNotice?: InputMaybe<StringFilter>;
+  auctionStartDate?: InputMaybe<DateTimeNullableFilter>;
+  city?: InputMaybe<StringFilter>;
+  contactDetails?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  emdAmount?: InputMaybe<StringFilter>;
+  emdSubmissionDate?: InputMaybe<DateTimeNullableFilter>;
+  id?: InputMaybe<IdFilter>;
+  institution_details?: InputMaybe<InstitutionWhereInput>;
+  listingId?: InputMaybe<IntFilter>;
+  propertyType?: InputMaybe<FindAuctionPropertyTypeTypeNullableFilter>;
+  reservePrice?: InputMaybe<StringFilter>;
+  state?: InputMaybe<StateWhereInput>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  vehicleRegNo?: InputMaybe<StringFilter>;
+};
+
+export type FindAuctionWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
 export type FloatNullableFilter = {
   equals?: InputMaybe<Scalars['Float']>;
   gt?: InputMaybe<Scalars['Float']>;
@@ -911,6 +1049,77 @@ export type ImageFieldOutput = {
   id: Scalars['ID'];
   url: Scalars['String'];
   width: Scalars['Int'];
+};
+
+export type Institution = {
+  __typename?: 'Institution';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  findAuction_details?: Maybe<Array<FindAuction>>;
+  findAuction_detailsCount?: Maybe<Scalars['Int']>;
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type InstitutionFindAuction_DetailsArgs = {
+  orderBy?: Array<FindAuctionOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: FindAuctionWhereInput;
+};
+
+
+export type InstitutionFindAuction_DetailsCountArgs = {
+  where?: FindAuctionWhereInput;
+};
+
+export type InstitutionCreateInput = {
+  findAuction_details?: InputMaybe<FindAuctionRelateToManyForCreateInput>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+export type InstitutionOrderByInput = {
+  createdAt?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  name?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+};
+
+export type InstitutionRelateToOneForCreateInput = {
+  connect?: InputMaybe<InstitutionWhereUniqueInput>;
+  create?: InputMaybe<InstitutionCreateInput>;
+};
+
+export type InstitutionRelateToOneForUpdateInput = {
+  connect?: InputMaybe<InstitutionWhereUniqueInput>;
+  create?: InputMaybe<InstitutionCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type InstitutionUpdateArgs = {
+  data: InstitutionUpdateInput;
+  where: InstitutionWhereUniqueInput;
+};
+
+export type InstitutionUpdateInput = {
+  findAuction_details?: InputMaybe<FindAuctionRelateToManyForUpdateInput>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+export type InstitutionWhereInput = {
+  AND?: InputMaybe<Array<InstitutionWhereInput>>;
+  NOT?: InputMaybe<Array<InstitutionWhereInput>>;
+  OR?: InputMaybe<Array<InstitutionWhereInput>>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  findAuction_details?: InputMaybe<FindAuctionManyRelationFilter>;
+  id?: InputMaybe<IdFilter>;
+  name?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+};
+
+export type InstitutionWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 export type IntFilter = {
@@ -1175,7 +1384,11 @@ export type Mutation = {
   createEvents?: Maybe<Array<Maybe<Event>>>;
   createExcelUpload?: Maybe<ExcelUpload>;
   createExcelUploads?: Maybe<Array<Maybe<ExcelUpload>>>;
+  createFindAuction?: Maybe<FindAuction>;
+  createFindAuctions?: Maybe<Array<Maybe<FindAuction>>>;
   createInitialUser: UserAuthenticationWithPasswordSuccess;
+  createInstitution?: Maybe<Institution>;
+  createInstitutions?: Maybe<Array<Maybe<Institution>>>;
   createLocation?: Maybe<Location>;
   createLocations?: Maybe<Array<Maybe<Location>>>;
   createPayment?: Maybe<Payment>;
@@ -1187,8 +1400,6 @@ export type Mutation = {
   createUser?: Maybe<User>;
   createUsers?: Maybe<Array<Maybe<User>>>;
   createVehicle?: Maybe<Vehicle>;
-  createVehicleImage?: Maybe<VehicleImage>;
-  createVehicleImages?: Maybe<Array<Maybe<VehicleImage>>>;
   createVehicles?: Maybe<Array<Maybe<Vehicle>>>;
   createWorkSheet?: Maybe<WorkSheet>;
   createWorkSheets?: Maybe<Array<Maybe<WorkSheet>>>;
@@ -1206,6 +1417,10 @@ export type Mutation = {
   deleteEvents?: Maybe<Array<Maybe<Event>>>;
   deleteExcelUpload?: Maybe<ExcelUpload>;
   deleteExcelUploads?: Maybe<Array<Maybe<ExcelUpload>>>;
+  deleteFindAuction?: Maybe<FindAuction>;
+  deleteFindAuctions?: Maybe<Array<Maybe<FindAuction>>>;
+  deleteInstitution?: Maybe<Institution>;
+  deleteInstitutions?: Maybe<Array<Maybe<Institution>>>;
   deleteLocation?: Maybe<Location>;
   deleteLocations?: Maybe<Array<Maybe<Location>>>;
   deletePayment?: Maybe<Payment>;
@@ -1217,8 +1432,6 @@ export type Mutation = {
   deleteUser?: Maybe<User>;
   deleteUsers?: Maybe<Array<Maybe<User>>>;
   deleteVehicle?: Maybe<Vehicle>;
-  deleteVehicleImage?: Maybe<VehicleImage>;
-  deleteVehicleImages?: Maybe<Array<Maybe<VehicleImage>>>;
   deleteVehicles?: Maybe<Array<Maybe<Vehicle>>>;
   deleteWorkSheet?: Maybe<WorkSheet>;
   deleteWorkSheets?: Maybe<Array<Maybe<WorkSheet>>>;
@@ -1239,6 +1452,10 @@ export type Mutation = {
   updateEvents?: Maybe<Array<Maybe<Event>>>;
   updateExcelUpload?: Maybe<ExcelUpload>;
   updateExcelUploads?: Maybe<Array<Maybe<ExcelUpload>>>;
+  updateFindAuction?: Maybe<FindAuction>;
+  updateFindAuctions?: Maybe<Array<Maybe<FindAuction>>>;
+  updateInstitution?: Maybe<Institution>;
+  updateInstitutions?: Maybe<Array<Maybe<Institution>>>;
   updateLocation?: Maybe<Location>;
   updateLocations?: Maybe<Array<Maybe<Location>>>;
   updatePayment?: Maybe<Payment>;
@@ -1250,8 +1467,6 @@ export type Mutation = {
   updateUser?: Maybe<User>;
   updateUsers?: Maybe<Array<Maybe<User>>>;
   updateVehicle?: Maybe<Vehicle>;
-  updateVehicleImage?: Maybe<VehicleImage>;
-  updateVehicleImages?: Maybe<Array<Maybe<VehicleImage>>>;
   updateVehicles?: Maybe<Array<Maybe<Vehicle>>>;
   updateWorkSheet?: Maybe<WorkSheet>;
   updateWorkSheets?: Maybe<Array<Maybe<WorkSheet>>>;
@@ -1334,8 +1549,28 @@ export type MutationCreateExcelUploadsArgs = {
 };
 
 
+export type MutationCreateFindAuctionArgs = {
+  data: FindAuctionCreateInput;
+};
+
+
+export type MutationCreateFindAuctionsArgs = {
+  data: Array<FindAuctionCreateInput>;
+};
+
+
 export type MutationCreateInitialUserArgs = {
   data: CreateInitialUserInput;
+};
+
+
+export type MutationCreateInstitutionArgs = {
+  data: InstitutionCreateInput;
+};
+
+
+export type MutationCreateInstitutionsArgs = {
+  data: Array<InstitutionCreateInput>;
 };
 
 
@@ -1391,16 +1626,6 @@ export type MutationCreateUsersArgs = {
 
 export type MutationCreateVehicleArgs = {
   data: VehicleCreateInput;
-};
-
-
-export type MutationCreateVehicleImageArgs = {
-  data: VehicleImageCreateInput;
-};
-
-
-export type MutationCreateVehicleImagesArgs = {
-  data: Array<VehicleImageCreateInput>;
 };
 
 
@@ -1489,6 +1714,26 @@ export type MutationDeleteExcelUploadsArgs = {
 };
 
 
+export type MutationDeleteFindAuctionArgs = {
+  where: FindAuctionWhereUniqueInput;
+};
+
+
+export type MutationDeleteFindAuctionsArgs = {
+  where: Array<FindAuctionWhereUniqueInput>;
+};
+
+
+export type MutationDeleteInstitutionArgs = {
+  where: InstitutionWhereUniqueInput;
+};
+
+
+export type MutationDeleteInstitutionsArgs = {
+  where: Array<InstitutionWhereUniqueInput>;
+};
+
+
 export type MutationDeleteLocationArgs = {
   where: LocationWhereUniqueInput;
 };
@@ -1541,16 +1786,6 @@ export type MutationDeleteUsersArgs = {
 
 export type MutationDeleteVehicleArgs = {
   where: VehicleWhereUniqueInput;
-};
-
-
-export type MutationDeleteVehicleImageArgs = {
-  where: VehicleImageWhereUniqueInput;
-};
-
-
-export type MutationDeleteVehicleImagesArgs = {
-  where: Array<VehicleImageWhereUniqueInput>;
 };
 
 
@@ -1657,6 +1892,28 @@ export type MutationUpdateExcelUploadsArgs = {
 };
 
 
+export type MutationUpdateFindAuctionArgs = {
+  data: FindAuctionUpdateInput;
+  where: FindAuctionWhereUniqueInput;
+};
+
+
+export type MutationUpdateFindAuctionsArgs = {
+  data: Array<FindAuctionUpdateArgs>;
+};
+
+
+export type MutationUpdateInstitutionArgs = {
+  data: InstitutionUpdateInput;
+  where: InstitutionWhereUniqueInput;
+};
+
+
+export type MutationUpdateInstitutionsArgs = {
+  data: Array<InstitutionUpdateArgs>;
+};
+
+
 export type MutationUpdateLocationArgs = {
   data: LocationUpdateInput;
   where: LocationWhereUniqueInput;
@@ -1715,17 +1972,6 @@ export type MutationUpdateUsersArgs = {
 export type MutationUpdateVehicleArgs = {
   data: VehicleUpdateInput;
   where: VehicleWhereUniqueInput;
-};
-
-
-export type MutationUpdateVehicleImageArgs = {
-  data: VehicleImageUpdateInput;
-  where: VehicleImageWhereUniqueInput;
-};
-
-
-export type MutationUpdateVehicleImagesArgs = {
-  data: Array<VehicleImageUpdateArgs>;
 };
 
 
@@ -1955,6 +2201,12 @@ export type Query = {
   excelUpload?: Maybe<ExcelUpload>;
   excelUploads?: Maybe<Array<ExcelUpload>>;
   excelUploadsCount?: Maybe<Scalars['Int']>;
+  findAuction?: Maybe<FindAuction>;
+  findAuctions?: Maybe<Array<FindAuction>>;
+  findAuctionsCount?: Maybe<Scalars['Int']>;
+  institution?: Maybe<Institution>;
+  institutions?: Maybe<Array<Institution>>;
+  institutionsCount?: Maybe<Scalars['Int']>;
   keystone: KeystoneMeta;
   /** Live Events */
   liveEvents?: Maybe<Array<Maybe<Event>>>;
@@ -1982,9 +2234,6 @@ export type Query = {
   users?: Maybe<Array<User>>;
   usersCount?: Maybe<Scalars['Int']>;
   vehicle?: Maybe<Vehicle>;
-  vehicleImage?: Maybe<VehicleImage>;
-  vehicleImages?: Maybe<Array<VehicleImage>>;
-  vehicleImagesCount?: Maybe<Scalars['Int']>;
   vehicles?: Maybe<Array<Vehicle>>;
   vehiclesCount?: Maybe<Scalars['Int']>;
   workSheet?: Maybe<WorkSheet>;
@@ -2127,6 +2376,42 @@ export type QueryExcelUploadsCountArgs = {
 };
 
 
+export type QueryFindAuctionArgs = {
+  where: FindAuctionWhereUniqueInput;
+};
+
+
+export type QueryFindAuctionsArgs = {
+  orderBy?: Array<FindAuctionOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: FindAuctionWhereInput;
+};
+
+
+export type QueryFindAuctionsCountArgs = {
+  where?: FindAuctionWhereInput;
+};
+
+
+export type QueryInstitutionArgs = {
+  where: InstitutionWhereUniqueInput;
+};
+
+
+export type QueryInstitutionsArgs = {
+  orderBy?: Array<InstitutionOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InstitutionWhereInput;
+};
+
+
+export type QueryInstitutionsCountArgs = {
+  where?: InstitutionWhereInput;
+};
+
+
 export type QueryLiveEventsArgs = {
   orderBy?: InputMaybe<Array<InputMaybe<EventOrderByInput>>>;
   skip?: Scalars['Int'];
@@ -2248,24 +2533,6 @@ export type QueryUsersCountArgs = {
 
 export type QueryVehicleArgs = {
   where: VehicleWhereUniqueInput;
-};
-
-
-export type QueryVehicleImageArgs = {
-  where: VehicleImageWhereUniqueInput;
-};
-
-
-export type QueryVehicleImagesArgs = {
-  orderBy?: Array<VehicleImageOrderByInput>;
-  skip?: Scalars['Int'];
-  take?: InputMaybe<Scalars['Int']>;
-  where?: VehicleImageWhereInput;
-};
-
-
-export type QueryVehicleImagesCountArgs = {
-  where?: VehicleImageWhereInput;
 };
 
 
@@ -2471,6 +2738,8 @@ export type SellerWhereUniqueInput = {
 export type State = {
   __typename?: 'State';
   createdAt?: Maybe<Scalars['DateTime']>;
+  find_auction_state?: Maybe<Array<FindAuction>>;
+  find_auction_stateCount?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
   locations?: Maybe<Array<Location>>;
   locationsCount?: Maybe<Scalars['Int']>;
@@ -2478,6 +2747,19 @@ export type State = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   users?: Maybe<Array<User>>;
   usersCount?: Maybe<Scalars['Int']>;
+};
+
+
+export type StateFind_Auction_StateArgs = {
+  orderBy?: Array<FindAuctionOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: FindAuctionWhereInput;
+};
+
+
+export type StateFind_Auction_StateCountArgs = {
+  where?: FindAuctionWhereInput;
 };
 
 
@@ -2507,6 +2789,7 @@ export type StateUsersCountArgs = {
 };
 
 export type StateCreateInput = {
+  find_auction_state?: InputMaybe<FindAuctionRelateToManyForCreateInput>;
   locations?: InputMaybe<LocationRelateToManyForCreateInput>;
   name?: InputMaybe<Scalars['String']>;
   users?: InputMaybe<UserRelateToManyForCreateInput>;
@@ -2554,6 +2837,7 @@ export type StateUpdateArgs = {
 };
 
 export type StateUpdateInput = {
+  find_auction_state?: InputMaybe<FindAuctionRelateToManyForUpdateInput>;
   locations?: InputMaybe<LocationRelateToManyForUpdateInput>;
   name?: InputMaybe<Scalars['String']>;
   users?: InputMaybe<UserRelateToManyForUpdateInput>;
@@ -2564,6 +2848,7 @@ export type StateWhereInput = {
   NOT?: InputMaybe<Array<StateWhereInput>>;
   OR?: InputMaybe<Array<StateWhereInput>>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
+  find_auction_state?: InputMaybe<FindAuctionManyRelationFilter>;
   id?: InputMaybe<IdFilter>;
   locations?: InputMaybe<LocationManyRelationFilter>;
   name?: InputMaybe<StringFilter>;
@@ -3096,8 +3381,6 @@ export type UserWhereUniqueInput = {
 
 export type Vehicle = {
   __typename?: 'Vehicle';
-  AllImages?: Maybe<Array<VehicleImage>>;
-  AllImagesCount?: Maybe<Scalars['Int']>;
   ExcelFile?: Maybe<ExcelUpload>;
   additionalRemarks?: Maybe<Scalars['String']>;
   approxParkingCharges?: Maybe<Scalars['String']>;
@@ -3184,19 +3467,6 @@ export type Vehicle = {
 };
 
 
-export type VehicleAllImagesArgs = {
-  orderBy?: Array<VehicleImageOrderByInput>;
-  skip?: Scalars['Int'];
-  take?: InputMaybe<Scalars['Int']>;
-  where?: VehicleImageWhereInput;
-};
-
-
-export type VehicleAllImagesCountArgs = {
-  where?: VehicleImageWhereInput;
-};
-
-
 export type VehicleUserVehicleBidsArgs = {
   orderBy?: Array<BidOrderByInput>;
   skip?: Scalars['Int'];
@@ -3237,7 +3507,6 @@ export type VehicleBidStatusTypeNullableFilter = {
 };
 
 export type VehicleCreateInput = {
-  AllImages?: InputMaybe<VehicleImageRelateToManyForCreateInput>;
   ExcelFile?: InputMaybe<ExcelUploadRelateToOneForCreateInput>;
   additionalRemarks?: InputMaybe<Scalars['String']>;
   approxParkingCharges?: InputMaybe<Scalars['String']>;
@@ -3313,64 +3582,6 @@ export type VehicleCreateInput = {
   watchedBy?: InputMaybe<UserRelateToManyForCreateInput>;
   yardLocation?: InputMaybe<Scalars['String']>;
   yearOfManufacture?: InputMaybe<Scalars['Int']>;
-};
-
-export type VehicleImage = {
-  __typename?: 'VehicleImage';
-  VehicleRelation?: Maybe<Vehicle>;
-  id: Scalars['ID'];
-  url?: Maybe<Scalars['String']>;
-};
-
-export type VehicleImageCreateInput = {
-  VehicleRelation?: InputMaybe<VehicleRelateToOneForCreateInput>;
-  url?: InputMaybe<Scalars['String']>;
-};
-
-export type VehicleImageManyRelationFilter = {
-  every?: InputMaybe<VehicleImageWhereInput>;
-  none?: InputMaybe<VehicleImageWhereInput>;
-  some?: InputMaybe<VehicleImageWhereInput>;
-};
-
-export type VehicleImageOrderByInput = {
-  id?: InputMaybe<OrderDirection>;
-  url?: InputMaybe<OrderDirection>;
-};
-
-export type VehicleImageRelateToManyForCreateInput = {
-  connect?: InputMaybe<Array<VehicleImageWhereUniqueInput>>;
-  create?: InputMaybe<Array<VehicleImageCreateInput>>;
-};
-
-export type VehicleImageRelateToManyForUpdateInput = {
-  connect?: InputMaybe<Array<VehicleImageWhereUniqueInput>>;
-  create?: InputMaybe<Array<VehicleImageCreateInput>>;
-  disconnect?: InputMaybe<Array<VehicleImageWhereUniqueInput>>;
-  set?: InputMaybe<Array<VehicleImageWhereUniqueInput>>;
-};
-
-export type VehicleImageUpdateArgs = {
-  data: VehicleImageUpdateInput;
-  where: VehicleImageWhereUniqueInput;
-};
-
-export type VehicleImageUpdateInput = {
-  VehicleRelation?: InputMaybe<VehicleRelateToOneForUpdateInput>;
-  url?: InputMaybe<Scalars['String']>;
-};
-
-export type VehicleImageWhereInput = {
-  AND?: InputMaybe<Array<VehicleImageWhereInput>>;
-  NOT?: InputMaybe<Array<VehicleImageWhereInput>>;
-  OR?: InputMaybe<Array<VehicleImageWhereInput>>;
-  VehicleRelation?: InputMaybe<VehicleWhereInput>;
-  id?: InputMaybe<IdFilter>;
-  url?: InputMaybe<StringFilter>;
-};
-
-export type VehicleImageWhereUniqueInput = {
-  id?: InputMaybe<Scalars['ID']>;
 };
 
 export type VehicleManyRelationFilter = {
@@ -3483,7 +3694,6 @@ export type VehicleUpdateArgs = {
 };
 
 export type VehicleUpdateInput = {
-  AllImages?: InputMaybe<VehicleImageRelateToManyForUpdateInput>;
   ExcelFile?: InputMaybe<ExcelUploadRelateToOneForUpdateInput>;
   additionalRemarks?: InputMaybe<Scalars['String']>;
   approxParkingCharges?: InputMaybe<Scalars['String']>;
@@ -3563,7 +3773,6 @@ export type VehicleUpdateInput = {
 
 export type VehicleWhereInput = {
   AND?: InputMaybe<Array<VehicleWhereInput>>;
-  AllImages?: InputMaybe<VehicleImageManyRelationFilter>;
   ExcelFile?: InputMaybe<ExcelUploadWhereInput>;
   NOT?: InputMaybe<Array<VehicleWhereInput>>;
   OR?: InputMaybe<Array<VehicleWhereInput>>;
@@ -3899,6 +4108,23 @@ export type ActiveBidsQueryVariables = Exact<{
 
 
 export type ActiveBidsQuery = { __typename?: 'Query', authenticatedItem?: { __typename?: 'User', activeBids?: Array<{ __typename?: 'Vehicle', registrationNumber?: string | null, type?: string | null, categoty?: string | null, fuel?: string | null, varient?: string | null, make?: string | null, registeredOwnerName?: string | null, model?: string | null, rcStatus?: string | null, yearOfManufacture?: number | null, ownership?: number | null, kmReading?: number | null, insuranceStatus?: string | null, yardLocation?: string | null, engineNo?: string | null, chassisNo?: string | null, currentBidAmount?: number | null, bidAmountUpdate?: number | null, bidStatus?: VehicleBidStatusType | null, id: string, bidTimeExpire?: any | null, event?: { __typename?: 'Event', eventNo?: number | null, eventCategory?: string | null, startDate?: any | null, endDate?: any | null, seller?: { __typename?: 'Seller', name?: string | null } | null, eventType?: Array<{ __typename?: 'EventType', name?: string | null }> | null, location?: { __typename?: 'Location', state?: { __typename?: 'State', name?: string | null } | null } | null } | null, userVehicleBids?: Array<{ __typename?: 'Bid', amount?: number | null }> | null, currentBidUser?: { __typename?: 'User', id: string, updatedAt?: any | null } | null }> | null } | null };
+
+export type InstitutionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type InstitutionsQuery = { __typename?: 'Query', institutions?: Array<{ __typename?: 'Institution', name?: string | null, id: string }> | null };
+
+export type FindAuctionsQueryVariables = Exact<{
+  where: FindAuctionWhereInput;
+}>;
+
+
+export type FindAuctionsQuery = { __typename?: 'Query', findAuctions?: Array<{ __typename?: 'FindAuction', address?: string | null, auctionEndDate?: any | null, auctionNotice?: string | null, auctionStartDate?: any | null, city?: string | null, contactDetails?: string | null, createdAt?: any | null, emdAmount?: string | null, emdSubmissionDate?: any | null, id: string, listingId?: number | null, propertyType?: FindAuctionPropertyTypeType | null, reservePrice?: string | null, vehicleRegNo?: string | null, institution_details?: { __typename?: 'Institution', createdAt?: any | null, id: string, name?: string | null } | null, state?: { __typename?: 'State', name?: string | null } | null }> | null };
+
+export type FindAuctionStateQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FindAuctionStateQuery = { __typename?: 'Query', states?: Array<{ __typename?: 'State', id: string, name?: string | null }> | null };
 
 export type CreatePaymentMutationVariables = Exact<{
   data: PaymentCreateInput;
@@ -4626,6 +4852,92 @@ export const useActiveBidsQuery = <
     useQuery<ActiveBidsQuery, TError, TData>(
       ['ActiveBids', variables],
       fetcher<ActiveBidsQuery, ActiveBidsQueryVariables>(client, ActiveBidsDocument, variables, headers),
+      options
+    );
+export const InstitutionsDocument = `
+    query Institutions {
+  institutions {
+    name
+    id
+  }
+}
+    `;
+export const useInstitutionsQuery = <
+      TData = InstitutionsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: InstitutionsQueryVariables,
+      options?: UseQueryOptions<InstitutionsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<InstitutionsQuery, TError, TData>(
+      variables === undefined ? ['Institutions'] : ['Institutions', variables],
+      fetcher<InstitutionsQuery, InstitutionsQueryVariables>(client, InstitutionsDocument, variables, headers),
+      options
+    );
+export const FindAuctionsDocument = `
+    query FindAuctions($where: FindAuctionWhereInput!) {
+  findAuctions(where: $where) {
+    address
+    auctionEndDate
+    auctionNotice
+    auctionStartDate
+    city
+    contactDetails
+    createdAt
+    emdAmount
+    emdSubmissionDate
+    id
+    institution_details {
+      createdAt
+      id
+      name
+    }
+    listingId
+    propertyType
+    reservePrice
+    vehicleRegNo
+    state {
+      name
+    }
+  }
+}
+    `;
+export const useFindAuctionsQuery = <
+      TData = FindAuctionsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: FindAuctionsQueryVariables,
+      options?: UseQueryOptions<FindAuctionsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<FindAuctionsQuery, TError, TData>(
+      ['FindAuctions', variables],
+      fetcher<FindAuctionsQuery, FindAuctionsQueryVariables>(client, FindAuctionsDocument, variables, headers),
+      options
+    );
+export const FindAuctionStateDocument = `
+    query findAuctionState {
+  states {
+    id
+    name
+  }
+}
+    `;
+export const useFindAuctionStateQuery = <
+      TData = FindAuctionStateQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: FindAuctionStateQueryVariables,
+      options?: UseQueryOptions<FindAuctionStateQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<FindAuctionStateQuery, TError, TData>(
+      variables === undefined ? ['findAuctionState'] : ['findAuctionState', variables],
+      fetcher<FindAuctionStateQuery, FindAuctionStateQueryVariables>(client, FindAuctionStateDocument, variables, headers),
       options
     );
 export const CreatePaymentDocument = `

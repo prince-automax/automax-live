@@ -1,6 +1,6 @@
 import '../globals.css'
 import Layout from '../components/layouts/layout'
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider, } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Toaster } from 'react-hot-toast';
 

@@ -17,6 +17,7 @@ import {
   useQueryQuery,
   useUserWorkBookQuery,
   UserWorkBookQueryVariables,
+  useFindAuctionsQuery
 } from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
 import moment from "moment";
@@ -726,6 +727,7 @@ const EnterBid = ({ row, call, event }) => {
 
   const [bidAmount, setBidAmount] = useState("");
 
+console.log("!!",row?.currentBidAmount);
 
 
   useEffect(() => {

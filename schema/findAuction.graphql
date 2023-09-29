@@ -1,0 +1,68 @@
+query Institutions {
+  institutions {
+    name
+    id
+  }
+}
+# query FindAuctions($where: FindAuctionWhereInput!, $stateWhere2: StateWhereUniqueInput!) {
+#   findAuctions(where: $where) {
+#     address
+#     auctionEndDate
+#     auctionNotice
+#     auctionStartDate
+#     city
+#     contactDetails
+#     createdAt
+#     emdAmount
+#     emdSubmissionDate
+#     id
+#     institution_details {
+#       createdAt
+#       id
+#       name
+#     }
+#     listingId
+#     propertyType
+#     reservePrice
+# vehicleRegNo
+#   }
+# #   state(where: $stateWhere2) {
+# # name
+# # }
+# }
+
+
+query FindAuctions($where: FindAuctionWhereInput!,) {
+  findAuctions(where: $where) {
+    address
+    auctionEndDate
+    auctionNotice
+    auctionStartDate
+    city
+    contactDetails
+    createdAt
+    emdAmount
+    emdSubmissionDate
+    id
+    institution_details {
+      createdAt
+      id
+      name
+    }
+    listingId
+    propertyType
+    reservePrice
+vehicleRegNo
+state {
+name
+}
+}
+
+}
+
+query findAuctionState {
+  states {
+    id
+    name
+  }
+}
