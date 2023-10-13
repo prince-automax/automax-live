@@ -68,7 +68,7 @@ function Vehicle() {
       setserverTime(timeData.time);
     }
   }, [timeData]);
-  ///////
+  
   const callCreateBid = useCreateBidMutation<CreateBidMutationVariables>(
     graphQLClient({ Authorization: `Bearer ${accessToken}` })
   );
@@ -92,8 +92,8 @@ function Vehicle() {
     }
   );
 
-  console.log("11",data);
-  // console.log("001", vehicle);
+
+
   
 
   let [tabs] = useState({
@@ -110,14 +110,14 @@ function Vehicle() {
   }, [data]);
 
   useEffect(() => {
-    console.log('99',vehicle);
+  
     
-       setImages((vehicle?.rightImage)?.split(','))
+       setImages((vehicle?.frontImage)?.split(','))
   } , [vehicle]);
 
-  console.log("pop",vehicle?.rightImage);
   
-  console.log('img',images);
+
+  
   
   async function CallBid(amount, vehicleId) {
     const confirmed = await Swal.fire({
@@ -156,11 +156,11 @@ function Vehicle() {
   function IsCompleted() {
     try {
       let bidTime = data.vehicles[0].bidTimeExpire;
-      //  console.log("bidTime from VEXHIES",bidTime);
+   
       const expiryTime = moment(bidTime);
       const currentTime = moment(serverTime).add(tick, "seconds");
       const diff = expiryTime.diff(currentTime, "seconds");
-      // console.log("this is diff",diff);
+    
 
       if (diff > 0) {
         return true;
@@ -170,7 +170,7 @@ function Vehicle() {
     } catch {}
     return true;
   }
-  console.log("the result of iscompleted", IsCompleted());
+ 
 
   return (
     <DashboardTemplate>
@@ -232,7 +232,7 @@ function Vehicle() {
                           {/* <span className="sr-only">{image.name}</span> */}
                           <span className="absolute inset-0 rounded-md overflow-hidden">
                             <Image
-                              alt={`image${index}`}
+                              alt={image}
                               src={image}
                               className="w-full h-full object-center object-cover"
                               layout="fill"

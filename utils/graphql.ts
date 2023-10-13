@@ -18,6 +18,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  BigInt: any;
   DateTime: any;
   JSON: any;
   Upload: any;
@@ -135,6 +136,17 @@ export type BidWhereInput = {
 
 export type BidWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
+};
+
+export type BigIntNullableFilter = {
+  equals?: InputMaybe<Scalars['BigInt']>;
+  gt?: InputMaybe<Scalars['BigInt']>;
+  gte?: InputMaybe<Scalars['BigInt']>;
+  in?: InputMaybe<Array<Scalars['BigInt']>>;
+  lt?: InputMaybe<Scalars['BigInt']>;
+  lte?: InputMaybe<Scalars['BigInt']>;
+  not?: InputMaybe<BigIntNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['BigInt']>>;
 };
 
 export type BooleanFilter = {
@@ -879,13 +891,13 @@ export type FindAuction = {
   city?: Maybe<Scalars['String']>;
   contactDetails?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  emdAmount?: Maybe<Scalars['String']>;
+  emdAmount?: Maybe<Scalars['BigInt']>;
   emdSubmissionDate?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
   institution_details?: Maybe<Institution>;
   listingId?: Maybe<Scalars['Int']>;
   propertyType?: Maybe<FindAuctionPropertyTypeType>;
-  reservePrice?: Maybe<Scalars['String']>;
+  reservePrice?: Maybe<Scalars['BigInt']>;
   state?: Maybe<State>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   vehicleRegNo?: Maybe<Scalars['String']>;
@@ -898,12 +910,12 @@ export type FindAuctionCreateInput = {
   auctionStartDate?: InputMaybe<Scalars['DateTime']>;
   city?: InputMaybe<Scalars['String']>;
   contactDetails?: InputMaybe<Scalars['String']>;
-  emdAmount?: InputMaybe<Scalars['String']>;
+  emdAmount?: InputMaybe<Scalars['BigInt']>;
   emdSubmissionDate?: InputMaybe<Scalars['DateTime']>;
   institution_details?: InputMaybe<InstitutionRelateToOneForCreateInput>;
   listingId?: InputMaybe<Scalars['Int']>;
   propertyType?: InputMaybe<FindAuctionPropertyTypeType>;
-  reservePrice?: InputMaybe<Scalars['String']>;
+  reservePrice?: InputMaybe<Scalars['BigInt']>;
   state?: InputMaybe<StateRelateToOneForCreateInput>;
   vehicleRegNo?: InputMaybe<Scalars['String']>;
 };
@@ -971,12 +983,12 @@ export type FindAuctionUpdateInput = {
   auctionStartDate?: InputMaybe<Scalars['DateTime']>;
   city?: InputMaybe<Scalars['String']>;
   contactDetails?: InputMaybe<Scalars['String']>;
-  emdAmount?: InputMaybe<Scalars['String']>;
+  emdAmount?: InputMaybe<Scalars['BigInt']>;
   emdSubmissionDate?: InputMaybe<Scalars['DateTime']>;
   institution_details?: InputMaybe<InstitutionRelateToOneForUpdateInput>;
   listingId?: InputMaybe<Scalars['Int']>;
   propertyType?: InputMaybe<FindAuctionPropertyTypeType>;
-  reservePrice?: InputMaybe<Scalars['String']>;
+  reservePrice?: InputMaybe<Scalars['BigInt']>;
   state?: InputMaybe<StateRelateToOneForUpdateInput>;
   vehicleRegNo?: InputMaybe<Scalars['String']>;
 };
@@ -992,13 +1004,13 @@ export type FindAuctionWhereInput = {
   city?: InputMaybe<StringFilter>;
   contactDetails?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
-  emdAmount?: InputMaybe<StringFilter>;
+  emdAmount?: InputMaybe<BigIntNullableFilter>;
   emdSubmissionDate?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<IdFilter>;
   institution_details?: InputMaybe<InstitutionWhereInput>;
   listingId?: InputMaybe<IntFilter>;
   propertyType?: InputMaybe<FindAuctionPropertyTypeTypeNullableFilter>;
-  reservePrice?: InputMaybe<StringFilter>;
+  reservePrice?: InputMaybe<BigIntNullableFilter>;
   state?: InputMaybe<StateWhereInput>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   vehicleRegNo?: InputMaybe<StringFilter>;
@@ -4109,6 +4121,16 @@ export type ActiveBidsQueryVariables = Exact<{
 
 export type ActiveBidsQuery = { __typename?: 'Query', authenticatedItem?: { __typename?: 'User', activeBids?: Array<{ __typename?: 'Vehicle', registrationNumber?: string | null, type?: string | null, categoty?: string | null, fuel?: string | null, varient?: string | null, make?: string | null, registeredOwnerName?: string | null, model?: string | null, rcStatus?: string | null, yearOfManufacture?: number | null, ownership?: number | null, kmReading?: number | null, insuranceStatus?: string | null, yardLocation?: string | null, engineNo?: string | null, chassisNo?: string | null, currentBidAmount?: number | null, bidAmountUpdate?: number | null, bidStatus?: VehicleBidStatusType | null, id: string, bidTimeExpire?: any | null, event?: { __typename?: 'Event', eventNo?: number | null, eventCategory?: string | null, startDate?: any | null, endDate?: any | null, seller?: { __typename?: 'Seller', name?: string | null } | null, eventType?: Array<{ __typename?: 'EventType', name?: string | null }> | null, location?: { __typename?: 'Location', state?: { __typename?: 'State', name?: string | null } | null } | null } | null, userVehicleBids?: Array<{ __typename?: 'Bid', amount?: number | null }> | null, currentBidUser?: { __typename?: 'User', id: string, updatedAt?: any | null } | null }> | null } | null };
 
+export type LiveEventscountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LiveEventscountQuery = { __typename?: 'Query', liveEvents?: Array<{ __typename?: 'Event', eventCategory?: string | null } | null> | null };
+
+export type UpcomingEventsCountsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UpcomingEventsCountsQuery = { __typename?: 'Query', upcomingEvents?: Array<{ __typename?: 'Event', id: string } | null> | null };
+
 export type InstitutionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4116,10 +4138,13 @@ export type InstitutionsQuery = { __typename?: 'Query', institutions?: Array<{ _
 
 export type FindAuctionsQueryVariables = Exact<{
   where: FindAuctionWhereInput;
+  take?: InputMaybe<Scalars['Int']>;
+  skip: Scalars['Int'];
+  orderBy: Array<FindAuctionOrderByInput> | FindAuctionOrderByInput;
 }>;
 
 
-export type FindAuctionsQuery = { __typename?: 'Query', findAuctions?: Array<{ __typename?: 'FindAuction', address?: string | null, auctionEndDate?: any | null, auctionNotice?: string | null, auctionStartDate?: any | null, city?: string | null, contactDetails?: string | null, createdAt?: any | null, emdAmount?: string | null, emdSubmissionDate?: any | null, id: string, listingId?: number | null, propertyType?: FindAuctionPropertyTypeType | null, reservePrice?: string | null, vehicleRegNo?: string | null, institution_details?: { __typename?: 'Institution', createdAt?: any | null, id: string, name?: string | null } | null, state?: { __typename?: 'State', name?: string | null } | null }> | null };
+export type FindAuctionsQuery = { __typename?: 'Query', findAuctions?: Array<{ __typename?: 'FindAuction', address?: string | null, auctionEndDate?: any | null, auctionNotice?: string | null, auctionStartDate?: any | null, city?: string | null, contactDetails?: string | null, createdAt?: any | null, emdAmount?: any | null, emdSubmissionDate?: any | null, id: string, listingId?: number | null, propertyType?: FindAuctionPropertyTypeType | null, reservePrice?: any | null, vehicleRegNo?: string | null, institution_details?: { __typename?: 'Institution', createdAt?: any | null, id: string, name?: string | null } | null, state?: { __typename?: 'State', name?: string | null } | null }> | null };
 
 export type FindAuctionStateQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4854,6 +4879,48 @@ export const useActiveBidsQuery = <
       fetcher<ActiveBidsQuery, ActiveBidsQueryVariables>(client, ActiveBidsDocument, variables, headers),
       options
     );
+export const LiveEventscountDocument = `
+    query LiveEventscount {
+  liveEvents {
+    eventCategory
+  }
+}
+    `;
+export const useLiveEventscountQuery = <
+      TData = LiveEventscountQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: LiveEventscountQueryVariables,
+      options?: UseQueryOptions<LiveEventscountQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<LiveEventscountQuery, TError, TData>(
+      variables === undefined ? ['LiveEventscount'] : ['LiveEventscount', variables],
+      fetcher<LiveEventscountQuery, LiveEventscountQueryVariables>(client, LiveEventscountDocument, variables, headers),
+      options
+    );
+export const UpcomingEventsCountsDocument = `
+    query UpcomingEventsCounts {
+  upcomingEvents {
+    id
+  }
+}
+    `;
+export const useUpcomingEventsCountsQuery = <
+      TData = UpcomingEventsCountsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: UpcomingEventsCountsQueryVariables,
+      options?: UseQueryOptions<UpcomingEventsCountsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<UpcomingEventsCountsQuery, TError, TData>(
+      variables === undefined ? ['UpcomingEventsCounts'] : ['UpcomingEventsCounts', variables],
+      fetcher<UpcomingEventsCountsQuery, UpcomingEventsCountsQueryVariables>(client, UpcomingEventsCountsDocument, variables, headers),
+      options
+    );
 export const InstitutionsDocument = `
     query Institutions {
   institutions {
@@ -4877,8 +4944,8 @@ export const useInstitutionsQuery = <
       options
     );
 export const FindAuctionsDocument = `
-    query FindAuctions($where: FindAuctionWhereInput!) {
-  findAuctions(where: $where) {
+    query FindAuctions($where: FindAuctionWhereInput!, $take: Int, $skip: Int!, $orderBy: [FindAuctionOrderByInput!]!) {
+  findAuctions(where: $where, take: $take, skip: $skip, orderBy: $orderBy) {
     address
     auctionEndDate
     auctionNotice

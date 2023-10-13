@@ -6,13 +6,14 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import PaymentPopup from "../../components/popup/popup";
 import Logo from "../../components/ui/Logo";
-import LogoImage from '@assets/openbid.png'
+import LogoImage from '@assets/logo.png'
 
 import {
   useFindAuctionsQuery,
   FindAuctionsQueryVariables,
   useGetUserQuery,
   GetUserQueryVariables,
+  OrderDirection,
 } from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
 // import Router from "next/router";
@@ -96,6 +97,14 @@ const OpenBidDetails = () => {
 
   const { data, isLoading, refetch } =
     useFindAuctionsQuery<FindAuctionsQueryVariables>(graphQLClient(), {
+      skip: 0,
+    take: 10,
+    orderBy: [
+      {
+        listingId:OrderDirection.Desc,
+      },
+    ],
+    
       where: {
         id: {
           equals: id as string,
@@ -229,21 +238,22 @@ const OpenBidDetails = () => {
                       </div>
                     ) : (
                       <div className="col-span-1 md:col-span-2 border max-lg:px-2  text-center">
-                        <div className=" max-w-4xl border border-sky-300 my-4 mx-auto  rounded-lg bg-sky-900  h-60 space-y-4 pb-2 flex flex-col justify-center items-center">
+                        <div className=" max-w-4xl  shadow-xl my-4 mx-auto  rounded-lg bg-[#f5f5f5]  h-60 space-y-4 pb-2 flex flex-col justify-center items-center">
                           <div className="space-y-5">
-                         <div className="shadow-lg w-60   mx-auto">
+                         <div className="w-72  bg-white rounded-md   mx-auto">
                          <Image
                     src={LogoImage}
                     alt="auto bse"
-                    width={180}
+                    width={200}
                     height={60}
+                   
                 />
                          </div>
                             <h1
                               id="tier-growth "
                               className="text-base sm:text-lg m-2"
                             >
-                              <span className="text-lg text-white uppercase font-semibold">
+                              <span className="text-lg text-black font-serif	 uppercase font-semibold">
                                 {" "}
                                 your Payment for Open Bids Subscription{" "}
                               </span>
@@ -257,9 +267,9 @@ const OpenBidDetails = () => {
                       </div>
                     ):( 
                     <div className="col-span-1 md:col-span-2 border max-lg:px-2  text-center ">
-                    <div className=" max-w-4xl  my-4 mx-auto   h-60 space-y-4 pb-2 flex flex-col justify-center items-center bg-sky-600">
+                    <div className=" max-w-4xl  my-4 mx-auto   h-60 space-y-4 pb-2 flex flex-col justify-center items-center  bg-[#f5f5f5]">
                       <div className="space-y-5">
-                      <div className="shadow-lg w-60  mx-auto">
+                      <div className="shadow-lg w-72 bg-white  mx-auto">
                       <Image
                     src={LogoImage}
                     alt="auto bse"
@@ -271,7 +281,7 @@ const OpenBidDetails = () => {
                           id="tier-growth "
                           className="text-base sm:text-lg m-2"
                         >
-                          <span className="text-lg tracking-wider text-white uppercase font-semibold ">
+                          <span className="text-lg tracking-wider text-black font-serif uppercase font-semibold ">
                             {" "}
                            please make the payment to see the full details{" "}
                           </span>
@@ -359,7 +369,7 @@ const DownloadButton = (file) => {
     const link = document.createElement('a');
     link.href = file;
     link.target = '_blank'; // Open the link in a new tab
-    link.download = 'image.jpg'; // Set the filename for the downloaded image
+    link.download = '.jpg'; // Set the filename for the downloaded image
     link.click();
 };
 

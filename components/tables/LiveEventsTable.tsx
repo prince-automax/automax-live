@@ -57,10 +57,6 @@ useEffect(()=>{
 refetch()
 },[data])
 
-// console.log("useLiveEventsQuery",data);
-
-  
-
 
   const { data: userData, isLoading: loading } =
     useGetUserQuery<GetUserQueryVariables>(

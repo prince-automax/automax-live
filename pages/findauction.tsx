@@ -21,7 +21,8 @@ import {
   useFindAuctionsQuery,
   FindAuctionsQueryVariables,
   useFindAuctionStateQuery,
-  FindAuctionStateQueryVariables
+  FindAuctionStateQueryVariables,
+  OrderDirection
 } from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
 
@@ -50,15 +51,26 @@ const Findauction = () => {
     useFindAuctionStateQuery<FindAuctionStateQueryVariables>(graphQLClient());
 
    
-    
+    const variables={
+      skip: 0,
+      take: 10,
+    }
 
     
 
-    const { data: findAuction } = useFindAuctionsQuery(graphQLClient(), {
+    const { data: findAuction } = useFindAuctionsQuery(graphQLClient(),  {
+      skip: 0,
+    take: 100,
+    orderBy: [
+      {
+        listingId: OrderDirection.Desc,
+      },
+    ],
+    
       where: {
         ...(queryResult?.category && {
           propertyType: {
-            equals: queryResult?.category
+            equals: queryResult?.category 
           }
         }),
         ...(queryResult?.bank && {
@@ -95,6 +107,9 @@ const Findauction = () => {
             
           }
         }),
+     
+    
+  
         ...(queryResult?.minimum && {
           reservePrice: {
             gte:  queryResult?.minimum.toString()
@@ -107,10 +122,13 @@ const Findauction = () => {
             
           }
         })
-      }
+      },
+      
     });
     
 
+
+    
 
 
 
@@ -120,7 +138,11 @@ const Findauction = () => {
       accessor:"listingId"
 
     },
-  
+    {
+      Header: "State",
+      accessor: "state.name",
+    }
+  ,
     {
       Header: "Institution Name",
       accessor: "institution_details.name",
@@ -169,7 +191,7 @@ const Findauction = () => {
         <Link href={`/openbiddetails/${value}`}>
           <a target="_blank">
             <div className="flex">
-          <span className="  font-normal px-4 py-1 mb-6 border bg-green-500 text-white rounded"> View</span> <div><ArrowRightIcon/></div>
+          <span className="  font-normal px-4 py-1 mb-6 border bg-blue-500 text-white rounded"> View</span> <div><ArrowRightIcon/></div>
             </div>
           </a>
         </Link>
@@ -380,7 +402,7 @@ const Findauction = () => {
                           </label>
                           <div className="mt-1">
                             <Field
-                              type="datetime-local"
+                              type="Date"
                               name="fromDate"
                               id="subject"
                               className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
@@ -396,7 +418,7 @@ const Findauction = () => {
                           </label>
                           <div className="mt-1">
                             <Field
-                              type="datetime-local"
+                              type="Date"
                               name="toDate"
                               id="subject"
                               className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
@@ -441,63 +463,7 @@ const Findauction = () => {
                             />
                           </div>
                         </div>
-                        {/* <div className="sm:col-span-2 sm:flex sm:justify-between">
-                         
-
-                          <div className="mt-1 space-x-2">
-                            <Field
-                              maxLength={10}
-                              type="checkbox"
-                              name="Possession"
-                              id="Possession"
-                              autoComplete="given-name"
-                              className="rounded-full"
-                            />
-                            <label
-                              htmlFor="firstname"
-                              className=" text-sm font-medium text-gray-900"
-                            >
-                              All Possession
-                            </label>
-                          </div>
-
-                      
-
-                          <div className="mt-1 space-x-2">
-                            <Field
-                              maxLength={10}
-                              type="checkbox"
-                              name="Physical"
-                              id="Physical"
-                              autoComplete="given-name"
-                              className="rounded-full"
-                            />
-                            <label
-                              htmlFor="firstname"
-                              className=" text-sm font-medium text-gray-900"
-                            >
-                              Physical
-                            </label>
-                          </div>
-                          <div className="mt-1 space-x-2">
-                            <Field
-                              maxLength={10}
-                              type="checkbox"
-                              name="Symbolic"
-                              id="Symbolic"
-                              autoComplete="given-name"
-                              className="rounded-full"
-                            />
-                            <label
-                              htmlFor="firstname"
-                              className=" text-sm font-medium text-gray-900"
-                            >
-                              Symbolic
-                            </label>
-                          </div>
-                          
-                        </div> */}
-
+                       
                         <div className="sm:col-span-2 sm:flex sm:justify-start">
                           <button
                             type="submit"
@@ -528,7 +494,8 @@ const Findauction = () => {
          {/* <div className="overflow-hidden shadow-lg  rounded-lg p-2 my-3 border border-slate-400 mx-4"> */}
          <div className="grid grid-cols-1 mx-10 border border-slate-300 my-6">
           <div className="flex flex-col border-b space-y-2 px-3 py-2 font-medium text-sm">
-            <span>Listing Id</span>
+            <span>Listing ID</span>
+            <span>State</span>
             <span>Institution Name</span>
             <span>Property Details</span>
             <span>Application Deadline</span>
@@ -541,7 +508,9 @@ const Findauction = () => {
             <div key={index}>
           <div className="flex flex-col border-b border-slate-300 space-y-2 px-3 py-3 text-black">
           <div className="flex  justify-center font-bold">  <span>{item?.listingId}</span></div>
+          <span>{item?.state.name}</span>
             <span>{item?.institution_details.name}</span>
+            
             <span>{item?.propertyType}</span>
             <span>{new Date(item?.emdSubmissionDate).toLocaleDateString()}</span>
             <span>{new Date(item?.auctionStartDate).toLocaleDateString()}</span>

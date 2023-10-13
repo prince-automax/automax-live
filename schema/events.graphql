@@ -270,3 +270,16 @@ query ActiveBids($take: Int, $orderBy: [BidOrderByInput!]!) {
     }
   }
 }
+
+
+query LiveEventscount {
+  liveEvents {
+  eventCategory
+      }
+}
+
+query UpcomingEventsCounts {
+  upcomingEvents {
+  id  
+  }
+}
