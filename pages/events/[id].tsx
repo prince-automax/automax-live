@@ -109,9 +109,10 @@ function Events() {
     { cacheTime: 5, refetchInterval: interval, enabled: accessToken !== "" }
   );
 
-  // console.log('liveevent',data);
+
+
   
-// console.log('demo',demo);
+ 
 
   
   const { data:workbook, isLoading:workbookLoading, refetch } =
@@ -119,7 +120,7 @@ function Events() {
     graphQLClient({ Authorization: `Bearer ${accessToken}` })
   );
 
-  //  console.log('workbook',workbook)
+  
 
 
   useEffect(()=>{
@@ -264,48 +265,9 @@ refetch()
     });
   };
 
-  // function BindVehicleImage(vehicle) {
-  //   if (vehicle) {
-  //     const tempImages = [];
-  //     let count = 0;
-  //     if (vehicle?.frontImage !== "") {
-  //       tempImages.push({
-  //         id: 1,
-  //         name: "Front Image",
-  //         src: vehicle?.frontImage,
-  //         alt: "Front Image.",
-  //       });
-  //     }
-  //     if (vehicle?.backImage !== "") {
-  //       tempImages.push({
-  //         id: 2,
-  //         name: "Back Image",
-  //         src: vehicle?.backImage,
-  //         alt: "Back Image.",
-  //       });
-  //     }
-  //     if (vehicle?.leftImage !== "") {
-  //       tempImages.push({
-  //         id: 3,
-  //         name: "Left Image",
-  //         src: vehicle?.leftImage,
-  //         alt: "Left Image.",
-  //       });
-  //     }
-  //     if (vehicle?.rightImage !== "") {
-  //       tempImages.push({
-  //         id: 4,
-  //         name: "Right Image",
-  //         src: vehicle?.rightImage,
-  //         alt: "Right Image.",
-  //       });
-  //     }
-    
-  //     setImages(tempImages);
-  //   } else {
-  //     setImages([]);
-  //   }
-  // }
+
+  
+
 
  
   let filteredArray = data?.event?.vehicles?.map((item, index) => {
@@ -344,9 +306,9 @@ refetch()
             if ((diff > 0 && type == "l") || type == "c") {
  {const find= (workbook?.workSheets as any[] | undefined)?.filter((wb)=> wb.registrationNumber===item.registrationNumber )
  
-// console.log('find',find);
 
-      // console.log('item?.rightImage',item?.rightImage);
+     
+      
       
            
               return (
@@ -364,19 +326,19 @@ refetch()
                       : "border-gray-300 bg-slate-50"
                   }  `}
                 >
-                  {item?.rightImage && (
+                  {item?.frontImage && (
                     <div
                       className="flex-none w-70 h-56  sm:max-md:h-56 sm:max-md:w-full md:h-auto sm:w-60 relative p-6 hover:cursor-pointer"
                       onClick={() => {
                         // BindVehicleImage(item);
-                        setImages((item?.rightImage).split(','))
+                        setImages((item?.frontImage).split(','))
                        
                         setShowImageCarouselModal(true);
                       }}
                     >
                       <Image
                         alt="img"
-                        src={item?.rightImage}
+                        src={item?.frontImage}
                         layout="fill"
                         className="absolute inset-0 w-full h-full object-cover rounded"
                       />
@@ -384,7 +346,7 @@ refetch()
                   )}
                   <div className={`flex-auto p-3 lg:space-y-4 sm:p-6 `}>
   
-<div className="mb-3">{find.length>0 && (<Link  href={`/workbook/${find[0].id}`}><a  target="_blank" rel="noopener noreferrer" title="Click here to view the workbook" className="bg-blue-700 p-2 cursor-pointer rounded-md text-white animate-pulse">WorkBook matched</a></Link>)}</div>
+<div className="mb-3">{find?.length>0 && (<Link  href={`/workbook/${find[0].id}`}><a  target="_blank" rel="noopener noreferrer" title="Click here to view the workbook" className="bg-blue-700 p-2 cursor-pointer rounded-md text-white animate-pulse">WorkBook matched</a></Link>)}</div>
 
                     <div className="sm:flex flex-wrap">
                       <div className="flex-auto">
@@ -451,8 +413,8 @@ refetch()
                               Repo date
                             </dt>
                             <dd className="text-sm text-gray-900">
-                              {" "}
-                              {new Date(item?.repoDt).toLocaleDateString()}
+                            
+                              {item?.repoDt ? new Date(item?.repoDt).toLocaleDateString(): 'N/A'}
                             </dd>
                           </div>
                           <div className="sm:col-span-1 flex items-center justify-between sm:block">
@@ -727,7 +689,7 @@ const EnterBid = ({ row, call, event }) => {
 
   const [bidAmount, setBidAmount] = useState("");
 
-console.log("!!",row?.currentBidAmount);
+
 
 
   useEffect(() => {
@@ -740,7 +702,7 @@ console.log("!!",row?.currentBidAmount);
       }
     } else {
       if (row.currentBidAmount !== null && row.currentBidAmount !== undefined) {
-        console.log("Entered IF condition");
+      
         let amt = row?.userVehicleBids?.length
           ? row?.userVehicleBids[0].amount
           : row.startPrice;

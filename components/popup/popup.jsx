@@ -11,7 +11,7 @@ const PaymentPopup = ({  onClose }) => {
           <div className="col-span-1 w-4/5 h-4/5 rounded-lg bg-gray-300 p-4 text-center flex flex-col space-y-9 mx-auto justify-center items-center  ">
            <div>
            <h2 className="text-lg font-normal">Subscribe for 3 month @</h2>
-            <p className=" text-lg font-bold"> <span>₹</span>3000</p>
+            <p className=" text-lg font-bold"> <span>₹</span>1900</p>
            </div>
            {/* <div className="w-full h-fit   "> */}
            {/* <button className="py-2 px-4 rounded-lg text-white bg-blue-400">subscribe</button> */}
