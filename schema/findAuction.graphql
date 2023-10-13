@@ -4,36 +4,15 @@ query Institutions {
     id
   }
 }
-# query FindAuctions($where: FindAuctionWhereInput!, $stateWhere2: StateWhereUniqueInput!) {
-#   findAuctions(where: $where) {
-#     address
-#     auctionEndDate
-#     auctionNotice
-#     auctionStartDate
-#     city
-#     contactDetails
-#     createdAt
-#     emdAmount
-#     emdSubmissionDate
-#     id
-#     institution_details {
-#       createdAt
-#       id
-#       name
-#     }
-#     listingId
-#     propertyType
-#     reservePrice
-# vehicleRegNo
-#   }
-# #   state(where: $stateWhere2) {
-# # name
-# # }
-# }
 
 
-query FindAuctions($where: FindAuctionWhereInput!,) {
-  findAuctions(where: $where) {
+
+
+
+
+
+ query FindAuctions($where: FindAuctionWhereInput!, $take: Int, $skip: Int!, $orderBy: [FindAuctionOrderByInput!]!) {
+  findAuctions(where: $where, take: $take, skip: $skip, orderBy: $orderBy) {
     address
     auctionEndDate
     auctionNotice
@@ -52,12 +31,11 @@ query FindAuctions($where: FindAuctionWhereInput!,) {
     listingId
     propertyType
     reservePrice
-vehicleRegNo
-state {
-name
-}
-}
-
+    vehicleRegNo
+    state {
+      name
+    }
+  }
 }
 
 query findAuctionState {

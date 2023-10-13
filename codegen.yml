@@ -1,6 +1,5 @@
 overwrite: true
- schema: https://api.autobse.com/api/graphql
-# schema: https://api-dev.autobse.com/api/graphql
+schema: https://api.autobse.com/api/graphql
 documents: "schema/*.graphql"
 generates:
   ./utils/graphql.ts:

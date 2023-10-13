@@ -59,7 +59,7 @@ export default function Navbar() {
       current: router.pathname == "/dashboard" ? true : false,
     },
     {
-      name: "Open Bids",
+      name: "Open Leads",
       href: "/findauction",
       current: router.pathname == "/findauction" ? true : false,
     },

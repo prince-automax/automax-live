@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TopBar from "./TopBar";
 import {
   ArrowCircleLeftIcon,
@@ -21,12 +21,13 @@ import {
 } from "@heroicons/react/outline";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCar,faCashRegister,faCog,faImages   } from '@fortawesome/free-solid-svg-icons';
-
+import graphQLClient from "@utils/useGQLQuery";
 
 
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Welcome from "../common/Welcome";
+import { useLiveEventscountQuery,LiveEventscountQueryVariables,useUpcomingEventsCountsQuery } from "@utils/graphql";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -38,6 +39,54 @@ export default function DashboardTemplate({ children, heading, subHeading }) {
   const [showEvents, setShowEvents] = useState(false);
   const [showBids, setShowBids] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+  const [liveOpen,setLiveOpen]=useState(0)
+  const [liveOnline,setLiveOnline]=useState(0)
+  const [Upcoming,setUpcoming]=useState(0)
+
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      setAccessToken(token);
+    }
+  }, []);
+
+
+
+
+
+  const { data, isLoading,refetch} = useLiveEventscountQuery(
+    graphQLClient({ Authorization: `Bearer ${accessToken}` }),
+  
+  );
+  const {data:upcoming}=useUpcomingEventsCountsQuery(
+    graphQLClient({ Authorization: `Bearer ${accessToken}` }),
+  )
+  
+ 
+
+
+useEffect(()=>{
+  if(data?.liveEvents[0]){
+    const liveOnline=data?.liveEvents?.filter((online)=>online?.eventCategory=='online')
+    const openlive=data?.liveEvents?.filter((online)=>online?.eventCategory=='open')
+ 
+    setLiveOnline(liveOnline?.length)
+    setLiveOpen(openlive?.length)
+  }
+  if(upcoming?.upcomingEvents){
+    setUpcoming(upcoming?.upcomingEvents?.length)
+   
+    
+  }
+},[data,upcoming])
+
+;
+
+
+    
+    
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -45,7 +94,7 @@ export default function DashboardTemplate({ children, heading, subHeading }) {
 
   const eventsNavigations = [
     {
-      name: "Online Events",
+      name: `Online Events (${liveOnline})`,
       href: "/dashboard",
       icon: ClockIcon,
       current:
@@ -54,13 +103,13 @@ export default function DashboardTemplate({ children, heading, subHeading }) {
           : false,
     },
     {
-      name: "Upcoming Events",
+      name: `Upcoming Events (${Upcoming})`,
       href: "/upcoming-events",
       icon: CalendarIcon,
       current: router.pathname == "/upcoming-events" ? true : false,
     },
     {
-      name: "Open Auctions",
+      name: `Open Auctions  (${liveOpen})`,
       href: "/open-auctions",
       icon: ClockIcon,
       current: router.pathname == "/open-auctions" ? true : false,
@@ -132,12 +181,7 @@ export default function DashboardTemplate({ children, heading, subHeading }) {
       icon: ReceiptTaxIcon,
       current: router.pathname == "/report" ? true : false,
     },
-    {
-      name: "OpenBidDetails",
-      href: "/openbiddetails",
-      icon: ReceiptTaxIcon,
-      current: router.pathname == "/openbiddetails" ? true : false,
-    },
+   
   ];
 
   return (
