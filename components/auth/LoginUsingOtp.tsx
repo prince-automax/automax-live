@@ -77,18 +77,18 @@ export default function LoginUsingOtp() {
                     text: "Please enter the OTP received on your registered mobile number.",
                 });
             } else {
-                console.log("entered here bcz user with such num doest exsist ");
+                // console.log("entered here bcz user with such num doest exsist ");
                 
                 // user with the provided mobile number does not exist. It proceeds to create a new user using the callCreateUserMutation with the provided number
                 const result2 = await callCreateUserMutation.mutateAsync({
-                    data: {
+                    data: {  
                         mobile,
                         username: "auto" + mobile,
                         status: UserStatusType.Pending,
                     },
                 });
 
-                console.log("user created using callcreateusermutation");
+                // console.log("user created using callcreateusermutation");
                 
 
                 if (!result2.createUser?.id) {

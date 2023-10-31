@@ -63,26 +63,34 @@ export default function Navbar() {
       href: "/findauction",
       current: router.pathname == "/findauction" ? true : false,
     },
+    {
+      name: "Sell A Car",
+      href: "/sellacar",
+      current: router.pathname == "/sellacar" ? true : false,
+    },
   ];
 
   return (
     <div className="bg-white">
       <Popover>
+
         <nav
           className="relative max-w-7xl mx-auto px-4 sm:px-6"
           aria-label="Global"
         >
           <div className="border-b border-gray-200 flex items-center justify-between py-3">
             <div className="flex items-center flex-1">
+          
               <div className="flex items-center justify-between w-full md:w-auto">
                 <Logo />
                 <div className="-mr-2 flex items-center md:hidden">
                   <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white">
-                    <span className="sr-only">Open main menu</span>
+                    <span className=""></span>
                     <MenuIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
                 </div>
               </div>
+              {/* Desktop view mapping */}
               <div className="hidden space-x-2 md:flex md:ml-10">
                 {navigation.map((item) => (
                   
@@ -97,7 +105,7 @@ export default function Navbar() {
                     >
                       {item.name}
                     </a>
-                  </Link>
+                  </Link> 
                 ))}
               </div>
             </div>
@@ -145,13 +153,14 @@ export default function Navbar() {
               <div className="px-5 pt-4 flex items-center justify-between">
                 <Logo />
                 <div className="-mr-2">
-                  {/* closing button */}
+              
                   <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                     <span className="sr-only">Close menu</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
                 </div>
               </div>
+              {/* mobile view mapping */}
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
                   <div key={item.index} className="flex">
@@ -164,11 +173,7 @@ export default function Navbar() {
                     </a>
                   </Link></Popover.Button>
                
-                   {/* <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                   <span className="sr-only">Close menu</span>
-                 
-                   <Link href={item.href} key={item.name}>   {item?.name}</Link>
-                 </Popover.Button> */}
+             
                  </div>
                 ))}
 

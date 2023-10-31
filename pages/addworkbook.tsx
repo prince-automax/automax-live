@@ -48,15 +48,12 @@ function AddWorkBook() {
 
   const AddWorkBookMutation = useAddWorkBookMutation<AddWorkBookMutationVariables>(
     graphQLClient({ Authorization: `Bearer ${accessToken}` })
-    // { where: { id } },
-    // {
-    //   enabled: accessToken !== "",
-    // }
+
     
   );
 
-   console.log("idfromworkaaa",id);
-   console.log("tokenfromworkaaa",accessToken);
+  
+
 
   const { data } = useGetUserQuery<GetUserQuery>(
     graphQLClient({ Authorization: `Bearer ${accessToken}` }),
@@ -66,7 +63,7 @@ function AddWorkBook() {
     }
   );
 
-  console.log("addWorkBookuser",data);
+ 
   
 
   const validationSchema = Yup.object().shape({
@@ -127,7 +124,7 @@ function AddWorkBook() {
   
 
   const onSubmit = async (values,{ resetForm }) => {
-    // console.log("reached here",values);
+
     
   
    const result=await AddWorkBookMutation.mutateAsync({
