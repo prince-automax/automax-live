@@ -97,6 +97,9 @@ export default function LoginUsingOtp() {
                         text: "Unable to send OTP. Please contact the support team.",
                     });
                 }
+
+
+                
                 const result3 = await callOTPMutation.mutateAsync({ mobile });
                 if (result3.sendUserMagicAuthLink) {
                     setVerificationMode(true);

@@ -1,7 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Roboto&family=Ubuntu:wght@500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
 
 
 .custom-swal-container {
@@ -64,6 +68,51 @@
     .btn-white {
         @apply w-full flex items-center justify-center border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50;
     }
+
+    .scroll {
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f1f1f1;
+      &::-webkit-scrollbar {
+          width: 10px;
+          display: none;
+      }
+
+      &::-webkit-scrollbar-track {
+          background: #f1f1f1;
+      }
+
+      &::-webkit-scrollbar-thumb {
+          background: #888;
+          border-radius: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+          background: #555;
+      }
+  }
+  .mfgScroll {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+    &::-webkit-scrollbar {
+        width: 5px;
+        
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+    
+
 }
 
 

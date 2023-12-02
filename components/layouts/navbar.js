@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon,ChevronRightIcon } from "@heroicons/react/outline";
 import Logo from "../ui/Logo";
 import Link from "next/link";
 import { useRouter } from "next/router";

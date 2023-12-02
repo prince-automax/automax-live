@@ -16,7 +16,8 @@ const nextConfig = {
             "api.autobse.com",
             "photos.google.com",
             "firebasestorage.googleapis.com",
-            "api-dev.autobse.com"
+            "api-dev.autobse.com",
+            "ops.adroitauto.in"
         ],
     },
 };
