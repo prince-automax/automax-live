@@ -1,4 +1,6 @@
 import React from "react";
+import * as Yup from "yup";
+
 import Image from "next/image";
 import bck from "../public/assets/Sell a car/bck2.jpg";
 import { useState, useRef, useEffect } from "react";
@@ -23,15 +25,31 @@ import {
 } from "../components/sellcarcomponents/components";
 import { Tabs } from "../utils/sellacar/sellACarTab";
 import SellACarOtp from "../components/sellacar/sellACarOtp";
-import SellACarOtpVerification from "../components/sellacar/SellACarOtpVerification";
+import storage from "../components/firebase/firebaseConfig";
+import { HandleUpload } from "../components/firebase/firebaseHandleupload";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 import WelcomePage from "../components/sellacar/WelcomePage";
-import { Formik, Form } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
+import graphQLClient from "@utils/useGQLQuery";
+import {
+  useCreateSellACarMutation,
+  CreateSellACarMutationVariables,
+  useUpdateUserMutation,
+  UpdateUserMutationVariables,
+} from "@utils/graphql";
 const years = Array.from({ length: 44 }, (_, index) => 1980 + index);
 
 const SellACar = () => {
-  const [activeTab, setActiveTab] = useState(14);
-  const [components, setComponents] = useState(4);
+  const [activeTab, setActiveTab] = useState(11);
+  const [components, setComponents] = useState(1);
   const [accessToken, setAccessToken] = useState("");
+  const [Interorimage, setInteriorImage] = useState([]);
+  const [Exterorimage, setEXteriorImage] = useState([]);
+  const [firebaseInteriorImage, setFirebaseInteriorImage] = useState("");
+  const [firebaseExteriorImage, setFirebaseExteriorImage] = useState("");
+  const [id, setId] = useState("");
+
   const [formData, setFormData] = useState({
     registrationNumber: "",
     make: "",
@@ -44,7 +62,8 @@ const SellACar = () => {
     fuel: "",
     vehicleCondition: "",
     veicleLocation: "",
-    images: "",
+    interiorImages: "",
+    exteriorImages: "",
     expectToSell: "",
     clientContactPerson: "",
     clientContactNo: "",
@@ -52,86 +71,125 @@ const SellACar = () => {
     landmark: "",
     pincode: "",
   });
+  const scrollContainerRef = useRef();
+  let container;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
-      token && setComponents(4);
+      const id = localStorage.getItem("id");
+      token && setComponents(3);
       setAccessToken(token);
-    
+      setId(id);
     }
   }, []);
 
+  const handleInteriorImage = (file) => {
+    // console.log('file from inter',file);
 
-  // useEffect(() => {
-  //   // console.log('hit one');
-  //   console.log('formdata t',formData);
+    setInteriorImage([...Interorimage, file]);
+  };
 
-  //   // if (formData?.registrationNumber !== "") {
-  //   //   localStorage.setItem("sellacar", JSON.stringify(formData));
-  //   // }
-
-  //   // if(!formData.registrationNumber || formData.registrationNumber == ''){
-  //   //   console.log('tab 1')
-  //   //   setActiveTab(1);
-  //   // }
-  //   // else if(!formData.yearOfManufacture ||formData.yearOfManufacture == '' ){
-  //   //   console.log('tab 2')
-  //   //   setActiveTab(2);
-  //   // }
-  //   // else if(!formData.model ||formData.model == '' ){
-  //   //   console.log('tab 2')
-  //   //   setActiveTab(3);
-  //   // }
-  //   // else if(!formData.body ||formData.body == '' ){
-  //   //   console.log('tab 2')
-  //   //   setActiveTab(4);
-  //   // }
-  //   // else if(!formData.rtocode ||formData.rtocode == '' ){
-  //   //   console.log('tab 2')
-  //   //   setActiveTab(5);
-  //   // }
-  //   // else if(!formData.kmReading ||formData.kmReading == '' ){
-  //   //   console.log('tab 2')
-  //   //   setActiveTab(6);
-  //   // }
-  // }, [formData]);
+  const handleExteriorImage = (file) => {
+    setEXteriorImage([...Exterorimage, file]);
+  };
 
   useEffect(() => {
-    if (formData.registrationNumber !== '') {
-      // Convert formData to a string using JSON.stringify
+    if (formData.registrationNumber !== "") {
       const formDataString = JSON.stringify(formData);
-  
-      // Store the string in localStorage
-      localStorage.setItem('sellacar', formDataString);
+
+      localStorage.setItem("sellacar", formDataString);
     }
   }, [formData]);
-  
-  
-
-
 
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem("sellacar")) || {};
-    // console.log('log from useeffect taking data from Lc when active tab is changing');
-    
+
     setFormData(savedFormData);
   }, [activeTab]);
 
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem("sellacar")) || {};
     setFormData(savedFormData);
-    
-    // console.log('log from useeffect taking data from Lc when initial rendering  tab is changing');
-
-    
   }, []);
-  
 
-  const scrollContainerRef = useRef();
-  let container;
+  const AddSellACarMutation =
+    useCreateSellACarMutation<CreateSellACarMutationVariables>(
+      graphQLClient({ Authorization: `Bearer ${accessToken}` })
+    );
 
-  const onSubmit = async (values, { resetForm }) => {
+  const UpdateUserMutation = useUpdateUserMutation<UpdateUserMutationVariables>(
+    graphQLClient({ Authorization: `Bearer ${accessToken}` })
+  );
+
+  async function SubmitFiles(values, { resetForm }) {
+    console.log("values from onSubmitFiles", values);
+
+    try {
+      const interiorImages = Interorimage || []; // Assuming values.interiorImage is an array
+      const ExteriorImages = Exterorimage || [];
+
+      try {
+        const interiorImageUrl = await HandleUpload(
+          interiorImages,
+          "interiorImage",
+          "interior"
+        );
+        console.log("interiorImageUrl from onSubmit", interiorImageUrl);
+        setFirebaseInteriorImage(interiorImageUrl);
+      } catch (ex) {
+        console.log("interiorImageUrl uploading Error", ex);
+
+        return ""; // Handle error, you may want to log or handle differently
+      }
+
+      try {
+        const ExteriorImageUrl = await HandleUpload(
+          ExteriorImages,
+          "exteriorImages",
+          "exterior"
+        );
+        setFirebaseExteriorImage(ExteriorImageUrl);
+        console.log("ExteriorImageUrl from onSubmit", ExteriorImageUrl);
+      } catch (error) {
+        console.log("Exteriro image uploading error", error);
+      }
+
+      const result = await AddSellACarMutation.mutateAsync({
+        data: {
+          registrationNumber: values?.registrationNumber,
+          make: values?.make,
+          yearOfManufacture: values?.yearOfManufacture,
+          model: values?.model,
+          body: values?.body,
+          state: values?.state,
+          rtoCode: values?.rtoCode,
+          // kmReading: values?.kmReading,
+          fuel: values?.fuel,
+          vehicleCondition: values?.vehicleCondition,
+          veicleLocation: values?.veicleLocation,
+          interiorImages: firebaseInteriorImage,
+          exteriorImages: firebaseExteriorImage,
+          expectToSell:new Date(values?.expectToSell).toISOString(),
+          address: values?.address,
+          landmark: values?.landmark,
+          pincode: values?.pincode,
+        },
+      });
+
+      console.log("result of sellacarform submission", result);
+
+      if (result) {
+        const userUpdate = await UpdateUserMutation.mutateAsync({
+          where: { id: id },
+          data: { firstName: values?.clientContactPerson },
+        });
+        console.log("result of sellacarform userupdate", userUpdate);
+      }
+    } catch (error) {
+      console.log("err in onsubmit", error);
+    }
+
     console.log("From ONSubmit of sell a car ", values);
     setFormData({
       registrationNumber: "",
@@ -145,21 +203,22 @@ const SellACar = () => {
       fuel: "",
       vehicleCondition: "",
       veicleLocation: "",
-      images: "",
+      interiorImages: "",
+      exteriorImages: "",
       expectToSell: "",
       clientContactPerson: "",
       clientContactNo: "",
       address: "",
       landmark: "",
       pincode: "",
-    })
-    resetForm()
-    localStorage.removeItem('sellacar')
-  };
+    });
+    resetForm();
+    localStorage.removeItem("sellacar");
+  }
 
   const handleScroll = (direction) => {
     container = scrollContainerRef.current;
-    const scrollAmount = 120;
+    const scrollAmount = 100;
 
     if (direction === "right") {
       container.scrollLeft += scrollAmount;
@@ -173,7 +232,6 @@ const SellACar = () => {
   const handleClose = () => {
     setActiveTab(1);
     handleScroll(0);
-    console.log("remove local");
 
     localStorage.removeItem("sellacar");
     setFormData({
@@ -188,14 +246,15 @@ const SellACar = () => {
       fuel: "",
       vehicleCondition: "",
       veicleLocation: "",
-      images: "",
+      interiorImages: "",
+      exteriorImages: "",
       expectToSell: "",
       clientContactPerson: "",
       clientContactNo: "",
       address: "",
       landmark: "",
       pincode: "",
-    })
+    });
   };
 
   const handleTabClick = (tabNo) => {
@@ -207,7 +266,13 @@ const SellACar = () => {
     }
   };
 
-
+  const validationSchema = Yup.object().shape({
+    registrationNumber: Yup.string().required(
+      "Registration Number is required"
+    ),
+    // Add other validations for other fields here
+    // ...
+  });
   return (
     <div className="w-full min-h-screen relative flex items-center justify-center sm:p-10  ">
       <div className="w-full h-full absolute  z-[-1] ">
@@ -221,8 +286,8 @@ const SellACar = () => {
       </div>
       <div className="w-full h-full flex items-center justify-center  ">
         {components === 1 && <SellACarOtp index={setComponents} />}
-        {components === 2 && <SellACarOtpVerification index={setComponents} />}
-        {components === 3 && <WelcomePage index={setComponents} />}
+
+        {components === 2 && <WelcomePage index={setComponents} />}
 
         <div className="max-md:w-96 md:max-w-lg m-3 md:m-0  rounded-xl bg-opacity md:relative bg-white bg-opacity-90">
           <div
@@ -231,12 +296,9 @@ const SellACar = () => {
           >
             X
           </div>
-          {/* <div>
-            <button onClick={removeLocal}>REMOVE</button>
-          </div> */}
-          {components === 4 && (
+
+          {components === 3 && (
             <div className="w-full h-full ">
-              {/* Render the tabs outside of Formik */}
               <div
                 ref={scrollContainerRef}
                 style={{ whiteSpace: "nowrap" }}
@@ -249,7 +311,7 @@ const SellACar = () => {
                       activeTab === tab.tabIndex
                         ? "text-white bg-blue-500 "
                         : "bg-white"
-                    } `}
+                    }   ` }
                     onClick={() => handleTabClick(tab.tabIndex)}
                   >
                     {tab.tabName}
@@ -259,8 +321,8 @@ const SellACar = () => {
 
               <Formik
                 initialValues={formData}
-                onSubmit={onSubmit}
-                // enableReinitialize={true}
+                onSubmit={SubmitFiles}
+                enableReinitialize={true}
               >
                 {(props) => (
                   <Form>
@@ -272,6 +334,7 @@ const SellACar = () => {
                           handleScroll={handleScroll}
                           setFormData={setFormData}
                           formData={formData}
+                          isValid={props.isValid}
                         />
                       )}
                       {activeTab === 2 && (
@@ -379,6 +442,10 @@ const SellACar = () => {
                           name="image"
                           setActiveTab={setActiveTab}
                           handleScroll={handleScroll}
+                          handleImage={handleInteriorImage}
+                          Interorimage={Interorimage}
+                          setFormData={setFormData}
+                          formData={formData}
                         />
                       )}
                       {activeTab === 12 && (
@@ -386,6 +453,10 @@ const SellACar = () => {
                           name="image"
                           setActiveTab={setActiveTab}
                           handleScroll={handleScroll}
+                          handleImage={handleExteriorImage}
+                          Exterorimage={Exterorimage}
+                          setFormData={setFormData}
+                          formData={formData}
                         />
                       )}
                       {activeTab === 13 && (
@@ -399,17 +470,10 @@ const SellACar = () => {
                       {activeTab === 14 && (
                         <div>
                           <UserDetails
-                       
-
-
-
-                           setFormData={setFormData} 
-                           formData={formData}
-                           
-
+                            setFormData={setFormData}
+                            formData={formData}
                           />
-                            
- 
+
                           <button
                             type="submit"
                             className="bg-[#135A9E] py-1 w-full px-3 sm:py-2 sm:px-8 hover:bg-[#264b6d] rounded-lg sm:rounded-lg font-poppins text-white "

@@ -722,18 +722,5 @@ export const planning=[
     "Above 1,00,000 km",
   ];
 
-  export const InteriorImage=[
-    {id:"01",label:"Front",img: <Image alt="" src={Volvo} />},
-    {id:"02",label:"Back",img: <Image alt="" src={Volvo} />},
-    {id:"03",label:"Right",img: <Image alt="" src={Volvo} />},
-    {id:"04",label:"Left",img: <Image alt="" src={Volvo} />},
-  ]
-  
-  export const ExteriorImage=[
-    {id:"01",label:"Front",img: <Image alt="" src={bharath} />},
-    {id:"02",label:"Back",img: <Image alt="" src={bharath} />},
-    {id:"03",label:"Right",img: <Image alt="" src={bharath} />},
-    {id:"04",label:"Left",img: <Image alt="" src={bharath} />},
-  ]
-  
+
   export const vehicleCondition=["Brand New","Excellent Conditon","Gently Used","Fair Conditon","Rougly Used"]

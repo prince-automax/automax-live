@@ -10,6 +10,59 @@ const SellACarOtpVerification = ({index}) => {
     index(3);
   };
 
+//   async function CallOTPVerify() {
+//     console.log("enetred for otp verify   01");
+    
+//     let isValid = true;
+//     if (!IsValidValue(otp)) {
+//         setError({ text: "Please enter a valid OTP." });
+//         isValid = false;
+//     }
+//     if (isValid) {
+//         console.log("enetred for otp verify   02");
+//         const result = await callVerifyOTP.mutateAsync({ mobile, token: otp });
+//         console.log("enetred for otp verify   03");
+//         console.log("result of verify OTP",result);
+        
+
+//         if (result.redeemUserMagicAuthToken["token"] === undefined) {
+//             console.log("otp is no valid");
+            
+//             setError({ text: "Please enter a valid OTP." });
+//         }
+
+//         if (result.redeemUserMagicAuthToken["token"]) {
+//             console.log("enetred for otp verify   04");
+//             localStorage.setItem("token", result.redeemUserMagicAuthToken["token"]);
+//             localStorage.setItem(
+//                 "id",
+//                 result.redeemUserMagicAuthToken["item"]["id"]
+//             );
+//             localStorage.setItem(
+//                 "status",
+//                 result.redeemUserMagicAuthToken["item"]["status"]
+//             );
+//             localStorage.setItem(
+//                 "name",
+//                 result.redeemUserMagicAuthToken["item"]["firstName"]
+//             );
+
+//             setToken(result.redeemUserMagicAuthToken["token"]);
+//             setMobile("");
+//             setVerificationMode(false);
+//             setSuccess({
+//                 text: "You have been successfully logged in.",
+//             });
+//             router.push(`/dashboard`);
+//         } else {
+//             setError({
+//                 text: "OTP verification failed. Please contact the support team.",
+//             });
+//         }
+//     }
+// }
+
+
   return (
     <div className=" p-6 mx-4 sm:max-w-lg rounded-xl sm:mx-auto  h-96 bg-white bg-opacity-75">
       <div className="space-y-6 flex flex-col justify-center items-center h-full">
@@ -35,7 +88,7 @@ const SellACarOtpVerification = ({index}) => {
         <div className="w-[111px] text-center mb-6 bg-slate-600">
           <button
           onClick={()=>handleSetComponents()}
-            btnclass="w-full"
+      
             type="submit"
             color="indigo"
             className="text-white bg-[#135A9E]  hover:bg-[#6693e6]  p-2  shadow-md cursor-pointer font-bold font-poppins text-sm  w-full  "

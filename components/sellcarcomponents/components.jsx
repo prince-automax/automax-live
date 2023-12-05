@@ -15,7 +15,15 @@ import {
 } from "../../utils/sellacar/sellACarData";
 import sample from "../../public/assets/makers/kia.jpg";
 import SearchableComponent from "./searchableComponent";
-import { Formik, Form, Field, ErrorMessage, useField,useFormikContext  } from "formik";
+import { ImageComponent } from "./imageComponent";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  useField,
+  useFormikContext,
+} from "formik";
 import { SearchIcon, PencilIcon } from "@heroicons/react/outline";
 
 const years = Array.from({ length: 44 }, (_, index) => 1980 + index);
@@ -129,7 +137,11 @@ export const ModelComponent = ({
   setFormData,
 }) => {
   const [model, setModel] = useState(formData?.model);
+  const [isValue, setIsValue] = useState();
   const [field, meta, helpers] = useField(name);
+  useEffect(() => {
+    model ? setIsValue(true) : setIsValue(false);
+  }, [model]);
 
   useEffect(() => {
     setModel(formData?.model);
@@ -142,7 +154,7 @@ export const ModelComponent = ({
       ...prevData,
       [name]: model,
     }));
-    console.log("fdsfdasf", model);
+    // console.log("fdsfdasf", model);
     handleScroll("right");
   };
 
@@ -169,15 +181,17 @@ export const ModelComponent = ({
           )}
         </Field>
       </div>
-      <button
-        onClick={handleSubmit}
-        className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-blue-400  rounded-lg   self-center space-x-2  "
-      >
-        <span className="text-[#FFFFFF] font-poppins sm:text-lg sm:font-medium ">
-          {" "}
-          continue
-        </span>{" "}
-      </button>
+      {isValue && (
+        <button
+          onClick={handleSubmit}
+          className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-blue-400  rounded-lg   self-center space-x-2  "
+        >
+          <span className="text-[#FFFFFF] font-poppins sm:text-lg sm:font-medium ">
+            {" "}
+            continue
+          </span>{" "}
+        </button>
+      )}
     </div>
   );
 };
@@ -212,8 +226,6 @@ export const BodyComponent = ({
   );
 };
 
-
-
 //REGISTRATION NUMBER OR BRAND
 export const RegistrationNumber = ({
   setActiveTab,
@@ -221,10 +233,19 @@ export const RegistrationNumber = ({
   handleScroll,
   setFormData,
   formData,
+  isValid,
 }) => {
   const [searchTermLocal, setSearchTermLocal] = useState(
     formData?.registrationNumber
   );
+
+  const [isValue, setIsValue] = useState(false);
+
+  useEffect(() => {
+    searchTermLocal ? setIsValue(true) : setIsValue(false);
+  }, [searchTermLocal]);
+
+  console.log("isvalid from REG", isValid);
 
   const [field, meta, helpers] = useField(name);
 
@@ -233,13 +254,14 @@ export const RegistrationNumber = ({
   }, [formData]);
 
   const handleClick = () => {
-    setActiveTab(2);
     helpers.setValue(searchTermLocal);
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: searchTermLocal,
     }));
     handleScroll("right");
+    setActiveTab(2);
   };
 
   return (
@@ -261,6 +283,7 @@ export const RegistrationNumber = ({
               type="text"
               name="registrationNumber"
               value={searchTermLocal}
+              maxLength={10}
               onChange={(e) =>
                 setSearchTermLocal(
                   e.target.value.toUpperCase().replace(/\s/g, "")
@@ -269,116 +292,24 @@ export const RegistrationNumber = ({
               placeholder="  Registration Number"
               className="  w-full h-full p-2 border-none bg-inherit focus:ring-0 outline-0  bg-opacity-75 text-base sm:text-xl sm:text-center  max-md:placeholder:text-xs max-md:placeholder:text-center md:placeholder:text-center placeholder:font-poppins placeholder:font-normal "
             />
+            {/* <ErrorMessage name="registrationNumber"  /> */}
           </div>
         </div>
-        <button
-          onClick={handleClick}
-          className="bg-[#135A9E] py-1 px-5 sm:py-2 sm:px-8 hover:bg-blue-400  rounded-lg   self-center space-x-2  "
-        >
-          <span className="text-[#FFFFFF] font-poppins sm:text-lg sm:font-medium ">
-            {" "}
-            Next
-          </span>{" "}
-        </button>
+
+        {isValue && (
+          <button
+            onClick={handleClick}
+            // disabled={isValid}
+            className="bg-[#135A9E] py-1 px-5 sm:py-2 sm:px-8 hover:bg-blue-400  rounded-lg   self-center space-x-2  "
+          >
+            <span className="text-[#FFFFFF] font-poppins sm:text-lg sm:font-medium ">
+              {" "}
+              Next
+            </span>{" "}
+          </button>
+        )}
       </div>
     </>
-  );
-};
-
-//IMAGE INTERIOR COMPONENT
-export const ImageInterior = ({ name, setActiveTab, handleScroll }) => {
-  const handleSelect = () => {
-    setActiveTab(12);
-    handleScroll("right");
-  };
-  return (
-    <div className="  flex flex-col items-start px-4 md:px-10  py-2 md:py-4 space-y-2  ">
-      <p className="text-[#000000] font-poppins font-semibold text-base">
-        Upload Vehicle interior Photos
-      </p>
-
-      <div className=" grid grid-cols-1 md:grid-cols-2  gap-2 md:gap-4 w-full overflow-hidden max-md:h-96  max-md:overflow-y-scroll text-center ">
-        {InteriorImage.map((item, index) => (
-          <div
-            key={index}
-            className="flex flex-col border border-[#a3a7aa] bg-white rounded-lg p-2  shadow-xl  space-y-3"
-          >
-            <p className="text-sm font-poppins font-semibold tracking-wider">
-              {item.label}
-            </p>
-            <div className="border w-full h-full rounded-md border-slate-400">
-              {" "}
-              {item?.img}
-            </div>
-            <div className="">
-              {" "}
-              <input
-                className=" text-sm w-full  font-normal  border p-px "
-                type="file"
-              />
-            </div>
-          </div>
-        ))}
-
-        <div className="text-center w-full md:grid-cols-1  ">
-          <button
-            onClick={handleSelect}
-            className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-[#356795] rounded-lg sm:rounded-lg font-poppins text-white "
-          >
-            continue
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-//IMAGE INTERIOR
-export const ImageExterior = ({ name, setActiveTab, handleScroll }) => {
-  const handleSelect = () => {
-    setActiveTab(13);
-    handleScroll("right");
-  };
-
-  return (
-    <div className="  flex flex-col items-start px-4 md:px-10  py-2 md:py-4 space-y-2  ">
-      <p className="text-[#000000] font-poppins font-semibold text-base">
-        Upload Vehicle Exterior Photos
-      </p>
-
-      <div className=" grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 w-full overflow-hidden max-md:h-96  max-md:overflow-y-scroll ">
-        {ExteriorImage.map((item, index) => (
-          <div
-            key={item.id}
-            className="flex flex-col border border-[#a3a7aa] bg-white rounded-lg p-2  shadow-xl  space-y-3"
-          >
-            <p className="text-sm font-poppins font-semibold tracking-wider">
-              {item.label}
-            </p>
-            <div className="border w-full h-full rounded-md border-slate-400">
-              {" "}
-              {item.img}
-            </div>
-            <div className="">
-              {" "}
-              <input
-                className=" text-sm w-full  font-normal  border p-px "
-                type="file"
-              />
-            </div>
-          </div>
-        ))}
-
-        <div className="text-center w-full ">
-          <button
-            onClick={handleSelect}
-            className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-[#356795] rounded-lg sm:rounded-lg font-poppins text-white "
-          >
-            continue
-          </button>
-        </div>
-      </div>
-    </div>
   );
 };
 
@@ -456,6 +387,7 @@ export const RegistrationStateComponent = ({
   const [searchRtoTerm, setSearchRtoTerm] = useState("");
   const [stateBoolean, setStateBoolean] = useState();
   const [rtoBoolean, setRtoBoolean] = useState();
+  const [rtoSection,setRtoSection]=useState(false)
 
   const [statefield, statemeta, statehelpers] = useField("state");
   const [rtofield, rtometa, rtohelpers] = useField("rtocode");
@@ -474,20 +406,23 @@ export const RegistrationStateComponent = ({
   }, [formData]);
 
   useEffect(() => {
-    console.log("entereed boolean values");
+    // console.log("entereed boolean values");
     if (selectedState) {
-      console.log("data from boolean state", selectedState);
+      // console.log("data from boolean state", selectedState);
       setStateBoolean(true);
     }
 
     if (selectedRto) {
-      console.log("data from boolean rto", selectedRto);
+      // console.log("data from boolean rto", selectedRto);
       setRtoBoolean(true);
     }
+    // else{
+    //   setRtoBoolean(false);
+    // }
   }, []);
 
   const handleStateSelect = (selectedItem) => {
-    console.log("001", selectedItem);
+    // console.log("001", selectedItem);
     setSelectedState(selectedItem);
 
     statehelpers.setValue(selectedItem.name);
@@ -496,6 +431,7 @@ export const RegistrationStateComponent = ({
       [state]: selectedItem.name,
     }));
     setStateBoolean(true);
+    setRtoSection(true)
   };
 
   const handleStateEdit = () => {
@@ -525,7 +461,7 @@ export const RegistrationStateComponent = ({
   };
 
   const handleSearchRtoTerm = (value) => {
-    console.log("RTO Term:", value);
+    // console.log("RTO Term:", value);
     setSearchRtoTerm(value); // Step 2
   };
 
@@ -544,7 +480,7 @@ export const RegistrationStateComponent = ({
   // console.log("filteredStateRto111",filteredStateRto);
 
   return (
-    <div className="  flex flex-col items-start px-4 md:px-10  py-2 md:py-4 space-y-4  ">
+    <div className="flex flex-col items-start px-4 md:px-10  py-2 md:py-4 space-y-4  ">
       {stateBoolean ? (
         <div className="w-full  p-2 rounded-lg px-6  border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit bg-sky-200">
           <div className="w-full flex items-center justify-between">
@@ -683,98 +619,469 @@ export const RegistrationStateComponent = ({
   );
 };
 
+// export const RegistrationStateComponent = ({
+//   state,
+//   rtocode,
+//   setActiveTab,
+//   handleScroll,
+//   setFormData,
+//   formData,
+//   registrationStateAndCode, // Assuming this is an array of objects with 'id', 'name', and 'number' properties
+// }) => {
+//   const [searchState, setSearchState] = useState("");
+//   const [selectedState, setSelectedState] = useState(
+//     formData !== null && formData !== undefined && formData[state]
+//       ? formData[state]
+//       : ""
+//   );
+//   const [selectedRto, setSelectedRto] = useState(
+//     formData !== null && formData !== undefined && formData[rtocode]
+//       ? formData[rtocode]
+//       : ""
+//   );
+//   const [searchRtoTerm, setSearchRtoTerm] = useState("");
+//   const [stateBoolean, setStateBoolean] = useState(false);
+//   const [rtoBoolean, setRtoBoolean] = useState(false);
+//   const [rtoSection, setRtoSection] = useState(false);
+
+//   useEffect(() => {
+//     setSelectedState(
+//       formData !== null && formData !== undefined && formData[state]
+//         ? formData[state]
+//         : ""
+//     );
+//     setSelectedRto(
+//       formData !== null && formData !== undefined && formData[rtocode]
+//         ? formData[rtocode]
+//         : ""
+//     );
+//   }, [formData]);
+
+//   useEffect(() => {
+//     if (selectedState) {
+//       setStateBoolean(true);
+//     }
+
+//     if (selectedRto) {
+//       setRtoBoolean(true);
+//     }
+//   }, [selectedState, selectedRto]);
+
+//   const handleStateSelect = (selectedItem) => {
+//     setSelectedState(selectedItem);
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       [state]: selectedItem.name,
+//     }));
+//     setStateBoolean(true);
+//     setRtoSection(true);
+//   };
+
+//   const handleStateEdit = () => {
+//     setStateBoolean(false);
+//     setRtoBoolean(false);
+//   };
+
+//   const handleRTOEdit = () => {
+//     setRtoBoolean(false);
+//   };
+
+//   const handleRtoSelect = (selectedItem) => {
+//     setSelectedRto(selectedItem);
+//     setActiveTab(7);
+//     handleScroll("right");
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       [rtocode]: selectedItem,
+//     }));
+//     setRtoBoolean(true);
+//   };
+
+//   const handleSearchState = (event) => {
+//     const { value } = event.target;
+//     setSearchState(value);
+//   };
+
+//   const handleSearchRtoTerm = (value) => {
+//     setSearchRtoTerm(value);
+//   };
+
+//   let filteredState = registrationStateAndCode.filter((item) =>
+//     item.name.toLowerCase().includes(searchState?.toLowerCase())
+//   );
+
+//   const filteredStateRto = registrationStateAndCode.filter((item) =>
+//     item.name
+//       .toLowerCase()
+//       .includes(
+//         selectedState?.name?.toLowerCase() || selectedState.toLowerCase()
+//       )
+//   );
+
+//   return (
+//     <div className="flex flex-col items-start px-4 md:px-10 py-2 md:py-4 space-y-4">
+//       {stateBoolean ? (
+//         <div className="w-full p-2 rounded-lg px-6 border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit bg-sky-200">
+//           <div className="w-full flex items-center justify-between">
+//             <p>{selectedState?.name ? selectedState.name : formData?.state}</p>
+//             <PencilIcon
+//               onClick={handleStateEdit}
+//               className="md:w-6 md:h-5 w-4 h-4 text-slate-500 m-1"
+//             />
+//           </div>
+//         </div>
+//       ) : (
+//         <div className="w-full">
+//           <p className="text-[#000000] font-poppins font-semibold text-base">
+//             Select Registration State
+//           </p>
+
+//           <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+//             <span className="">
+//               <SearchIcon className="md:w-6 md:h-5 w-4 h-4 text-[#F09720] m-1" />
+//             </span>
+//             <Field name="state">
+//               {({ field }) => (
+//                 <div className="w-full">
+//                   <input
+//                     {...field}
+//                     type="text"
+//                     value={searchState}
+//                     onChange={handleSearchState}
+//                     placeholder="Enter Registration Date"
+//                     className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center md:placeholder:text-start placeholder:font-poppins placeholder:font-normal"
+//                   />
+//                 </div>
+//               )}
+//             </Field>
+//           </div>
+
+//           <div className="p-2 md:p-4 h-96 mfgScroll overflow-y-scroll w-full">
+//             <div className="mt-4 w-full">
+//               <ul className="space-y-4 text-center w-full">
+//                 {filteredState.map((item) => (
+//                   <li
+//                     key={item.id}
+//                     onClick={() => handleStateSelect(item)}
+//                     className={`cursor-pointer ${
+//                       selectedState === item?.name
+//                         ? "bg-blue-100"
+//                         : "text-[#8C8C8C] bg-[#FFFFFFE8]"
+//                     } p-1 md:p-2 rounded-xl border border-[#DADADA] w-full`}
+//                   >
+//                     {item.name}
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           </div>
+//         </div>
+//       )}
+
+//       {rtoSection && (
+//         rtoBoolean ? (
+//           <div className="w-full p-2 rounded-lg px-6 border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit bg-sky-200">
+//             <div className="w-full flex items-center justify-between">
+//               <p>{selectedRto ? selectedRto : formData?.rtocode}</p>
+//               <PencilIcon
+//                 onClick={handleRTOEdit}
+//                 className="md:w-6 md:h-5 w-4 h-4 text-slate-500 m-1"
+//               />
+//             </div>
+//           </div>
+//         ) : (
+//           <div className="w-full">
+//             <p className="text-[#000000] font-poppins font-semibold text-base">
+//               Select Rto State
+//             </p>
+
+//             <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+//               <span className="">
+//                 <SearchIcon className="md:w-6 md:h-5 w-4 h-4 text-[#F09720] m-1" />
+//               </span>
+//               <Field name="rtocode">
+//                 {({ field }) => (
+//                   <div className="w-full">
+//                     <input
+//                       {...field}
+//                       type="text"
+//                       value={searchRtoTerm}
+//                       onChange={(e) =>
+//                         handleSearchRtoTerm(e.target.value.toUpperCase())
+//                       }
+//                       placeholder="Select Rto Code"
+//                       className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center md:placeholder:text-start placeholder:font-poppins placeholder:font-normal"
+//                     />
+//                   </div>
+//                 )}
+//               </Field>
+//             </div>
+//             <div className="mt-4 w-full h-56 mfgScroll overflow-y-scroll">
+//               {filteredStateRto.map((item) => {
+//                 const selectedNumber = item.number.find(
+//                   (number) => number === selectedRto
+//                 );
+
+//                 const remainingNumbers = item.number.filter(
+//                   (number) => number !== selectedRto
+//                 );
+
+//                 const sortedNumbers = selectedNumber
+//                   ? [selectedNumber, ...remainingNumbers]
+//                   : remainingNumbers;
+
+//                 return (
+//                   <ul key={item.id} className="space-y-4 text-center w-full">
+//                     {sortedNumbers.map((filteredNumber) => (
+//                       <li
+//                         onClick={() => handleRtoSelect(filteredNumber)}
+//                         className={`cursor-pointer ${
+//                           selectedRto === filteredNumber
+//                             ? "bg-blue-100"
+//                             : "text-[#8C8C8C] bg-[#FFFFFFE8]"
+//                         } p-1 md:p-2 rounded-xl border border-[#DADADA] w-full`}
+//                         key={filteredNumber}
+//                       >
+//                         {filteredNumber}
+//                       </li>
+//                     ))}
+//                   </ul>
+//                 );
+//               })}
+//             </div>
+//           </div>
+//         )
+//       )}
+//     </div>
+//   );
+// };
 
 
 //USER DETAILS COMPONENT
-export const UserDetails = ({setFormData,formData}) => {
+export const UserDetails = ({ setFormData, formData }) => {
   const formik = useFormikContext();
 
   const handleChange = (e) => {
     formik.setFieldValue(e.target.name, e.target.value);
-    console.log("userDetails", e.target.name);
+    // console.log("userDetails", e.target.name);
     setFormData((prevData) => ({
       ...prevData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
   return (
     <div className="w-full">
-    <div className="flex flex-col items-start px-4 md:px-10 py-2 md:py-4 space-y-4">
-      <div className="w-full space-y-4">
-        <label className="text-[#000000] font-poppins font-semibold text-base">
-          Enter Your Name
-        </label>
+      <div className="flex flex-col items-start px-4 md:px-10 py-2 md:py-4 space-y-4">
+        <div className="w-full space-y-4">
+          <label className="text-[#000000] font-poppins font-semibold text-base">
+            Enter Your Name
+          </label>
 
-        <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
-          <Field
-            type="input"
-            name="clientContactPerson"
-            value={formik.values.clientContactPerson}
-            className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
-            placeholder="  Enter Your Name"
-            onChange={handleChange}
-          />
+          <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+            <Field
+              type="input"
+              name="clientContactPerson"
+              value={formik.values.clientContactPerson}
+              className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
+              placeholder="  Enter Your Name"
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="w-full space-y-4">
-        <label className="text-[#000000] font-poppins font-semibold text-base">
-          Enter Your Pincode
-        </label>
+        <div className="w-full space-y-4">
+          <label className="text-[#000000] font-poppins font-semibold text-base">
+            Enter Your Pincode
+          </label>
 
-        <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
-          <Field
-            name="pincode"
-            type="number"
-            inputMode="numeric"
-            value={formik.values.pincode}
-            className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
-            placeholder="Enter Your pincode"
-            onChange={handleChange}
-          />
+          <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+            <Field
+              name="pincode"
+              type="number"
+              inputMode="numeric"
+              value={formik.values.pincode}
+              className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
+              placeholder="Enter Your pincode"
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="w-full space-y-4">
-        <label className="text-[#000000] font-poppins font-semibold text-base">
-          Enter Your Landmark
-        </label>
+        <div className="w-full space-y-4">
+          <label className="text-[#000000] font-poppins font-semibold text-base">
+            Enter Your Landmark
+          </label>
 
-        <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
-          <Field
-            type="input"
-            className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
-            placeholder="  Enter Your Landmark"
-            name="landmark"
-            value={formik.values.landmark}
-            onChange={handleChange}
-          />
+          <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+            <Field
+              type="input"
+              className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
+              placeholder="  Enter Your Landmark"
+              name="landmark"
+              value={formik.values.landmark}
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="w-full space-y-4">
-        <label className="text-[#000000] font-poppins font-semibold text-base">
-          Enter Your Address
-        </label>
+        <div className="w-full space-y-4">
+          <label className="text-[#000000] font-poppins font-semibold text-base">
+            Enter Your Address
+          </label>
 
-        <div className="text-center w-full md:p-1 max-md:h-20 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
-          <Field
-            as="textarea"
-            className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center max-md:placeholder:pt-4  placeholder:font-poppins placeholder:font-normal"
-            placeholder="  Enter Your Address"
-            name="address"
-            value={formik.values.address}
-            onChange={handleChange}
-          />
+          <div className="text-center w-full md:p-1 max-md:h-20 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+            <Field
+              as="textarea"
+              className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center max-md:placeholder:pt-4  placeholder:font-poppins placeholder:font-normal"
+              placeholder="  Enter Your Address"
+              name="address"
+              value={formik.values.address}
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="text-center w-full pb-4">
-        {/* ... (other components or content) ... */}
+        <div className="text-center w-full pb-4">
+          {/* ... (other components or content) ... */}
+        </div>
       </div>
     </div>
-  </div>
   );
 };
 
+//IMAGE INTERIOR COMPONENT
+export const ImageInterior = ({
+  name,
+  setActiveTab,
+  handleScroll,
+  handleImage,
+  Interorimage,
+  setFormData,
+  formData,
+}) => {
+  console.log("interior from componrnr", Interorimage);
+
+  const handleSelect = () => {
+    // setFormData((prevData) => ({
+    //   ...prevData,
+    //  InteriorImage:Interorimage,
+    // }));
+    setActiveTab(12);
+    handleScroll("right");
+  };
+  return (
+    <div className="  flex flex-col items-start px-4 md:px-10  py-2 md:py-4 space-y-2  ">
+      <p className="text-[#000000] font-poppins font-semibold text-base">
+        Upload Vehicle interior Photos
+      </p>
+
+      <div className=" grid grid-cols-1 md:grid-cols-2  gap-2 md:gap-4 w-full overflow-hidden max-md:h-96  max-md:overflow-y-scroll text-center ">
+        {InteriorImage > 0 && InteriorImage[0] ? (
+          <p>{InteriorImage[0]?.name}</p>
+        ) : (
+          <ImageComponent
+            label="Front"
+            handleImage={handleImage}
+            Interorimage={Interorimage}
+          />
+        )}
+        {InteriorImage > 0 && InteriorImage[1] ? (
+          <p>{InteriorImage[1]?.name}</p>
+        ) : (
+          <ImageComponent
+            label="Back"
+            handleImage={handleImage}
+            Interorimage={Interorimage}
+          />
+        )}
+
+        {InteriorImage > 0 && InteriorImage[2] ? (
+          <p>{InteriorImage[2]?.name}</p>
+        ) : (
+          <ImageComponent
+            label="Right"
+            handleImage={handleImage}
+            Interorimage={Interorimage}
+          />
+        )}
+        {InteriorImage > 0 && InteriorImage[3] ? (
+          <p>{InteriorImage[2]?.name}</p>
+        ) : (
+          <ImageComponent
+            label="Left"
+            handleImage={handleImage}
+            Interorimage={Interorimage}
+          />
+        )}
+        <div className="text-center w-full md:grid-cols-1 md:col-span-2 ">
+          {Interorimage.length >= 2 ? (
+            <button
+              onClick={handleSelect}
+              className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-[#356795] rounded-lg sm:rounded-lg font-poppins text-white "
+            >
+              continue
+            </button>
+          ) : (
+            <p className="w-full text-lg font-poppins  font-semibold">
+              {" "}
+              Upload atleast 2 images
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+//IMAGE INTERIOR
+export const ImageExterior = ({
+  name,
+  setActiveTab,
+  handleScroll,
+  handleImage,
+  Exterorimage,
+  setFormData,
+  formData,
+}) => {
+  const handleSelect = () => {
+    // setFormData((prevData) => ({
+    //   ...prevData,
+    //  InteriorImage:[Interorimage],
+    // }));
+    setActiveTab(13);
+
+    handleScroll("right");
+  };
+
+  return (
+    <div className="  flex flex-col items-start px-4 md:px-10  py-2 md:py-4 space-y-2  ">
+      <p className="text-[#000000] font-poppins font-semibold text-base">
+        Upload Vehicle Exterior Photos
+      </p>
+
+      <div className=" grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 w-full overflow-hidden max-md:h-96  max-md:overflow-y-scroll ">
+        <ImageComponent label="Front" handleImage={handleImage} />
+        <ImageComponent label="Back" handleImage={handleImage} />
+        <ImageComponent label="Right" handleImage={handleImage} />
+        <ImageComponent label="Left" handleImage={handleImage} />
+
+        <div className="text-center w-full md:col-span-2">
+          {Exterorimage.length >= 2 ? (
+            <button
+              onClick={handleSelect}
+              className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-[#356795] rounded-lg sm:rounded-lg font-poppins text-white "
+            >
+              continue
+            </button>
+          ) : (
+            <p className="w-full text-lg font-poppins  font-semibold">
+              {" "}
+              Upload atleast 2 images
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};

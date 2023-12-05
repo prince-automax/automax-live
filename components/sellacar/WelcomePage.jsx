@@ -7,7 +7,7 @@ const WelcomePage = ({index}) => {
   const handleSetComponents = () => {
       console.log("reached here");
     // You can call the setComponents function here
-    index(4);
+    index(3);
   };
 
   return (
