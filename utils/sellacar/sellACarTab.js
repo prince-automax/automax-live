@@ -98,4 +98,5 @@ export const Tabs = [
         tabName: 'User Details',
        
     },
+   
 ];

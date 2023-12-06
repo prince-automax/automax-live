@@ -1,6 +1,8 @@
 mutation CreateSellACar($data: SellACarCreateInput!) {
   createSellACar(data: $data) {
     id
+    interiorImages
+    exteriorImages
   }
 }
 

@@ -58,8 +58,7 @@ const SellACarOtp = ({ index }) => {
   }, [success, error]);
 
   async function CallOTP() {
-    setCount((prev)=>prev+1)
-    console.log("COUNT FROM CALLOTP",count);
+    
     
     
     let isValid = true;
@@ -67,22 +66,18 @@ const SellACarOtp = ({ index }) => {
       setError({ text: "Please enter a valid Mobile Number" });
       isValid = false;
     }
-    // the callOTPMutation to send the OTP &&  passing the mobile value as a parameter
     if (isValid) {
       const result = await callOTPMutation.mutateAsync({ mobile });
       console.log("result for otp mutation", result);
 
       if (result.sendUserMagicAuthLink) {
         console.log("User with this number exisists");
-        // user with the provided mobile number exists.
         setVerificationMode(true);
         setSuccess({
           text: "Please enter the OTP received on your registered mobile number.",
         });
       } else {
-        // console.log("entered here bcz user with such num doest exsist ");
 
-        // user with the provided mobile number does not exist. It proceeds to create a new user using the callCreateUserMutation with the provided number
         const result2 = await callCreateUserMutation.mutateAsync({
           data: {
             mobile,
@@ -90,8 +85,6 @@ const SellACarOtp = ({ index }) => {
             status: UserStatusType.Pending,
           },
         });
-
-        // console.log("user created using callcreateusermutation");
 
         if (!result2.createUser?.id) {
           setVerificationMode(false);
@@ -139,18 +132,18 @@ const SellACarOtp = ({ index }) => {
       if (result.redeemUserMagicAuthToken["token"]) {
         console.log("enetred for otp verify   04");
         localStorage.setItem("token", result.redeemUserMagicAuthToken["token"]);
-        // localStorage.setItem(
-        //     "id",
-        //     result.redeemUserMagicAuthToken["item"]["id"]
-        // );
-        // localStorage.setItem(
-        //     "status",
-        //     result.redeemUserMagicAuthToken["item"]["status"]
-        // );
-        // localStorage.setItem(
-        //     "name",
-        //     result.redeemUserMagicAuthToken["item"]["firstName"]
-        // );
+        localStorage.setItem(
+            "id",
+            result.redeemUserMagicAuthToken["item"]["id"]
+        );
+        localStorage.setItem(
+            "status",
+            result.redeemUserMagicAuthToken["item"]["status"]
+        );
+        localStorage.setItem(
+            "name",
+            result.redeemUserMagicAuthToken["item"]["firstName"]
+        );
 
         setToken(result.redeemUserMagicAuthToken["token"]);
         setMobile("");

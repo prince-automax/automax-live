@@ -25,9 +25,9 @@ export default function Navbar() {
   const logout = () => {
    
     setToken(null);
-    localStorage.removeItem("id");
-    localStorage.removeItem("token");
-    // localStorage.clear();
+    // localStorage.removeItem("id");
+    // localStorage.removeItem("token");
+    localStorage.clear();
     router.push(`/`);
   };
   const isLoggedIn = Boolean(token);
@@ -64,7 +64,7 @@ export default function Navbar() {
       current: router.pathname == "/findauction" ? true : false,
     },
     {
-      name: "Sell A Car",
+      name: "Sell A Truck",
       href: "/sellacar",
       current: router.pathname == "/sellacar" ? true : false,
     },

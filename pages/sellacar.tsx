@@ -30,6 +30,7 @@ import { HandleUpload } from "../components/firebase/firebaseHandleupload";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import WelcomePage from "../components/sellacar/WelcomePage";
+import SubmitMessage from "../components/sellacar/submitMessage";
 import { Formik, Form, ErrorMessage } from "formik";
 import graphQLClient from "@utils/useGQLQuery";
 import {
@@ -38,18 +39,20 @@ import {
   useUpdateUserMutation,
   UpdateUserMutationVariables,
 } from "@utils/graphql";
+import toast from "react-hot-toast";
 const years = Array.from({ length: 44 }, (_, index) => 1980 + index);
 
 const SellACar = () => {
-  const [activeTab, setActiveTab] = useState(11);
+  const [activeTab, setActiveTab] = useState(1);
   const [components, setComponents] = useState(1);
   const [accessToken, setAccessToken] = useState("");
   const [Interorimage, setInteriorImage] = useState([]);
   const [Exterorimage, setEXteriorImage] = useState([]);
   const [firebaseInteriorImage, setFirebaseInteriorImage] = useState("");
   const [firebaseExteriorImage, setFirebaseExteriorImage] = useState("");
-  const [id, setId] = useState("");
-
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
+  const [userId, setUserId] = useState("");
   const [formData, setFormData] = useState({
     registrationNumber: "",
     make: "",
@@ -77,12 +80,18 @@ const SellACar = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
+      // console.log("token in useEffect", token);
+
       const id = localStorage.getItem("id");
+      // console.log("id in useEffect", id);
       token && setComponents(3);
       setAccessToken(token);
-      setId(id);
+      setUserId(id);
     }
-  }, []);
+  }, [activeTab]);
+
+  // console.log("userid00007", userId);
+  // console.log("access00007", accessToken);
 
   const handleInteriorImage = (file) => {
     // console.log('file from inter',file);
@@ -113,6 +122,23 @@ const SellACar = () => {
     setFormData(savedFormData);
   }, []);
 
+  useEffect(() => {
+    if (success) {
+        toast.success(success.text ? success.text : "Success");
+        setTimeout(() => {
+            setSuccess(null);
+        }, 2000);
+    }
+    if (error) {
+        toast.error(
+            error.text ? error.text : "Something went wrong. Please contact support"
+        );
+        setTimeout(() => {
+            setError(null);
+        }, 2000);
+    }
+}, [success, error]);
+
   const AddSellACarMutation =
     useCreateSellACarMutation<CreateSellACarMutationVariables>(
       graphQLClient({ Authorization: `Bearer ${accessToken}` })
@@ -123,7 +149,7 @@ const SellACar = () => {
   );
 
   async function SubmitFiles(values, { resetForm }) {
-    console.log("values from onSubmitFiles", values);
+    console.log("values from onSubmitFiles000000000000000000000000");
 
     try {
       const interiorImages = Interorimage || []; // Assuming values.interiorImage is an array
@@ -135,10 +161,10 @@ const SellACar = () => {
           "interiorImage",
           "interior"
         );
-        console.log("interiorImageUrl from onSubmit", interiorImageUrl);
+        // console.log("interiorImageUrl from onSubmit", interiorImageUrl);
         setFirebaseInteriorImage(interiorImageUrl);
       } catch (ex) {
-        console.log("interiorImageUrl uploading Error", ex);
+        // console.log("interiorImageUrl uploading Error", ex);
 
         return ""; // Handle error, you may want to log or handle differently
       }
@@ -150,7 +176,11 @@ const SellACar = () => {
           "exterior"
         );
         setFirebaseExteriorImage(ExteriorImageUrl);
-        console.log("ExteriorImageUrl from onSubmit", ExteriorImageUrl);
+
+        // console.log("firebaseInteriorImage", firebaseInteriorImage);
+        // console.log("firebaseExteriorImage", firebaseExteriorImage);
+
+        // console.log("ExteriorImageUrl from onSubmit", ExteriorImageUrl);
       } catch (error) {
         console.log("Exteriro image uploading error", error);
       }
@@ -170,7 +200,7 @@ const SellACar = () => {
           veicleLocation: values?.veicleLocation,
           interiorImages: firebaseInteriorImage,
           exteriorImages: firebaseExteriorImage,
-          expectToSell:new Date(values?.expectToSell).toISOString(),
+          expectToSell: new Date(values?.expectToSell).toISOString(),
           address: values?.address,
           landmark: values?.landmark,
           pincode: values?.pincode,
@@ -180,17 +210,27 @@ const SellACar = () => {
       console.log("result of sellacarform submission", result);
 
       if (result) {
+        // console.log("USERID", userId);
         const userUpdate = await UpdateUserMutation.mutateAsync({
-          where: { id: id },
+          where: { id: userId },
           data: { firstName: values?.clientContactPerson },
         });
         console.log("result of sellacarform userupdate", userUpdate);
+
+        if (userUpdate) {
+          setComponents(4);
+          setSuccess({
+            text: "Form has been successfully submitted",
+        });
+        }
       }
     } catch (error) {
-      console.log("err in onsubmit", error);
+      setError({
+        text: "Form submission Failed",
+    });
     }
 
-    console.log("From ONSubmit of sell a car ", values);
+    // console.log("From ONSubmit of sell a car ", values);
     setFormData({
       registrationNumber: "",
       make: "",
@@ -267,11 +307,20 @@ const SellACar = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    registrationNumber: Yup.string().required(
-      "Registration Number is required"
+    clientContactPerson: Yup.string().required(
+      "clientContactPerson is required"
+    ),
+    address: Yup.string().required(
+      "address is required"
+    ),
+    landmark: Yup.string().required(
+      "landmark is required"
+    ),
+    pincode: Yup.string().required(
+      "pincode is required"
     ),
     // Add other validations for other fields here
-    // ...
+    // ...  
   });
   return (
     <div className="w-full min-h-screen relative flex items-center justify-center sm:p-10  ">
@@ -288,14 +337,15 @@ const SellACar = () => {
         {components === 1 && <SellACarOtp index={setComponents} />}
 
         {components === 2 && <WelcomePage index={setComponents} />}
-
-        <div className="max-md:w-96 md:max-w-lg m-3 md:m-0  rounded-xl bg-opacity md:relative bg-white bg-opacity-90">
-          <div
+ <div className="max-md:w-96 md:max-w-lg m-3 md:m-0  rounded-xl bg-opacity md:relative bg-white bg-opacity-90">
+ {  components === 3 && (
+         <div
             onClick={handleClose}
             className="hidden md:block md:absolute top-4 left-4 cursor-pointer text-lg text-[#989898] font-semibold"
           >
             X
-          </div>
+          </div>)}
+       
 
           {components === 3 && (
             <div className="w-full h-full ">
@@ -311,7 +361,7 @@ const SellACar = () => {
                       activeTab === tab.tabIndex
                         ? "text-white bg-blue-500 "
                         : "bg-white"
-                    }   ` }
+                    }   `}
                     onClick={() => handleTabClick(tab.tabIndex)}
                   >
                     {tab.tabName}
@@ -323,6 +373,8 @@ const SellACar = () => {
                 initialValues={formData}
                 onSubmit={SubmitFiles}
                 enableReinitialize={true}
+                // validationSchema={validationSchema}
+               
               >
                 {(props) => (
                   <Form>
@@ -465,10 +517,11 @@ const SellACar = () => {
                           setActiveTab={setActiveTab}
                           handleScroll={handleScroll}
                           setFormData={setFormData}
+                          formData={formData}
                         />
                       )}
                       {activeTab === 14 && (
-                        <div>
+                        <div className="py-4 w-full flex flex-col items-center ">
                           <UserDetails
                             setFormData={setFormData}
                             formData={formData}
@@ -476,7 +529,7 @@ const SellACar = () => {
 
                           <button
                             type="submit"
-                            className="bg-[#135A9E] py-1 w-full px-3 sm:py-2 sm:px-8 hover:bg-[#264b6d] rounded-lg sm:rounded-lg font-poppins text-white "
+                            className="bg-[#135A9E] py-1  w-52 rounded-md md:w-96  px-4 sm:py-2 sm:px-8 hover:bg-[#264b6d]  font-poppins text-white "
                           >
                             Submit
                           </button>
@@ -489,6 +542,11 @@ const SellACar = () => {
             </div>
           )}
         </div>
+        {components === 4 && <SubmitMessage 
+        setActiveTab={setActiveTab}
+        setComponents={setComponents}
+
+        />}
       </div>
     </div>
   );

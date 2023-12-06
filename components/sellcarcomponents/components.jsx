@@ -95,7 +95,7 @@ export const SearchBrandComponent = ({
                   type="text"
                   value={searchTermLocal}
                   onChange={handleSearch}
-                  placeholder=""
+                  placeholder="Search the company logo"
                   className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center md:placeholder:text-start placeholder:font-poppins placeholder:font-normal"
                 />
               </div>
@@ -289,7 +289,7 @@ export const RegistrationNumber = ({
                   e.target.value.toUpperCase().replace(/\s/g, "")
                 )
               }
-              placeholder="  Registration Number"
+              placeholder="KL07XX00XX"
               className="  w-full h-full p-2 border-none bg-inherit focus:ring-0 outline-0  bg-opacity-75 text-base sm:text-xl sm:text-center  max-md:placeholder:text-xs max-md:placeholder:text-center md:placeholder:text-center placeholder:font-poppins placeholder:font-normal "
             />
             {/* <ErrorMessage name="registrationNumber"  /> */}
@@ -319,6 +319,7 @@ export const PlanningToSell = ({
   setActiveTab,
   handleScroll,
   setFormData,
+  formData
 }) => {
   const [field, meta, helpers] = useField(name);
 
@@ -349,7 +350,7 @@ export const PlanningToSell = ({
             className="focus:outline-none  border "
           />
 
-          <button
+          {date && <button
             onClick={handleSelect}
             className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-blue-400  rounded-lg   self-center space-x-2  "
           >
@@ -357,7 +358,7 @@ export const PlanningToSell = ({
               {" "}
               Next{" "}
             </span>{" "}
-          </button>
+          </button>}
         </div>
       </div>
     </div>
@@ -858,6 +859,8 @@ export const RegistrationStateComponent = ({
 
 
 //USER DETAILS COMPONENT
+
+
 export const UserDetails = ({ setFormData, formData }) => {
   const formik = useFormikContext();
 
@@ -878,15 +881,18 @@ export const UserDetails = ({ setFormData, formData }) => {
             Enter Your Name
           </label>
 
-          <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+          <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex flex-col items-center justify-center">
             <Field
               type="input"
               name="clientContactPerson"
               value={formik.values.clientContactPerson}
               className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
               placeholder="  Enter Your Name"
+             
+             required
               onChange={handleChange}
             />
+             <ErrorMessage name="clientContactPerson" component="div" />
           </div>
         </div>
 
@@ -895,7 +901,7 @@ export const UserDetails = ({ setFormData, formData }) => {
             Enter Your Pincode
           </label>
 
-          <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+          <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex flex-col  items-center justify-center">
             <Field
               name="pincode"
               type="number"
@@ -904,7 +910,10 @@ export const UserDetails = ({ setFormData, formData }) => {
               className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
               placeholder="Enter Your pincode"
               onChange={handleChange}
+              maxLength={6}
+              required
             />
+              <ErrorMessage name="pincode" component="div" />
           </div>
         </div>
 
@@ -913,7 +922,7 @@ export const UserDetails = ({ setFormData, formData }) => {
             Enter Your Landmark
           </label>
 
-          <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+          <div className="text-center w-full md:p-1 max-sm:h-9 rounded-md border-2 border-[#9C9C9C] flex flex-col  items-center justify-center">
             <Field
               type="input"
               className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
@@ -921,7 +930,10 @@ export const UserDetails = ({ setFormData, formData }) => {
               name="landmark"
               value={formik.values.landmark}
               onChange={handleChange}
+              required
             />
+                          <ErrorMessage name="landmark" component="div" />
+
           </div>
         </div>
 
@@ -930,7 +942,7 @@ export const UserDetails = ({ setFormData, formData }) => {
             Enter Your Address
           </label>
 
-          <div className="text-center w-full md:p-1 max-md:h-20 rounded-md border-2 border-[#9C9C9C] flex items-center justify-center">
+          <div className="text-center w-full md:p-1 max-md:h-20 rounded-md border-2 border-[#9C9C9C] flex flex-col  items-center justify-center">
             <Field
               as="textarea"
               className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center max-md:placeholder:pt-4  placeholder:font-poppins placeholder:font-normal"
@@ -938,7 +950,10 @@ export const UserDetails = ({ setFormData, formData }) => {
               name="address"
               value={formik.values.address}
               onChange={handleChange}
+              required
             />
+          <ErrorMessage name="address" component="div" />
+
           </div>
         </div>
 

@@ -4726,7 +4726,7 @@ export type CreateSellACarMutationVariables = Exact<{
 }>;
 
 
-export type CreateSellACarMutation = { __typename?: 'Mutation', createSellACar?: { __typename?: 'SellACar', id: string } | null };
+export type CreateSellACarMutation = { __typename?: 'Mutation', createSellACar?: { __typename?: 'SellACar', id: string, interiorImages?: string | null, exteriorImages?: string | null } | null };
 
 export type UserPaymentsQueryVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -5670,6 +5670,8 @@ export const CreateSellACarDocument = `
     mutation CreateSellACar($data: SellACarCreateInput!) {
   createSellACar(data: $data) {
     id
+    interiorImages
+    exteriorImages
   }
 }
     `;
