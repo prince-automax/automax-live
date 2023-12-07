@@ -1,0 +1,26 @@
+mutation CreateSellACar($data: SellACarCreateInput!) {
+  createSellACar(data: $data) {
+    id
+    interiorImages
+    exteriorImages
+  }
+}
+
+
+# address
+#     body
+#     expectToSell
+#     exteriorImages
+#     interiorImages
+#     fuel
+#     kmReading
+#     landmark
+#     state
+#     rtoCode
+#     registrationNumber
+#     yearOfManufacture
+#     veicleLocation
+#     vehicleCondition
+#     pincode
+#     make
+#     model

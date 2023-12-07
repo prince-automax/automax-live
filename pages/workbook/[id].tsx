@@ -6,8 +6,7 @@ import Loader from "../../components/ui/Loader";
 import withPrivateRoute from "../../utils/withPrivateRoute";
 import { Formik, Form,Field, ErrorMessage } from "formik";
 import { faCar,faCashRegister,faCog,faImages,   } from '@fortawesome/free-solid-svg-icons';
-
-  import {
+import {
     GetUserQueryVariables,
     useGetUserQuery,
     useUserWorkBookQuery,

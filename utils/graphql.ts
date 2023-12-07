@@ -33,6 +33,8 @@ export type Bid = {
   coupenDetail?: Maybe<Array<Coupen>>;
   coupenDetailCount?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  deletedBid?: Maybe<Array<DeletedBid>>;
+  deletedBidCount?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -52,10 +54,24 @@ export type BidCoupenDetailCountArgs = {
   where?: CoupenWhereInput;
 };
 
+
+export type BidDeletedBidArgs = {
+  orderBy?: Array<DeletedBidOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: DeletedBidWhereInput;
+};
+
+
+export type BidDeletedBidCountArgs = {
+  where?: DeletedBidWhereInput;
+};
+
 export type BidCreateInput = {
   amount?: InputMaybe<Scalars['Int']>;
   bidVehicle?: InputMaybe<VehicleRelateToOneForCreateInput>;
   coupenDetail?: InputMaybe<CoupenRelateToManyForCreateInput>;
+  deletedBid?: InputMaybe<DeletedBidRelateToManyForCreateInput>;
   name?: InputMaybe<Scalars['String']>;
   user?: InputMaybe<UserRelateToOneForCreateInput>;
 };
@@ -116,6 +132,7 @@ export type BidUpdateInput = {
   amount?: InputMaybe<Scalars['Int']>;
   bidVehicle?: InputMaybe<VehicleRelateToOneForUpdateInput>;
   coupenDetail?: InputMaybe<CoupenRelateToManyForUpdateInput>;
+  deletedBid?: InputMaybe<DeletedBidRelateToManyForUpdateInput>;
   name?: InputMaybe<Scalars['String']>;
   user?: InputMaybe<UserRelateToOneForUpdateInput>;
 };
@@ -128,6 +145,7 @@ export type BidWhereInput = {
   bidVehicle?: InputMaybe<VehicleWhereInput>;
   coupenDetail?: InputMaybe<CoupenManyRelationFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
+  deletedBid?: InputMaybe<DeletedBidManyRelationFilter>;
   id?: InputMaybe<IdFilter>;
   name?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -370,6 +388,97 @@ export type DateTimeNullableFilter = {
   lte?: InputMaybe<Scalars['DateTime']>;
   not?: InputMaybe<DateTimeNullableFilter>;
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+};
+
+export type DeletedBid = {
+  __typename?: 'DeletedBid';
+  amount?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  deletedBidDetail?: Maybe<Array<Bid>>;
+  deletedBidDetailCount?: Maybe<Scalars['Int']>;
+  deletedbidVehicle?: Maybe<Vehicle>;
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user?: Maybe<User>;
+};
+
+
+export type DeletedBidDeletedBidDetailArgs = {
+  orderBy?: Array<BidOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: BidWhereInput;
+};
+
+
+export type DeletedBidDeletedBidDetailCountArgs = {
+  where?: BidWhereInput;
+};
+
+export type DeletedBidCreateInput = {
+  amount?: InputMaybe<Scalars['Int']>;
+  deletedBidDetail?: InputMaybe<BidRelateToManyForCreateInput>;
+  deletedbidVehicle?: InputMaybe<VehicleRelateToOneForCreateInput>;
+  name?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UserRelateToOneForCreateInput>;
+};
+
+export type DeletedBidManyRelationFilter = {
+  every?: InputMaybe<DeletedBidWhereInput>;
+  none?: InputMaybe<DeletedBidWhereInput>;
+  some?: InputMaybe<DeletedBidWhereInput>;
+};
+
+export type DeletedBidOrderByInput = {
+  amount?: InputMaybe<OrderDirection>;
+  createdAt?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  name?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+};
+
+export type DeletedBidRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<DeletedBidWhereUniqueInput>>;
+  create?: InputMaybe<Array<DeletedBidCreateInput>>;
+};
+
+export type DeletedBidRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<DeletedBidWhereUniqueInput>>;
+  create?: InputMaybe<Array<DeletedBidCreateInput>>;
+  disconnect?: InputMaybe<Array<DeletedBidWhereUniqueInput>>;
+  set?: InputMaybe<Array<DeletedBidWhereUniqueInput>>;
+};
+
+export type DeletedBidUpdateArgs = {
+  data: DeletedBidUpdateInput;
+  where: DeletedBidWhereUniqueInput;
+};
+
+export type DeletedBidUpdateInput = {
+  amount?: InputMaybe<Scalars['Int']>;
+  deletedBidDetail?: InputMaybe<BidRelateToManyForUpdateInput>;
+  deletedbidVehicle?: InputMaybe<VehicleRelateToOneForUpdateInput>;
+  name?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UserRelateToOneForUpdateInput>;
+};
+
+export type DeletedBidWhereInput = {
+  AND?: InputMaybe<Array<DeletedBidWhereInput>>;
+  NOT?: InputMaybe<Array<DeletedBidWhereInput>>;
+  OR?: InputMaybe<Array<DeletedBidWhereInput>>;
+  amount?: InputMaybe<IntNullableFilter>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  deletedBidDetail?: InputMaybe<BidManyRelationFilter>;
+  deletedbidVehicle?: InputMaybe<VehicleWhereInput>;
+  id?: InputMaybe<IdFilter>;
+  name?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  user?: InputMaybe<UserWhereInput>;
+};
+
+export type DeletedBidWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 export type EmdUpdate = {
@@ -1388,6 +1497,8 @@ export type Mutation = {
   createContactuses?: Maybe<Array<Maybe<ContactUs>>>;
   createCoupen?: Maybe<Coupen>;
   createCoupens?: Maybe<Array<Maybe<Coupen>>>;
+  createDeletedBid?: Maybe<DeletedBid>;
+  createDeletedBids?: Maybe<Array<Maybe<DeletedBid>>>;
   createEmdUpdate?: Maybe<EmdUpdate>;
   createEmdUpdates?: Maybe<Array<Maybe<EmdUpdate>>>;
   createEvent?: Maybe<Event>;
@@ -1403,8 +1514,12 @@ export type Mutation = {
   createInstitutions?: Maybe<Array<Maybe<Institution>>>;
   createLocation?: Maybe<Location>;
   createLocations?: Maybe<Array<Maybe<Location>>>;
+  createNotification?: Maybe<Notification>;
+  createNotifications?: Maybe<Array<Maybe<Notification>>>;
   createPayment?: Maybe<Payment>;
   createPayments?: Maybe<Array<Maybe<Payment>>>;
+  createSellACar?: Maybe<SellACar>;
+  createSellACars?: Maybe<Array<Maybe<SellACar>>>;
   createSeller?: Maybe<Seller>;
   createSellers?: Maybe<Array<Maybe<Seller>>>;
   createState?: Maybe<State>;
@@ -1421,6 +1536,8 @@ export type Mutation = {
   deleteContactuses?: Maybe<Array<Maybe<ContactUs>>>;
   deleteCoupen?: Maybe<Coupen>;
   deleteCoupens?: Maybe<Array<Maybe<Coupen>>>;
+  deleteDeletedBid?: Maybe<DeletedBid>;
+  deleteDeletedBids?: Maybe<Array<Maybe<DeletedBid>>>;
   deleteEmdUpdate?: Maybe<EmdUpdate>;
   deleteEmdUpdates?: Maybe<Array<Maybe<EmdUpdate>>>;
   deleteEvent?: Maybe<Event>;
@@ -1435,8 +1552,12 @@ export type Mutation = {
   deleteInstitutions?: Maybe<Array<Maybe<Institution>>>;
   deleteLocation?: Maybe<Location>;
   deleteLocations?: Maybe<Array<Maybe<Location>>>;
+  deleteNotification?: Maybe<Notification>;
+  deleteNotifications?: Maybe<Array<Maybe<Notification>>>;
   deletePayment?: Maybe<Payment>;
   deletePayments?: Maybe<Array<Maybe<Payment>>>;
+  deleteSellACar?: Maybe<SellACar>;
+  deleteSellACars?: Maybe<Array<Maybe<SellACar>>>;
   deleteSeller?: Maybe<Seller>;
   deleteSellers?: Maybe<Array<Maybe<Seller>>>;
   deleteState?: Maybe<State>;
@@ -1456,6 +1577,8 @@ export type Mutation = {
   updateContactuses?: Maybe<Array<Maybe<ContactUs>>>;
   updateCoupen?: Maybe<Coupen>;
   updateCoupens?: Maybe<Array<Maybe<Coupen>>>;
+  updateDeletedBid?: Maybe<DeletedBid>;
+  updateDeletedBids?: Maybe<Array<Maybe<DeletedBid>>>;
   updateEmdUpdate?: Maybe<EmdUpdate>;
   updateEmdUpdates?: Maybe<Array<Maybe<EmdUpdate>>>;
   updateEvent?: Maybe<Event>;
@@ -1470,8 +1593,12 @@ export type Mutation = {
   updateInstitutions?: Maybe<Array<Maybe<Institution>>>;
   updateLocation?: Maybe<Location>;
   updateLocations?: Maybe<Array<Maybe<Location>>>;
+  updateNotification?: Maybe<Notification>;
+  updateNotifications?: Maybe<Array<Maybe<Notification>>>;
   updatePayment?: Maybe<Payment>;
   updatePayments?: Maybe<Array<Maybe<Payment>>>;
+  updateSellACar?: Maybe<SellACar>;
+  updateSellACars?: Maybe<Array<Maybe<SellACar>>>;
   updateSeller?: Maybe<Seller>;
   updateSellers?: Maybe<Array<Maybe<Seller>>>;
   updateState?: Maybe<State>;
@@ -1518,6 +1645,16 @@ export type MutationCreateCoupenArgs = {
 
 export type MutationCreateCoupensArgs = {
   data: Array<CoupenCreateInput>;
+};
+
+
+export type MutationCreateDeletedBidArgs = {
+  data: DeletedBidCreateInput;
+};
+
+
+export type MutationCreateDeletedBidsArgs = {
+  data: Array<DeletedBidCreateInput>;
 };
 
 
@@ -1596,6 +1733,16 @@ export type MutationCreateLocationsArgs = {
 };
 
 
+export type MutationCreateNotificationArgs = {
+  data: NotificationCreateInput;
+};
+
+
+export type MutationCreateNotificationsArgs = {
+  data: Array<NotificationCreateInput>;
+};
+
+
 export type MutationCreatePaymentArgs = {
   data: PaymentCreateInput;
 };
@@ -1603,6 +1750,16 @@ export type MutationCreatePaymentArgs = {
 
 export type MutationCreatePaymentsArgs = {
   data: Array<PaymentCreateInput>;
+};
+
+
+export type MutationCreateSellACarArgs = {
+  data: SellACarCreateInput;
+};
+
+
+export type MutationCreateSellACarsArgs = {
+  data: Array<SellACarCreateInput>;
 };
 
 
@@ -1686,6 +1843,16 @@ export type MutationDeleteCoupensArgs = {
 };
 
 
+export type MutationDeleteDeletedBidArgs = {
+  where: DeletedBidWhereUniqueInput;
+};
+
+
+export type MutationDeleteDeletedBidsArgs = {
+  where: Array<DeletedBidWhereUniqueInput>;
+};
+
+
 export type MutationDeleteEmdUpdateArgs = {
   where: EmdUpdateWhereUniqueInput;
 };
@@ -1756,6 +1923,16 @@ export type MutationDeleteLocationsArgs = {
 };
 
 
+export type MutationDeleteNotificationArgs = {
+  where: NotificationWhereUniqueInput;
+};
+
+
+export type MutationDeleteNotificationsArgs = {
+  where: Array<NotificationWhereUniqueInput>;
+};
+
+
 export type MutationDeletePaymentArgs = {
   where: PaymentWhereUniqueInput;
 };
@@ -1763,6 +1940,16 @@ export type MutationDeletePaymentArgs = {
 
 export type MutationDeletePaymentsArgs = {
   where: Array<PaymentWhereUniqueInput>;
+};
+
+
+export type MutationDeleteSellACarArgs = {
+  where: SellACarWhereUniqueInput;
+};
+
+
+export type MutationDeleteSellACarsArgs = {
+  where: Array<SellACarWhereUniqueInput>;
 };
 
 
@@ -1860,6 +2047,17 @@ export type MutationUpdateCoupensArgs = {
 };
 
 
+export type MutationUpdateDeletedBidArgs = {
+  data: DeletedBidUpdateInput;
+  where: DeletedBidWhereUniqueInput;
+};
+
+
+export type MutationUpdateDeletedBidsArgs = {
+  data: Array<DeletedBidUpdateArgs>;
+};
+
+
 export type MutationUpdateEmdUpdateArgs = {
   data: EmdUpdateUpdateInput;
   where: EmdUpdateWhereUniqueInput;
@@ -1937,6 +2135,17 @@ export type MutationUpdateLocationsArgs = {
 };
 
 
+export type MutationUpdateNotificationArgs = {
+  data: NotificationUpdateInput;
+  where: NotificationWhereUniqueInput;
+};
+
+
+export type MutationUpdateNotificationsArgs = {
+  data: Array<NotificationUpdateArgs>;
+};
+
+
 export type MutationUpdatePaymentArgs = {
   data: PaymentUpdateInput;
   where: PaymentWhereUniqueInput;
@@ -1945,6 +2154,17 @@ export type MutationUpdatePaymentArgs = {
 
 export type MutationUpdatePaymentsArgs = {
   data: Array<PaymentUpdateArgs>;
+};
+
+
+export type MutationUpdateSellACarArgs = {
+  data: SellACarUpdateInput;
+  where: SellACarWhereUniqueInput;
+};
+
+
+export type MutationUpdateSellACarsArgs = {
+  data: Array<SellACarUpdateArgs>;
 };
 
 
@@ -2028,6 +2248,42 @@ export type NestedStringNullableFilter = {
   not?: InputMaybe<NestedStringNullableFilter>;
   notIn?: InputMaybe<Array<Scalars['String']>>;
   startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type Notification = {
+  __typename?: 'Notification';
+  amount?: Maybe<Scalars['Int']>;
+  id: Scalars['ID'];
+};
+
+export type NotificationCreateInput = {
+  amount?: InputMaybe<Scalars['Int']>;
+};
+
+export type NotificationOrderByInput = {
+  amount?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+};
+
+export type NotificationUpdateArgs = {
+  data: NotificationUpdateInput;
+  where: NotificationWhereUniqueInput;
+};
+
+export type NotificationUpdateInput = {
+  amount?: InputMaybe<Scalars['Int']>;
+};
+
+export type NotificationWhereInput = {
+  AND?: InputMaybe<Array<NotificationWhereInput>>;
+  NOT?: InputMaybe<Array<NotificationWhereInput>>;
+  OR?: InputMaybe<Array<NotificationWhereInput>>;
+  amount?: InputMaybe<IntNullableFilter>;
+  id?: InputMaybe<IdFilter>;
+};
+
+export type NotificationWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 export enum OrderDirection {
@@ -2201,6 +2457,9 @@ export type Query = {
   coupen?: Maybe<Coupen>;
   coupens?: Maybe<Array<Coupen>>;
   coupensCount?: Maybe<Scalars['Int']>;
+  deletedBid?: Maybe<DeletedBid>;
+  deletedBids?: Maybe<Array<DeletedBid>>;
+  deletedBidsCount?: Maybe<Scalars['Int']>;
   emdUpdate?: Maybe<EmdUpdate>;
   emdUpdates?: Maybe<Array<EmdUpdate>>;
   emdUpdatesCount?: Maybe<Scalars['Int']>;
@@ -2225,9 +2484,15 @@ export type Query = {
   location?: Maybe<Location>;
   locations?: Maybe<Array<Location>>;
   locationsCount?: Maybe<Scalars['Int']>;
+  notification?: Maybe<Notification>;
+  notifications?: Maybe<Array<Notification>>;
+  notificationsCount?: Maybe<Scalars['Int']>;
   payment?: Maybe<Payment>;
   payments?: Maybe<Array<Payment>>;
   paymentsCount?: Maybe<Scalars['Int']>;
+  sellACar?: Maybe<SellACar>;
+  sellACars?: Maybe<Array<SellACar>>;
+  sellACarsCount?: Maybe<Scalars['Int']>;
   seller?: Maybe<Seller>;
   sellers?: Maybe<Array<Seller>>;
   sellersCount?: Maybe<Scalars['Int']>;
@@ -2313,6 +2578,24 @@ export type QueryCoupensArgs = {
 
 export type QueryCoupensCountArgs = {
   where?: CoupenWhereInput;
+};
+
+
+export type QueryDeletedBidArgs = {
+  where: DeletedBidWhereUniqueInput;
+};
+
+
+export type QueryDeletedBidsArgs = {
+  orderBy?: Array<DeletedBidOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: DeletedBidWhereInput;
+};
+
+
+export type QueryDeletedBidsCountArgs = {
+  where?: DeletedBidWhereInput;
 };
 
 
@@ -2450,6 +2733,24 @@ export type QueryLocationsCountArgs = {
 };
 
 
+export type QueryNotificationArgs = {
+  where: NotificationWhereUniqueInput;
+};
+
+
+export type QueryNotificationsArgs = {
+  orderBy?: Array<NotificationOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: NotificationWhereInput;
+};
+
+
+export type QueryNotificationsCountArgs = {
+  where?: NotificationWhereInput;
+};
+
+
 export type QueryPaymentArgs = {
   where: PaymentWhereUniqueInput;
 };
@@ -2465,6 +2766,24 @@ export type QueryPaymentsArgs = {
 
 export type QueryPaymentsCountArgs = {
   where?: PaymentWhereInput;
+};
+
+
+export type QuerySellACarArgs = {
+  where: SellACarWhereUniqueInput;
+};
+
+
+export type QuerySellACarsArgs = {
+  orderBy?: Array<SellACarOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: SellACarWhereInput;
+};
+
+
+export type QuerySellACarsCountArgs = {
+  where?: SellACarWhereInput;
 };
 
 
@@ -2595,6 +2914,165 @@ export type RedeemUserMagicAuthTokenSuccess = {
   __typename?: 'RedeemUserMagicAuthTokenSuccess';
   item: User;
   token: Scalars['String'];
+};
+
+export type SellACar = {
+  __typename?: 'SellACar';
+  address?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  engineNo?: Maybe<Scalars['String']>;
+  expectToSell?: Maybe<Scalars['DateTime']>;
+  exteriorImages?: Maybe<Scalars['String']>;
+  fuel?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  interiorImages?: Maybe<Scalars['String']>;
+  kmReading?: Maybe<Scalars['Int']>;
+  landmark?: Maybe<Scalars['String']>;
+  make?: Maybe<Scalars['String']>;
+  model?: Maybe<Scalars['String']>;
+  pincode?: Maybe<Scalars['String']>;
+  registrationNumber?: Maybe<Scalars['String']>;
+  rtoCode?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user?: Maybe<User>;
+  varient?: Maybe<Scalars['String']>;
+  vehicleCondition?: Maybe<Scalars['String']>;
+  vehicleIndexNo?: Maybe<Scalars['Int']>;
+  veicleLocation?: Maybe<Scalars['String']>;
+  yearOfManufacture?: Maybe<Scalars['Int']>;
+};
+
+export type SellACarCreateInput = {
+  address?: InputMaybe<Scalars['String']>;
+  body?: InputMaybe<Scalars['String']>;
+  engineNo?: InputMaybe<Scalars['String']>;
+  expectToSell?: InputMaybe<Scalars['DateTime']>;
+  exteriorImages?: InputMaybe<Scalars['String']>;
+  fuel?: InputMaybe<Scalars['String']>;
+  interiorImages?: InputMaybe<Scalars['String']>;
+  kmReading?: InputMaybe<Scalars['Int']>;
+  landmark?: InputMaybe<Scalars['String']>;
+  make?: InputMaybe<Scalars['String']>;
+  model?: InputMaybe<Scalars['String']>;
+  pincode?: InputMaybe<Scalars['String']>;
+  registrationNumber?: InputMaybe<Scalars['String']>;
+  rtoCode?: InputMaybe<Scalars['String']>;
+  state?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UserRelateToOneForCreateInput>;
+  varient?: InputMaybe<Scalars['String']>;
+  vehicleCondition?: InputMaybe<Scalars['String']>;
+  vehicleIndexNo?: InputMaybe<Scalars['Int']>;
+  veicleLocation?: InputMaybe<Scalars['String']>;
+  yearOfManufacture?: InputMaybe<Scalars['Int']>;
+};
+
+export type SellACarManyRelationFilter = {
+  every?: InputMaybe<SellACarWhereInput>;
+  none?: InputMaybe<SellACarWhereInput>;
+  some?: InputMaybe<SellACarWhereInput>;
+};
+
+export type SellACarOrderByInput = {
+  address?: InputMaybe<OrderDirection>;
+  body?: InputMaybe<OrderDirection>;
+  createdAt?: InputMaybe<OrderDirection>;
+  engineNo?: InputMaybe<OrderDirection>;
+  expectToSell?: InputMaybe<OrderDirection>;
+  exteriorImages?: InputMaybe<OrderDirection>;
+  fuel?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  interiorImages?: InputMaybe<OrderDirection>;
+  kmReading?: InputMaybe<OrderDirection>;
+  landmark?: InputMaybe<OrderDirection>;
+  make?: InputMaybe<OrderDirection>;
+  model?: InputMaybe<OrderDirection>;
+  pincode?: InputMaybe<OrderDirection>;
+  registrationNumber?: InputMaybe<OrderDirection>;
+  rtoCode?: InputMaybe<OrderDirection>;
+  state?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+  varient?: InputMaybe<OrderDirection>;
+  vehicleCondition?: InputMaybe<OrderDirection>;
+  vehicleIndexNo?: InputMaybe<OrderDirection>;
+  veicleLocation?: InputMaybe<OrderDirection>;
+  yearOfManufacture?: InputMaybe<OrderDirection>;
+};
+
+export type SellACarRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<SellACarWhereUniqueInput>>;
+  create?: InputMaybe<Array<SellACarCreateInput>>;
+};
+
+export type SellACarRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<SellACarWhereUniqueInput>>;
+  create?: InputMaybe<Array<SellACarCreateInput>>;
+  disconnect?: InputMaybe<Array<SellACarWhereUniqueInput>>;
+  set?: InputMaybe<Array<SellACarWhereUniqueInput>>;
+};
+
+export type SellACarUpdateArgs = {
+  data: SellACarUpdateInput;
+  where: SellACarWhereUniqueInput;
+};
+
+export type SellACarUpdateInput = {
+  address?: InputMaybe<Scalars['String']>;
+  body?: InputMaybe<Scalars['String']>;
+  engineNo?: InputMaybe<Scalars['String']>;
+  expectToSell?: InputMaybe<Scalars['DateTime']>;
+  exteriorImages?: InputMaybe<Scalars['String']>;
+  fuel?: InputMaybe<Scalars['String']>;
+  interiorImages?: InputMaybe<Scalars['String']>;
+  kmReading?: InputMaybe<Scalars['Int']>;
+  landmark?: InputMaybe<Scalars['String']>;
+  make?: InputMaybe<Scalars['String']>;
+  model?: InputMaybe<Scalars['String']>;
+  pincode?: InputMaybe<Scalars['String']>;
+  registrationNumber?: InputMaybe<Scalars['String']>;
+  rtoCode?: InputMaybe<Scalars['String']>;
+  state?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UserRelateToOneForUpdateInput>;
+  varient?: InputMaybe<Scalars['String']>;
+  vehicleCondition?: InputMaybe<Scalars['String']>;
+  vehicleIndexNo?: InputMaybe<Scalars['Int']>;
+  veicleLocation?: InputMaybe<Scalars['String']>;
+  yearOfManufacture?: InputMaybe<Scalars['Int']>;
+};
+
+export type SellACarWhereInput = {
+  AND?: InputMaybe<Array<SellACarWhereInput>>;
+  NOT?: InputMaybe<Array<SellACarWhereInput>>;
+  OR?: InputMaybe<Array<SellACarWhereInput>>;
+  address?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  engineNo?: InputMaybe<StringFilter>;
+  expectToSell?: InputMaybe<DateTimeNullableFilter>;
+  exteriorImages?: InputMaybe<StringFilter>;
+  fuel?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IdFilter>;
+  interiorImages?: InputMaybe<StringFilter>;
+  kmReading?: InputMaybe<IntNullableFilter>;
+  landmark?: InputMaybe<StringFilter>;
+  make?: InputMaybe<StringFilter>;
+  model?: InputMaybe<StringFilter>;
+  pincode?: InputMaybe<StringFilter>;
+  registrationNumber?: InputMaybe<StringFilter>;
+  rtoCode?: InputMaybe<StringFilter>;
+  state?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  user?: InputMaybe<UserWhereInput>;
+  varient?: InputMaybe<StringFilter>;
+  vehicleCondition?: InputMaybe<StringFilter>;
+  vehicleIndexNo?: InputMaybe<IntFilter>;
+  veicleLocation?: InputMaybe<StringFilter>;
+  yearOfManufacture?: InputMaybe<IntNullableFilter>;
+};
+
+export type SellACarWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 export type Seller = {
@@ -2936,6 +3414,8 @@ export type User = {
   currentVehicleBuyingLimit?: Maybe<VehicleBuyingLimits>;
   dealerId?: Maybe<Scalars['String']>;
   dealership?: Maybe<ImageFieldOutput>;
+  deletedBid?: Maybe<Array<DeletedBid>>;
+  deletedBidCount?: Maybe<Scalars['Int']>;
   email?: Maybe<Scalars['String']>;
   emdUpdates?: Maybe<Array<EmdUpdate>>;
   emdUpdatesByAdmin?: Maybe<Array<EmdUpdate>>;
@@ -2966,12 +3446,15 @@ export type User = {
   quotedBids?: Maybe<Array<Bid>>;
   quotedBidsCount?: Maybe<Scalars['Int']>;
   role?: Maybe<UserRoleType>;
+  sellACar?: Maybe<Array<SellACar>>;
+  sellACarCount?: Maybe<Scalars['Int']>;
   specialVehicleBuyingLimit?: Maybe<Scalars['Int']>;
   state?: Maybe<Scalars['String']>;
   states?: Maybe<Array<State>>;
   statesCount?: Maybe<Scalars['Int']>;
   status?: Maybe<UserStatusType>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  userCategory?: Maybe<Scalars['String']>;
   username?: Maybe<Scalars['String']>;
   vehicleBuyingLimit?: Maybe<Scalars['Int']>;
   watchList?: Maybe<Array<Vehicle>>;
@@ -3030,6 +3513,19 @@ export type UserCoupenDetailArgs = {
 
 export type UserCoupenDetailCountArgs = {
   where?: CoupenWhereInput;
+};
+
+
+export type UserDeletedBidArgs = {
+  orderBy?: Array<DeletedBidOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: DeletedBidWhereInput;
+};
+
+
+export type UserDeletedBidCountArgs = {
+  where?: DeletedBidWhereInput;
 };
 
 
@@ -3098,6 +3594,19 @@ export type UserQuotedBidsCountArgs = {
 };
 
 
+export type UserSellACarArgs = {
+  orderBy?: Array<SellACarOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: SellACarWhereInput;
+};
+
+
+export type UserSellACarCountArgs = {
+  where?: SellACarWhereInput;
+};
+
+
 export type UserStatesArgs = {
   orderBy?: Array<StateOrderByInput>;
   skip?: Scalars['Int'];
@@ -3159,6 +3668,7 @@ export type UserCreateInput = {
   coupenDetail?: InputMaybe<CoupenRelateToManyForCreateInput>;
   dealerId?: InputMaybe<Scalars['String']>;
   dealership?: InputMaybe<ImageFieldInput>;
+  deletedBid?: InputMaybe<DeletedBidRelateToManyForCreateInput>;
   email?: InputMaybe<Scalars['String']>;
   emdUpdates?: InputMaybe<EmdUpdateRelateToManyForCreateInput>;
   emdUpdatesByAdmin?: InputMaybe<EmdUpdateRelateToManyForCreateInput>;
@@ -3183,10 +3693,12 @@ export type UserCreateInput = {
   phone?: InputMaybe<Scalars['String']>;
   quotedBids?: InputMaybe<BidRelateToManyForCreateInput>;
   role?: InputMaybe<UserRoleType>;
+  sellACar?: InputMaybe<SellACarRelateToManyForCreateInput>;
   specialVehicleBuyingLimit?: InputMaybe<Scalars['Int']>;
   state?: InputMaybe<Scalars['String']>;
   states?: InputMaybe<StateRelateToManyForCreateInput>;
   status?: InputMaybe<UserStatusType>;
+  userCategory?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
   vehicleBuyingLimit?: InputMaybe<Scalars['Int']>;
   watchList?: InputMaybe<VehicleRelateToManyForCreateInput>;
@@ -3235,6 +3747,7 @@ export type UserOrderByInput = {
   state?: InputMaybe<OrderDirection>;
   status?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
+  userCategory?: InputMaybe<OrderDirection>;
   username?: InputMaybe<OrderDirection>;
   vehicleBuyingLimit?: InputMaybe<OrderDirection>;
 };
@@ -3305,6 +3818,7 @@ export type UserUpdateInput = {
   coupenDetail?: InputMaybe<CoupenRelateToManyForUpdateInput>;
   dealerId?: InputMaybe<Scalars['String']>;
   dealership?: InputMaybe<ImageFieldInput>;
+  deletedBid?: InputMaybe<DeletedBidRelateToManyForUpdateInput>;
   email?: InputMaybe<Scalars['String']>;
   emdUpdates?: InputMaybe<EmdUpdateRelateToManyForUpdateInput>;
   emdUpdatesByAdmin?: InputMaybe<EmdUpdateRelateToManyForUpdateInput>;
@@ -3329,10 +3843,12 @@ export type UserUpdateInput = {
   phone?: InputMaybe<Scalars['String']>;
   quotedBids?: InputMaybe<BidRelateToManyForUpdateInput>;
   role?: InputMaybe<UserRoleType>;
+  sellACar?: InputMaybe<SellACarRelateToManyForUpdateInput>;
   specialVehicleBuyingLimit?: InputMaybe<Scalars['Int']>;
   state?: InputMaybe<Scalars['String']>;
   states?: InputMaybe<StateRelateToManyForUpdateInput>;
   status?: InputMaybe<UserStatusType>;
+  userCategory?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
   vehicleBuyingLimit?: InputMaybe<Scalars['Int']>;
   watchList?: InputMaybe<VehicleRelateToManyForUpdateInput>;
@@ -3352,6 +3868,7 @@ export type UserWhereInput = {
   coupenDetail?: InputMaybe<CoupenManyRelationFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
   dealerId?: InputMaybe<StringFilter>;
+  deletedBid?: InputMaybe<DeletedBidManyRelationFilter>;
   email?: InputMaybe<StringFilter>;
   emdUpdates?: InputMaybe<EmdUpdateManyRelationFilter>;
   emdUpdatesByAdmin?: InputMaybe<EmdUpdateManyRelationFilter>;
@@ -3373,11 +3890,13 @@ export type UserWhereInput = {
   phone?: InputMaybe<StringFilter>;
   quotedBids?: InputMaybe<BidManyRelationFilter>;
   role?: InputMaybe<UserRoleTypeNullableFilter>;
+  sellACar?: InputMaybe<SellACarManyRelationFilter>;
   specialVehicleBuyingLimit?: InputMaybe<IntNullableFilter>;
   state?: InputMaybe<StringFilter>;
   states?: InputMaybe<StateManyRelationFilter>;
   status?: InputMaybe<UserStatusTypeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  userCategory?: InputMaybe<StringFilter>;
   username?: InputMaybe<StringFilter>;
   vehicleBuyingLimit?: InputMaybe<IntNullableFilter>;
   watchList?: InputMaybe<VehicleManyRelationFilter>;
@@ -3418,6 +3937,8 @@ export type Vehicle = {
   currentBidAmount?: Maybe<Scalars['Int']>;
   currentBidUser?: Maybe<User>;
   dateOfRegistration?: Maybe<Scalars['DateTime']>;
+  deletedBid?: Maybe<Array<DeletedBid>>;
+  deletedBidCount?: Maybe<Scalars['Int']>;
   doorCount?: Maybe<Scalars['Int']>;
   engineNo?: Maybe<Scalars['String']>;
   event?: Maybe<Event>;
@@ -3476,6 +3997,19 @@ export type Vehicle = {
   watchedByCount?: Maybe<Scalars['Int']>;
   yardLocation?: Maybe<Scalars['String']>;
   yearOfManufacture?: Maybe<Scalars['Int']>;
+};
+
+
+export type VehicleDeletedBidArgs = {
+  orderBy?: Array<DeletedBidOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: DeletedBidWhereInput;
+};
+
+
+export type VehicleDeletedBidCountArgs = {
+  where?: DeletedBidWhereInput;
 };
 
 
@@ -3543,6 +4077,7 @@ export type VehicleCreateInput = {
   currentBidAmount?: InputMaybe<Scalars['Int']>;
   currentBidUser?: InputMaybe<UserRelateToOneForCreateInput>;
   dateOfRegistration?: InputMaybe<Scalars['DateTime']>;
+  deletedBid?: InputMaybe<DeletedBidRelateToManyForCreateInput>;
   doorCount?: InputMaybe<Scalars['Int']>;
   engineNo?: InputMaybe<Scalars['String']>;
   event?: InputMaybe<EventRelateToOneForCreateInput>;
@@ -3730,6 +4265,7 @@ export type VehicleUpdateInput = {
   currentBidAmount?: InputMaybe<Scalars['Int']>;
   currentBidUser?: InputMaybe<UserRelateToOneForUpdateInput>;
   dateOfRegistration?: InputMaybe<Scalars['DateTime']>;
+  deletedBid?: InputMaybe<DeletedBidRelateToManyForUpdateInput>;
   doorCount?: InputMaybe<Scalars['Int']>;
   engineNo?: InputMaybe<Scalars['String']>;
   event?: InputMaybe<EventRelateToOneForUpdateInput>;
@@ -3812,6 +4348,7 @@ export type VehicleWhereInput = {
   currentBidAmount?: InputMaybe<IntNullableFilter>;
   currentBidUser?: InputMaybe<UserWhereInput>;
   dateOfRegistration?: InputMaybe<DateTimeNullableFilter>;
+  deletedBid?: InputMaybe<DeletedBidManyRelationFilter>;
   doorCount?: InputMaybe<IntNullableFilter>;
   engineNo?: InputMaybe<StringFilter>;
   event?: InputMaybe<EventWhereInput>;
@@ -4183,6 +4720,13 @@ export type ReportQueryVariables = Exact<{
 
 
 export type ReportQuery = { __typename?: 'Query', vehicles?: Array<{ __typename?: 'Vehicle', id: string, bidStatus?: VehicleBidStatusType | null, chassisNo?: string | null, registrationNumber?: string | null, make?: string | null, vehicleEventStatus?: VehicleEventStatus | null, startPrice?: number | null, currentBidAmount?: number | null, event?: { __typename?: 'Event', eventNo?: number | null, endDate?: any | null, seller?: { __typename?: 'Seller', name?: string | null, id: string } | null } | null }> | null };
+
+export type CreateSellACarMutationVariables = Exact<{
+  data: SellACarCreateInput;
+}>;
+
+
+export type CreateSellACarMutation = { __typename?: 'Mutation', createSellACar?: { __typename?: 'SellACar', id: string, interiorImages?: string | null, exteriorImages?: string | null } | null };
 
 export type UserPaymentsQueryVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -5120,6 +5664,28 @@ export const useReportQuery = <
     useQuery<ReportQuery, TError, TData>(
       ['Report', variables],
       fetcher<ReportQuery, ReportQueryVariables>(client, ReportDocument, variables, headers),
+      options
+    );
+export const CreateSellACarDocument = `
+    mutation CreateSellACar($data: SellACarCreateInput!) {
+  createSellACar(data: $data) {
+    id
+    interiorImages
+    exteriorImages
+  }
+}
+    `;
+export const useCreateSellACarMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<CreateSellACarMutation, TError, CreateSellACarMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<CreateSellACarMutation, TError, CreateSellACarMutationVariables, TContext>(
+      ['CreateSellACar'],
+      (variables?: CreateSellACarMutationVariables) => fetcher<CreateSellACarMutation, CreateSellACarMutationVariables>(client, CreateSellACarDocument, variables, headers)(),
       options
     );
 export const UserPaymentsDocument = `

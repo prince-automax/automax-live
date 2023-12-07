@@ -37,7 +37,7 @@ function TopBar() {
         <div className="flex flex-col justify-end ">
           <div className="text-right text-sm">
             <span className="font-normal"> Vehicle Buying Limit : </span>
-            {data?.user?.currentVehicleBuyingLimit?.vehicleBuyingLimit ?? ""}
+            {data?.user?.currentVehicleBuyingLimit?.vehicleBuyingLimit ?? "Nil"}
           </div>
           <div className="text-right text-sm">
             <span className=" text-sm sm:text-base">
