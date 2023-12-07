@@ -27,11 +27,13 @@ const SubmitMessage = ({setActiveTab,setComponents}) => {
           className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-blue-400  rounded flex space-x-2  items-center justify-center">
             <span className="text-[#FFFFFF] font-poppins sm:text-lg sm:font-bold ">
               {" "}
-            Submit Another Form
+            Sell Another Truck
             </span>{" "}
+         
             <span>
-             
+              <ChevronRightIcon className=" w-4 h-5 text-white " />{" "}
             </span>
+           
           </button>
         </div>
         

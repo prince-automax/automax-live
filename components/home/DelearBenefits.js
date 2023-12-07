@@ -57,7 +57,7 @@ export default function DelearBenefits() {
                         Benefits
                     </h2>
                     <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
-                        Delear Benefits
+                    Dealer Benefits
                     </p>
                 </div>
 

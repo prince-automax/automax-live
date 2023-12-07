@@ -53,6 +53,7 @@ const SellACar = () => {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
   const [userId, setUserId] = useState("");
+  const [count, setcount] = useState(0);
   const [formData, setFormData] = useState({
     registrationNumber: "",
     make: "",
@@ -79,16 +80,37 @@ const SellACar = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
-      // console.log("token in useEffect", token);
+      const dataContains = JSON.parse(localStorage.getItem("sellacar")) || {};
+      console.log("dataContains", dataContains);
 
+      const token = localStorage.getItem("token");
+      if (
+        token &&
+        dataContains?.registrationNumber !== "" &&
+        dataContains?.registrationNumber !== undefined
+      ) {
+        console.log("entered here in with only token and form");
+        setComponents(3);
+      } 
+      else if(token) {
+        console.log("entered here in with only token");
+        setComponents(2);
+      }
+
+      // token && setComponents(2);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // console.log('entered useeffect when component changes');
+
+      const token = localStorage.getItem("token");
       const id = localStorage.getItem("id");
-      // console.log("id in useEffect", id);
-      token && setComponents(3);
       setAccessToken(token);
       setUserId(id);
     }
-  }, [activeTab]);
+  }, [components]);
 
   // console.log("userid00007", userId);
   // console.log("access00007", accessToken);
@@ -124,20 +146,20 @@ const SellACar = () => {
 
   useEffect(() => {
     if (success) {
-        toast.success(success.text ? success.text : "Success");
-        setTimeout(() => {
-            setSuccess(null);
-        }, 2000);
+      toast.success(success.text ? success.text : "Success");
+      setTimeout(() => {
+        setSuccess(null);
+      }, 2000);
     }
     if (error) {
-        toast.error(
-            error.text ? error.text : "Something went wrong. Please contact support"
-        );
-        setTimeout(() => {
-            setError(null);
-        }, 2000);
+      toast.error(
+        error.text ? error.text : "Something went wrong. Please contact support"
+      );
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
     }
-}, [success, error]);
+  }, [success, error]);
 
   const AddSellACarMutation =
     useCreateSellACarMutation<CreateSellACarMutationVariables>(
@@ -221,13 +243,13 @@ const SellACar = () => {
           setComponents(4);
           setSuccess({
             text: "Form has been successfully submitted",
-        });
+          });
         }
       }
     } catch (error) {
       setError({
         text: "Form submission Failed",
-    });
+      });
     }
 
     // console.log("From ONSubmit of sell a car ", values);
@@ -310,17 +332,11 @@ const SellACar = () => {
     clientContactPerson: Yup.string().required(
       "clientContactPerson is required"
     ),
-    address: Yup.string().required(
-      "address is required"
-    ),
-    landmark: Yup.string().required(
-      "landmark is required"
-    ),
-    pincode: Yup.string().required(
-      "pincode is required"
-    ),
+    address: Yup.string().required("address is required"),
+    landmark: Yup.string().required("landmark is required"),
+    pincode: Yup.string().required("pincode is required"),
     // Add other validations for other fields here
-    // ...  
+    // ...
   });
   return (
     <div className="w-full min-h-screen relative flex items-center justify-center sm:p-10  ">
@@ -337,15 +353,15 @@ const SellACar = () => {
         {components === 1 && <SellACarOtp index={setComponents} />}
 
         {components === 2 && <WelcomePage index={setComponents} />}
- <div className="max-md:w-96 md:max-w-lg m-3 md:m-0  rounded-xl bg-opacity md:relative bg-white bg-opacity-90">
- {  components === 3 && (
-         <div
-            onClick={handleClose}
-            className="hidden md:block md:absolute top-4 left-4 cursor-pointer text-lg text-[#989898] font-semibold"
-          >
-            X
-          </div>)}
-       
+        <div className="max-md:w-96 md:max-w-lg m-3 md:m-0  rounded-xl bg-opacity md:relative bg-white bg-opacity-90">
+          {components === 3 && (
+            <div
+              onClick={handleClose}
+              className="hidden md:block md:absolute top-4 left-4 cursor-pointer text-lg text-[#989898] font-semibold"
+            >
+              X
+            </div>
+          )}
 
           {components === 3 && (
             <div className="w-full h-full ">
@@ -374,7 +390,6 @@ const SellACar = () => {
                 onSubmit={SubmitFiles}
                 enableReinitialize={true}
                 // validationSchema={validationSchema}
-               
               >
                 {(props) => (
                   <Form>
@@ -542,11 +557,12 @@ const SellACar = () => {
             </div>
           )}
         </div>
-        {components === 4 && <SubmitMessage 
-        setActiveTab={setActiveTab}
-        setComponents={setComponents}
-
-        />}
+        {components === 4 && (
+          <SubmitMessage
+            setActiveTab={setActiveTab}
+            setComponents={setComponents}
+          />
+        )}
       </div>
     </div>
   );
