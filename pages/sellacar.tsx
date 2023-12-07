@@ -40,6 +40,7 @@ import {
   UpdateUserMutationVariables,
 } from "@utils/graphql";
 import toast from "react-hot-toast";
+import PropagateLoader from "react-spinners/PropagateLoader";
 const years = Array.from({ length: 44 }, (_, index) => 1980 + index);
 
 const SellACar = () => {
@@ -50,6 +51,7 @@ const SellACar = () => {
   const [Exterorimage, setEXteriorImage] = useState([]);
   const [firebaseInteriorImage, setFirebaseInteriorImage] = useState("");
   const [firebaseExteriorImage, setFirebaseExteriorImage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
   const [userId, setUserId] = useState("");
@@ -91,8 +93,7 @@ const SellACar = () => {
       ) {
         console.log("entered here in with only token and form");
         setComponents(3);
-      } 
-      else if(token) {
+      } else if (token) {
         console.log("entered here in with only token");
         setComponents(2);
       }
@@ -128,10 +129,16 @@ const SellACar = () => {
   useEffect(() => {
     if (formData.registrationNumber !== "") {
       const formDataString = JSON.stringify(formData);
-
+      const activeString=JSON.stringify(activeTab);
       localStorage.setItem("sellacar", formDataString);
+     
     }
   }, [formData]);
+
+  useEffect(()=>{
+    const activeString=JSON.stringify(activeTab);
+    localStorage.setItem('activetab',activeString)
+  },[activeTab])
 
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem("sellacar")) || {};
@@ -174,6 +181,7 @@ const SellACar = () => {
     console.log("values from onSubmitFiles000000000000000000000000");
 
     try {
+      setIsLoading(true);
       const interiorImages = Interorimage || []; // Assuming values.interiorImage is an array
       const ExteriorImages = Exterorimage || [];
 
@@ -232,7 +240,7 @@ const SellACar = () => {
       console.log("result of sellacarform submission", result);
 
       if (result) {
-        // console.log("USERID", userId);
+        console.log("USERID", userId);
         const userUpdate = await UpdateUserMutation.mutateAsync({
           where: { id: userId },
           data: { firstName: values?.clientContactPerson },
@@ -246,10 +254,13 @@ const SellACar = () => {
           });
         }
       }
+      setIsLoading(false);
     } catch (error) {
       setError({
-        text: "Form submission Failed",
+        text: `Form submission Failed ${error.message}`,
       });
+    } finally {
+      setIsLoading(false);
     }
 
     // console.log("From ONSubmit of sell a car ", values);
@@ -349,7 +360,12 @@ const SellACar = () => {
           className="bg-opacity-50 "
         />
       </div>
-      <div className="w-full h-full flex items-center justify-center  ">
+      <div className="w-full h-full flex items-center justify-center relative  ">
+        {isLoading && (
+          <div className=" absolute z-10">
+            <PropagateLoader color="#36b3d6" size={35} speedMultiplier={2} />
+          </div>
+        )}
         {components === 1 && <SellACarOtp index={setComponents} />}
 
         {components === 2 && <WelcomePage index={setComponents} />}
@@ -544,6 +560,7 @@ const SellACar = () => {
 
                           <button
                             type="submit"
+                            disabled={props.isSubmitting}
                             className="bg-[#135A9E] py-1  w-52 rounded-md md:w-96  px-4 sm:py-2 sm:px-8 hover:bg-[#264b6d]  font-poppins text-white "
                           >
                             Submit

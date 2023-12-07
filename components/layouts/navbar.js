@@ -63,11 +63,11 @@ export default function Navbar() {
       href: "/findauction",
       current: router.pathname == "/findauction" ? true : false,
     },
-    // {
-    //   name: "Sell A Truck",
-    //   href: "/sellacar",
-    //   current: router.pathname == "/sellacar" ? true : false,
-    // },
+    {
+      name: "Sell A Truck",
+      href: "/sellacar",
+      current: router.pathname == "/sellacar" ? true : false,
+    },
   ];
 
   return (
