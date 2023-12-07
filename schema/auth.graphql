@@ -18,6 +18,8 @@ mutation VerifyOTP($mobile: String!, $token: String!) {
   }
 }
 
+
+
 mutation AuthenticateUserWithPassword($mobile: String!, $password: String!) {
   authenticateUserWithPassword(mobile: $mobile, password: $password) {
     ... on UserAuthenticationWithPasswordSuccess {

@@ -40,7 +40,7 @@
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx"
-, "pages/passbook.tsx", "pages/showworkbook.js"    ],
+, "pages/passbook.tsx", "pages/showworkbook.js", "components/firebase/firebaseHandleupload.js"    ],
     "exclude": [
         "node_modules"
     ]
