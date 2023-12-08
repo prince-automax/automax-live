@@ -469,12 +469,11 @@ export const RegistrationStateComponent = ({
   };
 
   let filteredState = registrationStateAndCode.filter((item) =>
-    item.name.toLowerCase().includes(searchState?.toLowerCase())
+    item?.name?.toLowerCase().includes(searchState?.toLowerCase())
   );
 
-  const filteredStateRto = registrationStateAndCode.filter((item) =>
-    item.name
-      .toLowerCase()
+  const filteredStateRto = registrationStateAndCode?.filter((item) =>
+    item?.name?.toLowerCase()
       .includes(
         selectedState?.name?.toLowerCase() || selectedState.toLowerCase()
       )
@@ -582,12 +581,12 @@ export const RegistrationStateComponent = ({
             </Field>
           </div>
           <div className="mt-4 w-full h-56 mfgScroll overflow-y-scroll">
-            {filteredStateRto.map((item) => {
-              const selectedNumber = item.number.find(
+            {filteredStateRto?.map((item) => {
+              const selectedNumber = item?.number?.find(
                 (number) => number === selectedRto
               );
 
-              const remainingNumbers = item.number.filter(
+              const remainingNumbers = item?.number?.filter(
                 (number) => number !== selectedRto
               );
 
@@ -597,7 +596,7 @@ export const RegistrationStateComponent = ({
 
               return (
                 <ul key={item.id} className="space-y-4 text-center w-full">
-                  {sortedNumbers.map((filteredNumber) => (
+                  {sortedNumbers?.map((filteredNumber) => (
                     <li
                       onClick={() => handleRtoSelect(filteredNumber)}
                       className={`cursor-pointer ${
@@ -1084,3 +1083,5 @@ export const ImageExterior = ({
     </div>
   );
 };
+
+

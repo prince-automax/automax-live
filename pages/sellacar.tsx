@@ -40,7 +40,7 @@ import {
   UpdateUserMutationVariables,
 } from "@utils/graphql";
 import toast from "react-hot-toast";
-import PropagateLoader from "react-spinners/PropagateLoader";
+import PulseLoader from "react-spinners/PulseLoader";
 const years = Array.from({ length: 44 }, (_, index) => 1980 + index);
 
 const SellACar = () => {
@@ -360,10 +360,13 @@ const SellACar = () => {
           className="bg-opacity-50 "
         />
       </div>
-      <div className="w-full h-full flex items-center justify-center relative  ">
+      <div className="w-full h-full flex items-center justify-center relative  px-10  ">
         {isLoading && (
           <div className=" absolute z-10">
-            <PropagateLoader color="#36b3d6" size={35} speedMultiplier={2} />
+<PulseLoader
+  color="#010101"
+  size={20}
+/>
           </div>
         )}
         {components === 1 && <SellACarOtp index={setComponents} />}

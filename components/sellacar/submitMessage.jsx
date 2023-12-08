@@ -10,7 +10,7 @@ const SubmitMessage = ({setActiveTab,setComponents}) => {
   
 
   return (
-    <div className=" mx-4 p-10 sm:max-w-lg rounded-xl sm:mx-auto   flex items-center justify-center h-60 sm:h-80 bg-white bg-opacity-90">
+<div className=" max-md:mr-6 md:p-4 sm:max-w-lg rounded-xl flex items-center justify-center h-60 sm:h-80 bg-white bg-opacity-90">
       <div className=" w-full h-48 space-y-5 flex flex-col justify-center items-center  ">
         <div className="w-full text-center space-y-3 ">
          
