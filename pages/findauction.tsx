@@ -11,7 +11,7 @@ import {
   DocumentDownloadIcon,
   PrinterIcon,
   ArrowCircleRightIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
 } from "@heroicons/react/outline";
 
 import {
@@ -22,127 +22,102 @@ import {
   FindAuctionsQueryVariables,
   useFindAuctionStateQuery,
   FindAuctionStateQueryVariables,
-  OrderDirection
+  OrderDirection,
 } from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
 
 const Findauction = () => {
   const [queryResult, setQueryResult] = useState(null);
 
-
   const formikRef = useRef(null);
 
-
-
-   const Category=[
-    
-    { value:"vehicle",label:"Vehicle"},
-    { value:"flat",label:"Flat"},
-  { value:"mechinery",label:"Mechinery"},
-  { value:"gold",label:"Gold"},
-  { value:"other",label:"Other"}
-
-]
+  const Category = [
+    { value: "vehicle", label: "Vehicle" },
+    { value: "flat", label: "Flat" },
+    { value: "mechinery", label: "Mechinery" },
+    { value: "gold", label: "Gold" },
+    { value: "other", label: "Other" },
+  ];
 
   const { data, isLoading: loadingbank } =
     useInstitutionsQuery<InstitutionsQueryVariables>(graphQLClient());
 
-    const { data:findAuctionState, isLoading: loadingstate } =
+  const { data: findAuctionState, isLoading: loadingstate } =
     useFindAuctionStateQuery<FindAuctionStateQueryVariables>(graphQLClient());
 
-   
-    const variables={
-      skip: 0,
-      take: 10,
-    }
+  const variables = {
+    skip: 0,
+    take: 10,
+  };
 
-    
-
-    const { data: findAuction } = useFindAuctionsQuery(graphQLClient(),  {
-      skip: 0,
+  const { data: findAuction } = useFindAuctionsQuery(graphQLClient(), {
+    skip: 0,
     take: 100,
     orderBy: [
       {
         listingId: OrderDirection.Desc,
       },
     ],
-    
-      where: {
-        ...(queryResult?.category && {
-          propertyType: {
-            equals: queryResult?.category 
-          }
-        }),
-        ...(queryResult?.bank && {
-          institution_details: {
-            name: {
-              equals: queryResult?.bank
-            }
-          }
-        }),
-        ...(queryResult?.state && {
-          state: {
-            name: {
-              equals: queryResult?.state
-            }
-          }
-        }),
-        ...(queryResult?.city && {
-         
-            city: {
-              contains: queryResult?.city
-            }
-          
-        }),
-       
-        ...(queryResult?.fromDate && {
-          auctionStartDate: {
-            gte:  new Date(queryResult?.fromDate).toISOString()
-            
-          }
-        }),
-        ...(queryResult?.toDate && {
-          auctionEndDate: {
-            lte:  new Date(queryResult?.toDate).toISOString()
-            
-          }
-        }),
-     
-    
-  
-        ...(queryResult?.minimum && {
-          reservePrice: {
-            gte:  queryResult?.minimum.toString()
-            
-          }
-        }),
-        ...(queryResult?.maximum && {
-          reservePrice: {
-            lte: queryResult?.maximum.toString()
-            
-          }
-        })
-      },
-      
-    });
-    
 
+    where: {
+      ...(queryResult?.category && {
+        propertyType: {
+          equals: queryResult?.category,
+        },
+      }),
+      ...(queryResult?.bank && {
+        institution_details: {
+          name: {
+            equals: queryResult?.bank,
+          },
+        },
+      }),
+      ...(queryResult?.state && {
+        state: {
+          name: {
+            equals: queryResult?.state,
+          },
+        },
+      }),
+      ...(queryResult?.city && {
+        city: {
+          contains: queryResult?.city,
+        },
+      }),
 
-    
+      ...(queryResult?.fromDate && {
+        auctionStartDate: {
+          gte: new Date(queryResult?.fromDate).toISOString(),
+        },
+      }),
+      ...(queryResult?.toDate && {
+        auctionEndDate: {
+          lte: new Date(queryResult?.toDate).toISOString(),
+        },
+      }),
 
-
+      ...(queryResult?.minimum && {
+        reservePrice: {
+          gte: queryResult?.minimum.toString(),
+        },
+      }),
+      ...(queryResult?.maximum && {
+        reservePrice: {
+          lte: queryResult?.maximum.toString(),
+        },
+      }),
+    },
+  });
 
   const columns = [
     {
-      Header:"Listing Id",
-      accessor:"listingId"
-
+      Header: "Listing Id",
+      accessor: "listingId",
     },
     {
       Header: "State",
       accessor: "state.name",
-    }
-  ,
+    },
     {
       Header: "Institution Name",
       accessor: "institution_details.name",
@@ -168,7 +143,7 @@ const Findauction = () => {
     {
       Header: "View Details",
       accessor: "id",
-      Cell: ({ cell: { value } }) =>  View(value)
+      Cell: ({ cell: { value } }) => View(value),
     },
   ];
 
@@ -191,7 +166,13 @@ const Findauction = () => {
         <Link href={`/openbiddetails/${value}`}>
           <a target="_blank">
             <div className="flex">
-          <span className="  font-normal px-4 py-1 mb-6 border bg-blue-500 text-white rounded"> View</span> <div><ArrowRightIcon/></div>
+              <span className="  font-medium px-4 py-1 font-poppins mb-6 border text-sm border-[#DC2626] text-[#DC2626] rounded-xl">
+                {" "}
+                Enter
+              </span>{" "}
+              <div>
+                <ArrowRightIcon />
+              </div>
             </div>
           </a>
         </Link>
@@ -217,29 +198,27 @@ const Findauction = () => {
       </div>
     );
   }
-  function dataFormat(value) {
+  function DateFormat(value) {
+    console.log("value form StartDate", value);
+  
     return (
       <div>
         <div className="flex space-x-2">
-          <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" />
-          <div className="space-y-1 font-medium">
-            <div className="text-sm text-gray-900 whitespace-nowrap">
+          {/* <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" /> */}
+          <div className="space-y-1 font-poppins">
+            <div className="text-sm  whitespace-nowrap">
               <span>{moment(value).format("MMMM Do, YYYY")}</span>
             </div>
             <div className="text-xs text-gray-500 bg-gray-200 rounded">
-              <span className="text-left">
-                {/* {moment(value).format("ddd h:mm a")} */}
-              </span>
+              {/* <span className="text-left">
+                {moment(value).format("ddd h:mm a")}
+              </span> */}
             </div>
           </div>
         </div>
       </div>
     );
   }
-
-
- 
-
   const onSubmitData = async (values, { resetForm }) => {
     setQueryResult(values);
     // resetForm();
@@ -291,26 +270,24 @@ const Findauction = () => {
                             Location
                           </label>
                           <div className="mt-1">
-                          <Field
+                            <Field
                               as="select"
                               name="state"
                               id="state"
                               autoComplete="family-name"
                               className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                               placeholder="List of Banks"
-                             
                             >
                               <option>Select</option>
-                              {(findAuctionState?.states as any[] | undefined)?.map(
-                                (banks, index) => (
-                                  <>
-                                 
+                              {(
+                                findAuctionState?.states as any[] | undefined
+                              )?.map((banks, index) => (
+                                <>
                                   <option key={index} value={banks.name}>
                                     {banks.name}
                                   </option>
-                                  </>
-                                )
-                              )}
+                                </>
+                              ))}
                             </Field>
                           </div>
                         </div>
@@ -329,16 +306,14 @@ const Findauction = () => {
                               autoComplete="family-name"
                               className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                               placeholder="List of Banks"
-                             
                             >
                               <option>Select</option>
                               {(data?.institutions as any[] | undefined)?.map(
                                 (banks, index) => (
                                   <>
-                                 
-                                  <option key={index} value={banks.name}>
-                                    {banks.name}
-                                  </option>
+                                    <option key={index} value={banks.name}>
+                                      {banks.name}
+                                    </option>
                                   </>
                                 )
                               )}
@@ -362,13 +337,10 @@ const Findauction = () => {
                             >
                               <option>select</option>
                               {Category.map((category, index) => (
-                                
                                 // <
                                 <option key={index} value={category.value}>
                                   {category.label}
                                 </option>
-                                
-                              
                               ))}
                             </Field>
                           </div>
@@ -463,7 +435,7 @@ const Findauction = () => {
                             />
                           </div>
                         </div>
-                       
+
                         <div className="sm:col-span-2 sm:flex sm:justify-start">
                           <button
                             type="submit"
@@ -483,27 +455,20 @@ const Findauction = () => {
           </div>
         </section>
         <section>
-         <div className="hidden md:block">
-         { findAuction?.findAuctions && <Datatable
-                    hideSearch={false}
-                    tableData={findAuction?.findAuctions}
-                    tableColumns={columns}
-                  /> }
-         </div>
-         <div className="md:hidden">
-         {/* <div className="overflow-hidden shadow-lg  rounded-lg p-2 my-3 border border-slate-400 mx-4"> */}
-         <div className="grid grid-cols-1 mx-10 border border-slate-300 my-6">
-          <div className="flex flex-col border-b space-y-2 px-3 py-2 font-medium text-sm">
-            <span>Listing ID</span>
-            <span>State</span>
-            <span>Institution Name</span>
-            <span>Property Details</span>
-            <span>Application Deadline</span>
-            <span>Auction Date</span>
-            <span>Reserve Price</span>
-            <span>View Details</span>
+          <div className="hidden md:block">
+            {findAuction?.findAuctions && (
+              <Datatable
+                hideSearch={false}
+                tableData={findAuction?.findAuctions}
+                tableColumns={columns}
+              />
+            )}
           </div>
-       
+          <div className="md:hidden space-y-4 my-4  flex flex-col justify-center items-center">
+            {/* <div className="overflow-hidden shadow-lg  rounded-lg p-2 my-3 border border-slate-400 mx-4"> */}
+            {/* <div className="grid grid-cols-1 mx-10 border border-slate-300 my-6"> */}
+
+            {/*        
         {findAuction?.findAuctions.map((item,index)=>( 
             <div key={index}>
           <div className="flex flex-col border-b border-slate-300 space-y-2 px-3 py-3 text-black">
@@ -513,18 +478,88 @@ const Findauction = () => {
             
             <span>{item?.propertyType}</span>
             <span>{new Date(item?.emdSubmissionDate).toLocaleDateString()}</span>
-            <span>{new Date(item?.auctionStartDate).toLocaleDateString()}</span>
-            <span>₹{item?.reservePrice}</span>
+          
             <div className="flex justify-end mx-4">
            <span className="bg-red-200"><ArrowRightIcon className="bg-black"/></span>  {MobileViewId(item.id)}
             </div>
           </div>
           </div>
-        ))  }
-        
-         </div>
-      {/* </div> */}
-         </div>
+        ))  } */}
+
+            {/* </div> */}
+            {/* </div> */}
+            {findAuction?.findAuctions.map((item, index) => {
+              console.log("item in open bids", item);
+
+              return (
+                <div
+                  key={index}
+                  className="grid grid-cols-1 gap-1 border-2  border-orange-600 rounded-lg mx-2     px-6 py-2 "
+                >
+                  <div className="grid grid-cols-3 gap-1 space-x-2   items-center   ">
+                    <p className="flex justify-between text-base  ">
+                      Listing ID <span className="pl-2">:</span>
+                    </p>
+
+                    <p className="col-span-2 text-base pl-2 ">{item?.listingId}</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1 space-x-2  justify-center items-center   ">
+                    <p className="flex justify-between text-base">
+                      State <span>:</span>
+                    </p>
+
+                    <p className="col-span-2 text-base tracking-wide pl-2">{item?.state?.name}</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1 space-x-2 justify-center items-center ">
+                    <p className="flex justify-between text-base">
+                      Client <span>:</span>
+                    </p>
+
+                    <p className="col-span-2 text-base pl-2">
+                      {item?.institution_details?.name}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1 space-x-2 justify-center items-center ">
+                    <p className="flex justify-between text-base">
+                      Details <span>:</span>
+                    </p>
+
+                    <p className="col-span-2  text-base pl-2 ">{item?.propertyType}</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1 space-x-2 justify-center items-center">
+                    <p className="flex justify-between text-base">
+                      Deadline <span>:</span>
+                    </p>
+
+                    <p className="col-span-2  text-base items-end pl-2">
+                      {  DateFormat(item?.emdSubmissionDate)}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1 space-x-2 justify-center items-center">
+                    <p className="flex justify-between text-base">
+                      Auction Date <span className="pl-1">:</span>
+                    </p>
+
+                    <p className="col-span-2  text-base pl-2">
+                      { DateFormat(item?.auctionStartDate)}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1 space-x-2 justify-center items-center">
+                    <p className="flex justify-between text-base">
+                      Reserve Price <span className="pl-1">:</span>
+                    </p>
+
+                    <p className="col-span-2  text-sm pl-2">₹{item?.reservePrice}</p>
+                  </div>
+                  <hr className="to-black" />
+                  <div className="space-x-3 mt-2 flex">
+                    <button className="">{MobileViewId(item?.id)}</button>
+                    <span className=""></span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </section>
         {/* Contact grid */}
       </main>
