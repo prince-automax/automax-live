@@ -163,7 +163,7 @@ const SellACarOtp = ({ index }) => {
   return (
     <>
       {!verificationMode && (
-        <div className="p-6 mx-4 sm:max-w-lg rounded-xl sm:mx-auto  h-96 bg-white bg-opacity-75">
+        <div className="p-6  max-sm:ml-6  sm:max-w-lg rounded-xl sm:mx-auto  h-96 bg-white bg-opacity-75">
           <div className="space-y-6 flex flex-col justify-center items-center h-full">
             <h1 className="w-80  text-center font-extrabold text-xl sm:text-4xl ">
               OTP Verification
@@ -210,7 +210,7 @@ const SellACarOtp = ({ index }) => {
       )}
 
       {verificationMode && (
-        <div className=" p-6 mx-4 sm:max-w-lg rounded-xl sm:mx-auto  h-96 bg-white bg-opacity-75">
+        <div className=" p-6 mx-4 max-sm:ml-10 sm:max-w-lg rounded-xl sm:mx-auto  h-96 bg-white bg-opacity-75">
           <div className="space-y-6 flex flex-col justify-center items-center h-full">
             <h1 className="w-80 sm:w-96  text-center font-extrabold text-xl sm:text-3xl ">
               Enter Verification Code

@@ -11,7 +11,7 @@
     };
 
     return (
-<div className=" max-md:ml-6  md:p-4 sm:max-w-lg rounded-xl flex items-center justify-center h-60 sm:h-80 bg-white bg-opacity-90">
+<div className=" max-md:ml-8  md:p-4 sm:max-w-lg rounded-xl flex items-center justify-center h-60 sm:h-80 bg-white bg-opacity-90">
 <div className=" h-48 space-y-5 flex flex-col justify-center items-center">
           <div className="w-full text-center space-y-3 ">
             <h1 className="font-extrabold font-ubuntu text-[#F09720] text-2xl sm:text-5xl">

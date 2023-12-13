@@ -72,6 +72,9 @@ refetch()
 
   const payment = userData ? userData["user"]?.payments : "";
 
+  console.log("payment from live table",payment);
+  
+
   useEffect(() => {
     if (payment) {
       
@@ -389,11 +392,11 @@ function MobielViewCard({
 }) {
   
 
-  console.log("index1",index1);
-  console.log("event",event);
-  console.log("allowDownload66",allowDownload);
-  console.log("registered",registered);
-  console.log("registeredStatus",registeredStatus);
+  // console.log("index1",index1);
+  // console.log("event",event);
+  // console.log("allowDownload66",allowDownload);
+  // console.log("registered",registered);
+  // console.log("registeredStatus",registeredStatus);
   
 
 // console.log("11",event.downloadableFile

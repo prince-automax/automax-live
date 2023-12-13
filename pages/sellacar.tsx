@@ -113,8 +113,8 @@ const SellACar = () => {
     }
   }, [components]);
 
-  // console.log("userid00007", userId);
-  // console.log("access00007", accessToken);
+  console.log("userid00007", userId);
+  console.log("access00007", accessToken);
 
   const handleInteriorImage = (file) => {
     // console.log('file from inter',file);
@@ -191,7 +191,7 @@ const SellACar = () => {
           "interiorImage",
           "interior"
         );
-        // console.log("interiorImageUrl from onSubmit", interiorImageUrl);
+        console.log("interiorImageUrl from onSubmit", interiorImageUrl);
         setFirebaseInteriorImage(interiorImageUrl);
       } catch (ex) {
         // console.log("interiorImageUrl uploading Error", ex);
@@ -205,12 +205,13 @@ const SellACar = () => {
           "exteriorImages",
           "exterior"
         );
+        console.log("ExteriorImageUrl from onSubmit", ExteriorImageUrl);
         setFirebaseExteriorImage(ExteriorImageUrl);
 
-        // console.log("firebaseInteriorImage", firebaseInteriorImage);
-        // console.log("firebaseExteriorImage", firebaseExteriorImage);
+        console.log("firebaseInteriorImage", firebaseInteriorImage);
+        console.log("firebaseExteriorImage", firebaseExteriorImage);
 
-        // console.log("ExteriorImageUrl from onSubmit", ExteriorImageUrl);
+      
       } catch (error) {
         console.log("Exteriro image uploading error", error);
       }
@@ -224,7 +225,7 @@ const SellACar = () => {
           body: values?.body,
           state: values?.state,
           rtoCode: values?.rtoCode,
-          // kmReading: values?.kmReading,
+          kmReading: values?.kmReading,
           fuel: values?.fuel,
           vehicleCondition: values?.vehicleCondition,
           veicleLocation: values?.veicleLocation,
@@ -234,6 +235,7 @@ const SellACar = () => {
           address: values?.address,
           landmark: values?.landmark,
           pincode: values?.pincode,
+          user:{connect:{id:userId}}
         },
       });
 
@@ -244,6 +246,7 @@ const SellACar = () => {
         const userUpdate = await UpdateUserMutation.mutateAsync({
           where: { id: userId },
           data: { firstName: values?.clientContactPerson },
+         
         });
         console.log("result of sellacarform userupdate", userUpdate);
 
@@ -257,7 +260,7 @@ const SellACar = () => {
       setIsLoading(false);
     } catch (error) {
       setError({
-        text: `Form submission Failed ${error.message}`,
+        text: `Form submission Failed ${error}`,
       });
     } finally {
       setIsLoading(false);

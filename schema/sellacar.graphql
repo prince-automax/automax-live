@@ -3,6 +3,9 @@ mutation CreateSellACar($data: SellACarCreateInput!) {
     id
     interiorImages
     exteriorImages
+    user{
+      id
+    }
   }
 }
 

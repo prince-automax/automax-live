@@ -91,9 +91,9 @@ const DataTableUILoggedIn = ({
               </>
             )
           ) : (
-            <p>
-              Payment Status :{" "}
-              <span className="text-red-500 font-bold">{registeredStatus}</span>
+            <p className="font-poppins font-semibold text-sm">
+              Payment  :{" "}
+              <span className="text-orange-500 font-bold ">{registeredStatus? registeredStatus:"Payment Nil"}</span>
             </p>
           )}
         </div>
