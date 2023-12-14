@@ -110,6 +110,7 @@ function Events() {
   );
 
 
+console.log('data',data);
 
   
  

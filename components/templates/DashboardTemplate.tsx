@@ -184,23 +184,61 @@ useEffect(()=>{
    
   ];
 
+  const mobileNavigation=[...eventsNavigations,...activityNavigations,...accountNavigations]
+
+  console.log('mobileNavigation',mobileNavigation);
+  
+
   return (
     <>
       <TopBar />
       <main className="max-w-7xl mx-auto pb-10 py-1   ">
-        <div className="lg:flex ">
+        <div className="lg:flex max-md:w-full ">
           {showSidebar && (
-            <aside className="relative py-6 sm:py-0 px-2 sm:px-6 w-60 flex-none lg:border-r border-gray-200">
-              <button className="absolute 0 right-0 top-0 -mr-3 mt-4 sm:max-lg:mt-0 h-6 w-6 rounded-full flex items-center justify-center ring-2 ring-gray-300 hover:ring-gray-400">
+            <aside className=" max-md:w-full relative py-6 sm:py-0 px-2 sm:px-6  flex-none lg:border-r border-gray-200">
+             
+
+
+             
+              {/* <button className="absolute 0 right-0 top-0 -mr-3 mt-4 sm:max-lg:mt-0 h-6 w-6 rounded-full flex items-center justify-center ring-2 ring-gray-300 hover:ring-gray-400">
                 <ChevronLeftIcon
                   className=" h-4 w-4 top-text-gray-400 animate-pulse  animation-duration-500"
                   onClick={toggleSidebar}
                 />
-              </button>
+              </button> */}
               {/* <Welcome /> */}
-              <nav className="mt-1 sm:max-lg:mt-8 space-y-4  ">
-                <div className="w-52 text-black bg-white lg:hidden ">
-                  <ul className="flex flex-col space-y-1">
+              <nav className="mt-1 sm:max-lg:mt-8 space-y-4 max-md:w-full  ">
+                <div className=" text-black bg-white lg:hidden flex w-full space-x-4  overflow-x-scroll   scroll ">
+                  {mobileNavigation.map((item,index)=>{
+                    return (
+                      <ul key={index} className="space-x-4 ">
+                      <li className=" space-x-4  "> <Link key={item.name} href={item.href}>
+                              <a
+                                className={classNames(
+                                  item.current
+                                    ? " text-white bg-orange-500"
+                                    : "text-gray-900 hover:text-gray-900 hover:bg-gray-100",
+                                  "group rounded-md px-3 py-2 flex items-center text-sm font-medium   border  shadow-inner shadow-slate-200"
+                                )}
+                                aria-current={item.current ? "page" : undefined}
+                              >
+                                {/* <item.icon
+                                  className={classNames(
+                                    item.current
+                                      ? "text-orange-500"
+                                      : "text-gray-400 group-hover:text-gray-500",
+                                    "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                                  )}
+                                  aria-hidden="true"
+                                /> */}
+                                <span className="truncate">{item.name}</span>
+                              </a>
+                            </Link></li>
+                    </ul>
+                    )
+                  })}
+                 
+                  {/* <ul className="flex flex-col space-y-1">
                     <li>
                       <button
                         className="flex hover:cursor-pointer hover:text-blue-500 px-3 w-32 py-1 text-base font-semibold text-gray-500  tracking-wider  "
@@ -355,7 +393,7 @@ useEffect(()=>{
                         </li>
                       </ul>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
                 
                 <div className="hidden lg:block">

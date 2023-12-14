@@ -10,7 +10,7 @@ const DataTableMobile = ({ index1, event, allowDownload,showAlertModal,setShowAl
         <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-600 p-4 rounded-lg mx-3 space-y-1  font-inter font-medium">
             
           <div className="grid grid-cols-3 gap-1 space-x-2">
-            <p className="flex justify-between text-sm ">
+            <p className="flex justify-between text- ">
               Event <span>:</span>
             </p>
   
