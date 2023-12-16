@@ -336,7 +336,7 @@ function MobielViewCard({index1, event, allowDownload,registered,registeredStatu
        <div className="">
        
        <div className=" w-full  flex justify-center items-center mt-4 ">
-    <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-4 rounded-lg  space-y-1  ">
+    <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-2 rounded-lg  space-y-1  ">
         {/*  */}
       <div className="grid grid-cols-3 gap-1 space-x-2">
         <p className="flex justify-between text-sm ">
@@ -370,7 +370,7 @@ function MobielViewCard({index1, event, allowDownload,registered,registeredStatu
       </div>
       <hr className="to-black shadow-2xl" />
       <div className="mt-3">
-      <div className="flex w-full  justify-start space-x-2 mt-4 ">
+      <div className="flex w-full  justify-start space-x-2 m-1 ">
             {registered ?  
               allowDownload ? (
                 <>

@@ -190,7 +190,7 @@ function MobielViewCard({
     <>
       <div className="overflow-scroll">
         <div className=" w-full  flex justify-center items-center mt-4 ">
-          <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-4 rounded-lg  space-y-1  ">
+          <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-2 rounded-lg  space-y-1  ">
             {/*  */}
             <div className="grid grid-cols-3 gap-1 space-x-2">
               <p className="flex justify-between text-sm ">

@@ -7,7 +7,7 @@ import {
 const DataTableMobile = ({ index1, event, allowDownload,showAlertModal,setShowAlert }) => {
     return (
       <div className=" w-full  flex justify-center items-center mt-4 ">
-        <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-600 p-4 rounded-lg mx-3 space-y-1  font-inter font-medium">
+        <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-600 p-2 rounded-lg mx-3 space-y-1  font-inter font-medium">
             
           <div className="grid grid-cols-3 gap-1 space-x-2">
             <p className="flex justify-between text- ">

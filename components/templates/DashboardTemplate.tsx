@@ -84,6 +84,11 @@ useEffect(()=>{
 
 ;
 
+// Inside DashboardTemplate
+const setNavigationLink = (href) => {
+  router.push(href);
+  // Optionally, you can also set the active link state here if needed.
+};
 
     
     
@@ -115,6 +120,20 @@ useEffect(()=>{
       current: router.pathname == "/open-auctions" ? true : false,
     },
   ];
+
+  // Inside DashboardTemplate
+// Inside DashboardTemplate
+useEffect(() => {
+  const activeLink = document.querySelector('.active-link');
+  if (activeLink) {
+    activeLink.scrollIntoView({
+      behavior: 'instant',
+      block: 'center', // Scroll to the center vertically
+      inline: 'center', // Scroll to the center horizontally
+    });
+  }
+}, [router.pathname]);
+
 
   const activityNavigations = [
     {
@@ -186,7 +205,7 @@ useEffect(()=>{
 
   const mobileNavigation=[...eventsNavigations,...activityNavigations,...accountNavigations]
 
-  console.log('mobileNavigation',mobileNavigation);
+  // console.log('mobileNavigation',mobileNavigation);
   
 
   return (
@@ -209,34 +228,30 @@ useEffect(()=>{
               {/* <Welcome /> */}
               <nav className="mt-1 sm:max-lg:mt-8 space-y-4 max-md:w-full  ">
                 <div className=" text-black bg-white lg:hidden flex w-full space-x-4  overflow-x-scroll   scroll ">
-                  {mobileNavigation.map((item,index)=>{
-                    return (
-                      <ul key={index} className="space-x-4 ">
-                      <li className=" space-x-4  "> <Link key={item.name} href={item.href}>
-                              <a
-                                className={classNames(
-                                  item.current
-                                    ? " text-white bg-orange-500"
-                                    : "text-gray-900 hover:text-gray-900 hover:bg-gray-100",
-                                  "group rounded-md px-3 py-2 flex items-center text-sm font-medium   border  shadow-inner shadow-slate-200"
-                                )}
-                                aria-current={item.current ? "page" : undefined}
-                              >
-                                {/* <item.icon
-                                  className={classNames(
-                                    item.current
-                                      ? "text-orange-500"
-                                      : "text-gray-400 group-hover:text-gray-500",
-                                    "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                                  )}
-                                  aria-hidden="true"
-                                /> */}
-                                <span className="truncate">{item.name}</span>
-                              </a>
-                            </Link></li>
-                    </ul>
-                    )
-                  })}
+               
+{mobileNavigation.map((item, index) => (
+  <ul key={index} className="space-x-4">
+    <li className="space-x-4 ">
+      <Link key={item.name} href={item.href}>
+        <a
+          className={classNames(
+            router.pathname === item.href
+              ? "text-white bg-orange-500 active-link"
+              : "text-gray-900 hover:text-gray-900 hover:bg-gray-100",
+            "group rounded-md px-3 py-2 flex items-center text-sm font-medium border shadow-inner shadow-slate-200"
+          )}
+          onClick={(e) => {
+            e.preventDefault(); // Prevent the default behavior
+            setNavigationLink(item.href);
+          }}
+        >
+          <span className="truncate">{item.name}</span>
+        </a>
+      </Link>
+    </li>
+  </ul>
+))}
+
                  
                   {/* <ul className="flex flex-col space-y-1">
                     <li>
