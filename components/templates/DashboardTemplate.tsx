@@ -123,16 +123,18 @@ const setNavigationLink = (href) => {
 
   // Inside DashboardTemplate
 // Inside DashboardTemplate
+// Inside DashboardTemplate
 useEffect(() => {
   const activeLink = document.querySelector('.active-link');
   if (activeLink) {
     activeLink.scrollIntoView({
-      behavior: 'instant',
+      behavior: 'auto', // Change 'instant' to 'auto'
       block: 'center', // Scroll to the center vertically
       inline: 'center', // Scroll to the center horizontally
     });
   }
 }, [router.pathname]);
+
 
 
   const activityNavigations = [
