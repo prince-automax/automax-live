@@ -238,7 +238,7 @@ useEffect(() => {
         <a
           className={classNames(
             router.pathname === item.href
-              ? "text-white bg-orange-500 active-link"
+              ? "text-white bg-orange-500 active-link transition ease-in-out transform translate-x-1"
               : "text-gray-900 hover:text-gray-900 hover:bg-gray-100",
             "group rounded-md px-3 py-2 flex items-center text-sm font-medium border shadow-inner shadow-slate-200"
           )}

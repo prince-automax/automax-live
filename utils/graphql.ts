@@ -12,6 +12,7 @@ function fetcher<TData, TVariables>(client: GraphQLClient, query: string, variab
   return async (): Promise<TData> => client.request<TData, TVariables>(query, variables, headers);
 }
 /** All built-in and custom scalars, mapped to their actual values */
+
 export type Scalars = {
   ID: string;
   String: string;

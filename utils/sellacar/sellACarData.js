@@ -1,4 +1,6 @@
 import Image from "next/image";
+
+
 import Tata from "../../public/assets/Truck logos/tata.png";
 import ashok from "../../public/assets/Truck logos/ashok.png";
 import asian from "../../public/assets/Truck logos/asian.png";
@@ -13,6 +15,7 @@ import piago from "../../public/assets/Truck logos/Piaggio.png";
 import Volvo from "../../public/assets/Truck logos/Volvo.jpg";
 
 export const truckBrands = [
+
   {
     name: "Tata Motors",
     image: (
