@@ -12,10 +12,10 @@ import {
   faUser,
   faTruckFast,
   faRightFromBracket,
-  faHammer
+  faHammer,
+  faBarsStaggered
 } from "@fortawesome/free-solid-svg-icons";
 import Car from "../../public/assets/racingcar.jpg";
-
 import Image from "next/image";
 import Logo from "../ui/Logo";
 import Link from "next/link";
@@ -107,6 +107,8 @@ export default function Navbar() {
                       <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white">
                         <span className=""></span>
                         <MenuIcon className="h-6 w-6" aria-hidden="true" />
+                        {/* <FontAwesomeIcon icon={faBarsStaggered} /> */}
+
                       </Popover.Button>
                     </div>
                   </div>
