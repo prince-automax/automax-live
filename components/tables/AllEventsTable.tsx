@@ -17,7 +17,7 @@ import {
 import graphQLClient from "@utils/useGQLQuery";
 import Router from "next/router";
 import Link from "next/link";
-
+import DataTableMobile from "../ui/DataTableMobile";
 export default function AllEventsTable({
   showHeadings,
   hideSearch,
@@ -42,9 +42,6 @@ export default function AllEventsTable({
       graphQLClient({ Authorization: `Bearer ${accessToken}` }),
       variablesUpcoming
     );
-    
-    // console.log('upcomingevent',upcomingEvents);
-    
 
   const variablesLive = {
     skip: 0,
@@ -69,7 +66,6 @@ export default function AllEventsTable({
     variablesLive
   );
 
-
   const events = [
     ...Object.values(upcomingEvents || []),
     ...Object.values(liveEvents || []),
@@ -77,8 +73,6 @@ export default function AllEventsTable({
   const eventdata = events.flat();
 
   // console.log("liveevents", liveEvents);
-  
-
 
   const columns = [
     {
@@ -109,7 +103,6 @@ export default function AllEventsTable({
       accessor: "endDate",
       Cell: ({ cell: { value } }) => EndDate(value),
     },
-
   ];
 
   return (
@@ -178,7 +171,7 @@ AllEventsTable.defaultProps = {
 };
 
 function View(value, eventCategory, startDate) {
-  console.log("$$", eventCategory, startDate);
+  // console.log("$$", eventCategory, startDate);
   let currentDate = new Date();
   let eventStartDate = startDate;
 
@@ -193,7 +186,7 @@ function View(value, eventCategory, startDate) {
 
   //  }
 
-  console.log("$$", currentDate, startDate);
+  // console.log("$$", currentDate, startDate);
 
   return (
     <>
@@ -237,7 +230,7 @@ function RenderEventTypes(eventTypes) {
 }
 
 function StartDate(value) {
-  console.log("value form StartDate", value);
+  // console.log("value form StartDate", value);
 
   return (
     <div>
@@ -330,11 +323,11 @@ AllEventsTable.defaultProps = {
 };
 
 function MobielViewCard({ index1, event, allowDownload }) {
-  
-console.log("key",index1);
+  // console.log("key", index1);
+  // console.log("event", event);
+  // console.log("allowDownload", allowDownload);
 
-
-const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const showAlertModal = () => {
     setShowAlert(true);
@@ -347,25 +340,31 @@ const [showAlert, setShowAlert] = useState(false);
 
   return (
     <>
-      <div className= {`  overflow-hidden rounded-lg p-2 shadow-lg m-5 my-3 border ${index1 % 2==0 ? 'border-blue-600' :'border-red-700'}  `}>
-       
-        <div className="">
+      <div className= "space-y-6  ">
+      <DataTableMobile
+        index1={index1}
+        event={event}
+        allowDownload={allowDownload}
+        showAlertModal={showAlertModal}
+        setShowAlert={setShowAlert}
+      />
+        {/* <div className="">
         <div className="flex flex-col items-center py-4">
             <div className="flex w-full justify-between  ">
               <span className="font-semibold ">Event :</span>
-              {/* <span className="">:</span> */}
+            
               <span className=" ">{event?.seller?.name}</span>
             </div>
             <div className="flex w-full justify-between ">
               <span className="font-semibold">Location :</span>
-              {/* <span className="">:</span> */}
+         
               <span className=" ">
                 {event?.location?.name}, {event?.location?.state?.name}
               </span>
             </div>
             <div className="flex w-full  justify-between">
               <span className="font-semibold ">Start Time :</span>
-              {/* <span className="">:</span> */}
+            
               <span className="">
                 {moment(event.startDate).format(" Do-MMMM-YYYY")}{" "}
                 {moment(event.startDate).format(" h:mm a ")}
@@ -373,7 +372,7 @@ const [showAlert, setShowAlert] = useState(false);
             </div>
             <div className="flex w-full justify-between ">
               <span className="font-semibold">Close Time :</span>
-              {/* <span className="">:</span> */}
+           
               <span className=" ">
                 {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
                 {moment(event.endDate).format(" h:mm a")}
@@ -404,8 +403,9 @@ const [showAlert, setShowAlert] = useState(false);
               )}
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
+      </div> 
+
 
       {showAlert && (
         <AlertModal

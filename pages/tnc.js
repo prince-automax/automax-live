@@ -1,8 +1,10 @@
 export default function Contact() {
   return (
-    <div className="p-2">
-      <strong>Terms &amp; Conditions</strong>{" "}
-      <p>
+    <div className="max-w-7xl   my-2 sm:mx-auto mx-2  overflow-hidden rounded-xl md:rounded-none   border ">
+         <p className="font-poppins text-center w-full h-16 font-medium text-xl sm:text-2xl  text-[#FFFFFF] flex items-center justify-center pl-4 bg-gradient-to-r from-[#175994] to-[#70BAFC]">
+ <strong className="text-center">Terms &amp; Conditions</strong>{" "}</p>
+ <div className="w-full p-2 sm:p-4 text-[12px] sm:text-base  space-y-4 font-roboto ">
+ <p className="text-[#717171]">
         By downloading or using the app, these terms will automatically apply to
         you – you should make sure therefore that you read them carefully before
         using the app. You’re not allowed to copy or modify the app, any part of
@@ -12,8 +14,7 @@ export default function Contact() {
         app itself, and all the trademarks, copyright, database rights, and
         other intellectual property rights related to it, still belong to
         Automax Solutions India Pvt. Ltd..
-      </p>{" "}
-      <p>
+    
         Automax Solutions India Pvt. Ltd. is committed to ensuring that the app
         is as useful and efficient as possible. For that reason, we reserve the
         right to make changes to the app or to charge for its services, at any
@@ -21,7 +22,7 @@ export default function Contact() {
         services without making it very clear to you exactly what you’re paying
         for.
       </p>{" "}
-      <p>
+      <p className="text-[#717171]">
         The AutoBSE app stores and processes personal data that you have
         provided to us, to provide our Service. It’s your responsibility to keep
         your phone and access to the app secure. We therefore recommend that you
@@ -33,15 +34,14 @@ export default function Contact() {
         at all.
       </p>{" "}
       <div>
-        <p>
+      <p className="text-[#717171]">
           The app does use third-party services that declare their Terms and
           Conditions.
-        </p>{" "}
-        <p>
+      
           Link to Terms and Conditions of third-party service providers used by
           the app
         </p>{" "}
-        <ul>
+        <ul className="text-[#717171] list-disc pl-4">
           <li>
             <a
               href="https://policies.google.com/terms"
@@ -62,7 +62,7 @@ export default function Contact() {
           </li>
         </ul>
       </div>{" "}
-      <p>
+      <p className="text-[#717171]">
         You should be aware that there are certain things that Automax Solutions
         India Pvt. Ltd. will not take responsibility for. Certain functions of
         the app will require the app to have an active internet connection. The
@@ -70,9 +70,7 @@ export default function Contact() {
         Automax Solutions India Pvt. Ltd. cannot take responsibility for the app
         not working at full functionality if you don’t have access to Wi-Fi, and
         you don’t have any of your data allowance left.
-      </p>{" "}
-      <p></p>{" "}
-      <p>
+  
         If you’re using the app outside of an area with Wi-Fi, you should
         remember that the terms of the agreement with your mobile network
         provider will still apply. As a result, you may be charged by your
@@ -85,14 +83,13 @@ export default function Contact() {
         that we assume that you have received permission from the bill payer for
         using the app.
       </p>{" "}
-      <p>
+      <p className="text-[#717171]">
         Along the same lines, Automax Solutions India Pvt. Ltd. cannot always
         take responsibility for the way you use the app i.e. You need to make
         sure that your device stays charged – if it runs out of battery and you
         can’t turn it on to avail the Service, Automax Solutions India Pvt. Ltd.
         cannot accept responsibility.
-      </p>{" "}
-      <p>
+   
         With respect to Automax Solutions India Pvt. Ltd.’s responsibility for
         your use of the app, when you’re using the app, it’s important to bear
         in mind that although we endeavor to ensure that it is updated and
@@ -102,7 +99,7 @@ export default function Contact() {
         experience as a result of relying wholly on this functionality of the
         app.
       </p>{" "}
-      <p>
+      <p className="text-[#717171]">
         At some point, we may wish to update the app. The app is currently
         available on Android &amp; iOS – the requirements for the both
         systems(and for any additional systems we decide to extend the
@@ -118,23 +115,23 @@ export default function Contact() {
         terms will end; (b) you must stop using the app, and (if needed) delete
         it from your device.
       </p>{" "}
-      <p>
+   <div className="space-y-2">
+   <p>
         <strong>Changes to This Terms and Conditions</strong>
       </p>{" "}
-      <p>
+      <p className="text-[#717171]">
         We may update our Terms and Conditions from time to time. Thus, you are
         advised to review this page periodically for any changes. We will notify
         you of any changes by posting the new Terms and Conditions on this page.
-      </p>{" "}
-      <p>These terms and conditions are effective as of 2023-01-02</p>{" "}
+    These terms and conditions are effective as of 2023-01-02</p>{" "}
+   </div>
       <p>
         <strong>Contact Us</strong>
       </p>{" "}
-      <p>
+      <p className="text-[#717171]">
         If you have any questions or suggestions about our Terms and Conditions,
         do not hesitate to contact us at shanidh@autobse.com.
-      </p>{" "}
-      <p>
+ 
         This Terms and Conditions page was generated by{" "}
         <a
           href="https://app-privacy-policy-generator.nisrulz.com/"
@@ -144,6 +141,7 @@ export default function Contact() {
           App Privacy Policy Generator
         </a>
       </p>
+      </div>
     </div>
   );
 }

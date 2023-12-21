@@ -5,10 +5,10 @@ import { faCoffee, faHome, faUser,faTimes ,faRupeeSign  } from "@fortawesome/fre
 
 const PaymentPopup = ({  onClose }) => {
     return (
-      <div className="fixed inset-0 flex items-center justify-center  bg-black bg-opacity-50">
-        <div className="  w-3/5 h-3/5 p-4 rounded-lg  grid grid-cols-1 ">
-        <div className="flex flex-col justify-center items-center">
-          <div className="col-span-1 w-4/5 h-4/5 rounded-lg bg-gray-300 p-4 text-center flex flex-col space-y-9 mx-auto justify-center items-center  ">
+      <div className="fixed w-full inset-0 flex items-center justify-center  bg-black bg-opacity-50">
+        <div className=" w-96 p-4 rounded-lg  grid grid-cols-1 ">
+        <div className="flex flex-col justify-center items-center w-full">
+          <div className="col-span-1 w-full rounded-lg bg-gray-300 p-4 text-center flex flex-col space-y-9 mx-auto justify-center items-center  ">
            <div>
            <h2 className="text-lg font-normal">Subscribe for 3 month @</h2>
             <p className=" text-lg font-bold"> <span>₹</span>1900</p>

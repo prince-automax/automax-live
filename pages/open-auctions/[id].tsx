@@ -37,30 +37,7 @@ import {
 import ImageCarouselModal from "@components/modals/ImageCarouselModal";
 
 import Swal from "sweetalert2";
-const product = {
-  images: [
-    {
-      id: 1,
-      name: "Angled view",
-      src: PostThumb1,
-    },
-    {
-      id: 2,
-      name: "Angled view",
-      src: PostThumb2,
-    },
-    {
-      id: 3,
-      name: "Angled view",
-      src: PostThumb3,
-    },
-    {
-      id: 4,
-      name: "Angled view",
-      src: PostThumb3,
-    },
-  ],
-};
+
 
 const incrementAmounts = [
   {
@@ -97,24 +74,7 @@ const incrementAmounts = [
   
 ];
 
-// const bidHistory = [
-//   {
-//     name: "James Bond",
-//     amount: 23000,
-//   },
-//   {
-//     name: "Elon Musk",
-//     amount: 200000,
-//   },
-//   {
-//     name: "Bill Gates",
-//     amount: 50000,
-//   },
-//   {
-//     name: "Tim Cook",
-//     amount: 40000,
-//   },
-// ];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

@@ -19,6 +19,7 @@ import {
 import graphQLClient from "@utils/useGQLQuery";
 import Router from "next/router";
 import Link from "next/link";
+import DataTableUILoggedIn from "../ui/DataTableUILoggedIn"
 
 export default function EventsTable({
   showHeadings,
@@ -70,6 +71,9 @@ refetch()
 
 
   const payment = userData ? userData["user"]?.payments : "";
+
+  console.log("payment from live table",payment);
+  
 
   useEffect(() => {
     if (payment) {
@@ -388,6 +392,13 @@ function MobielViewCard({
 }) {
   
 
+  // console.log("index1",index1);
+  // console.log("event",event);
+  // console.log("allowDownload66",allowDownload);
+  // console.log("registered",registered);
+  // console.log("registeredStatus",registeredStatus);
+  
+
 // console.log("11",event.downloadableFile
 // );
 
@@ -405,8 +416,10 @@ function MobielViewCard({
 
   return (
     <>
-      <div className={`overflow-hidden shadow-lg rounded-lg p-2 my-3 border ${index1 % 2===0 ? 'border-blue-600' :'border-red-700'} `}>
-        <div className="">
+      <div className="w-full">
+      <DataTableUILoggedIn index1={index1} event={event} allowDownload={allowDownload} registered={registered} registeredStatus={registeredStatus}  />
+
+        {/* <div className="">
           <div className="flex flex-col items-center py-4">
             <div className="flex w-full justify-between  ">
               <span className="font-semibold ">Event :</span>
@@ -492,8 +505,10 @@ function MobielViewCard({
               )}
             </div>
           </div>
-        </div>
+        </div> */}
+        
       </div>
+
 
       {showAlert && (
         <AlertModal

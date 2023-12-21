@@ -315,40 +315,45 @@ function MobielViewCard({ index1,event, allowDownload,registered,registeredStatu
 
   return (
     <>
-      <div className={`overflow-hidden shadow-lg rounded-lg p-2 my-3 border ${index1 % 2===0 ? 'border-blue-600' :'border-red-700'} `}>
-        <div className="">
-          <div className="flex flex-col items-center py-4">
-          <div className="flex w-full justify-between  ">
-              <span className="font-semibold ">Event :</span>
+      
+      
+      <div className="">
+       
+      <div className=" w-full  flex justify-center items-center mt-4 ">
+    <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-4 rounded-lg  space-y-1  ">
+        {/*  */}
+      <div className="grid grid-cols-3 gap-1 space-x-2">
+        <p className="flex justify-between text-sm ">
+          Event <span>:</span>
+        </p>
 
-              <span className="text-base ">{event?.seller?.name}</span>
-            </div>
-            <div className="flex w-full justify-between">
-              <span className="font-semibold">Location :</span>
+        <p className="col-span-2 text-sm flex">{event?.seller?.name}</p>
+      </div>
+      <div className="grid grid-cols-3 gap-1 space-x-2 ">
+        <p className="flex justify-between text-sm  ">
+          Location <span>:</span>
+        </p>
 
-              <span className=" ">
-                {event?.location?.name}, {event?.location?.state?.name}
-              </span>
-            </div>
-            <div className="flex w-full  justify-between">
-              <span className="font-semibold ">Start Time :</span>
+        <p className="col-span-2 text-sm  flex">   {event?.location?.name}, {event?.location?.state?.name}</p>
+      </div>
+      <div className="grid grid-cols-3 gap-1 space-x-2 ">
+        <p className="flex justify-between text-sm">
+          Start Time <span>:</span>
+        </p>
 
-              <span className="text-sm font-semibold ">
-                {moment(event.startDate).format(" Do-MMMM-YYYY")}{" "}
-                {moment(event.startDate).format(" h:mm a ")}
-              </span>
-            </div>
-            <div className="flex w-full justify-between ">
-              <span className="font-semibold">Close Time :</span>
+        <p className="col-span-2 text-sm flex   justify-start "> {moment(event.startDate).format(" Do-MMMM-YYYY")}{" "}
+            {moment(event.startDate).format(" ")}</p>
+      </div>
+      <div className="grid grid-cols-3 gap-1 space-x-2">
+        <p className="flex justify-between text-sm">
+          Close Time <span>:</span>
+        </p>
 
-              <span className=" text-sm font-semibold">
-                {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
-                {moment(event.endDate).format(" h:mm a")}
-              </span>
-            </div>
-
-
-            <div className="mt-3">
+        <p className="col-span-2  text-sm flex"> {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
+            {moment(event.endDate).format(" ")}</p>
+      </div>
+      <hr className="to-black shadow-2xl" />
+      <div className="mt-3">
            {registered ? <div>  
             <a  href={`/events/${event.id}?type=c`} target="_blank" rel="noopener noreferrer"><span      className={`border px-4 rounded-md ${index1 % 2==0 ? 'bg-red-600' :'bg-blue-700'} text-white py-1`}>View</span></a>
            </div>   :<p>
@@ -378,9 +383,14 @@ function MobielViewCard({ index1,event, allowDownload,registered,registeredStatu
                 </>
               )} */}
             </div>
+    </div>
+  
+  </div>
+
+            
           </div>
-        </div>
-      </div>
+       
+    
 
       {showAlert && (
         <AlertModal

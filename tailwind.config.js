@@ -22,7 +22,8 @@
         fontFamily:{
             poppins:["Poppins","sans-serif"],
             inter:["Inter"],
-            ubuntu:["Ubuntu"]
+            ubuntu:["Ubuntu"],
+            roboto:["Roboto"]
         }
     },
     plugins: [

@@ -40,6 +40,7 @@ import {
   UpdateUserMutationVariables,
 } from "@utils/graphql";
 import toast from "react-hot-toast";
+import PulseLoader from "react-spinners/PulseLoader";
 const years = Array.from({ length: 44 }, (_, index) => 1980 + index);
 
 const SellACar = () => {
@@ -50,6 +51,7 @@ const SellACar = () => {
   const [Exterorimage, setEXteriorImage] = useState([]);
   const [firebaseInteriorImage, setFirebaseInteriorImage] = useState("");
   const [firebaseExteriorImage, setFirebaseExteriorImage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
   const [userId, setUserId] = useState("");
@@ -91,8 +93,7 @@ const SellACar = () => {
       ) {
         console.log("entered here in with only token and form");
         setComponents(3);
-      } 
-      else if(token) {
+      } else if (token) {
         console.log("entered here in with only token");
         setComponents(2);
       }
@@ -112,8 +113,8 @@ const SellACar = () => {
     }
   }, [components]);
 
-  // console.log("userid00007", userId);
-  // console.log("access00007", accessToken);
+  console.log("userid00007", userId);
+  console.log("access00007", accessToken);
 
   const handleInteriorImage = (file) => {
     // console.log('file from inter',file);
@@ -128,10 +129,16 @@ const SellACar = () => {
   useEffect(() => {
     if (formData.registrationNumber !== "") {
       const formDataString = JSON.stringify(formData);
-
+      const activeString=JSON.stringify(activeTab);
       localStorage.setItem("sellacar", formDataString);
+     
     }
   }, [formData]);
+
+  useEffect(()=>{
+    const activeString=JSON.stringify(activeTab);
+    localStorage.setItem('activetab',activeString)
+  },[activeTab])
 
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem("sellacar")) || {};
@@ -174,6 +181,7 @@ const SellACar = () => {
     console.log("values from onSubmitFiles000000000000000000000000");
 
     try {
+      setIsLoading(true);
       const interiorImages = Interorimage || []; // Assuming values.interiorImage is an array
       const ExteriorImages = Exterorimage || [];
 
@@ -183,7 +191,7 @@ const SellACar = () => {
           "interiorImage",
           "interior"
         );
-        // console.log("interiorImageUrl from onSubmit", interiorImageUrl);
+        console.log("interiorImageUrl from onSubmit", interiorImageUrl);
         setFirebaseInteriorImage(interiorImageUrl);
       } catch (ex) {
         // console.log("interiorImageUrl uploading Error", ex);
@@ -197,12 +205,13 @@ const SellACar = () => {
           "exteriorImages",
           "exterior"
         );
+        console.log("ExteriorImageUrl from onSubmit", ExteriorImageUrl);
         setFirebaseExteriorImage(ExteriorImageUrl);
 
-        // console.log("firebaseInteriorImage", firebaseInteriorImage);
-        // console.log("firebaseExteriorImage", firebaseExteriorImage);
+        console.log("firebaseInteriorImage", firebaseInteriorImage);
+        console.log("firebaseExteriorImage", firebaseExteriorImage);
 
-        // console.log("ExteriorImageUrl from onSubmit", ExteriorImageUrl);
+      
       } catch (error) {
         console.log("Exteriro image uploading error", error);
       }
@@ -216,7 +225,7 @@ const SellACar = () => {
           body: values?.body,
           state: values?.state,
           rtoCode: values?.rtoCode,
-          // kmReading: values?.kmReading,
+          kmReading: values?.kmReading,
           fuel: values?.fuel,
           vehicleCondition: values?.vehicleCondition,
           veicleLocation: values?.veicleLocation,
@@ -226,16 +235,18 @@ const SellACar = () => {
           address: values?.address,
           landmark: values?.landmark,
           pincode: values?.pincode,
+          user:{connect:{id:userId}}
         },
       });
 
       console.log("result of sellacarform submission", result);
 
       if (result) {
-        // console.log("USERID", userId);
+        console.log("USERID", userId);
         const userUpdate = await UpdateUserMutation.mutateAsync({
           where: { id: userId },
           data: { firstName: values?.clientContactPerson },
+         
         });
         console.log("result of sellacarform userupdate", userUpdate);
 
@@ -246,10 +257,13 @@ const SellACar = () => {
           });
         }
       }
+      setIsLoading(false);
     } catch (error) {
       setError({
-        text: "Form submission Failed",
+        text: `Form submission Failed ${error}`,
       });
+    } finally {
+      setIsLoading(false);
     }
 
     // console.log("From ONSubmit of sell a car ", values);
@@ -349,7 +363,15 @@ const SellACar = () => {
           className="bg-opacity-50 "
         />
       </div>
-      <div className="w-full h-full flex items-center justify-center  ">
+      <div className="w-full h-full flex items-center justify-center relative  px-10  ">
+        {isLoading && (
+          <div className=" absolute z-10">
+<PulseLoader
+  color="#010101"
+  size={20}
+/>
+          </div>
+        )}
         {components === 1 && <SellACarOtp index={setComponents} />}
 
         {components === 2 && <WelcomePage index={setComponents} />}
@@ -544,6 +566,7 @@ const SellACar = () => {
 
                           <button
                             type="submit"
+                            disabled={props.isSubmitting}
                             className="bg-[#135A9E] py-1  w-52 rounded-md md:w-96  px-4 sm:py-2 sm:px-8 hover:bg-[#264b6d]  font-poppins text-white "
                           >
                             Submit
