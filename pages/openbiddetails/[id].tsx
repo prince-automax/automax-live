@@ -269,11 +269,11 @@ const OpenBidDetails = () => {
                     <div className="col-span-1 md:col-span-2 border max-lg:px-2  text-center ">
                     <div className=" max-w-4xl  my-4 mx-auto   h-60 space-y-4 pb-2 flex flex-col justify-center items-center  bg-[#f5f5f5]">
                       <div className="space-y-5">
-                      <div className="shadow-lg w-72 bg-white  mx-auto">
+                      <div className="shadow-lg max-sm:w-60 w-80 mt-6 bg-white  mx-auto">
                       <Image
                     src={LogoImage}
                     alt="auto bse"
-                    width={180}
+                    width={100}
                     height={60}
                 />
                     </div>
@@ -281,14 +281,14 @@ const OpenBidDetails = () => {
                           id="tier-growth "
                           className="text-base sm:text-lg m-2"
                         >
-                          <span className="text-lg tracking-wider text-black font-serif uppercase font-semibold ">
+                          <span className="max-sm:text-sm text-lg tracking-wider text-black font-serif uppercase font-semibold ">
                             {" "}
                            please make the payment to see the full details{" "}
                           </span>
                          
                         </h1>
-                        <div>
-                          <button className="bg-green-700 hover:bg-slate-600 hover:scale-105 transform transition-transform duration-300 ease-linear text-white px-4 py-2 rounded-lg"
+                        <div className="h-full">
+                          <button className="bg-green-700 mb-4 hover:bg-slate-600 hover:scale-105 transform transition-transform duration-300 ease-linear text-white px-4 py-2 rounded-lg"
         onClick={togglePopup}>View Payment</button>
         {showPopup && <PaymentPopup onClose={togglePopup} />}
                          </div>

@@ -70,12 +70,12 @@ export default function Welcome() {
       </p>
 
       <div className="text-xs">
-        {serverTime
+      <p>  {serverTime
           ? moment(serverTime).add(tick, "seconds").format("MMMM Do, YYYY")
-          : "-"}{" "}
-        {serverTime
+          : "-"}{" "}</p>
+      <p className="hidden md:block">  {serverTime
           ? moment(serverTime).add(tick, "seconds").format("h:mm:ss a")
-          : "-"}
+          : "-"}</p>
       </div>
     </div>
   );

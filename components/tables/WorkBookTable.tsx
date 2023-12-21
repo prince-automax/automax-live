@@ -25,8 +25,7 @@ export default function WorkBookTable({
   allowDownload,
 }) {
   const [accessToken, setAccessToken] = useState("");
-  const [registered, setRegistered] = useState(false);
-  const [registeredStatus, setRegisteredStatus] = useState("");
+
   const id = localStorage.getItem("id");
 
   useEffect(() => {
@@ -41,10 +40,6 @@ export default function WorkBookTable({
       graphQLClient({ Authorization: `Bearer ${accessToken}` })
     );
 
-    
-    
-
-
   useEffect(() => {
     refetch();
   }, [data]);
@@ -53,7 +48,6 @@ export default function WorkBookTable({
     {
       Header: "Reg No",
       accessor: "registrationNumber",
-      
     },
     {
       Header: "make",
@@ -74,23 +68,15 @@ export default function WorkBookTable({
     {
       Header: "Engine No",
       accessor: "engineNo",
-      
     },
     {
       Header: "View",
       accessor: "id",
-      Cell: ({ cell: { value } }) =>  View(value)
-      
+      Cell: ({ cell: { value } }) => View(value),
     },
   ];
 
-
-
-
-
   function View(value) {
-   
-    
     return (
       <div>
         <Link href={`/workbook/${value}`}>
@@ -112,9 +98,11 @@ export default function WorkBookTable({
 
   return (
     <>
-      <div className="relative bg-white w-full h-screen text-right ">
+      <div className="relative bg-white w-full  text-right ">
         <Link href="/addworkbook">
-          <a className="bg-blue-700 text-white p-1 text-center rounded-md p-2">Add Vehicle</a>
+          <a className="bg-blue-700 text-white  text-center rounded-md p-2">
+            Add Vehicle
+          </a>
         </Link>
 
         <div className="mx-auto max-w-md text-center  sm:max-w-3xl lg:max-w-7xl">
@@ -146,12 +134,9 @@ export default function WorkBookTable({
                       <MobielViewCard
                         key={eventIdx}
                         index1={eventIdx}
+                        view={View}
                         event={workSheet}
-                        registered={registered}
-                        registeredStatus={registeredStatus}
-                        allowDownload={
-                          accessToken !== null && accessToken !== ""
-                        }
+                    
                       />
                     )
                   )}
@@ -185,11 +170,12 @@ WorkBookTable.defaultProps = {
 function MobielViewCard({
   index1,
   event,
-  allowDownload,
-  registered,
-  registeredStatus,
+ 
+  view,
 }) {
   const [showAlert, setShowAlert] = useState(false);
+
+  console.log("workbook", event);
 
   const showAlertModal = () => {
     setShowAlert(true);
@@ -202,71 +188,49 @@ function MobielViewCard({
 
   return (
     <>
-      <div
-        className={`overflow-hidden shadow-lg rounded-lg p-2 my-3 border ${
-          index1 % 2 === 0 ? "border-blue-600" : "border-red-700"
-        } `}
-      >
-        <div className="">
-          <div className="flex flex-col items-center py-4">
-            <div className="flex w-full justify-between  ">
-              <span className="font-semibold ">Event :</span>
+      <div className="overflow-scroll">
+        <div className=" w-full  flex justify-center items-center mt-4 ">
+          <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-2 rounded-lg  space-y-1  ">
+            {/*  */}
+            <div className="grid grid-cols-3 gap-1 space-x-2">
+              <p className="flex justify-between text-sm ">
+                Number <span>:</span>
+              </p>
 
-              <span className="text-base ">{event?.seller?.name}</span>
+              <p className="col-span-2 text-sm flex">
+                {event?.registrationNumber}
+              </p>
             </div>
-            <div className="flex w-full justify-between">
-              <span className="font-semibold">Location :</span>
+            <div className="grid grid-cols-3 gap-1 space-x-2 ">
+              <p className="flex justify-between text-sm  ">
+                make <span>:</span>
+              </p>
 
-              <span className=" ">
-                {event?.location?.name}, {event?.location?.state?.name}
-              </span>
+              <p className="col-span-2 text-sm  flex"> {event?.make}</p>
             </div>
-            <div className="flex w-full  justify-between">
-              <span className="font-semibold ">Start Time :</span>
+            <div className="grid grid-cols-3 gap-1 space-x-2 ">
+              <p className="flex justify-between text-sm">
+                model <span>:</span>
+              </p>
 
-              {/* <span className="text-sm font-semibold ">
-                {moment(event.startDate).format(" Do-MMMM-YYYY")}{" "}
-                {moment(event.startDate).format(" h:mm a ")}
-              </span>
+              <p className="col-span-2 text-sm flex   justify-start ">
+                {event?.model}
+              </p>
             </div>
-            <div className="flex w-full justify-between ">
-              <span className="font-semibold">Close Time :</span>
+            <div className="grid grid-cols-3 gap-1 space-x-2">
+              <p className="flex justify-between text-sm">
+                Varient <span>:</span>
+              </p>
 
-              <span className=" text-sm font-semibold">
-                {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
-                {moment(event.endDate).format(" h:mm a")}
-              </span> */}
+              <p className="col-span-2  text-sm flex">{event?.varient}</p>
             </div>
-            <div className="flex w-full  justify-center space-x-2 mt-4 ">
-              {registered ? (
-                allowDownload ? (
-                  <>
-                    {event?.downloadableFile &&
-                      event?.downloadableFile?.url && (
-                        <a
-                          href={`${process.env.BASE_URL}${event?.downloadableFile?.url}`}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          <DocumentDownloadIcon className=" h-8 w-8 text-gray-600 hover:text-green-600 border border-slate-600 rounded-md" />
-                        </a>
-                      )}
-                  </>
-                ) : (
-                  <>
-                    <button onClick={() => showAlertModal()}>
-                      <DocumentDownloadIcon className=" h-8 w-8 text-gray-600 hover:text-green-600 border border-slate-600 rounded-md" />
-                    </button>
-                  </>
-                )
-              ) : (
-                <p>
-                  Payment Status :{" "}
-                  <span className="text-red-500 font-bold">
-                    {registeredStatus}
-                  </span>
-                </p>
-              )}
+            <hr className="to-black shadow-2xl" />
+            <div className="mt-3">
+              <div className="flex w-full  justify-center space-x-2 mt-4 ">
+                <div>
+                  <a className="">{view(event?.id)}</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

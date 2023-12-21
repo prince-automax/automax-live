@@ -319,7 +319,7 @@ export const PlanningToSell = ({
   setActiveTab,
   handleScroll,
   setFormData,
-  formData
+  formData,
 }) => {
   const [field, meta, helpers] = useField(name);
 
@@ -350,15 +350,17 @@ export const PlanningToSell = ({
             className="focus:outline-none  border "
           />
 
-          {date && <button
-            onClick={handleSelect}
-            className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-blue-400  rounded-lg   self-center space-x-2  "
-          >
-            <span className="text-[#FFFFFF] font-poppins sm:text-lg sm:font-medium ">
-              {" "}
-              Next{" "}
-            </span>{" "}
-          </button>}
+          {date && (
+            <button
+              onClick={handleSelect}
+              className="bg-[#135A9E] py-1 px-3 sm:py-2 sm:px-8 hover:bg-blue-400  rounded-lg   self-center space-x-2  "
+            >
+              <span className="text-[#FFFFFF] font-poppins sm:text-lg sm:font-medium ">
+                {" "}
+                Next{" "}
+              </span>{" "}
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -388,7 +390,7 @@ export const RegistrationStateComponent = ({
   const [searchRtoTerm, setSearchRtoTerm] = useState("");
   const [stateBoolean, setStateBoolean] = useState();
   const [rtoBoolean, setRtoBoolean] = useState();
-  const [rtoSection,setRtoSection]=useState(false)
+  const [rtoSection, setRtoSection] = useState(false);
 
   const [statefield, statemeta, statehelpers] = useField("state");
   const [rtofield, rtometa, rtohelpers] = useField("rtocode");
@@ -432,7 +434,7 @@ export const RegistrationStateComponent = ({
       [state]: selectedItem.name,
     }));
     setStateBoolean(true);
-    setRtoSection(true)
+    setRtoSection(true);
   };
 
   const handleStateEdit = () => {
@@ -467,12 +469,11 @@ export const RegistrationStateComponent = ({
   };
 
   let filteredState = registrationStateAndCode.filter((item) =>
-    item.name.toLowerCase().includes(searchState?.toLowerCase())
+    item?.name?.toLowerCase().includes(searchState?.toLowerCase())
   );
 
-  const filteredStateRto = registrationStateAndCode.filter((item) =>
-    item.name
-      .toLowerCase()
+  const filteredStateRto = registrationStateAndCode?.filter((item) =>
+    item?.name?.toLowerCase()
       .includes(
         selectedState?.name?.toLowerCase() || selectedState.toLowerCase()
       )
@@ -580,12 +581,12 @@ export const RegistrationStateComponent = ({
             </Field>
           </div>
           <div className="mt-4 w-full h-56 mfgScroll overflow-y-scroll">
-            {filteredStateRto.map((item) => {
-              const selectedNumber = item.number.find(
+            {filteredStateRto?.map((item) => {
+              const selectedNumber = item?.number?.find(
                 (number) => number === selectedRto
               );
 
-              const remainingNumbers = item.number.filter(
+              const remainingNumbers = item?.number?.filter(
                 (number) => number !== selectedRto
               );
 
@@ -595,7 +596,7 @@ export const RegistrationStateComponent = ({
 
               return (
                 <ul key={item.id} className="space-y-4 text-center w-full">
-                  {sortedNumbers.map((filteredNumber) => (
+                  {sortedNumbers?.map((filteredNumber) => (
                     <li
                       onClick={() => handleRtoSelect(filteredNumber)}
                       className={`cursor-pointer ${
@@ -857,9 +858,7 @@ export const RegistrationStateComponent = ({
 //   );
 // };
 
-
 //USER DETAILS COMPONENT
-
 
 export const UserDetails = ({ setFormData, formData }) => {
   const formik = useFormikContext();
@@ -888,11 +887,10 @@ export const UserDetails = ({ setFormData, formData }) => {
               value={formik.values.clientContactPerson}
               className="focus:outline-none w-full border-none max-md:tracking-tight focus:ring-0 outline-0 bg-inherit max-sm:placeholder:text-sm max-md:placeholder:text-center placeholder:font-poppins placeholder:font-normal"
               placeholder="  Enter Your Name"
-             
-             required
+              required
               onChange={handleChange}
             />
-             <ErrorMessage name="clientContactPerson" component="div" />
+            <ErrorMessage name="clientContactPerson" component="div" />
           </div>
         </div>
 
@@ -913,7 +911,7 @@ export const UserDetails = ({ setFormData, formData }) => {
               maxLength={6}
               required
             />
-              <ErrorMessage name="pincode" component="div" />
+            <ErrorMessage name="pincode" component="div" />
           </div>
         </div>
 
@@ -932,8 +930,7 @@ export const UserDetails = ({ setFormData, formData }) => {
               onChange={handleChange}
               required
             />
-                          <ErrorMessage name="landmark" component="div" />
-
+            <ErrorMessage name="landmark" component="div" />
           </div>
         </div>
 
@@ -952,8 +949,7 @@ export const UserDetails = ({ setFormData, formData }) => {
               onChange={handleChange}
               required
             />
-          <ErrorMessage name="address" component="div" />
-
+            <ErrorMessage name="address" component="div" />
           </div>
         </div>
 
@@ -992,43 +988,30 @@ export const ImageInterior = ({
       </p>
 
       <div className=" grid grid-cols-1 md:grid-cols-2  gap-2 md:gap-4 w-full overflow-hidden max-md:h-96  max-md:overflow-y-scroll text-center ">
-        {InteriorImage > 0 && InteriorImage[0] ? (
-          <p>{InteriorImage[0]?.name}</p>
-        ) : (
-          <ImageComponent
-            label="Front"
-            handleImage={handleImage}
-            Interorimage={Interorimage}
-          />
-        )}
-        {InteriorImage > 0 && InteriorImage[1] ? (
-          <p>{InteriorImage[1]?.name}</p>
-        ) : (
-          <ImageComponent
-            label="Back"
-            handleImage={handleImage}
-            Interorimage={Interorimage}
-          />
-        )}
+        <ImageComponent
+          label="Front"
+          handleImage={handleImage}
+          Interorimage={Interorimage}
+        />
 
-        {InteriorImage > 0 && InteriorImage[2] ? (
-          <p>{InteriorImage[2]?.name}</p>
-        ) : (
-          <ImageComponent
-            label="Right"
-            handleImage={handleImage}
-            Interorimage={Interorimage}
-          />
-        )}
-        {InteriorImage > 0 && InteriorImage[3] ? (
-          <p>{InteriorImage[2]?.name}</p>
-        ) : (
-          <ImageComponent
-            label="Left"
-            handleImage={handleImage}
-            Interorimage={Interorimage}
-          />
-        )}
+        <ImageComponent
+          label="Back"
+          handleImage={handleImage}
+          Interorimage={Interorimage}
+        />
+
+        <ImageComponent
+          label="Right"
+          handleImage={handleImage}
+          Interorimage={Interorimage}
+        />
+
+        <ImageComponent
+          label="Left"
+          handleImage={handleImage}
+          Interorimage={Interorimage}
+        />
+
         <div className="text-center w-full md:grid-cols-1 md:col-span-2 ">
           {Interorimage.length >= 2 ? (
             <button
@@ -1042,7 +1025,7 @@ export const ImageInterior = ({
               {" "}
               Upload atleast 2 images
             </p>
-          )}
+         )} 
         </div>
       </div>
     </div>
@@ -1100,3 +1083,5 @@ export const ImageExterior = ({
     </div>
   );
 };
+
+

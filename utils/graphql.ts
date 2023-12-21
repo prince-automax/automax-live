@@ -12,6 +12,7 @@ function fetcher<TData, TVariables>(client: GraphQLClient, query: string, variab
   return async (): Promise<TData> => client.request<TData, TVariables>(query, variables, headers);
 }
 /** All built-in and custom scalars, mapped to their actual values */
+
 export type Scalars = {
   ID: string;
   String: string;
@@ -2927,7 +2928,7 @@ export type SellACar = {
   fuel?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   interiorImages?: Maybe<Scalars['String']>;
-  kmReading?: Maybe<Scalars['Int']>;
+  kmReading?: Maybe<Scalars['String']>;
   landmark?: Maybe<Scalars['String']>;
   make?: Maybe<Scalars['String']>;
   model?: Maybe<Scalars['String']>;
@@ -2952,7 +2953,7 @@ export type SellACarCreateInput = {
   exteriorImages?: InputMaybe<Scalars['String']>;
   fuel?: InputMaybe<Scalars['String']>;
   interiorImages?: InputMaybe<Scalars['String']>;
-  kmReading?: InputMaybe<Scalars['Int']>;
+  kmReading?: InputMaybe<Scalars['String']>;
   landmark?: InputMaybe<Scalars['String']>;
   make?: InputMaybe<Scalars['String']>;
   model?: InputMaybe<Scalars['String']>;
@@ -3025,7 +3026,7 @@ export type SellACarUpdateInput = {
   exteriorImages?: InputMaybe<Scalars['String']>;
   fuel?: InputMaybe<Scalars['String']>;
   interiorImages?: InputMaybe<Scalars['String']>;
-  kmReading?: InputMaybe<Scalars['Int']>;
+  kmReading?: InputMaybe<Scalars['String']>;
   landmark?: InputMaybe<Scalars['String']>;
   make?: InputMaybe<Scalars['String']>;
   model?: InputMaybe<Scalars['String']>;
@@ -3054,7 +3055,7 @@ export type SellACarWhereInput = {
   fuel?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
   interiorImages?: InputMaybe<StringFilter>;
-  kmReading?: InputMaybe<IntNullableFilter>;
+  kmReading?: InputMaybe<StringFilter>;
   landmark?: InputMaybe<StringFilter>;
   make?: InputMaybe<StringFilter>;
   model?: InputMaybe<StringFilter>;
@@ -4726,7 +4727,7 @@ export type CreateSellACarMutationVariables = Exact<{
 }>;
 
 
-export type CreateSellACarMutation = { __typename?: 'Mutation', createSellACar?: { __typename?: 'SellACar', id: string, interiorImages?: string | null, exteriorImages?: string | null } | null };
+export type CreateSellACarMutation = { __typename?: 'Mutation', createSellACar?: { __typename?: 'SellACar', id: string, interiorImages?: string | null, exteriorImages?: string | null, user?: { __typename?: 'User', id: string } | null } | null };
 
 export type UserPaymentsQueryVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -5672,6 +5673,9 @@ export const CreateSellACarDocument = `
     id
     interiorImages
     exteriorImages
+    user {
+      id
+    }
   }
 }
     `;
