@@ -59,7 +59,7 @@ export default function LoginUsingPassword() {
     }, [success, error]);
 
     async function CallPasswordLogin() {
-        console.log(username, password);
+    
 
         let isValid = true;
         if (!IsValidValue(username) || !IsValidMobile(username)) {

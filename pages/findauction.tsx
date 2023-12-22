@@ -50,6 +50,11 @@ const Findauction = () => {
     take: 10,
   };
 
+
+  console.log('query result ',queryResult);
+  // queryResult && console.log("after spread", ...queryResult);
+  
+  
   const { data: findAuction } = useFindAuctionsQuery(graphQLClient(), {
     skip: 0,
     take: 100,
@@ -95,20 +100,38 @@ const Findauction = () => {
           lte: new Date(queryResult?.toDate).toISOString(),
         },
       }),
-
-      ...(queryResult?.minimum && {
+      ...(queryResult?. minimum && queryResult?.maximum &&{
         reservePrice: {
           gte: queryResult?.minimum.toString(),
         },
+        AND: [
+          {
+            reservePrice: {
+              lte: queryResult?.maximum.toString(),
+            }
+          }
+        ]
       }),
-      ...(queryResult?.maximum && {
+
+
+
+      ...(queryResult?.minimum && !queryResult?.maximum && {
+        reservePrice: {
+          gte: queryResult?.minimum.toString(),
+        },  
+      }),
+      ...(queryResult?.maximum &&  !queryResult?.minimum &&{
         reservePrice: {
           lte: queryResult?.maximum.toString(),
         },
       }),
+
     },
   });
 
+
+  console.log('find auction00000000000',findAuction);
+  
   const columns = [
     {
       Header: "Listing Id",
@@ -489,7 +512,7 @@ const Findauction = () => {
             {/* </div> */}
             {/* </div> */}
             {findAuction?.findAuctions.map((item, index) => {
-              console.log("item in open bids", item);
+              // console.log("item in open bids", item);
 
               return (
                 <div
