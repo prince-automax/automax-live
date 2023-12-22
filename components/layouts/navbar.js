@@ -163,8 +163,8 @@ export default function Navbar() {
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
               leave="transition ease-in-out duration-1000 transform"
-              leaveFrom="opacity-100 translate-x-0"
-              leaveTo="opacity-0 translate-x-full"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo=" transition ease-in-out duration-1000 transform opacity-0 scale-95"
             >
               <Popover.Panel
                 focus
@@ -172,7 +172,7 @@ export default function Navbar() {
               >
                 <div
                   onClick={close}
-                  className="flex flex-col  justify-around   relative  rounded-3xl  shadow-md bg-[#FFFFFF] ring-1 ring-black ring-opacity-5 overflow-hidden w-60 h-screen text-[#747474]"
+                  className="flex flex-col  justify-around   relative  rounded-xl shadow-md bg-[#FFFFFF] ring-1 ring-black ring-opacity-5 overflow-hidden w-60 h-screen text-[#747474]"
                 >
                   {/* <div className="px-5 flex items-center justify-between"> */}
                   {/* <Logo /> */}

@@ -70,12 +70,12 @@ export default function Membership() {
         </div>
       </div>
 
-      <div className="mt-16 bg-white pb-12 lg:mt-20 lg:pb-20">
-        <div className="relative z-0">
+      <div className="mt-16 bg-white pb-12 lg:mt-20 lg:pb-20 ">
+        <div className="relative z-0 bg-black py-4">
           <div className="absolute inset-0 h-5/6 bg-gray-900 lg:h-2/3" />
 
           <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="relative lg:grid  lg:grid-cols-12">
+            <div className="relative lg:grid  lg:grid-cols-12 max-sm:space-y-6">
               <div className="mx-auto max-w-md lg:mx-0 lg:max-w-none  lg:col-start-10 lg:col-end-13 lg:row-start-2 lg:row-end-3">
                 <div className="h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-l-lg">
                   <div className="flex-1 flex flex-col">
@@ -128,10 +128,10 @@ export default function Membership() {
                       </h3>
                       <div className="mt-4 flex items-center justify-center">
                         <span className="px-3 flex items-start text-6xl tracking-tight text-gray-900 sm:text-6xl">
-                          <span className="mt-2 mr-2 text-4xl font-medium">
+                          <span className="mt-2 mr-2 text-2xl sm:text-4xl font-medium">
                             Rs.
                           </span>
-                          <span className="font-extrabold">5000/- </span>
+                          <span className=" font-semibold text-3xl  sm:font-extrabold">5000/- </span>
                         </span>
                         <span className="text-2xl font-medium text-gray-500">
                           {" "}
@@ -174,17 +174,18 @@ export default function Membership() {
               </div>
 
               <div className="mx-auto max-w-md lg:mx-0 lg:max-w-none lg:col-start-1 lg:col-end-4  lg:row-start-2 lg:row-end-3">
+                
                 <div className="h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-l-lg">
                   <div className="flex-1 flex flex-col">
                     <div className="bg-white px-6 py-10">
                       <div>
                         <h3
-                          className="text-center text-2xl font-medium text-gray-900"
+                          className="text-center text-2xl font-bold text-gray-900"
                           id="tier-hobby"
                         >
                           Account Details
                         </h3>
-                        <p className="block w-full text-center font-bold rounded-lg border border-transparent bg-white px-6 py-3 text-base  text-black hover:bg-gray-50">
+                        <p className="block w-full text-center font-semibold rounded-lg border border-transparent bg-white px-6 py-3 text-base  text-black hover:bg-gray-50">
                           Automax Solutions India Pvt. Ltd.
                         </p>
                       </div>
@@ -217,19 +218,19 @@ export default function Membership() {
           </div>
         </div>
 
-        <div className="relative lg:grid  lg:grid-cols-12 mt-12 ml-12  ">
+        <div className="relative grid max-sm:grid-cols-1 grid-cols-12 mt-6 max-sm:mx-2 justify-center  border py-2     ">
           <div className="mx-auto max-w-md lg:mx-0 lg:max-w-none lg:col-start-5 lg:col-end-9 lg:row-start-1 lg:row-end-4 ">
             <div className="h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-l-lg">
               <div className="flex-1 flex flex-col ">
                 <div className="px-6 py-10  ">
                   <div>
                     <h3
-                      className="text-center text-2xl font-medium text-gray-900"
+                      className="text-center sm:text-2xl text-lg font-bold text-gray-900"
                       id="tier-hobby"
                     >
                       YES BANK Account Details
                     </h3>
-                    <p className="block w-full text-center font-bold rounded-lg border border-transparent bg-white px-6 py-3 text-base  text-black hover:bg-gray-50">
+                    <p className="block w-full text-center font-semibold rounded-lg border border-transparent bg-white px-6 py-3 text-base  text-black hover:bg-gray-50">
                       Automax Solutions India Pvt. Ltd.
                     </p>
                   </div>
