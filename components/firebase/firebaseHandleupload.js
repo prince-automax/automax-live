@@ -64,7 +64,7 @@ export const HandleUpload = async (selectedFiles,imageField,directory) => {
        // console.log('imageinteriorString',urls);
        // Convert the array of URLs to a string separated by commas
        const concatenatedUrls = urls.join(',');
-  console.log('concatenatedurl form handleupload',concatenatedUrls);
+
   
  
    

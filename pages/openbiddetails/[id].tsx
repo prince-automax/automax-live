@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import PaymentPopup from "../../components/popup/popup";
 import Logo from "../../components/ui/Logo";
-import LogoImage from '@assets/logo.png'
+import LogoImage from "@assets/logo.png";
 
 import {
   useFindAuctionsQuery,
@@ -27,7 +27,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../../utils/store";
 import withPrivateRoute from "../../utils/withPrivateRoute";
-
+import ImageCarouselModal from "@components/modals/ImageCarouselModal";
 
 const OpenBidDetails = () => {
   const router = useRouter();
@@ -36,10 +36,10 @@ const OpenBidDetails = () => {
   const [userId, setUserId] = useState("");
   const [openBidPayment, setOpenBidPayment] = useState(false);
   const [openBidPaymentStatus, setOpenBidPaymentStatus] = useState();
-  const [hasOpenBidPayment,setHasOpenBidPayment]=useState(false)
-  const [showPopup,setShowPopup]=useState(false)
-  
-
+  const [hasOpenBidPayment, setHasOpenBidPayment] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showImageCarouselModal, setShowImageCarouselModal] = useState(false);
+  const [images, setImages] = useState([]);
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
@@ -53,8 +53,6 @@ const OpenBidDetails = () => {
       setUserId(id);
     }
   }, []);
-
- 
 
   const { data: userData, isLoading: loading } =
     useGetUserQuery<GetUserQueryVariables>(
@@ -71,40 +69,35 @@ const OpenBidDetails = () => {
 
   const payment = userData ? userData["user"]?.payments : "";
 
-  
   useEffect(() => {
     if (payment) {
       payment?.map((item) => {
-        if (item.paymentFor === "openBids" ) {
-          setHasOpenBidPayment(true)
-          if (item.status === "success" && new Date().toISOString() <= item.RegistrationExpire) {
+        if (item.paymentFor === "openBids") {
+          setHasOpenBidPayment(true);
+          if (
+            item.status === "success" &&
+            new Date().toISOString() <= item.RegistrationExpire
+          ) {
             setOpenBidPayment(true);
           } else {
             setOpenBidPaymentStatus(item.status);
-           
-            
           }
-
-         
         } else {
-         
         }
       });
     }
   }, [payment]);
 
-
-
   const { data, isLoading, refetch } =
     useFindAuctionsQuery<FindAuctionsQueryVariables>(graphQLClient(), {
       skip: 0,
-    take: 10,
-    orderBy: [
-      {
-        listingId:OrderDirection.Desc,
-      },
-    ],
-    
+      take: 10,
+      orderBy: [
+        {
+          listingId: OrderDirection.Desc,
+        },
+      ],
+
       where: {
         id: {
           equals: id as string,
@@ -112,26 +105,23 @@ const OpenBidDetails = () => {
       },
     });
 
-  
- 
-  const listingId = (data as { findAuctions?: any[] })?.findAuctions?.map((item,index)=> item.listingId)
+  console.log("findunique data", data);
 
-
-
-
-
+  const listingId = (data as { findAuctions?: any[] })?.findAuctions?.map(
+    (item, index) => item.listingId
+  );
 
   return (
     <>
       <div className="max-w-4xl md:max-w-5xl mx-auto my-10   ">
         <div className=" mx-4 my-6 ">
           <h2 className="text-2xl font-semibold text-black ">
-            Autobse Listing ID {listingId} Details
+            AutoBse Listing ID {listingId} Details
           </h2>
         </div>
         <div className="w-full h-px bg-gray-300 my-4  " />
 
-        <div className="grid grid-cols-1  mx-4 border ">
+        <div className="grid grid-cols-1  mx-4 border shadow-lg ">
           <div>
             {(data as { findAuctions?: any[] })?.findAuctions?.map(
               (item, index) => (
@@ -160,14 +150,7 @@ const OpenBidDetails = () => {
                       {item.propertyType}
                     </p>
                   </div>
-                  <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
-                    <p className="text-base font-semibold tracking-wide">
-                      Asset Location
-                    </p>
-                    <p className="text-base font-normal tracking-wide text-gray-800">
-                      {item.address}
-                    </p>
-                  </div>
+
                   <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
                     <p className="text-base font-semibold tracking-wide">
                       City
@@ -176,127 +159,187 @@ const OpenBidDetails = () => {
                       {item.city}
                     </p>
                   </div>
-   {token &&
-                  <div>
-                    
-                    {hasOpenBidPayment ? openBidPayment ? (
-                      <div>
-                        <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
-                          <p className="text-base font-semibold tracking-wide">
-                            Reserve Price
-                          </p>
-                          <p className="text-base font-normal tracking-wide text-gray-800">
-                            {item.reservePrice ? item.reservePrice : "-"}
-                          </p>
-                        </div>
-                        <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
-                          <p className="text-base font-semibold tracking-wide">
-                            Auction StartDate
-                          </p>
-                          <p>{Format(item?.auctionStartDate)}</p>
-                        </div>
-                        <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
-                          <p className="text-base font-semibold tracking-wide">
-                            Auction StartDate
-                          </p>
-                          <p>{Format(item?.auctionEndtDate)}</p>
-                        </div>
+                  <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                    <p className="text-base font-semibold tracking-wide">
+                      State
+                    </p>
+                    <p className="text-base font-normal tracking-wide text-gray-800">
+                      {item.state?.name}
+                    </p>
+                  </div>
+
+                  <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                    <p className="text-base font-semibold tracking-wide">
+                      Asset Location
+                    </p>
+                    <p className="text-base font-normal tracking-wide text-gray-800">
+                      {item.address}
+                    </p>
+                  </div>
+
+                  {token && (
+                    <div>
+                      {hasOpenBidPayment ? (
+                        openBidPayment ? (
+                          <div>
+                            <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                              <p className="text-base font-semibold tracking-wide">
+                                Reserve Price
+                              </p>
+                              <p className="text-base font-normal tracking-wide text-gray-800">
+                                {item.reservePrice ? item.reservePrice : "-"}
+                              </p>
+                            </div>
+                            <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                              <p className="text-base font-semibold tracking-wide">
+                                Auction StartDate
+                              </p>
+                              <p>{Format(item?.auctionStartDate)}</p>
+                            </div>
+                            <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                              <p className="text-base font-semibold tracking-wide">
+                                Auction StartDate
+                              </p>
+                              <p>{Format(item?.auctionEndtDate)}</p>
+                            </div>
+
+                            <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                              <p className="text-base font-semibold tracking-wide">
+                                Contact Details
+                              </p>
+                              <p className="text-base font-normal tracking-wide text-gray-800">
+                                {item.contactDetails
+                                  ? item.contactDetails
+                                  : "-"}
+                              </p>
+                            </div>
+                            <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                              <p className="text-base font-semibold tracking-wide">
+                                Emd Amount
+                              </p>
+                              <p className="text-base font-normal tracking-wide text-gray-800">
+                                {item.emdAmount ? item.emdAmount : "-"}
+                              </p>
+                            </div>
+                            <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                              <p className="text-base font-semibold tracking-wide">
+                                Emd submission Date
+                              </p>
+                              <p className="text-base font-normal tracking-wide text-gray-800">
+                                {Format(item.emdSubmissionDate)}
+                              </p>
+                            </div>
+                            <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                              <p className="text-base font-semibold tracking-wide">
+                                Auction Notice
+                              </p>
+                              <p className="text-base font-normal tracking-wide text-gray-800">
+                                {item.auctionNotice
+                                  ? DownloadButton(item.auctionNotice)
+                                  : "-"}
+                              </p>
+                            </div>
+                            <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                              <p className="text-base font-semibold tracking-wide">
+                                Tender Notice
+                              </p>
+                              <p className="text-base font-normal tracking-wide text-gray-800">
+                                {item.auctionNotice
+                                  ? DownloadButton(item.auctionNotice)
+                                  : "-"}
+                              </p>
+                            </div>
+                            {item?.image && (
+                              <div
+                                onClick={() => {
+                                  // BindVehicleImage(item);
+                                  setImages((item?.image).split(","));
+
+                                  setShowImageCarouselModal(true);
+                                }}
+                                className="space-y-1 py-3 px-3  border-2   md:col-span-2 grid justify-center "
+                              >
+                               <div  className="w-full border-2 p-2 shadow-xl">
+                               <Image
+                                  alt="img"
+                                  src={item?.image.split(",")[0]}
+                                  width={500}
+                                  height={300}
                       
-                        <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
-                          <p className="text-base font-semibold tracking-wide">
-                            Contact Details
-                          </p>
-                          <p className="text-base font-normal tracking-wide text-gray-800">
-                            {item.contactDetails ? item.contactDetails : "-"}
-                          </p>
-                        </div>
-                        <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
-                          <p className="text-base font-semibold tracking-wide">
-                            Emd Amount
-                          </p>
-                          <p className="text-base font-normal tracking-wide text-gray-800">
-                            {item.emdAmount ? item.emdAmount : "-"}
-                          </p>
-                        </div>
-                        <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
-                          <p className="text-base font-semibold tracking-wide">
-                            Emd submission Date
-                          </p>
-                          <p className="text-base font-normal tracking-wide text-gray-800">
-                            {Format(item.emdSubmissionDate)}
-                          </p>
-                        </div>
-                        <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
-                          <p className="text-base font-semibold tracking-wide">
-                            Auction Notice
-                          </p>
-                          <p className="text-base font-normal tracking-wide text-gray-800">
-                            {item.auctionNotice ? DownloadButton(item.auctionNotice) : "-"}
-                          </p>
-                        </div>
-                    
-                      </div>
-                    ) : (
-                      <div className="col-span-1 md:col-span-2 border max-lg:px-2  text-center">
-                        <div className=" max-w-4xl  shadow-xl my-4 mx-auto  rounded-lg bg-[#f5f5f5]  h-60 space-y-4 pb-2 flex flex-col justify-center items-center">
-                          <div className="space-y-5">
-                         <div className="w-72  bg-white rounded-md   mx-auto">
-                         <Image
-                    src={LogoImage}
-                    alt="auto bse"
-                    width={200}
-                    height={60}
-                   
-                />
-                         </div>
-                            <h1
-                              id="tier-growth "
-                              className="text-base sm:text-lg m-2"
-                            >
-                              <span className="text-lg text-black font-serif	 uppercase font-semibold">
-                                {" "}
-                                your Payment for Open Bids Subscription{" "}
-                              </span>
-                              :{" "}
-                              <span className="text-lg animate-pulse font-bold uppercase">
-                                {openBidPaymentStatus}
-                              </span>
-                            </h1>
+                                />
+                               
+                               </div>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="col-span-1 md:col-span-2 border max-lg:px-2  text-center">
+                            <div className=" max-w-4xl  shadow-xl my-4 mx-auto  rounded-lg bg-[#f5f5f5]  h-60 space-y-4 pb-2 flex flex-col justify-center items-center">
+                              <div className="space-y-5">
+                                <div className="w-72  bg-white rounded-md   mx-auto">
+                                  <Image
+                                    src={LogoImage}
+                                    alt="auto bse"
+                                    width={200}
+                                    height={60}
+                                  />
+                                </div>
+                                <h1
+                                  id="tier-growth "
+                                  className="text-base sm:text-lg m-2"
+                                >
+                                  <span className="text-lg text-black font-serif	 uppercase font-semibold">
+                                    {" "}
+                                    your Payment for Open Bids Subscription{" "}
+                                  </span>
+                                  :{" "}
+                                  <span className="text-lg animate-pulse font-bold uppercase">
+                                    {openBidPaymentStatus}
+                                  </span>
+                                </h1>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      ) : (
+                        <div className="col-span-1 md:col-span-2 border max-lg:px-2  text-center ">
+                          <div className=" max-w-4xl  my-4 mx-auto   h-60 space-y-4 pb-2 flex flex-col justify-center items-center  bg-[#f5f5f5]">
+                            <div className="space-y-5">
+                              <div className="shadow-lg max-sm:w-60 w-80 mt-6 bg-white  mx-auto">
+                                <Image
+                                  src={LogoImage}
+                                  alt="auto bse"
+                                  width={100}
+                                  height={60}
+                                />
+                              </div>
+                              <h1
+                                id="tier-growth "
+                                className="text-base sm:text-lg m-2"
+                              >
+                                <span className="max-sm:text-sm text-lg tracking-wider text-black font-serif uppercase font-semibold ">
+                                  {" "}
+                                  please make the payment to see the full
+                                  details{" "}
+                                </span>
+                              </h1>
+                              <div className="h-full">
+                                <button
+                                  className="bg-green-700 mb-4 hover:bg-slate-600 hover:scale-105 transform transition-transform duration-300 ease-linear text-white px-4 py-2 rounded-lg"
+                                  onClick={togglePopup}
+                                >
+                                  View Payment
+                                </button>
+                                {showPopup && (
+                                  <PaymentPopup onClose={togglePopup} />
+                                )}
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ):( 
-                    <div className="col-span-1 md:col-span-2 border max-lg:px-2  text-center ">
-                    <div className=" max-w-4xl  my-4 mx-auto   h-60 space-y-4 pb-2 flex flex-col justify-center items-center  bg-[#f5f5f5]">
-                      <div className="space-y-5">
-                      <div className="shadow-lg max-sm:w-60 w-80 mt-6 bg-white  mx-auto">
-                      <Image
-                    src={LogoImage}
-                    alt="auto bse"
-                    width={100}
-                    height={60}
-                />
+                      )}
                     </div>
-                        <h1
-                          id="tier-growth "
-                          className="text-base sm:text-lg m-2"
-                        >
-                          <span className="max-sm:text-sm text-lg tracking-wider text-black font-serif uppercase font-semibold ">
-                            {" "}
-                           please make the payment to see the full details{" "}
-                          </span>
-                         
-                        </h1>
-                        <div className="h-full">
-                          <button className="bg-green-700 mb-4 hover:bg-slate-600 hover:scale-105 transform transition-transform duration-300 ease-linear text-white px-4 py-2 rounded-lg"
-        onClick={togglePopup}>View Payment</button>
-        {showPopup && <PaymentPopup onClose={togglePopup} />}
-                         </div>
-                      </div>
-                    </div>
-                  </div>)}
-                  </div>
-            }
+                  )}
                 </div>
               )
             )}
@@ -356,32 +399,39 @@ const OpenBidDetails = () => {
           )}
         </div>
       </div>
+      <ImageCarouselModal
+        color="blue"
+        open={showImageCarouselModal}
+        close={() => setShowImageCarouselModal(false)}
+        images={images}
+      />
     </>
-  )
-}
+  );
+};
 
 export default withPrivateRoute(OpenBidDetails);
 
-
 const DownloadButton = (file) => {
+  console.log("download file", file);
 
   const handleDownload = () => {
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = file;
-    link.target = '_blank'; // Open the link in a new tab
-    link.download = '.jpg'; // Set the filename for the downloaded image
+    // link.target = '_blank'; // Open the link in a new tab
+    // link.download = '.jpg'; // Set the filename for the downloaded image
     link.click();
-};
+  };
 
-return (
+  return (
     <div>
-        {/* <img src={file} alt="Image to download" /> */}
-        <button className="" onClick={handleDownload}>   <DocumentDownloadIcon className=" h-8 w-8 text-gray-600 hover:text-green-600  rounded-md" ></DocumentDownloadIcon></button>
+      {/* <img src={file} alt="Image to download" /> */}
+      <button className="" onClick={handleDownload}>
+        {" "}
+        <DocumentDownloadIcon className=" h-8 w-8 text-gray-600 hover:text-green-600  rounded-md"></DocumentDownloadIcon>
+      </button>
     </div>
-);
-}
-
-
+  );
+};
 
 function Format(value) {
   return (

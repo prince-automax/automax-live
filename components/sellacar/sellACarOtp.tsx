@@ -68,10 +68,10 @@ const SellACarOtp = ({ index }) => {
     }
     if (isValid) {
       const result = await callOTPMutation.mutateAsync({ mobile });
-      console.log("result for otp mutation", result);
+     
 
       if (result.sendUserMagicAuthLink) {
-        console.log("User with this number exisists");
+     
         setVerificationMode(true);
         setSuccess({
           text: "Please enter the OTP received on your registered mobile number.",
@@ -118,10 +118,9 @@ const SellACarOtp = ({ index }) => {
       isValid = false;
     }
     if (isValid) {
-      console.log("enetred for otp verify   02");
+    ;
       const result = await callVerifyOTP.mutateAsync({ mobile, token: otp });
-      console.log("enetred for otp verify   03");
-      console.log("result of verify OTP", result);
+
 
       if (result.redeemUserMagicAuthToken["token"] === undefined) {
         console.log("otp is no valid");
@@ -130,7 +129,7 @@ const SellACarOtp = ({ index }) => {
       }
 
       if (result.redeemUserMagicAuthToken["token"]) {
-        console.log("enetred for otp verify   04");
+      
         localStorage.setItem("token", result.redeemUserMagicAuthToken["token"]);
         localStorage.setItem(
             "id",

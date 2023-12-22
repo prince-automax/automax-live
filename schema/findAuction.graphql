@@ -35,6 +35,7 @@ query Institutions {
     state {
       name
     }
+    image
   }
 }
 

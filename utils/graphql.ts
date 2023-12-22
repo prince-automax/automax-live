@@ -12,7 +12,6 @@ function fetcher<TData, TVariables>(client: GraphQLClient, query: string, variab
   return async (): Promise<TData> => client.request<TData, TVariables>(query, variables, headers);
 }
 /** All built-in and custom scalars, mapped to their actual values */
-
 export type Scalars = {
   ID: string;
   String: string;
@@ -1004,11 +1003,13 @@ export type FindAuction = {
   emdAmount?: Maybe<Scalars['BigInt']>;
   emdSubmissionDate?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
+  image?: Maybe<Scalars['String']>;
   institution_details?: Maybe<Institution>;
   listingId?: Maybe<Scalars['Int']>;
   propertyType?: Maybe<FindAuctionPropertyTypeType>;
   reservePrice?: Maybe<Scalars['BigInt']>;
   state?: Maybe<State>;
+  tenderDocument?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   vehicleRegNo?: Maybe<Scalars['String']>;
 };
@@ -1022,11 +1023,13 @@ export type FindAuctionCreateInput = {
   contactDetails?: InputMaybe<Scalars['String']>;
   emdAmount?: InputMaybe<Scalars['BigInt']>;
   emdSubmissionDate?: InputMaybe<Scalars['DateTime']>;
+  image?: InputMaybe<Scalars['String']>;
   institution_details?: InputMaybe<InstitutionRelateToOneForCreateInput>;
   listingId?: InputMaybe<Scalars['Int']>;
   propertyType?: InputMaybe<FindAuctionPropertyTypeType>;
   reservePrice?: InputMaybe<Scalars['BigInt']>;
   state?: InputMaybe<StateRelateToOneForCreateInput>;
+  tenderDocument?: InputMaybe<Scalars['String']>;
   vehicleRegNo?: InputMaybe<Scalars['String']>;
 };
 
@@ -1047,9 +1050,11 @@ export type FindAuctionOrderByInput = {
   emdAmount?: InputMaybe<OrderDirection>;
   emdSubmissionDate?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
+  image?: InputMaybe<OrderDirection>;
   listingId?: InputMaybe<OrderDirection>;
   propertyType?: InputMaybe<OrderDirection>;
   reservePrice?: InputMaybe<OrderDirection>;
+  tenderDocument?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
   vehicleRegNo?: InputMaybe<OrderDirection>;
 };
@@ -1095,11 +1100,13 @@ export type FindAuctionUpdateInput = {
   contactDetails?: InputMaybe<Scalars['String']>;
   emdAmount?: InputMaybe<Scalars['BigInt']>;
   emdSubmissionDate?: InputMaybe<Scalars['DateTime']>;
+  image?: InputMaybe<Scalars['String']>;
   institution_details?: InputMaybe<InstitutionRelateToOneForUpdateInput>;
   listingId?: InputMaybe<Scalars['Int']>;
   propertyType?: InputMaybe<FindAuctionPropertyTypeType>;
   reservePrice?: InputMaybe<Scalars['BigInt']>;
   state?: InputMaybe<StateRelateToOneForUpdateInput>;
+  tenderDocument?: InputMaybe<Scalars['String']>;
   vehicleRegNo?: InputMaybe<Scalars['String']>;
 };
 
@@ -1117,11 +1124,13 @@ export type FindAuctionWhereInput = {
   emdAmount?: InputMaybe<BigIntNullableFilter>;
   emdSubmissionDate?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<IdFilter>;
+  image?: InputMaybe<StringFilter>;
   institution_details?: InputMaybe<InstitutionWhereInput>;
   listingId?: InputMaybe<IntFilter>;
   propertyType?: InputMaybe<FindAuctionPropertyTypeTypeNullableFilter>;
   reservePrice?: InputMaybe<BigIntNullableFilter>;
   state?: InputMaybe<StateWhereInput>;
+  tenderDocument?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   vehicleRegNo?: InputMaybe<StringFilter>;
 };
@@ -4682,7 +4691,7 @@ export type FindAuctionsQueryVariables = Exact<{
 }>;
 
 
-export type FindAuctionsQuery = { __typename?: 'Query', findAuctions?: Array<{ __typename?: 'FindAuction', address?: string | null, auctionEndDate?: any | null, auctionNotice?: string | null, auctionStartDate?: any | null, city?: string | null, contactDetails?: string | null, createdAt?: any | null, emdAmount?: any | null, emdSubmissionDate?: any | null, id: string, listingId?: number | null, propertyType?: FindAuctionPropertyTypeType | null, reservePrice?: any | null, vehicleRegNo?: string | null, institution_details?: { __typename?: 'Institution', createdAt?: any | null, id: string, name?: string | null } | null, state?: { __typename?: 'State', name?: string | null } | null }> | null };
+export type FindAuctionsQuery = { __typename?: 'Query', findAuctions?: Array<{ __typename?: 'FindAuction', address?: string | null, auctionEndDate?: any | null, auctionNotice?: string | null, auctionStartDate?: any | null, city?: string | null, contactDetails?: string | null, createdAt?: any | null, emdAmount?: any | null, emdSubmissionDate?: any | null, id: string, listingId?: number | null, propertyType?: FindAuctionPropertyTypeType | null, reservePrice?: any | null, vehicleRegNo?: string | null, image?: string | null, institution_details?: { __typename?: 'Institution', createdAt?: any | null, id: string, name?: string | null } | null, state?: { __typename?: 'State', name?: string | null } | null }> | null };
 
 export type FindAuctionStateQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5513,6 +5522,7 @@ export const FindAuctionsDocument = `
     state {
       name
     }
+    image
   }
 }
     `;

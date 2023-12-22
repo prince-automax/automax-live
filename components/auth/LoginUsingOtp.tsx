@@ -67,17 +67,17 @@ export default function LoginUsingOtp() {
         // the callOTPMutation to send the OTP &&  passing the mobile value as a parameter
         if (isValid) {
             const result = await callOTPMutation.mutateAsync({ mobile });
-            console.log("result for otp mutation",result);
+            
             
             if (result.sendUserMagicAuthLink) {
-                console.log("User with this number exisists");
+                
                 // user with the provided mobile number exists.
                 setVerificationMode(true);
                 setSuccess({
                     text: "Please enter the OTP received on your registered mobile number.",
                 });
             } else {
-                // console.log("entered here bcz user with such num doest exsist ");
+                
                 
                 // user with the provided mobile number does not exist. It proceeds to create a new user using the callCreateUserMutation with the provided number
                 const result2 = await callCreateUserMutation.mutateAsync({
@@ -117,7 +117,7 @@ export default function LoginUsingOtp() {
     }
    // handles the logic when the user clicks on the "Send OTP" button.
     async function CallOTPVerify() {
-        console.log("enetred for otp verify   01");
+     
         
         let isValid = true;
         if (!IsValidValue(otp)) {
@@ -125,20 +125,19 @@ export default function LoginUsingOtp() {
             isValid = false;
         }
         if (isValid) {
-            console.log("enetred for otp verify   02");
+            
             const result = await callVerifyOTP.mutateAsync({ mobile, token: otp });
-            console.log("enetred for otp verify   03");
-            console.log("result of verify OTP",result);
+         
             
 
             if (result.redeemUserMagicAuthToken["token"] === undefined) {
-                console.log("otp is no valid");
+               
                 
                 setError({ text: "Please enter a valid OTP." });
             }
 
             if (result.redeemUserMagicAuthToken["token"]) {
-                console.log("enetred for otp verify   04");
+             
                 localStorage.setItem("token", result.redeemUserMagicAuthToken["token"]);
                 localStorage.setItem(
                     "id",
