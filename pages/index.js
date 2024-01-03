@@ -1,6 +1,7 @@
 import HeroSection from "../components/home/HeroSection";
-import UpcomingEventHomePage from "../components/tables/UpcomingEventHomePage";
-import LiveEventHomePage from "../components/tables/LiveEventHomePage";
+// import UpcomingEventHomePage from "../components/tables/UpcomingEventHomePage";
+// import LiveEventHomePage from "../components/tables/LiveEventHomePage";
+import AllEventsTable from "../components/tables/AllEventsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
@@ -39,7 +40,7 @@ export default function Example() {
     <>
       <HeroSection />
 
-      <div className="pl-6">
+      {/* <div className="pl-6">
         <div className="w-full  sm:px-0  my-2 p-4 ">
           <Tab.Group>
             <Tab.List className="flex justify-center space-x-1  sm:w-96  border ">
@@ -61,7 +62,6 @@ export default function Example() {
                       {tab}
                       {selected && (
                         <span className="absolute top-10 left-14 transform -translate-y-1/2 transition ease-in-out delay-100">
-                          {/* <FontAwesomeIcon icon={faCaretDown} className="w-10 h-8 text-black" />{" "} */}
                           <FontAwesomeIcon
                             icon={faCaretDown}
                             className="w-20 h-8 text-blue-600 "
@@ -76,16 +76,16 @@ export default function Example() {
 
             <Tab.Panels className="mt-6">
               <Tab.Panel>
-                <UpcomingEventHomePage />
+              
               </Tab.Panel>
               <Tab.Panel>
-                <LiveEventHomePage />
+               
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
         </div>
-      </div>
-
+      </div> */}
+<AllEventsTable/>
       <Cards />
       <RecentlySold />
       <LogoCloud />
