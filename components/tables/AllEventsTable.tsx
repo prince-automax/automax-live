@@ -130,7 +130,7 @@ export default function AllEventsTable({
           ) : (
             <>
               {!eventdata.length && (
-                <div className="font-bold sm:text-base md:text-xl text-black uppercase animate-pulse duration-100 text-red-600">
+                <div className="font-bold sm:text-base md:text-xl  uppercase animate-pulse duration-100 text-red-600">
                   No Upcoming / Live Events{" "}
                 </div>
               )}

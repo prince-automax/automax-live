@@ -225,7 +225,7 @@ const SellACar = () => {
           body: values?.body,
           state: values?.state,
           rtoCode: values?.rtoCode,
-          kmReading: values?.kmReading,
+          kmRead: values?.kmReading,
           fuel: values?.fuel,
           vehicleCondition: values?.vehicleCondition,
           veicleLocation: values?.veicleLocation,

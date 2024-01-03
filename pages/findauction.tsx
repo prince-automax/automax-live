@@ -7,11 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 import moment from "moment";
 import {
-  CalendarIcon,
-  DocumentDownloadIcon,
-  PrinterIcon,
-  ArrowCircleRightIcon,
-  ArrowRightIcon,
+  CalendarIcon, ArrowRightIcon,
 } from "@heroicons/react/outline";
 
 import {
@@ -45,15 +41,20 @@ const Findauction = () => {
   const { data: findAuctionState, isLoading: loadingstate } =
     useFindAuctionStateQuery<FindAuctionStateQueryVariables>(graphQLClient());
 
+ 
+    
+
   const variables = {
     skip: 0,
     take: 10,
   };
 
 
-  console.log('query result ',queryResult);
-  // queryResult && console.log("after spread", ...queryResult);
   
+  let currentDateWithoutMinutesSeconds = new Date();
+currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
+
+ 
   
   const { data: findAuction } = useFindAuctionsQuery(graphQLClient(), {
     skip: 0,
@@ -65,6 +66,11 @@ const Findauction = () => {
     ],
 
     where: {
+
+      auctionEndDate: {
+        gte: currentDateWithoutMinutesSeconds.toISOString(),
+      },
+
       ...(queryResult?.category && {
         propertyType: {
           equals: queryResult?.category,
@@ -129,8 +135,9 @@ const Findauction = () => {
     },
   });
 
+  console.log('findauction',findAuction);
 
-  console.log('find auction00000000000',findAuction);
+
   
   const columns = [
     {
@@ -222,7 +229,7 @@ const Findauction = () => {
     );
   }
   function DateFormat(value) {
-    console.log("value form StartDate", value);
+    // console.log("value form StartDate", value);
   
     return (
       <div>
