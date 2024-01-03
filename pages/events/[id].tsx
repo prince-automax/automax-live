@@ -34,6 +34,7 @@ import TermsConditions from "@components/templates/TermsConditions";
 import InspectionReportModal from "@components/modals/InspectionReportModal";
 import ImageCarouselModal from "@components/modals/ImageCarouselModal";
 import Swal from "sweetalert2";
+// import TermsAndCondtionsModal from  "@components/modals/TermsAndConditionModal"
 
 function Events() {
   const router = useRouter();
@@ -54,6 +55,10 @@ function Events() {
   const [wathclistVehicls, setWatchlistvehicls] = useState([]);
   const [demo, setDemo] = useState([]);
 
+
+  // useEffect(()=>{
+  //   TermsAndCondtionsModal()
+  // },[])
 
  
   const handleClick = () => {

@@ -21,7 +21,7 @@ import Router from "next/router";
 import Link from "next/link";
 import DataTableUILoggedIn from "../ui/DataTableUILoggedIn";
 
-export default function EventsTable({
+export default function LiveEventHomePage({
   showHeadings,
   hideSearch,
   allowDownload,
@@ -30,7 +30,7 @@ export default function EventsTable({
   const [accessToken, setAccessToken] = useState("");
   const [registered, setRegistered] = useState(false);
   const [registeredStatus, setRegisteredStatus] = useState("");
-  const id = localStorage.getItem("id");
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
@@ -38,54 +38,32 @@ export default function EventsTable({
     }
   }, []);
 
-  const variables = {
+  const variablesLive = {
     skip: 0,
     take: 10,
     where: {
-      eventCategory: {
-        equals: eventCategory,
-      },
+      OR: [
+        {
+          eventCategory: {
+            equals: "online",
+          },
+        },
+        {
+          eventCategory: {
+            equals: "open",
+          },
+        },
+      ],
     },
   };
-  const { data, isLoading, refetch } = useLiveEventsQuery<LiveEventsQuery>(
+  const { data, refetch, isLoading } = useLiveEventsQuery<LiveEventsQuery>(
     graphQLClient({ Authorization: `Bearer ${accessToken}` }),
-    variables
+    variablesLive
   );
 
   useEffect(() => {
     refetch();
   }, [data]);
-
-  const { data: userData, isLoading: loading } =
-    useGetUserQuery<GetUserQueryVariables>(
-      graphQLClient({ Authorization: `Bearer ${accessToken}` }),
-      { where: { id } },
-      {
-        enabled: accessToken !== "",
-      }
-    );
-
-  const payment = userData ? userData["user"]?.payments : "";
-
-  console.log("payment from live table", payment);
-
-  useEffect(() => {
-    if (payment) {
-      payment?.map((item) => {
-        if (item.paymentFor === "registrations") {
-          if (item.status === "success") {
-            setRegistered(true);
-          } else {
-            setRegisteredStatus(item.status);
-          }
-
-          // console.log("trueeeee");
-        } else {
-          // console.log("falseeeeeeeeeee");
-        }
-      });
-    }
-  }, [payment]);
 
   const columns = [
     {
@@ -121,49 +99,18 @@ export default function EventsTable({
       accessor: "endDate",
       Cell: ({ cell: { value } }) => EndDate(value),
     },
-    {
-      Header: "Details",
-      accessor: "id",
-      Cell: ({ cell: { value } }) =>
-        registered ? (
-          View(value, eventCategory)
-        ) : registeredStatus ? (
-          `Registration Staus: ${registeredStatus}`
-        ) : (
-          <span className="text-bold text-red-500 text-xs">
-            Selected Auction has not been assigned to you. Please contact{" "}
-            <span className="p-3">9962334455 </span> for more details
-          </span>
-        ),
-    },
-    {
-      Header: "Download",
-      accessor: "downloadableFile",
-      Cell: ({ cell: { value } }) =>
-        registered ? (
-          <DownloadButton file={value} allowDownload={allowDownload} />
-        ) : (
-          <span className="text-bold text-red-500 text-sm">
-            Pending for Approval{" "}
-          </span>
-        ),
-    },
   ];
 
   return (
     <>
-      <div className="relative bg-white">
+      <div className="relative bg-white ">
         <div className="mx-auto max-w-md text-center  sm:max-w-3xl lg:max-w-7xl">
           {showHeadings && (
-            <div className="pt-8 pb-8">
-              {data?.liveEvents?.length == 0 ? (
+            <div className=" ">
+              {data?.liveEvents?.length == 0 && (
                 <p className="mt-px text-3xl font-extrabold text-gray-900 tracking-tight sm:text-3xl animate-pulse">
                   No Live Events ...
                 </p>
-              ) : (
-                <h2 className="mt-px text-3xl font-extrabold text-gray-900 tracking-tight sm:text-3xl ">
-                  Live Events
-                </h2>
               )}
               {/* <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
                 Most recent events
@@ -215,7 +162,7 @@ export default function EventsTable({
   );
 }
 
-EventsTable.defaultProps = {
+LiveEventHomePage.defaultProps = {
   hideSearch: false,
   allowDownload: false,
 };
@@ -357,7 +304,7 @@ function DownloadButton({ file, allowDownload }) {
   );
 }
 
-EventsTable.defaultProps = {
+LiveEventHomePage.defaultProps = {
   showHeadings: true,
 };
 
