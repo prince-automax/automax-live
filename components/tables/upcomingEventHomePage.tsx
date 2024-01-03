@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import Datatable from "../ui/Datatable";
 import Loader from "../ui/Loader";
 import moment from "moment";
@@ -7,30 +7,27 @@ import {
   DocumentDownloadIcon,
   PrinterIcon,
 } from "@heroicons/react/outline";
+import { useEffect, useState } from "react";
 import AlertModal from "../ui/AlertModal";
 import {
-  LiveEventsQuery,
-  useLiveEventsQuery,
   GetUserQueryVariables,
+  UpcomingEventsQuery,
   useGetUserQuery,
-  useUserWorkBookQuery,
-  UserWorkBookQueryVariables,
+  useUpcomingEventsQuery,
 } from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
 import Router from "next/router";
-import Link from "next/link";
-import DataTableUILoggedIn from "../ui/DataTableUILoggedIn";
 
-export default function EventsTable({
+export default function UpcomingEventHomePage({
   showHeadings,
   hideSearch,
   allowDownload,
-  eventCategory = "online",
 }) {
   const [accessToken, setAccessToken] = useState("");
   const [registered, setRegistered] = useState(false);
   const [registeredStatus, setRegisteredStatus] = useState("");
-  const id = localStorage.getItem("id");
+
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
@@ -41,51 +38,18 @@ export default function EventsTable({
   const variables = {
     skip: 0,
     take: 10,
-    where: {
-      eventCategory: {
-        equals: eventCategory,
-      },
-    },
   };
-  const { data, isLoading, refetch } = useLiveEventsQuery<LiveEventsQuery>(
-    graphQLClient({ Authorization: `Bearer ${accessToken}` }),
-    variables
-  );
+  const { data, isLoading, refetch } =
+    useUpcomingEventsQuery<UpcomingEventsQuery>(
+      graphQLClient({ Authorization: `Bearer ${accessToken}` }),
+      variables
+    );
 
   useEffect(() => {
     refetch();
   }, [data]);
 
-  const { data: userData, isLoading: loading } =
-    useGetUserQuery<GetUserQueryVariables>(
-      graphQLClient({ Authorization: `Bearer ${accessToken}` }),
-      { where: { id } },
-      {
-        enabled: accessToken !== "",
-      }
-    );
 
-  const payment = userData ? userData["user"]?.payments : "";
-
-  console.log("payment from live table", payment);
-
-  useEffect(() => {
-    if (payment) {
-      payment?.map((item) => {
-        if (item.paymentFor === "registrations") {
-          if (item.status === "success") {
-            setRegistered(true);
-          } else {
-            setRegisteredStatus(item.status);
-          }
-
-          // console.log("trueeeee");
-        } else {
-          // console.log("falseeeeeeeeeee");
-        }
-      });
-    }
-  }, [payment]);
 
   const columns = [
     {
@@ -97,19 +61,22 @@ export default function EventsTable({
       Header: "Seller",
       accessor: "seller.name",
     },
-    { Header: "Event Type", accessor: "eventCategory" },
+    {
+      Header: "Event Type",
+      accessor: "eventCategory",
+    },
     {
       Header: "State",
       accessor: "location.state.name",
     },
     {
+      Header: "Location",
+      accessor: "location.name",
+    },
+    {
       Header: "Vehicle",
       accessor: "vehiclesCount",
       Cell: ({ cell: { value } }) => (value ? value : ""),
-    },
-    {
-      Header: "Location",
-      accessor: "location.name",
     },
     {
       Header: "Category",
@@ -121,79 +88,35 @@ export default function EventsTable({
       accessor: "endDate",
       Cell: ({ cell: { value } }) => EndDate(value),
     },
-    {
-      Header: "Details",
-      accessor: "id",
-      Cell: ({ cell: { value } }) =>
-        registered ? (
-          View(value, eventCategory)
-        ) : registeredStatus ? (
-          `Registration Staus: ${registeredStatus}`
-        ) : (
-          <span className="text-bold text-red-500 text-xs">
-            Selected Auction has not been assigned to you. Please contact{" "}
-            <span className="p-3">9962334455 </span> for more details
-          </span>
-        ),
-    },
-    {
-      Header: "Download",
-      accessor: "downloadableFile",
-      Cell: ({ cell: { value } }) =>
-        registered ? (
-          <DownloadButton file={value} allowDownload={allowDownload} />
-        ) : (
-          <span className="text-bold text-red-500 text-sm">
-            Pending for Approval{" "}
-          </span>
-        ),
-    },
+    
   ];
 
   return (
     <>
-      <div className="relative bg-white">
+      <div className=" bg-white ">
         <div className="mx-auto max-w-md text-center  sm:max-w-3xl lg:max-w-7xl">
-          {showHeadings && (
-            <div className="pt-8 pb-8">
-              {data?.liveEvents?.length == 0 ? (
-                <p className="mt-px text-3xl font-extrabold text-gray-900 tracking-tight sm:text-3xl animate-pulse">
-                  No Live Events ...
-                </p>
-              ) : (
-                <h2 className="mt-px text-3xl font-extrabold text-gray-900 tracking-tight sm:text-3xl ">
-                  Live Events
-                </h2>
-              )}
-              {/* <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-                Most recent events
-              </p>
-              <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-                Open auction or closed auction!! Know your deal better with list
-                of locations, type of auction, date and many more features, An
-                updates on our most recent events.
-              </p> */}
-            </div>
-          )}
+        
 
           {isLoading ? (
             <Loader />
           ) : (
             <>
-              {/* {!data?.liveEvents?.length && <div>No Auctions Found</div>} */}
-              {/* {data?.liveEvents && data?.liveEvents?.length > 0 && ( */}
+              {/* {data &&
+                data?.upcomingEvents &&
+                data?.upcomingEvents?.length > 0 && ( */}
               <>
                 <div className="sm:hidden">
-                  {data?.liveEvents?.map((event, eventIdx) => {
+                  {data?.upcomingEvents?.map((event, eventIdx) => {
                     return (
                       <MobielViewCard
                         key={eventIdx}
                         index1={eventIdx}
                         event={event}
-                        allowDownload={allowDownload}
                         registered={registered}
                         registeredStatus={registeredStatus}
-                        // noOfVehicles={event?.v}
+                        allowDownload={
+                          accessToken !== null && accessToken !== ""
+                        }
                       />
                     );
                   })}
@@ -201,52 +124,17 @@ export default function EventsTable({
                 <div className="hidden sm:block">
                   <Datatable
                     hideSearch={hideSearch}
-                    tableData={data?.liveEvents}
+                    tableData={data?.upcomingEvents}
                     tableColumns={columns}
                   />
                 </div>
               </>
-              {/* )} */}
+              {/* )}  */}
             </>
           )}
         </div>
       </div>
     </>
-  );
-}
-
-EventsTable.defaultProps = {
-  hideSearch: false,
-  allowDownload: false,
-};
-
-function vechileCount(value) {
-  console.log("vechilecount", value);
-
-  return (
-    <div>
-      <span>{value}</span>
-    </div>
-  );
-}
-
-function View(value, eventCategory) {
-  console.log("view", eventCategory);
-
-  return (
-    <div>
-      <Link
-        href={`/${
-          eventCategory === "open" ? "open-auctions" : "events"
-        }/${value}?type=l`}
-      >
-        <a target="_blank">
-          <div>
-            <span className="text-emerald-600 font-extrabold">Bid Now</span>
-          </div>
-        </a>
-      </Link>
-    </div>
   );
 }
 
@@ -267,6 +155,11 @@ function RenderEventTypes(eventTypes) {
     return <div />;
   }
 }
+
+UpcomingEventHomePage.defaultProps = {
+  hideSearch: false,
+  allowDownload: false,
+};
 
 function StartDate(value) {
   return (
@@ -308,8 +201,6 @@ function EndDate(value) {
 }
 
 function DownloadButton({ file, allowDownload }) {
-  // console.log("file",file);
-
   const [showAlert, setShowAlert] = useState(false);
 
   const showAlertModal = () => {
@@ -357,7 +248,7 @@ function DownloadButton({ file, allowDownload }) {
   );
 }
 
-EventsTable.defaultProps = {
+UpcomingEventHomePage.defaultProps = {
   showHeadings: true,
 };
 
@@ -381,14 +272,85 @@ function MobielViewCard({
 
   return (
     <>
-      <div className="w-full">
-        <DataTableUILoggedIn
-          index1={index1}
-          event={event}
-          allowDownload={allowDownload}
-          registered={registered}
-          registeredStatus={registeredStatus}
-        />
+      <div className="">
+        <div className=" w-full  flex justify-center items-center mt-4 ">
+          <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-2 rounded-lg  space-y-1  ">
+            {/*  */}
+            <div className="grid grid-cols-3 gap-1 space-x-2">
+              <p className="flex justify-between text-sm ">
+                Event <span>:</span>
+              </p>
+
+              <p className="col-span-2 text-sm flex">{event?.seller?.name}</p>
+            </div>
+            <div className="grid grid-cols-3 gap-1 space-x-2 ">
+              <p className="flex justify-between text-sm  ">
+                Location <span>:</span>
+              </p>
+
+              <p className="col-span-2 text-sm  flex">
+                {" "}
+                {event?.location?.name}, {event?.location?.state?.name}
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-1 space-x-2 ">
+              <p className="flex justify-between text-sm">
+                Start Time <span>:</span>
+              </p>
+
+              <p className="col-span-2 text-sm flex   justify-start ">
+                {" "}
+                {moment(event.startDate).format(" Do-MMMM-YYYY")}{" "}
+                {moment(event.startDate).format(" ")}
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-1 space-x-2">
+              <p className="flex justify-between text-sm">
+                Close Time <span>:</span>
+              </p>
+
+              <p className="col-span-2  text-sm flex">
+                {" "}
+                {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
+                {moment(event.endDate).format(" ")}
+              </p>
+            </div>
+            <hr className="to-black shadow-2xl" />
+            <div className="mt-3">
+              <div className="flex w-full  justify-start space-x-2 m-1 ">
+                {registered ? (
+                  allowDownload ? (
+                    <>
+                      {event?.downloadableFile &&
+                        event?.downloadableFile?.url && (
+                          <a
+                            href={`${process.env.BASE_URL}${event?.downloadableFile?.url}`}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            <DocumentDownloadIcon className=" h-8 w-8 text-gray-600  border border-slate-600 rounded-md" />
+                          </a>
+                        )}
+                    </>
+                  ) : (
+                    <>
+                      <button onClick={() => showAlertModal()}>
+                        <DocumentDownloadIcon className=" h-8 w-8 text-gray-600  border border-slate-600 rounded-md" />
+                      </button>
+                    </>
+                  )
+                ) : (
+                  <p className="font-poppins font-semibold text-sm">
+                    Registration Payment :{" "}
+                    <span className="text-orange-500 font-bold ">
+                      {registeredStatus ? registeredStatus : "Payment Nil"}
+                    </span>
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {showAlert && (

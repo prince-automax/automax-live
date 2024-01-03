@@ -195,7 +195,7 @@ export default function Navbar() {
                             <Link href={item.href} key={item.name}>
                               <a
                                 onClick={close}
-                                className="block px-3  py-2 rounded-md text-base font-medium text-[#747474] hover:text-gray-900 hover:bg-gray-50"
+                                className="block px-3 focus:ring-0 ring-offset-0  focus:outline-none  py-2 rounded-md text-base font-medium text-[#747474] hover:text-gray-900 hover:bg-gray-50"
                               >
                                 {item.name}
                               </a>

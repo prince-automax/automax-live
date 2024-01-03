@@ -28,6 +28,8 @@ import { faCoffee, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../../utils/store";
 import withPrivateRoute from "../../utils/withPrivateRoute";
 import ImageCarouselModal from "@components/modals/ImageCarouselModal";
+import WorksheetCarsoul from "@components/modals/WorksheetCarsoul";
+
 
 const OpenBidDetails = () => {
   const router = useRouter();
@@ -170,10 +172,10 @@ const OpenBidDetails = () => {
 
                   <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
                     <p className="text-base font-semibold tracking-wide">
-                      Asset Location
+                   Vehicle Modal
                     </p>
                     <p className="text-base font-normal tracking-wide text-gray-800">
-                      {item.address}
+                      {item.address ? item?.address : '-'}
                     </p>
                   </div>
 
@@ -182,6 +184,14 @@ const OpenBidDetails = () => {
                       {hasOpenBidPayment ? (
                         openBidPayment ? (
                           <div>
+                              <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
+                              <p className="text-base font-semibold tracking-wide">
+                                Vehicle RegNO
+                              </p>
+                              <p className="text-base font-normal tracking-wide text-gray-800">
+                                {item.vehicleRegNo ? item.vehicleRegNo : "-"}
+                              </p>
+                            </div>
                             <div className="space-y-1 py-3 px-3 md:col-span-2 md:grid md:grid-cols-2 border ">
                               <p className="text-base font-semibold tracking-wide">
                                 Reserve Price

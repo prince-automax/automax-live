@@ -2937,7 +2937,7 @@ export type SellACar = {
   fuel?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   interiorImages?: Maybe<Scalars['String']>;
-  kmReading?: Maybe<Scalars['String']>;
+  kmRead?: Maybe<Scalars['String']>;
   landmark?: Maybe<Scalars['String']>;
   make?: Maybe<Scalars['String']>;
   model?: Maybe<Scalars['String']>;
@@ -2962,7 +2962,7 @@ export type SellACarCreateInput = {
   exteriorImages?: InputMaybe<Scalars['String']>;
   fuel?: InputMaybe<Scalars['String']>;
   interiorImages?: InputMaybe<Scalars['String']>;
-  kmReading?: InputMaybe<Scalars['String']>;
+  kmRead?: InputMaybe<Scalars['String']>;
   landmark?: InputMaybe<Scalars['String']>;
   make?: InputMaybe<Scalars['String']>;
   model?: InputMaybe<Scalars['String']>;
@@ -2994,7 +2994,7 @@ export type SellACarOrderByInput = {
   fuel?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   interiorImages?: InputMaybe<OrderDirection>;
-  kmReading?: InputMaybe<OrderDirection>;
+  kmRead?: InputMaybe<OrderDirection>;
   landmark?: InputMaybe<OrderDirection>;
   make?: InputMaybe<OrderDirection>;
   model?: InputMaybe<OrderDirection>;
@@ -3035,7 +3035,7 @@ export type SellACarUpdateInput = {
   exteriorImages?: InputMaybe<Scalars['String']>;
   fuel?: InputMaybe<Scalars['String']>;
   interiorImages?: InputMaybe<Scalars['String']>;
-  kmReading?: InputMaybe<Scalars['String']>;
+  kmRead?: InputMaybe<Scalars['String']>;
   landmark?: InputMaybe<Scalars['String']>;
   make?: InputMaybe<Scalars['String']>;
   model?: InputMaybe<Scalars['String']>;
@@ -3064,7 +3064,7 @@ export type SellACarWhereInput = {
   fuel?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
   interiorImages?: InputMaybe<StringFilter>;
-  kmReading?: InputMaybe<StringFilter>;
+  kmRead?: InputMaybe<StringFilter>;
   landmark?: InputMaybe<StringFilter>;
   make?: InputMaybe<StringFilter>;
   model?: InputMaybe<StringFilter>;
