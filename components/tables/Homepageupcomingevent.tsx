@@ -18,7 +18,7 @@ import {
 import graphQLClient from "@utils/useGQLQuery";
 import Router from "next/router";
 
-export default function UpcomingEventHomePage({
+export function UpcomingEventHomePage({
   showHeadings,
   hideSearch,
   allowDownload,
