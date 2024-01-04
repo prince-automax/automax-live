@@ -21,7 +21,7 @@ import Router from "next/router";
 import Link from "next/link";
 import DataTableUILoggedIn from "../ui/DataTableUILoggedIn";
 
-export default function LiveEventHomePage({
+export  function LiveEventHomePage({
   showHeadings,
   hideSearch,
   allowDownload,
