@@ -1,5 +1,5 @@
-import {UpcomingEventHomePage} from "../tables/UpcomingEventHomePage"
-import {LiveEventHomePage} from "../tables/LiveEventHomePage"
+import {UpcomingEventHomePage} from "../tables/Homepageupcomingevent"
+import {LiveEventHomePage} from "../tables/Homepageliveevent"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
