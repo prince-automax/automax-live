@@ -314,7 +314,7 @@ function MobielViewCard({
             </div>
             <hr className="to-black shadow-2xl" />
             <div className="mt-3">
-              <div className="flex w-full  justify-start space-x-2 m-1 ">
+              {/* <div className="flex w-full  justify-start space-x-2 m-1 ">
                 {registered ? (
                   allowDownload ? (
                     <>
@@ -344,7 +344,7 @@ function MobielViewCard({
                     </span>
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -35,6 +35,9 @@ export default function UpcomingEventsTable({
     }
   }, []);
 
+  console.log('registeredStatus from upcoming',registeredStatus);
+  
+
   const variables = {
     skip: 0,
     take: 10,
@@ -44,6 +47,9 @@ export default function UpcomingEventsTable({
       graphQLClient({ Authorization: `Bearer ${accessToken}` }),
       variables
     );
+
+    console.log('data from upcoming event',data);
+    
 
   useEffect(() => {
     refetch();
