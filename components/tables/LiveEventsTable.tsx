@@ -52,6 +52,9 @@ export default function EventsTable({
     variables
   );
 
+  console.log('data from live event login  page',data);
+  
+
   useEffect(() => {
     refetch();
   }, [data]);
@@ -98,10 +101,7 @@ export default function EventsTable({
       accessor: "seller.name",
     },
     { Header: "Event Type", accessor: "eventCategory" },
-    {
-      Header: "State",
-      accessor: "location.state.name",
-    },
+ 
     {
       Header: "Vehicle",
       accessor: "vehiclesCount",
