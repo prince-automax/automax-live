@@ -298,6 +298,9 @@ function Events() {
                   (wb) => wb.registrationNumber === item.registrationNumber
                 );
 
+              console.log('item from live event',item?.yearOfManufacture);
+              
+
                 return (
                   <div
                     key={`d${index}`}

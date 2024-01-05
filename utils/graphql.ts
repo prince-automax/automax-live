@@ -4622,7 +4622,7 @@ export type LiveEventsQueryVariables = Exact<{
 }>;
 
 
-export type LiveEventsQuery = { __typename?: 'Query', liveEvents?: Array<{ __typename?: 'Event', id: string, eventNo?: number | null, eventCategory?: string | null, startDate?: any | null, endDate?: any | null, noOfBids?: number | null, termsAndConditions?: string | null, vehiclesCount?: number | null, seller?: { __typename?: 'Seller', name?: string | null } | null, eventType?: Array<{ __typename?: 'EventType', name?: string | null }> | null, location?: { __typename?: 'Location', name?: string | null, country?: string | null, city?: string | null, state?: { __typename?: 'State', name?: string | null } | null } | null, ExcelFile?: { __typename?: 'ExcelUpload', file?: { __typename?: 'FileFieldOutput', url: string } | null } | null, downloadableFile?: { __typename?: 'FileFieldOutput', url: string } | null } | null> | null };
+export type LiveEventsQuery = { __typename?: 'Query', liveEvents?: Array<{ __typename?: 'Event', id: string, eventNo?: number | null, eventCategory?: string | null, startDate?: any | null, endDate?: any | null, noOfBids?: number | null, termsAndConditions?: string | null, vehiclesCount?: number | null, seller?: { __typename?: 'Seller', name?: string | null } | null, eventType?: Array<{ __typename?: 'EventType', name?: string | null }> | null, location?: { __typename?: 'Location', name?: string | null, country?: string | null, city?: string | null, state?: { __typename?: 'State', name?: string | null } | null } | null, ExcelFile?: { __typename?: 'ExcelUpload', file?: { __typename?: 'FileFieldOutput', url: string } | null } | null, downloadableFile?: { __typename?: 'FileFieldOutput', url: string } | null, vehicles?: Array<{ __typename?: 'Vehicle', id: string }> | null } | null> | null };
 
 export type UpcomingEventsQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']>;
@@ -4876,6 +4876,14 @@ export type UniqueuserWorkSheetQueryVariables = Exact<{
 
 
 export type UniqueuserWorkSheetQuery = { __typename?: 'Query', workSheet?: { __typename?: 'WorkSheet', chassis?: string | null, createdAt?: any | null, engineNo?: string | null, id: string, image1?: string | null, image2?: string | null, image3?: string | null, image4?: string | null, image5?: string | null, make?: string | null, model?: string | null, registrationNumber?: string | null, vehicleCondition?: string | null, varient?: string | null } | null };
+
+export type WorksheetUpdateMutationVariables = Exact<{
+  where: WorkSheetWhereUniqueInput;
+  data: WorkSheetUpdateInput;
+}>;
+
+
+export type WorksheetUpdateMutation = { __typename?: 'Mutation', updateWorkSheet?: { __typename?: 'WorkSheet', id: string } | null };
 
 
 export const SendOtpDocument = `
@@ -5147,6 +5155,9 @@ export const LiveEventsDocument = `
     }
     termsAndConditions
     vehiclesCount
+    vehicles {
+      id
+    }
   }
 }
     `;
@@ -6374,5 +6385,25 @@ export const useUniqueuserWorkSheetQuery = <
     useQuery<UniqueuserWorkSheetQuery, TError, TData>(
       ['uniqueuserWorkSheet', variables],
       fetcher<UniqueuserWorkSheetQuery, UniqueuserWorkSheetQueryVariables>(client, UniqueuserWorkSheetDocument, variables, headers),
+      options
+    );
+export const WorksheetUpdateDocument = `
+    mutation WorksheetUpdate($where: WorkSheetWhereUniqueInput!, $data: WorkSheetUpdateInput!) {
+  updateWorkSheet(where: $where, data: $data) {
+    id
+  }
+}
+    `;
+export const useWorksheetUpdateMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<WorksheetUpdateMutation, TError, WorksheetUpdateMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<WorksheetUpdateMutation, TError, WorksheetUpdateMutationVariables, TContext>(
+      ['WorksheetUpdate'],
+      (variables?: WorksheetUpdateMutationVariables) => fetcher<WorksheetUpdateMutation, WorksheetUpdateMutationVariables>(client, WorksheetUpdateDocument, variables, headers)(),
       options
     );
