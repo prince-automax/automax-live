@@ -65,19 +65,12 @@ export function UpcomingEventHomePage({
       Header: "Event Type",
       accessor: "eventCategory",
     },
-    {
-      Header: "State",
-      accessor: "location.state.name",
-    },
+ 
     {
       Header: "Location",
       accessor: "location.name",
     },
-    {
-      Header: "Vehicle",
-      accessor: "vehiclesCount",
-      Cell: ({ cell: { value } }) => (value ? value : ""),
-    },
+ 
     {
       Header: "Category",
       accessor: "eventType",
@@ -101,9 +94,13 @@ export function UpcomingEventHomePage({
             <Loader />
           ) : (
             <>
-              {/* {data &&
+              {data &&
                 data?.upcomingEvents &&
-                data?.upcomingEvents?.length > 0 && ( */}
+                data?.upcomingEvents?.length === 0 && (
+                    <p className="mt-px text-xl font-extrabold text-gray-900 tracking-tight sm:text-xl animate-pulse">
+                  NO UPCOMING EVENTS ...
+                </p>)
+}
               <>
                 <div className="sm:hidden">
                   {data?.upcomingEvents?.map((event, eventIdx) => {

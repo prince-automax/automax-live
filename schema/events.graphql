@@ -62,6 +62,9 @@ query LiveEvents($take: Int!, $skip: Int!, $where: EventWhereInput) {
 }
     termsAndConditions
     vehiclesCount
+     vehicles {
+    id
+  } 
   }
 }
 

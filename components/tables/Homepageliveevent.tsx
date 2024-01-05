@@ -61,6 +61,9 @@ export  function LiveEventHomePage({
     variablesLive
   );
 
+  console.log('data from live event home page',data);
+  
+
   useEffect(() => {
     refetch();
   }, [data]);
@@ -76,15 +79,8 @@ export  function LiveEventHomePage({
       accessor: "seller.name",
     },
     { Header: "Event Type", accessor: "eventCategory" },
-    {
-      Header: "State",
-      accessor: "location.state.name",
-    },
-    {
-      Header: "Vehicle",
-      accessor: "vehiclesCount",
-      Cell: ({ cell: { value } }) => (value ? value : ""),
-    },
+   
+  
     {
       Header: "Location",
       accessor: "location.name",
@@ -108,8 +104,8 @@ export  function LiveEventHomePage({
           {showHeadings && (
             <div className=" ">
               {data?.liveEvents?.length == 0 && (
-                <p className="mt-px text-3xl font-extrabold text-gray-900 tracking-tight sm:text-3xl animate-pulse">
-                  No Live Events ...
+                <p className="mt-px text-xl font-extrabold text-gray-900 tracking-tight sm:text-xl animate-pulse">
+                  NO LIVE EVENTS ...
                 </p>
               )}
               {/* <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">

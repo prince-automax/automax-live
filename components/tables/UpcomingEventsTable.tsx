@@ -95,10 +95,7 @@ export default function UpcomingEventsTable({
       Header: "Event Type",
       accessor: "eventCategory",
     },
-    {
-      Header: "State",
-      accessor: "location.state.name",
-    },
+  
     {
       Header: "Location",
       accessor: "location.name",
