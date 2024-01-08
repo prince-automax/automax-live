@@ -97,10 +97,10 @@ function Vehicle() {
   
 
   let [tabs] = useState({
-    "General Details": [],
+    "General ": [],
     Registration: [],
     Insurance: [],
-    "Other Details": [],
+    "Other ": [],
   });
 
   useEffect(() => {

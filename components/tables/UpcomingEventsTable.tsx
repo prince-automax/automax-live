@@ -48,7 +48,7 @@ export default function UpcomingEventsTable({
       variables
     );
 
-    console.log('data from upcoming event',data);
+    // console.log('data from upcoming event',data);
     
 
   useEffect(() => {
@@ -64,14 +64,20 @@ export default function UpcomingEventsTable({
       }
     );
 
+    console.log('user data for libin',userData);
+
+    
   const payment = userData ? userData["user"]?.payments : "";
+
+  console.log('payment of libin',payment);
+  
 
   useEffect(() => {
     if (payment) {
       // console.log('00');
 
       payment?.map((item) => {
-        // console.log('963',item.paymentFor);
+        console.log('963',item);
         if (item.paymentFor === "registrations") {
           if (item.status === "success") {
             setRegistered(true);
