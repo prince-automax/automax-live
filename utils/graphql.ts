@@ -1011,6 +1011,7 @@ export type FindAuction = {
   state?: Maybe<State>;
   tenderDocument?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  vehicleModel?: Maybe<Scalars['String']>;
   vehicleRegNo?: Maybe<Scalars['String']>;
 };
 
@@ -1030,6 +1031,7 @@ export type FindAuctionCreateInput = {
   reservePrice?: InputMaybe<Scalars['BigInt']>;
   state?: InputMaybe<StateRelateToOneForCreateInput>;
   tenderDocument?: InputMaybe<Scalars['String']>;
+  vehicleModel?: InputMaybe<Scalars['String']>;
   vehicleRegNo?: InputMaybe<Scalars['String']>;
 };
 
@@ -1056,6 +1058,7 @@ export type FindAuctionOrderByInput = {
   reservePrice?: InputMaybe<OrderDirection>;
   tenderDocument?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
+  vehicleModel?: InputMaybe<OrderDirection>;
   vehicleRegNo?: InputMaybe<OrderDirection>;
 };
 
@@ -1107,6 +1110,7 @@ export type FindAuctionUpdateInput = {
   reservePrice?: InputMaybe<Scalars['BigInt']>;
   state?: InputMaybe<StateRelateToOneForUpdateInput>;
   tenderDocument?: InputMaybe<Scalars['String']>;
+  vehicleModel?: InputMaybe<Scalars['String']>;
   vehicleRegNo?: InputMaybe<Scalars['String']>;
 };
 
@@ -1132,6 +1136,7 @@ export type FindAuctionWhereInput = {
   state?: InputMaybe<StateWhereInput>;
   tenderDocument?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  vehicleModel?: InputMaybe<StringFilter>;
   vehicleRegNo?: InputMaybe<StringFilter>;
 };
 
@@ -4607,6 +4612,13 @@ export type CreateContactUsMutationVariables = Exact<{
 
 export type CreateContactUsMutation = { __typename?: 'Mutation', createContactUs?: { __typename?: 'ContactUs', id: string } | null };
 
+export type DeleteUserMutationVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser?: { __typename?: 'User', id: string, firstName?: string | null } | null };
+
 export type EventsQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']>;
   skip: Scalars['Int'];
@@ -5073,6 +5085,27 @@ export const useCreateContactUsMutation = <
     useMutation<CreateContactUsMutation, TError, CreateContactUsMutationVariables, TContext>(
       ['CreateContactUs'],
       (variables?: CreateContactUsMutationVariables) => fetcher<CreateContactUsMutation, CreateContactUsMutationVariables>(client, CreateContactUsDocument, variables, headers)(),
+      options
+    );
+export const DeleteUserDocument = `
+    mutation deleteUser($where: UserWhereUniqueInput!) {
+  deleteUser(where: $where) {
+    id
+    firstName
+  }
+}
+    `;
+export const useDeleteUserMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<DeleteUserMutation, TError, DeleteUserMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<DeleteUserMutation, TError, DeleteUserMutationVariables, TContext>(
+      ['deleteUser'],
+      (variables?: DeleteUserMutationVariables) => fetcher<DeleteUserMutation, DeleteUserMutationVariables>(client, DeleteUserDocument, variables, headers)(),
       options
     );
 export const EventsDocument = `
