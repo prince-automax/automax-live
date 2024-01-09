@@ -88,6 +88,7 @@ export default function Navbar() {
       current: router.pathname == "/sellacar" ? true : false,
       icon: <FontAwesomeIcon icon={faCar} />,
     },
+ 
   ];
 
   return (
