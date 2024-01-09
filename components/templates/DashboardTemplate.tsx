@@ -172,6 +172,7 @@ useEffect(() => {
   ];
 
   const accountNavigations = [
+
     {
       name: "Profile",
       href: "/profile",
