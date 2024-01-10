@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/outline";
 import moment from "moment";
 
-const DataTableUILoggedIn = ({
+ const DataTableUILoggedIn = ({
   index1,
   event,
   allowDownload,
@@ -55,7 +55,7 @@ const DataTableUILoggedIn = ({
           </p>
         </div>
         <hr className="to-black shadow-2xl" />
-        {/* <div className="space-x-3 flex items-center  m-2  ">
+        <div className="space-x-3 flex items-center  m-2  ">
           {registered && (
             <div>
               <a
@@ -96,7 +96,7 @@ const DataTableUILoggedIn = ({
               <span className="text-orange-500 font-bold ">{registeredStatus? registeredStatus:"Payment Nil"}</span>
             </p>
           )}
-        </div> */}
+        </div>
       </div>
     </div>
   );

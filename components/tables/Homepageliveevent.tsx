@@ -19,7 +19,7 @@ import {
 import graphQLClient from "@utils/useGQLQuery";
 import Router from "next/router";
 import Link from "next/link";
-import DataTableUILoggedIn from "../ui/DataTableUILoggedIn";
+import DataTableUILogout from "../ui/DataTableUILogout";
 
 export  function LiveEventHomePage({
   showHeadings,
@@ -325,7 +325,7 @@ function MobielViewCard({
   return (
     <>
       <div className="w-full">
-        <DataTableUILoggedIn
+        <DataTableUILogout
           index1={index1}
           event={event}
           allowDownload={allowDownload}
