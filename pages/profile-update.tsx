@@ -111,7 +111,7 @@ function ProfileUpdate() {
       }
     );
 
-    // console.log("data from profiel updarte0",data);
+    console.log("data from profiel updarte0",data);
     
 
   const { data: duplicateEmailCheckData } = useDuplicateDataCheckQuery(
@@ -368,6 +368,7 @@ function ProfileUpdate() {
                           label="First Name"
                           width="w-full"
                           placeholder="First Name"
+                          disabled
                         />
                       </div>
 
@@ -379,6 +380,7 @@ function ProfileUpdate() {
                           label="Last Name"
                           width="w-full"
                           placeholder="Last Name"
+                          disabled
                         />
                       </div>
 
