@@ -48,7 +48,7 @@ export default function UpcomingEventsTable({
       variables
     );
 
-    // console.log('data from upcoming event',data);
+    console.log('data from upcoming event',data);
     
 
   useEffect(() => {
@@ -128,7 +128,7 @@ export default function UpcomingEventsTable({
       Cell: ({ cell: { value } }) => EndDate(value),
     },
     {
-      Header: "Action",
+      Header: "Download",
       accessor: "downloadableFile",
       Cell: ({ cell: { value } }) =>
         registered ? (
@@ -138,7 +138,7 @@ export default function UpcomingEventsTable({
           />
         ) : (
           <span className="text-bold text-red-500 text-sm">
-            {registeredStatus}{" "}
+            {registeredStatus ? registeredStatus  : "pending for approval"}{" "}
           </span>
         ),
     },
