@@ -109,19 +109,19 @@ const id = localStorage.getItem("id");
     []
   );
   if (error) {
-    console.log("Error fetching payments data:", error);
+    
     return <div>Error fetching payments data</div>;
   }
-  console.log("%%%%0000000",data?.user?.payments);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
   
  
   if (data?.user?.payments === undefined) {
-    console.log("data.user.payments is undefined");
+   
   } else {
-    console.log("data.user.payments is defined");
+    
   }
   
 

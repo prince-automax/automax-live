@@ -93,7 +93,7 @@ function MyQuotes() {
             enabled: accessToken != "" && userId != "",
         }
     );
-    console.log("thi is data",data);
+  
     
     const callUpdateVehicle =
         useUpdateVehicleMutation<UpdateVehicleMutationVariables>(

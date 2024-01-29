@@ -45,6 +45,9 @@ export default function EventsTable({
     variables
   );
 
+
+  
+
   const { data: userData, isLoading: loading } =
     useGetUserQuery<GetUserQueryVariables>(
       graphQLClient({ Authorization: `Bearer ${accessToken}` }),
@@ -61,10 +64,10 @@ export default function EventsTable({
 
   useEffect(() => {
     if (payment) {
-      console.log("00");
+   
 
       payment?.map((item) => {
-        console.log("963", item.paymentFor);
+      
         if (item.paymentFor === "registrations") {
           if (item.status === "success") {
             setRegistered(true);
@@ -72,9 +75,9 @@ export default function EventsTable({
             setRegisteredStatus(item.status);
           }
 
-          console.log("trueeeee");
+          
         } else {
-          console.log("falseeeeeeeeeee");
+    
         }
       });
     }

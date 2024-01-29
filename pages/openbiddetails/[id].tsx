@@ -107,7 +107,7 @@ const OpenBidDetails = () => {
       },
     });
 
-  console.log("findunique data", data);
+  
 
   const listingId = (data as { findAuctions?: any[] })?.findAuctions?.map(
     (item, index) => item.listingId
@@ -422,7 +422,7 @@ const OpenBidDetails = () => {
 export default withPrivateRoute(OpenBidDetails);
 
 const DownloadButton = (file) => {
-  console.log("download file", file);
+
 
   const handleDownload = () => {
     const link = document.createElement("a");

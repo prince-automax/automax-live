@@ -61,7 +61,6 @@ export  function LiveEventHomePage({
     variablesLive
   );
 
-  console.log('data from live event home page',data);
   
 
   useEffect(() => {
@@ -164,7 +163,7 @@ LiveEventHomePage.defaultProps = {
 };
 
 function vechileCount(value) {
-  console.log("vechilecount", value);
+ 
 
   return (
     <div>
@@ -174,7 +173,7 @@ function vechileCount(value) {
 }
 
 function View(value, eventCategory) {
-  console.log("view", eventCategory);
+ 
 
   return (
     <div>
@@ -251,7 +250,7 @@ function EndDate(value) {
 }
 
 function DownloadButton({ file, allowDownload }) {
-  // console.log("file",file);
+
 
   const [showAlert, setShowAlert] = useState(false);
 

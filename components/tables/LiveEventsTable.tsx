@@ -52,7 +52,7 @@ export default function EventsTable({
     variables
   );
 
-  console.log('data from live event login  page',data);
+
   
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function EventsTable({
 
   const payment = userData ? userData["user"]?.payments : "";
 
-  console.log("payment from live table", payment);
+  
 
   useEffect(() => {
     if (payment) {
@@ -221,7 +221,7 @@ EventsTable.defaultProps = {
 };
 
 function vechileCount(value) {
-  console.log("vechilecount", value);
+
 
   return (
     <div>
@@ -231,7 +231,7 @@ function vechileCount(value) {
 }
 
 function View(value, eventCategory) {
-  console.log("view", eventCategory);
+ 
 
   return (
     <div>
@@ -308,7 +308,7 @@ function EndDate(value) {
 }
 
 function DownloadButton({ file, allowDownload }) {
-  // console.log("file",file);
+
 
   const [showAlert, setShowAlert] = useState(false);
 

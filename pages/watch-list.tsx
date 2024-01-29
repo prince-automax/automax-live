@@ -98,7 +98,7 @@ function WatchList() {
     graphQLClient({ Authorization: `Bearer ${accessToken}` })
   );
 
-  //  console.log('workbook',workbook)
+
 
 
   useEffect(()=>{
@@ -284,8 +284,9 @@ refetch()
             ?.filter((item) => item.vehicleEventStatus == "live")
             .map((item, index) => {
 
-              const find= (workbook?.workSheets as any[] | undefined)?.filter((wb)=> wb.registrationNumber===item.registrationNumber )
-              console.log('findwatch',find);
+              const find= (workbook?.workSheets as any[] | undefined)?.filter((wb)=> wb?.registrationNumber===item?.registrationNumber )
+            console.log('from watchlist',item);
+            
               return (
               <div
                 key={`d${index}`}
@@ -298,24 +299,26 @@ refetch()
               >
                  
 
-                {item?.rightImage && (
+                {item?.frontImage
+ && (
                   <div className="flex-none w-70 h-56  sm:max-md:h-56 sm:max-md:w-full md:h-auto sm:w-60 relative p-6 hover:cursor-pointer"
                   onClick={() => {
                     // BindVehicleImage(item);
-                    setImages((item?.rightImage).split(','))
+                    setImages((item?.frontImage
+).split(','))
                     setShowImageCarouselModal(true);
                   }}
                   >
                     <Image
                       alt=""
-                      src={item?.rightImage}
+                      src={item?.frontImage}
                       layout="fill"
                       className="absolute inset-0 w-full h-full object-cover rounded"
                     />
                   </div>
                 )}
                 <div className="flex-auto p-3 lg:space-y-4 sm:p-6">
-                <div className="mb-3">{find.length>0 && (<Link  href={`/workbook/${find[0].id}`}><a  target="_blank" rel="noopener noreferrer" title="Click here to view the workbook" className="bg-blue-700 p-2 cursor-pointer rounded-md text-white animate-pulse">WorkBook matched</a></Link>)}</div>
+                <div className="mb-3">{find?.length>0 && (<Link  href={`/workbook/${find[0].id}`}><a  target="_blank" rel="noopener noreferrer" title="Click here to view the workbook" className="bg-blue-700 p-2 cursor-pointer rounded-md text-white animate-pulse">WorkBook matched</a></Link>)}</div>
 
                   <div className="sm:flex flex-wrap">
                     <div className="flex-auto">

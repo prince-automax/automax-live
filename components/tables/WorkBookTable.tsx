@@ -175,7 +175,6 @@ function MobielViewCard({
 }) {
   const [showAlert, setShowAlert] = useState(false);
 
-  console.log("workbook", event);
 
   const showAlertModal = () => {
     setShowAlert(true);

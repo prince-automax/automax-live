@@ -42,14 +42,14 @@ const SearchableComponent = ({
   const [selectedItems, setSelectedItems] = useState({});
 
   useEffect(() => {
-    console.log('test',formData !== null && formData !== undefined && formData[name]?formData[name]:'')
+  
     setSelectedItems(formData !== null && formData !== undefined && formData[name]?formData[name]:'');
    
   }, [formData])
 
   // Function to handle item selection
   const handleSelect = (selectedItem) => {
-    console.log("selectedItem00001", selectedItem);
+   
 
      onSelect(selectedItem); // Call the onSelect prop with the selected item
      setSearchTermLocal(''); // Clear local search term after selection
@@ -64,27 +64,27 @@ const SearchableComponent = ({
     switch (name) {
       case "yearOfManufacture":
         setActiveTab(3);
-        console.log("yearOfManufacture");
+  
         break;
       case "body":
         setActiveTab(6);
-        console.log("reached body");
+      
         break;
       case "kmReading":
         setActiveTab(8);
-        console.log("reached kmReading");
+   
         break;
       case "fuel":
         setActiveTab(9);
-        console.log("reached fuel");
+   
         break;
       case "vehicleCondition":
         setActiveTab(10);
-        console.log("reached vehicleCondition");
+     
         break;
       case "veicleLocation":
         setActiveTab(11);
-        console.log("reached vehicleLocation");
+       
         break;
       default:
     }

@@ -35,7 +35,7 @@ export default function Contact() {
     );
 
   const onSubmitData=async(values ,{ resetForm })=>{
-    console.log("777",values);
+   
 
     const result = await callCreateContactus.mutateAsync({
       data:{

@@ -35,7 +35,13 @@ import InspectionReportModal from "@components/modals/InspectionReportModal";
 import ImageCarouselModal from "@components/modals/ImageCarouselModal";
 import Swal from "sweetalert2";
 // import TermsAndCondtionsModal from  "@components/modals/TermsAndConditionModal"
+import {
+  faThumbsUp,
+faThumbsDown,
+faUserSlash
+} from "@fortawesome/free-solid-svg-icons";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Events() {
   const router = useRouter();
   const { id, type } = router.query;
@@ -55,12 +61,10 @@ function Events() {
   const [wathclistVehicls, setWatchlistvehicls] = useState([]);
   const [demo, setDemo] = useState([]);
 
-
   // useEffect(()=>{
   //   TermsAndCondtionsModal()
   // },[])
 
- 
   const handleClick = () => {
     setShowCode(!showCode);
   };
@@ -110,8 +114,6 @@ function Events() {
     },
     { cacheTime: 5, refetchInterval: interval, enabled: accessToken !== "" }
   );
-
-  console.log("data", data);
 
   const {
     data: workbook,
@@ -297,9 +299,6 @@ function Events() {
                 )?.filter(
                   (wb) => wb.registrationNumber === item.registrationNumber
                 );
-
-              console.log('item from live event',item?.yearOfManufacture);
-              
 
                 return (
                   <div
@@ -626,22 +625,22 @@ function Events() {
                                 <span>Quote Increment</span>
                                 <span>{item?.quoteIncreament}</span>
                               </div>
-                              <div className="flex items-center justify-between text-xs text-gray-700">
+                              <div className="flex  items-center justify-between text-xs text-gray-700">
                                 <span>Current Status</span>
                                 {item.userVehicleBidsCount && item.myBidRank ? (
                                   item.myBidRank == 1 ? (
-                                    <span style={{ color: "#00CC00" }}>
-                                      Winning
-                                    </span>
+                                    <p className="space-x-2"><FontAwesomeIcon icon={faThumbsUp} /><span style={{ color: "#00CC00" }}>
+                                    Winning
+                                  </span></p>
                                   ) : (
-                                    <span style={{ color: "#FF3333" }}>
-                                      Losing
-                                    </span>
+                                 <p className="space-x-2"> <FontAwesomeIcon icon={faThumbsDown} />  <span style={{ color: "#FF3333" }}>
+                                 Losing
+                               </span></p>
                                   )
                                 ) : (
-                                  <span style={{ color: "#CCCC00" }}>
-                                    Not Enrolled
-                                  </span>
+                                  <p className="space-x-2"><FontAwesomeIcon icon={faUserSlash} /> <span style={{ color: "#CCCC00" }}>
+                                  Not Enrolled
+                                </span></p>
                                 )}
                               </div>
                             </div>

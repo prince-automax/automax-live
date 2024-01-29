@@ -3,10 +3,10 @@
   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
   const WelcomePage = ({index}) => {
 
-    console.log("reached here in sellacarotp comp");
+ 
     const handleSetComponents = () => {
-        console.log("reached here");
-      // You can call the setComponents function here
+      
+     
       index(3);
     };
 

@@ -38,7 +38,7 @@ const DeleteUser = () => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
       const id = localStorage.getItem("id");
-      console.log("token from local",token);
+
       
 
       setAccessToken(token);
@@ -46,9 +46,9 @@ const DeleteUser = () => {
       setUsrid(id);
 
       if(token){
-        console.log('inside if condition');
+      
         
-        console.log('access',accessToken);
+      
          
         setOtpVerification(false)
         setDeleteMessage(true);
@@ -58,12 +58,10 @@ const DeleteUser = () => {
 
 
   useEffect(()=>{
- console.log('in useseffect');
+
  
     if(accessToken){
-      console.log('inside if condition');
-      
-      console.log('access',accessToken);
+    
        
       setOtpVerification(false)
       setDeleteMessage(true);
@@ -170,7 +168,7 @@ const DeleteUser = () => {
   }
 
   async function CallOTPVerify() {
-    console.log("enetred for otp verify   01");
+    
 
     let isValid = true;
     if (!IsValidValue(otp)) {
@@ -181,7 +179,7 @@ const DeleteUser = () => {
       const result = await callVerifyOTP.mutateAsync({ mobile, token: otp });
 
       if (result.redeemUserMagicAuthToken["token"] === undefined) {
-        console.log("otp is no valid");
+      
 
         setError({ text: "Please enter a valid OTP." });
       }

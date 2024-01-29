@@ -208,7 +208,6 @@ useEffect(() => {
 
   const mobileNavigation=[...eventsNavigations,...activityNavigations,...accountNavigations]
 
-  // console.log('mobileNavigation',mobileNavigation);
   
 
   return (

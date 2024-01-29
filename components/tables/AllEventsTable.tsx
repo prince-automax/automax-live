@@ -72,7 +72,7 @@ export default function AllEventsTable({
   ];
   const eventdata = events.flat();
 
-  // console.log("liveevents", liveEvents);
+
 
   const columns = [
     {
@@ -171,22 +171,14 @@ AllEventsTable.defaultProps = {
 };
 
 function View(value, eventCategory, startDate) {
-  // console.log("$$", eventCategory, startDate);
+
   let currentDate = new Date();
   let eventStartDate = startDate;
 
   const CurrentDates = new Date(currentDate);
   const eventStartDates = new Date(eventStartDate);
 
-  //  if(eventStartDates > CurrentDates){
-  //   console.log('trueeeeeee');
-
-  //  }else{
-  //   console.log('falseeeeeee');
-
-  //  }
-
-  // console.log("$$", currentDate, startDate);
+  
 
   return (
     <>
@@ -230,7 +222,7 @@ function RenderEventTypes(eventTypes) {
 }
 
 function StartDate(value) {
-  // console.log("value form StartDate", value);
+
 
   return (
     <div>
@@ -323,9 +315,7 @@ AllEventsTable.defaultProps = {
 };
 
 function MobielViewCard({ index1, event, allowDownload }) {
-  // console.log("key", index1);
-  // console.log("event", event);
-  // console.log("allowDownload", allowDownload);
+
 
   const [showAlert, setShowAlert] = useState(false);
 

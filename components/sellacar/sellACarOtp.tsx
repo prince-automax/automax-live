@@ -110,7 +110,7 @@ const SellACarOtp = ({ index }) => {
   }
 
   async function CallOTPVerify() {
-    console.log("enetred for otp verify   01");
+  
 
     let isValid = true;
     if (!IsValidValue(otp)) {
@@ -123,7 +123,7 @@ const SellACarOtp = ({ index }) => {
 
 
       if (result.redeemUserMagicAuthToken["token"] === undefined) {
-        console.log("otp is no valid");
+     
 
         setError({ text: "Please enter a valid OTP." });
       }
