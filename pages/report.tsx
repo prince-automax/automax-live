@@ -22,7 +22,7 @@ if(typeof window !== 'undefined'){
     id=localStorage.getItem("id");
   }
 
-  console.log("this id from localstorage",id)
+
 
   
   
@@ -58,11 +58,9 @@ variables ,   {
     }
   );
   
-  // if (data?.where?.bidStatus?.equals && data.vehicles.length > 0) {
-  //   console.log("!!!", data.vehicles[0]);
-  // }
+ 
   const vehicle=vehicles?vehicles['vehicles'] : ''
-  console.log('!!!',vehicle);
+
   
   
 

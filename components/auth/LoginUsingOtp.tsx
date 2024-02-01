@@ -32,8 +32,7 @@ export default function LoginUsingOtp() {
   }));
 
 
-   console.log('first name',firstName);
-   console.log('Last name',lastName);
+
    
   const callOTPMutation = useSendOtpMutation<SendOtpMutationVariables>(
     graphQLClient()
@@ -99,7 +98,7 @@ export default function LoginUsingOtp() {
           },
         });
 
-        // console.log("user created using callcreateusermutation");
+   
 
         if (!result2.createUser?.id) {
           setVerificationMode(false);

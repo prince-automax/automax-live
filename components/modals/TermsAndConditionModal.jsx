@@ -6,7 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 
 const TermsAndConditionsModal = () => {
-    // console.log("entered in terms and conditions modal");
+  
     const [open, setOpen] = useState();
     const cancelButtonRef = useRef(null);
   return (

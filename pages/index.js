@@ -20,7 +20,7 @@ export default function Example() {
   const router = useRouter();
   const isLoggedIn =
     typeof window !== "undefined" && window.localStorage.getItem("token"); //typeof window !== 'undefined' check is used to prevent errors during server-side rendering when accessing the window object.
-  // console.log('oops',isLoggedIn);
+  
 
   useEffect(() => {
     if (isLoggedIn) {

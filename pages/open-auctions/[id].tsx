@@ -14,6 +14,13 @@ import {
   TrendingUpIcon,
   UserIcon,
 } from "@heroicons/react/outline";
+import {
+  faThumbsUp,
+faThumbsDown,
+faUserSlash
+} from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import withPrivateRoute from "../../utils/withPrivateRoute";
 import Image from "next/image";
 import PostThumb1 from "@assets/blog/C1.jpg";
@@ -93,10 +100,7 @@ function OpenAuctions() {
   const [showImageCarouselModal, setShowImageCarouselModal] = useState(false);
   const [images, setImages] = useState([]);
 
-  // console.log('upcoming',upcoming );
-  console.log('liveitem',liveItem);
-  // console.log("images",images)
-  console.log('bidamount',bidAmount);
+
   
   
 
@@ -147,7 +151,7 @@ function OpenAuctions() {
       }
     );
 
-    console.log(" data frm openauction",data);
+
     // let duration=data?.vehicles[0]?.event?.gapInBetweenVehicles
     
   const { data: bidHistory } = useSudoBidsQuery<SudoBidsQuery>(
@@ -192,8 +196,7 @@ function OpenAuctions() {
       
       );
       
-      console.log('live',live);
-      console.log('typeof',typeof(live));
+    
       
       const upcomingVehicles = data.vehicles.filter(
         (element) => element.vehicleEventStatus == "upcoming"
@@ -270,12 +273,12 @@ function OpenAuctions() {
     // expiry - server + tick
     try {
       if (liveItem) {
-        console.log('this is liveitem from openauction',liveItem)
+       
         
         const expiryTime = moment(liveItem.bidTimeExpire);
         const currentTime = moment(serverTime).add(tick, "seconds");
         const diff = expiryTime.diff(currentTime, "seconds");
-        console.log("differeenc",diff);
+       
         
         if (diff > 0) return moment.utc(diff * 1000).format("HH:mm:ss");
         else return "00:00:00";
@@ -291,7 +294,7 @@ function OpenAuctions() {
     let noUpcoming='no upcoming left'
     try {
       if(upcoming[0]){
-        // console.log('upcoming[0]',upcoming[0]);
+    
         let count=upcoming[0].length
         let string=count+""
        
@@ -300,8 +303,7 @@ function OpenAuctions() {
         const diff = startTime.diff(currentTime, "seconds");
         if (diff > 0) return moment.utc(diff * 1000).format("HH:mm:ss");
         else return "00:00:00";
-        // console.log('upcomingSecondsLeftDIFF',diff);
-        // console.log('upcomingSecondsLeft',startTime);
+      
         
       }
       return noUpcoming;
@@ -350,8 +352,7 @@ function OpenAuctions() {
           alt: "Right Image.",
         });
       }
-      console.log(vehicle);
-      console.log(tempImages);
+     
       setImages(tempImages);
     } else {
       setImages([]);
@@ -375,7 +376,7 @@ function OpenAuctions() {
   };
 
   const handleBidAmount=(price)=>{
-     console.log("ASDFGHJKL");
+    
      
     setBidAmount(bidAmount+price)
   }
@@ -1122,7 +1123,7 @@ export default withPrivateRoute(OpenAuctions);
 
 
 function counterLeftUpcoming(hhmmss: string,) {
-  console.log("**001",typeof(hhmmss));
+
 if(hhmmss==="no upcoming left"){
   return (
     <div className="flex justify-center font-extrabold items-center animate-pulse text-black-600 sm:text-xl md:text-2xl lg:text-3xl " style={{ minHeight: '80vh' }}>NO MORE  UPCOMING VECHILES  </div>
@@ -1175,7 +1176,7 @@ if(hhmmss==="no upcoming left"){
 
 
 function BidHistory(data,liveItem) {
-  console.log("zdata",data,'ydata',liveItem);
+
   var username = localStorage.getItem('username');
   var name = localStorage.getItem('name');
   // console.log('009',name);

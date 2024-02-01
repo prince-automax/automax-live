@@ -110,14 +110,14 @@
   //           },
   //         },
   //       });
-  //       console.log("cc: ", cc);
+  //     
   //       Swal.fire(
   //         'Success!',
   //         'Your bid has been submitted.',
   //         'success'
   //       );
   //     } catch (e) {
-  //       console.log("EEE: ", e);
+  //    
   //     }
   //   }
   // }

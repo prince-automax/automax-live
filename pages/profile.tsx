@@ -10,7 +10,7 @@ import Link from "next/link";
 
 function ProfilePage() {
   const id = localStorage.getItem("id");
-  console.log("this id from localstorage",id);
+ 
 
   const [accessToken, setAccessToken] = useState("");
 
@@ -46,7 +46,7 @@ function ProfilePage() {
       enabled: accessToken !== "",
     }
   );
-console.log("***",data);
+
 
 
   useEffect(() => {

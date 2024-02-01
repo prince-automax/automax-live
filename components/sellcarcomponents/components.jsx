@@ -56,11 +56,7 @@ export const SearchBrandComponent = ({
     }));
   };
 
-  // useEffect(() => {
-  //   console.log('test',formData !== null && formData !== undefined && formData[name]?formData[name]:'')
-  //   setSelectedItems(formData !== null && formData !== undefined && formData[name]?formData[name]:'');
 
-  // }, [formData])
 
   const handleSearch = (event) => {
     const { value } = event.target;
@@ -154,7 +150,7 @@ export const ModelComponent = ({
       ...prevData,
       [name]: model,
     }));
-    // console.log("fdsfdasf", model);
+  
     handleScroll("right");
   };
 
@@ -245,7 +241,7 @@ export const RegistrationNumber = ({
     searchTermLocal ? setIsValue(true) : setIsValue(false);
   }, [searchTermLocal]);
 
-  console.log("isvalid from REG", isValid);
+
 
   const [field, meta, helpers] = useField(name);
 
@@ -409,14 +405,14 @@ export const RegistrationStateComponent = ({
   }, [formData]);
 
   useEffect(() => {
-    // console.log("entereed boolean values");
+   
     if (selectedState) {
-      // console.log("data from boolean state", selectedState);
+     
       setStateBoolean(true);
     }
 
     if (selectedRto) {
-      // console.log("data from boolean rto", selectedRto);
+     
       setRtoBoolean(true);
     }
     // else{
@@ -425,7 +421,7 @@ export const RegistrationStateComponent = ({
   }, []);
 
   const handleStateSelect = (selectedItem) => {
-    // console.log("001", selectedItem);
+   
     setSelectedState(selectedItem);
 
     statehelpers.setValue(selectedItem.name);
@@ -464,7 +460,7 @@ export const RegistrationStateComponent = ({
   };
 
   const handleSearchRtoTerm = (value) => {
-    // console.log("RTO Term:", value);
+    
     setSearchRtoTerm(value); // Step 2
   };
 
@@ -479,7 +475,7 @@ export const RegistrationStateComponent = ({
       )
   );
 
-  // console.log("filteredStateRto111",filteredStateRto);
+ 
 
   return (
     <div className="flex flex-col items-start px-4 md:px-10  py-2 md:py-4 space-y-4  ">
@@ -865,7 +861,7 @@ export const UserDetails = ({ setFormData, formData }) => {
 
   const handleChange = (e) => {
     formik.setFieldValue(e.target.name, e.target.value);
-    // console.log("userDetails", e.target.name);
+   
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
@@ -971,7 +967,7 @@ export const ImageInterior = ({
   setFormData,
   formData,
 }) => {
-  console.log("interior from componrnr", Interorimage);
+
 
   const handleSelect = () => {
     // setFormData((prevData) => ({

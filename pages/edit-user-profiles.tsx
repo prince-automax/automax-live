@@ -61,7 +61,7 @@ function welcomeMessage(props) {
 
 function ProfileUpdate() {
   const id = localStorage.getItem("id");
-  // console.log("this id from localstorage", id);
+  
 
   // const token = localStorage.getItem("token");
   const [emailCheckData, setEmailCheckData] = useState("");
@@ -75,7 +75,7 @@ function ProfileUpdate() {
 
   useEffect(() => {
    
-    console.log(selectedState)
+  
     if(selectedState != null && selectedState != "")
     {
       
@@ -83,8 +83,7 @@ function ProfileUpdate() {
 
       const filteredC = cities.filter(c => c.state  ===  selectedState)
 
-      console.log("cities",cities)
-      console.log("filteredC",filteredC)
+    
       setFilteredCities(filteredC.map((city, index) => {
         return {
           label: city.city,
@@ -112,11 +111,11 @@ function ProfileUpdate() {
       }
     );
 
-    // console.log("222",data?.user?.pancard.url);
-    console.log("111",data);
+  
+    
 
     const pancard = data ? data["user"]?.pancard.url : "";
-    // console.log("pancard",pancard);
+  
     
     
     
@@ -245,7 +244,7 @@ function ProfileUpdate() {
   });
 
   const onSubmit = async (values) => {
-    console.log("value on submit", values );
+   
 
     const result = await callUpdateUserMutation.mutateAsync({
       data: {
@@ -276,7 +275,7 @@ function ProfileUpdate() {
     localStorage.setItem("name", `${values.firstName}`);
     // localStorage.setItem("username", `${values.firstName}`);
     let name = values.firstName;
-    // console.log("name form profile updation",name);
+  
     // welcomeMessage(name)
     Router.push("/dashboard");
     toast.success(`Welcome ${name}`);
@@ -361,7 +360,7 @@ function ProfileUpdate() {
             }}
           >
             {(props) => (
-              // console.log("this is props", props),
+       
               (
                 <Form>
                   <div className="space-y-3 mt-4 pb-4">
