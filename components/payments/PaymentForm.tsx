@@ -180,14 +180,14 @@ export default function PaymentForm() {
                 onChange={async (event) => {
                   try {
                     const file = event.target.files[0];
-                    // console.log("file before resizing", file);
+                  
 
                     const image = await ResizeImage(file);
-                    // console.log("image after resizing", image);
+                  
 
                     props.setFieldValue("proof", image);
                   } catch (err) {
-                    console.log(err);
+                  
                   }
                 }}
                 name="proof"

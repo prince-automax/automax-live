@@ -7,7 +7,6 @@ import TextArea from "./TextArea";
 
 function FormField(props) {
 
-  // console.log("PROPS",props);
   const { field, ...rest } = props;
   switch (field) {
     case "input":

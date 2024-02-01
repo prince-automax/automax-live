@@ -69,7 +69,7 @@ const Modal = ({isModalOpend,closeModals}) => {
 
 const onSubmit=async()=>{
 
-  console.log('entereed in onsubmit function');
+
   closeModals();
     try {
       const result=await userDeleteMutation.mutateAsync({
@@ -77,16 +77,14 @@ const onSubmit=async()=>{
     })
     
     toast.success('your Account has being successfully Deleted')
-    console.log('reuslt from delete user',result);
+   
   
     localStorage.clear();
     router.push(`/`);
  
     
     } catch (error) {
-      console.log('ASDFGHJKLPOIII');
-      
-      console.log('error',);
+     
       
     }
 }

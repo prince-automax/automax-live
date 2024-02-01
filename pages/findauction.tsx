@@ -135,7 +135,7 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
     },
   });
 
-  console.log('findauction',findAuction);
+ 
 
 
   
@@ -229,7 +229,7 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
     );
   }
   function DateFormat(value) {
-    // console.log("value form StartDate", value);
+
   
     return (
       <div>
@@ -519,7 +519,7 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
             {/* </div> */}
             {/* </div> */}
             {findAuction?.findAuctions.map((item, index) => {
-              // console.log("item in open bids", item);
+            
 
               return (
                 <div

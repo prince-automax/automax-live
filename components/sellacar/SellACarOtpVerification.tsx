@@ -3,64 +3,13 @@ import React from "react";
 ;
 
 const SellACarOtpVerification = ({index}) => {
-  console.log("reached here in sellacarotp comp");
+ 
   const handleSetComponents = () => {
-      console.log("reached here");
+  
     // You can call the setComponents function here
     index(3);
   };
 
-//   async function CallOTPVerify() {
-//     console.log("enetred for otp verify   01");
-    
-//     let isValid = true;
-//     if (!IsValidValue(otp)) {
-//         setError({ text: "Please enter a valid OTP." });
-//         isValid = false;
-//     }
-//     if (isValid) {
-//         console.log("enetred for otp verify   02");
-//         const result = await callVerifyOTP.mutateAsync({ mobile, token: otp });
-//         console.log("enetred for otp verify   03");
-//         console.log("result of verify OTP",result);
-        
-
-//         if (result.redeemUserMagicAuthToken["token"] === undefined) {
-//             console.log("otp is no valid");
-            
-//             setError({ text: "Please enter a valid OTP." });
-//         }
-
-//         if (result.redeemUserMagicAuthToken["token"]) {
-//             console.log("enetred for otp verify   04");
-//             localStorage.setItem("token", result.redeemUserMagicAuthToken["token"]);
-//             localStorage.setItem(
-//                 "id",
-//                 result.redeemUserMagicAuthToken["item"]["id"]
-//             );
-//             localStorage.setItem(
-//                 "status",
-//                 result.redeemUserMagicAuthToken["item"]["status"]
-//             );
-//             localStorage.setItem(
-//                 "name",
-//                 result.redeemUserMagicAuthToken["item"]["firstName"]
-//             );
-
-//             setToken(result.redeemUserMagicAuthToken["token"]);
-//             setMobile("");
-//             setVerificationMode(false);
-//             setSuccess({
-//                 text: "You have been successfully logged in.",
-//             });
-//             router.push(`/dashboard`);
-//         } else {
-//             setError({
-//                 text: "OTP verification failed. Please contact the support team.",
-//             });
-//         }
-//     }
-// }
 
 
   return (

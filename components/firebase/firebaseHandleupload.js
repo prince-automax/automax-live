@@ -11,7 +11,7 @@ import imageCompression from 'browser-image-compression';
 export const HandleUpload = async (selectedFiles,imageField,directory) => {
    try {
      // const [percent, setPercent] = useState(0); 
-     console.log('selectedFiles from handleupload',selectedFiles);
+   
     
      if (!selectedFiles || selectedFiles.length === 0) {
        alert("Please upload at least one image!");
@@ -47,7 +47,7 @@ export const HandleUpload = async (selectedFiles,imageField,directory) => {
              // setPercent(percent);
            },
            (err) => {
-             console.log(err);
+          
              reject(err);
            },
            () => {
@@ -61,7 +61,7 @@ export const HandleUpload = async (selectedFiles,imageField,directory) => {
    
      try {
        const urls = await Promise.all(uploadPromises);
-       // console.log('imageinteriorString',urls);
+      
        // Convert the array of URLs to a string separated by commas
        const concatenatedUrls = urls.join(',');
 

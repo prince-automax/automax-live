@@ -60,7 +60,7 @@ function welcomeMessage(props) {
 
 function ProfileUpdate() {
   const id = localStorage.getItem("id");
-  // console.log("this id from localstorage", id);
+  
 
   // const token = localStorage.getItem("token");
   const [emailCheckData, setEmailCheckData] = useState("");
@@ -74,7 +74,7 @@ function ProfileUpdate() {
 
   useEffect(() => {
    
-    console.log(selectedState)
+    
     if(selectedState != null && selectedState != "")
     {
       
@@ -82,8 +82,7 @@ function ProfileUpdate() {
 
       const filteredC = cities.filter(c => c.state  ===  selectedState)
 
-      console.log("cities",cities)
-      console.log("filteredC",filteredC)
+      
       setFilteredCities(filteredC.map((city, index) => {
         return {
           label: city.city,
@@ -111,7 +110,7 @@ function ProfileUpdate() {
       }
     );
 
-    console.log("data from profiel updarte0",data);
+    
     
 
   const { data: duplicateEmailCheckData } = useDuplicateDataCheckQuery(
@@ -231,7 +230,7 @@ function ProfileUpdate() {
   });
 
   const onSubmit = async (values) => {
-    console.log("value on submit", values);
+    
 
     const result = await callUpdateUserMutation.mutateAsync({
       data: {
@@ -262,7 +261,6 @@ function ProfileUpdate() {
     localStorage.setItem("name", `${values.firstName}`);
     // localStorage.setItem("username", `${values.firstName}`);
     let name = values.firstName;
-    // console.log("name form profile updation",name);
     // welcomeMessage(name)
     Router.push("/dashboard");
     toast.success(`Welcome ${name}`);

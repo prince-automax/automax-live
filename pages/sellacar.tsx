@@ -83,7 +83,7 @@ const SellACar = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const dataContains = JSON.parse(localStorage.getItem("sellacar")) || {};
-      console.log("dataContains", dataContains);
+      
 
       const token = localStorage.getItem("token");
       if (
@@ -91,10 +91,10 @@ const SellACar = () => {
         dataContains?.registrationNumber !== "" &&
         dataContains?.registrationNumber !== undefined
       ) {
-        console.log("entered here in with only token and form");
+        
         setComponents(3);
       } else if (token) {
-        console.log("entered here in with only token");
+       
         setComponents(2);
       }
 
@@ -104,7 +104,7 @@ const SellACar = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // console.log('entered useeffect when component changes');
+    
 
       const token = localStorage.getItem("token");
       const id = localStorage.getItem("id");
@@ -113,11 +113,10 @@ const SellACar = () => {
     }
   }, [components]);
 
-  console.log("userid00007", userId);
-  console.log("access00007", accessToken);
+
 
   const handleInteriorImage = (file) => {
-    // console.log('file from inter',file);
+ 
 
     setInteriorImage([...Interorimage, file]);
   };
@@ -178,7 +177,7 @@ const SellACar = () => {
   );
 
   async function SubmitFiles(values, { resetForm }) {
-    console.log("values from onSubmitFiles000000000000000000000000");
+  
 
     try {
       setIsLoading(true);
@@ -191,10 +190,10 @@ const SellACar = () => {
           "interiorImage",
           "interior"
         );
-        console.log("interiorImageUrl from onSubmit", interiorImageUrl);
+     
         setFirebaseInteriorImage(interiorImageUrl);
       } catch (ex) {
-        // console.log("interiorImageUrl uploading Error", ex);
+       
 
         return ""; // Handle error, you may want to log or handle differently
       }
@@ -205,12 +204,10 @@ const SellACar = () => {
           "exteriorImages",
           "exterior"
         );
-        console.log("ExteriorImageUrl from onSubmit", ExteriorImageUrl);
+       
         setFirebaseExteriorImage(ExteriorImageUrl);
 
-        console.log("firebaseInteriorImage", firebaseInteriorImage);
-        console.log("firebaseExteriorImage", firebaseExteriorImage);
-
+    
       
       } catch (error) {
         console.log("Exteriro image uploading error", error);
@@ -239,16 +236,16 @@ const SellACar = () => {
         },
       });
 
-      console.log("result of sellacarform submission", result);
+  
 
       if (result) {
-        console.log("USERID", userId);
+        
         const userUpdate = await UpdateUserMutation.mutateAsync({
           where: { id: userId },
           data: { firstName: values?.clientContactPerson },
          
         });
-        console.log("result of sellacarform userupdate", userUpdate);
+        
 
         if (userUpdate) {
           setComponents(4);
@@ -266,7 +263,7 @@ const SellACar = () => {
       setIsLoading(false);
     }
 
-    // console.log("From ONSubmit of sell a car ", values);
+ 
     setFormData({
       registrationNumber: "",
       make: "",

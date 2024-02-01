@@ -1,6 +1,14 @@
 import DashboardTemplate from "../../components/templates/DashboardTemplate";
 import withPrivateRoute from "../../utils/withPrivateRoute";
 import Image from "next/image";
+import {
+  faThumbsUp,
+faThumbsDown,
+faUserSlash
+} from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import PostThumb1 from "@assets/blog/C1.jpg";
 import PostThumb2 from "@assets/blog/C2.jpg";
 import PostThumb3 from "@assets/blog/C3.jpg";
@@ -210,7 +218,7 @@ function Vehicle() {
                     <Tab.Panel key={image.id}>
                       <Image
                         alt={`image${index}`}
-                        src={image}
+                        src={image.trim()}
                         className="w-full h-full object-center object-cover sm:rounded-lg"
                         width={500}
                         height={300}
@@ -510,8 +518,8 @@ function Vehicle() {
                   BID NOW
                 </button>
               )}
-              <p className="mt-3 text-sm text-indigo-100">
-                {vehicle?.userVehicleBidsCount && vehicle?.myBidRank ? (
+              <p className=" text-sm text-indigo-100">
+                {/* {vehicle?.userVehicleBidsCount && vehicle?.myBidRank ? (
                   vehicle?.myBidRank == 1 ? (
                     <span style={{ color: "#00CC00" }}>Winning</span>
                   ) : (
@@ -519,7 +527,22 @@ function Vehicle() {
                   )
                 ) : (
                   <span style={{ color: "#CCCC00" }}>Not Enrolled</span>
-                )}
+                )} */}
+                 <div
+                  className="mt-4 w-full border-white text-center bg-white px-5 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white rounded-md">
+                  
+                  
+                 {vehicle?.userVehicleBidsCount && vehicle?.myBidRank ? (
+                    vehicle?.myBidRank == 1 ? (
+                     <p className="text-green-500 font-bold text-base space-x-1"><FontAwesomeIcon icon={faThumbsUp} /> <span className="text-green-500"> Winning</span></p>
+                    ) : (
+                     <p className="text-red-500 font-bold text-base space-x-1"><FontAwesomeIcon icon={faThumbsDown} /> <span style={{ color: "#FF3333" }}>Losing</span></p>
+                    )
+                  ) : (
+                    <p className="text-black font-bold text-base space-x-1"><FontAwesomeIcon icon={faUserSlash} /><span className="text-black"> Not  Enrolled </span></p>
+                  )}              
+               
+               </div>
               </p>
             </div>
           </div>

@@ -54,7 +54,7 @@ function WorkBooks() {
   const HandleEdit = () => {
     // Toggle the disabled state
 
-    // console.log('here in button click');
+    
 
     setFieldsDisabled(!isFieldsDisabled);
   };
@@ -65,7 +65,7 @@ function WorkBooks() {
       { where: { id: id as string } }
     );
 
-  // console.log("data from worksheet", data);
+  
 
 
 
@@ -143,7 +143,7 @@ function WorkBooks() {
   });
 
   const onSubmit = async (values) => {
-    console.log("values from workbook edit", values);
+   
 
     try {
       const result = await updateUserWorksheet.mutateAsync({
@@ -167,7 +167,7 @@ function WorkBooks() {
     }
   };
 
-  // console.log('data from worksheed', data && data["workSheet"]?.registrationNumber );
+       
 
   let initialValues = {
     RegistrationNo:
@@ -181,7 +181,7 @@ function WorkBooks() {
       data && data["workSheet"] ? data["workSheet"].vehicleCondition : "",
   };
 
-  // console.log('initialValues',initialValues);
+  
 
   return (
     <DashboardTemplate>
