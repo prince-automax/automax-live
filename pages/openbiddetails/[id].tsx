@@ -108,6 +108,7 @@ const OpenBidDetails = () => {
     });
 
   
+  
 
   const listingId = (data as { findAuctions?: any[] })?.findAuctions?.map(
     (item, index) => item.listingId
