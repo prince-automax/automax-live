@@ -41,7 +41,7 @@ const Findauction = () => {
   const { data: findAuctionState, isLoading: loadingstate } =
     useFindAuctionStateQuery<FindAuctionStateQueryVariables>(graphQLClient());
 
- 
+    
     
 
   const variables = {
