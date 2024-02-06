@@ -118,12 +118,10 @@ function Vehicle() {
   }, [data]);
 
   useEffect(() => {
-  
-    
+     
        setImages((vehicle?.frontImage)?.split(','))
   } , [vehicle]);
 
-  
 
   
   
@@ -241,7 +239,7 @@ function Vehicle() {
                           <span className="absolute inset-0 rounded-md overflow-hidden">
                             <Image
                               alt={image}
-                              src={image}
+                              src={image.trim()}
                               className="w-full h-full object-center object-cover"
                               layout="fill"
                             />
