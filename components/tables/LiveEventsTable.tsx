@@ -123,7 +123,7 @@ export default function EventsTable({
     },
     {
       Header: "Details",
-      accessor: "id",
+      accessor: "id",   
       Cell: ({ cell: { value } }) =>
         registered ? (
           View(value, eventCategory)

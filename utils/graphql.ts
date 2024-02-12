@@ -2267,17 +2267,37 @@ export type NestedStringNullableFilter = {
 
 export type Notification = {
   __typename?: 'Notification';
-  amount?: Maybe<Scalars['Int']>;
+  deviceToken?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  user?: Maybe<User>;
 };
 
 export type NotificationCreateInput = {
-  amount?: InputMaybe<Scalars['Int']>;
+  deviceToken?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UserRelateToOneForCreateInput>;
+};
+
+export type NotificationManyRelationFilter = {
+  every?: InputMaybe<NotificationWhereInput>;
+  none?: InputMaybe<NotificationWhereInput>;
+  some?: InputMaybe<NotificationWhereInput>;
 };
 
 export type NotificationOrderByInput = {
-  amount?: InputMaybe<OrderDirection>;
+  deviceToken?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
+};
+
+export type NotificationRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<NotificationWhereUniqueInput>>;
+  create?: InputMaybe<Array<NotificationCreateInput>>;
+};
+
+export type NotificationRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<NotificationWhereUniqueInput>>;
+  create?: InputMaybe<Array<NotificationCreateInput>>;
+  disconnect?: InputMaybe<Array<NotificationWhereUniqueInput>>;
+  set?: InputMaybe<Array<NotificationWhereUniqueInput>>;
 };
 
 export type NotificationUpdateArgs = {
@@ -2286,15 +2306,17 @@ export type NotificationUpdateArgs = {
 };
 
 export type NotificationUpdateInput = {
-  amount?: InputMaybe<Scalars['Int']>;
+  deviceToken?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UserRelateToOneForUpdateInput>;
 };
 
 export type NotificationWhereInput = {
   AND?: InputMaybe<Array<NotificationWhereInput>>;
   NOT?: InputMaybe<Array<NotificationWhereInput>>;
   OR?: InputMaybe<Array<NotificationWhereInput>>;
-  amount?: InputMaybe<IntNullableFilter>;
+  deviceToken?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
+  user?: InputMaybe<UserWhereInput>;
 };
 
 export type NotificationWhereUniqueInput = {
@@ -3451,6 +3473,8 @@ export type User = {
   magicAuthRedeemedAt?: Maybe<Scalars['DateTime']>;
   magicAuthToken?: Maybe<PasswordState>;
   mobile?: Maybe<Scalars['String']>;
+  notification?: Maybe<Array<Notification>>;
+  notificationCount?: Maybe<Scalars['Int']>;
   pancard?: Maybe<ImageFieldOutput>;
   pancardNo?: Maybe<Scalars['String']>;
   password?: Maybe<PasswordState>;
@@ -3583,6 +3607,19 @@ export type UserEventDetailCountArgs = {
 };
 
 
+export type UserNotificationArgs = {
+  orderBy?: Array<NotificationOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: NotificationWhereInput;
+};
+
+
+export type UserNotificationCountArgs = {
+  where?: NotificationWhereInput;
+};
+
+
 export type UserPaymentsArgs = {
   orderBy?: Array<PaymentOrderByInput>;
   skip?: Scalars['Int'];
@@ -3700,6 +3737,7 @@ export type UserCreateInput = {
   magicAuthRedeemedAt?: InputMaybe<Scalars['DateTime']>;
   magicAuthToken?: InputMaybe<Scalars['String']>;
   mobile?: InputMaybe<Scalars['String']>;
+  notification?: InputMaybe<NotificationRelateToManyForCreateInput>;
   pancard?: InputMaybe<ImageFieldInput>;
   pancardNo?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
@@ -3850,6 +3888,7 @@ export type UserUpdateInput = {
   magicAuthRedeemedAt?: InputMaybe<Scalars['DateTime']>;
   magicAuthToken?: InputMaybe<Scalars['String']>;
   mobile?: InputMaybe<Scalars['String']>;
+  notification?: InputMaybe<NotificationRelateToManyForUpdateInput>;
   pancard?: InputMaybe<ImageFieldInput>;
   pancardNo?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
@@ -3898,6 +3937,7 @@ export type UserWhereInput = {
   magicAuthRedeemedAt?: InputMaybe<DateTimeNullableFilter>;
   magicAuthToken?: InputMaybe<PasswordFilter>;
   mobile?: InputMaybe<StringFilter>;
+  notification?: InputMaybe<NotificationManyRelationFilter>;
   pancardNo?: InputMaybe<StringFilter>;
   password?: InputMaybe<PasswordFilter>;
   paymentByAdmin?: InputMaybe<PaymentWhereInput>;
@@ -4634,7 +4674,7 @@ export type LiveEventsQueryVariables = Exact<{
 }>;
 
 
-export type LiveEventsQuery = { __typename?: 'Query', liveEvents?: Array<{ __typename?: 'Event', id: string, eventNo?: number | null, eventCategory?: string | null, startDate?: any | null, endDate?: any | null, noOfBids?: number | null, termsAndConditions?: string | null, vehiclesCount?: number | null, seller?: { __typename?: 'Seller', name?: string | null } | null, eventType?: Array<{ __typename?: 'EventType', name?: string | null }> | null, location?: { __typename?: 'Location', name?: string | null, country?: string | null, city?: string | null, state?: { __typename?: 'State', name?: string | null } | null } | null, ExcelFile?: { __typename?: 'ExcelUpload', file?: { __typename?: 'FileFieldOutput', url: string } | null } | null, downloadableFile?: { __typename?: 'FileFieldOutput', url: string } | null, vehicles?: Array<{ __typename?: 'Vehicle', id: string }> | null } | null> | null };
+export type LiveEventsQuery = { __typename?: 'Query', liveEvents?: Array<{ __typename?: 'Event', id: string, eventNo?: number | null, eventCategory?: string | null, startDate?: any | null, endDate?: any | null, noOfBids?: number | null, termsAndConditions?: string | null, vehiclesCount?: number | null, seller?: { __typename?: 'Seller', name?: string | null } | null, eventType?: Array<{ __typename?: 'EventType', name?: string | null }> | null, location?: { __typename?: 'Location', name?: string | null, country?: string | null, city?: string | null, state?: { __typename?: 'State', name?: string | null } | null } | null, ExcelFile?: { __typename?: 'ExcelUpload', file?: { __typename?: 'FileFieldOutput', url: string } | null } | null, downloadableFile?: { __typename?: 'FileFieldOutput', url: string } | null, vehicles?: Array<{ __typename?: 'Vehicle', id: string, bidTimeExpire?: any | null }> | null } | null> | null };
 
 export type UpcomingEventsQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']>;
@@ -5190,6 +5230,7 @@ export const LiveEventsDocument = `
     vehiclesCount
     vehicles {
       id
+      bidTimeExpire
     }
   }
 }

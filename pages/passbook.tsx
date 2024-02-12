@@ -216,7 +216,7 @@ const id = localStorage.getItem("id");
                         );
                       })}
                     </div> */}
-                    <div className="hidden sm:block">
+                    <div className="block">
                     {data?.user?.payments ? (<Datatable
     tableData={data?.user?.payments}
     tableColumns={columns}
