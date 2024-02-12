@@ -64,6 +64,7 @@ query LiveEvents($take: Int!, $skip: Int!, $where: EventWhereInput) {
     vehiclesCount
      vehicles {
     id
+    bidTimeExpire
   } 
   }
 }
