@@ -383,16 +383,16 @@ const SellACar = () => {
           )}
 
           {components === 3 && (
-            <div className="w-full h-full ">
+            <div className="w-full h-full  ">
               <div
                 ref={scrollContainerRef}
                 style={{ whiteSpace: "nowrap" }}
-                className="hidden space-x-4 md:flex overflow-scroll scroll mt-12 h-20 items-center px-6 scroll-smooth"
+                className="hidden space-x-4 md:flex overflow-scroll scroll mfgScroll   mt-12 h-20 items-center px-6 scroll-smooth "
               >
                 {Tabs.map((tab) => (
                   <button
                     key={tab.tabIndex}
-                    className={`h-9 px-6 min-w-fit border border-[#A5A5A5] rounded-md font-poppins font-semibold text-xs p-2 ${
+                    className={`h-9 px-6 min-w-fit border  border-[#A5A5A5] rounded-md font-poppins font-semibold text-xs p-2 ${
                       activeTab === tab.tabIndex
                         ? "text-white bg-blue-500 "
                         : "bg-white"

@@ -45,12 +45,12 @@ export default function Navbar() {
   const isLoggedIn = Boolean(token);
 
   const navigation = [
-    {
-      name: "Home",
-      href: isLoggedIn ? "/dashboard" : "/",
-      current: router.pathname == "/" ? true : false,
-      icon: <FontAwesomeIcon icon={faHouse} />,
-    },
+    // {
+    //   name: "Home",
+    //   href: isLoggedIn ? "/dashboard" : "/",
+    //   current: router.pathname == "/" ? true : false,
+    //   icon: <FontAwesomeIcon icon={faHouse} />,
+    // },
 
     {
       name: "Membership",
