@@ -387,7 +387,7 @@ const SellACar = () => {
               <div
                 ref={scrollContainerRef}
                 style={{ whiteSpace: "nowrap" }}
-                className="hidden space-x-4 md:flex overflow-scroll scroll mfgScroll   mt-12 h-20 items-center px-6 scroll-smooth "
+                className="hidden space-x-4 md:flex overflow-scroll scroll scrollbar-hide   mt-12 h-20 items-center px-6 scroll-smooth "
               >
                 {Tabs.map((tab) => (
                   <button
