@@ -189,7 +189,7 @@ function Datatable(props) {
               </p>
             </div>
 
-            <div className="flex-1 flex justify-between sm:justify-end">
+            <div className="flex-1 flex justify-between items-center sm:justify-end">
               <button
                 onClick={() => previousPage()}
                 disabled={!canPreviousPage}
@@ -197,6 +197,13 @@ function Datatable(props) {
               >
                 Previous
               </button>
+              <div className="block sm:hidden">
+              <p className="text-sm text-gray-700">
+                
+                <span className="font-medium"> {pageIndex + 1} </span> of{" "}
+                <span className="font-medium">{pageOptions.length}</span> pages
+              </p>
+            </div>
               <button
                 onClick={() => nextPage()}
                 disabled={!canNextPage}
