@@ -308,8 +308,6 @@ function WatchList() {
                   >
                     {/* WORKBOOK MATCH, TITLE, IMAGE FOR MOBILE VIEW,VEHICLE INFORMATION, INOECTION REPORT,BID TIMING  FOR MOBILE  STARTS HERE  */}
                     <div className="flex-auto p-3 lg:space-y-4 sm:p-6">
-                    
-                    
                       {/* workbook match and watchlist remove button starts here */}
                       <div className="mb-3 flex justify-between">
                         {find?.length > 0 && (
@@ -336,9 +334,6 @@ function WatchList() {
                       </div>
                       {/* workbook match and watchlist remove button  ends here */}
 
-
-
-
                       {/* title starts here */}
                       <div className="sm:flex flex-wrap">
                         <div className="flex-auto">
@@ -354,10 +349,6 @@ function WatchList() {
                         </div>
                       </div>
                       {/* title ends here */}
-
-
-
-
 
                       {/* mobile veiw for image starts here */}
                       {item?.frontImage && (
@@ -378,9 +369,8 @@ function WatchList() {
                         </div>
                       )}
                       {/* mobile view for image ends here */}
-
-
-
+                    </div>
+                    <div className="flex-auto p-3 lg:space-y-4 sm:p-6">
                       {/* vehicle information starts here */}
                       <div className="">
                         <dl className="grid grid-cols-3 gap-x-1 gap-y-2 sm:gap-x-4 sm:gap-y-3  ">
@@ -469,8 +459,6 @@ function WatchList() {
                       </div>
                       {/* vehicle information ends here */}
 
-
-
                       {/* MOBILE VIEW FOR INSPECT AND MORE DETAIL STARTS HERE) */}
                       <div className="flex sm:hidden space-x-4 mt-6 pt-4 pr-1 text-sm font-medium border-t border-slate-200">
                         <div className="flex-auto flex space-x-4">
@@ -499,9 +487,8 @@ function WatchList() {
                       </div>
                       {/* MOBILE VIEW FOR INSPECT AND MORE DETAIL ENDS HERE) */}
 
-
-                       {/* BID TIMING SHOW STARTS HERE */}
-                       <div className="flex sm:max-md:flex-row flex-col items-center  justify-center  p-4 space-y-2">
+                      {/* BID TIMING SHOW STARTS HERE */}
+                      <div className="flex sm:max-md:flex-row flex-col items-center  justify-center  p-4 space-y-2">
                         <div className="w-full max-sm:flex flex-col sm:max-md:w-1/2 sm:max-md:self-start    sm:max-md:text-left space-y-2 mt-1 sm:mt-2 ">
                           <p className="sm:max-md:text-base md:text-left">
                             {" "}
@@ -534,20 +521,8 @@ function WatchList() {
                       </div>
 
                       {/* BID TIMING SHOW ENDS HERE */}
-
-
-                    </div>
-                    {/* WORKBOOK MATCH, TITLE, IMAGE FOR MOBILE VIEW,VEHICLE INFORMATION, INOECTION REPORT,BID TIMING  FOR MOBILE  ENDS HERE  */}
-
-
-
-
-
-
-
-
-                    {/* BID BOX FOR MOBILE VIEW STARTS HERE */}
-                    {/* {showChild && ( */}
+                      {/* BID BOX FOR MOBILE VIEW STARTS HERE */}
+                      {/* {showChild && ( */}
                       <div
                         id={`innerContainer-${index}`}
                         className=" sm:hidden sticky bottom-2 left-0 w-full  bg-gray-200  border-4  "
@@ -598,292 +573,12 @@ function WatchList() {
                           />
                         </div>
                       </div>
-                    {/* // )} */}
-                    {/* BID BOX FOR MOBILE VIEW ENDS HERE */}
+                      {/* // )} */}
+                      {/* BID BOX FOR MOBILE VIEW ENDS HERE */}
+                    </div>
+                    {/* WORKBOOK MATCH, TITLE, IMAGE FOR MOBILE VIEW,VEHICLE INFORMATION, INOECTION REPORT,BID TIMING  FOR MOBILE  ENDS HERE  */}
                   </div>
                   {/*  MOBILE VIEW ENDS HERE */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                   {/* DESKTOP VIEW STARTS HERE */}
                   <div
@@ -896,7 +591,6 @@ function WatchList() {
                     }`}
                     id={`parentcontainer-${index}`}
                   >
-                   
                     {/* image only for desktop view starts here */}
                     {item?.frontImage && (
                       <div
