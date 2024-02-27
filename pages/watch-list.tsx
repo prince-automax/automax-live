@@ -13,6 +13,8 @@ import {
 } from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
 import moment from "moment";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { useEffect, useState } from "react";
 import DashboardTemplate from "../components/templates/DashboardTemplate";
 import withPrivateRoute from "../utils/withPrivateRoute";
@@ -65,6 +67,16 @@ function WatchList() {
     };
   }, []);
 
+  const options = {
+    rewind: true,
+    gap: 1, // Adjust gap as needed
+    autoplay: true,
+    interval: 2000, // Set autoplay interval in milliseconds
+    pauseOnHover: false,
+    resetProgress: false,
+    pagination: false,
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTick((tic) => tic + 1);
@@ -115,8 +127,6 @@ function WatchList() {
     }
   );
 
-  console.log();
-
   const {
     data: workbook,
     isLoading: workbookLoading,
@@ -138,35 +148,7 @@ function WatchList() {
     }
   );
 
-  //   // JavaScript code
-  //   const parentContainer = document.getElementById('parentcontainer');
-  //   const innerContainer = document.getElementById('innerContainer');
-
-  //   // Define the scroll threshold
-  //   const scrollThreshold = 600; // Adjust this value as needed
-
-  //   // Add scroll event listener to the parent container
-  //  if(parentContainer){
-  //   console.log("parentContainer",parentContainer);
-  //   console.log("innerContainer",innerContainer);
-  //   parentContainer.addEventListener('scroll', function() {
-  //     // Get the current scroll position
-  //     const scrollPosition = parentContainer.scrollTop;
-
-  //     // Check if the scroll position exceeds the threshold
-  //     if (scrollPosition > scrollThreshold) {
-  //       // Show the inner container
-  //       innerContainer.classList.remove('hidden');
-  //       console.log("888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888");
-
-  //     } else {
-  //       // Hide the inner container
-  //       innerContainer.classList.add('hidden');
-  //       console.log("888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888");
-
-  //     }
-  //   });
-  //  }
+ 
 
   function SecondsLeft(item) {
     try {
@@ -293,12 +275,14 @@ function WatchList() {
                 (wb) => wb?.registrationNumber === item?.registrationNumber
               );
 
+              console.log("item in front image", typeof item?.frontImage);
+
               return (
                 <>
                   {/*  MOBILE VIEW STARTS HERE */}
                   <div
                     key={`d${index}`}
-                    className={`sm:hidden sm:max-md:flex-col font-sans border-4  rounded relative   ${
+                    className={`sm:hidden sm:max-md:flex-col font-sans border-2  rounded    ${
                       moment(item?.bidTimeExpire).diff(moment(), "s") <= 120 &&
                       moment(item?.bidTimeExpire).diff(moment(), "s") > 0
                         ? "blink"
@@ -306,8 +290,8 @@ function WatchList() {
                     }`}
                     id={`parentcontainer-${index}`}
                   >
-                    {/* WORKBOOK MATCH, TITLE, IMAGE FOR MOBILE VIEW,VEHICLE INFORMATION, INOECTION REPORT,BID TIMING  FOR MOBILE  STARTS HERE  */}
-                    <div className="flex-auto p-3 lg:space-y-4 sm:p-6">
+                    {/* WORKBOOK MATCH, TITLE, IMAGE FOR MOBILE VIEW STARTS HERE  */}
+                    <div className="flex-auto p-3 lg:space-y-4 sm:p-6 ">
                       {/* workbook match and watchlist remove button starts here */}
                       <div className="mb-3 flex justify-between">
                         {find?.length > 0 && (
@@ -368,9 +352,31 @@ function WatchList() {
                           />
                         </div>
                       )}
+                      {/* <div 
+      className=" h-full  w-full relative p-6 m-3 hover:cursor-pointer">
+
+  <Splide options={options} aria-label="React Splide Example">
+  {item.frontImage?.split(',').map((imageUrl, index) => (
+    <SplideSlide key={index}>
+      <Image  
+        alt={`image${index}`}
+        src={imageUrl.trim()}
+        className="w-full h-full object-center object-cover rounded-lg"
+        width={500}
+        height={300}
+      />
+    </SplideSlide>
+  ))}
+</Splide>
+  </div> */}
+
                       {/* mobile view for image ends here */}
                     </div>
-                    <div className="flex-auto p-3 lg:space-y-4 sm:p-6">
+
+                    {/* WORKBOOK MATCH, TITLE, IMAGE FOR MOBILE VIEW ENDS HERE  */}
+
+                    {/* VEHICLE INFORMATION, INOECTION REPORT,BID TIMING  FOR MOBILE, BID BOX   STARTS HERE */}
+                    <div className="flex-auto p-3 lg:space-y-4 sm:p-6  ">
                       {/* vehicle information starts here */}
                       <div className="">
                         <dl className="grid grid-cols-3 gap-x-1 gap-y-2 sm:gap-x-4 sm:gap-y-3  ">
@@ -519,13 +525,12 @@ function WatchList() {
                           {/* </div> */}
                         </div>
                       </div>
-
                       {/* BID TIMING SHOW ENDS HERE */}
+
                       {/* BID BOX FOR MOBILE VIEW STARTS HERE */}
-                      {/* {showChild && ( */}
                       <div
                         id={`innerContainer-${index}`}
-                        className=" sm:hidden sticky bottom-2 left-0 w-full  bg-gray-200  border-4  "
+                        className=" sm:hidden sticky bottom-0 left-0 w-full  bg-gray-200  border-4  "
                       >
                         <div className="px-4 py-2">
                           <h2 className="text-sm font-semibold text-gray-900">
@@ -573,17 +578,16 @@ function WatchList() {
                           />
                         </div>
                       </div>
-                      {/* // )} */}
                       {/* BID BOX FOR MOBILE VIEW ENDS HERE */}
                     </div>
-                    {/* WORKBOOK MATCH, TITLE, IMAGE FOR MOBILE VIEW,VEHICLE INFORMATION, INOECTION REPORT,BID TIMING  FOR MOBILE  ENDS HERE  */}
+                    {/* VEHICLE INFORMATION, INSPECTION REPORT,BID TIMING  FOR MOBILE  ENDS HERE  */}
                   </div>
                   {/*  MOBILE VIEW ENDS HERE */}
 
                   {/* DESKTOP VIEW STARTS HERE */}
                   <div
                     key={`d${index}`}
-                    className={`hidden  sm:flex sm:max-md:flex-col font-sans border-4  rounded relative   ${
+                    className={`hidden  sm:flex sm:max-md:flex-col font-sans border-2  rounded relative   ${
                       moment(item?.bidTimeExpire).diff(moment(), "s") <= 120 &&
                       moment(item?.bidTimeExpire).diff(moment(), "s") > 0
                         ? "blink"
@@ -841,7 +845,7 @@ function WatchList() {
                       {/* BID TIMING SHOW ENDS HERE */}
 
                       {/* bid box  for desktop  starts here */}
-                      <div className="max-sm:hidden  w-full sm:max-md:w-1/2 md:w-full bg-gray-200 rounded-lg border-4 border-red-400 p-0">
+                      <div className="max-sm:hidden  w-full sm:max-md:w-1/2 md:w-full bg-gray-200 rounded-lg  p-0">
                         <div className="px-4 py-2">
                           <h2 className="text-sm font-semibold text-gray-900">
                             Bid Details
