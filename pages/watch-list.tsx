@@ -30,7 +30,7 @@ import {
 import { useQueryClient } from "react-query";
 import { SecondsToDhms } from "@utils/common";
 import Swal from "sweetalert2";
-import { faCircleInfo, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faAngleRight,faUserSlash,faThumbsDown,faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function WatchList() {
@@ -148,8 +148,6 @@ function WatchList() {
     }
   );
 
- 
-
   function SecondsLeft(item) {
     try {
       if (item) {
@@ -159,7 +157,9 @@ function WatchList() {
         if (diff > 0) {
           return (
             <div className="w-full max-sm:flex items-center justify-between">
-              <div className="text-xs ">End's in</div>
+              <div className="text-sm text-[#646464] font-poppins">
+                End's In
+              </div>
               <div className="text-base text-red-500">
                 {SecondsToDhms(diff)}
               </div>
@@ -275,14 +275,14 @@ function WatchList() {
                 (wb) => wb?.registrationNumber === item?.registrationNumber
               );
 
-              console.log("item in front image", typeof item?.frontImage);
+              console.log("item in front image", item);
 
               return (
                 <>
                   {/*  MOBILE VIEW STARTS HERE */}
                   <div
                     key={`d${index}`}
-                    className={`sm:hidden sm:max-md:flex-col font-sans border-2  rounded    ${
+                    className={`sm:hidden sm:max-md:flex-col font-sans border-2  rounded border-[#A7C2FF80] bg-[#EEF1FB]   ${
                       moment(item?.bidTimeExpire).diff(moment(), "s") <= 120 &&
                       moment(item?.bidTimeExpire).diff(moment(), "s") > 0
                         ? "blink"
@@ -376,10 +376,10 @@ function WatchList() {
                     {/* WORKBOOK MATCH, TITLE, IMAGE FOR MOBILE VIEW ENDS HERE  */}
 
                     {/* VEHICLE INFORMATION, INOECTION REPORT,BID TIMING  FOR MOBILE, BID BOX   STARTS HERE */}
-                    <div className="flex-auto p-3 lg:space-y-4 sm:p-6  ">
+                    <div className="flex-auto   ">
                       {/* vehicle information starts here */}
-                      <div className="">
-                        <dl className="grid grid-cols-3 gap-x-1 gap-y-2 sm:gap-x-4 sm:gap-y-3  ">
+                      <div className=" mt-4 pb-3 border-b-2 border-zinc-200">
+                        <dl className="grid grid-cols-3 gap-x-2 gap-y-4 sm:gap-x-4 sm:gap-y-3  ">
                           <div className="sm:col-span-1 flex max-sm:flex-col items-center justify-between sm:block">
                             <dt className="text-sm font-bold sm:font-medium text-gray-500">
                               Odometer
@@ -471,7 +471,10 @@ function WatchList() {
                           <div className="mt-1 flex flex-row sm:flex-wrap sm:mt-0 space-x-2 sm:space-x-6 justify-around w-full  sm:max-md:justify-around sm:max-md:w-full ">
                             <div className="flex flex-col space-y-2 w-64">
                               <div className=" flex items-center justify-between text-sm text-blue-800 ">
-                                <p> Inspection Report</p>
+                                <p className="flex items-center text-sm font-poppins font-medium text-[#2563EB]">
+                                  {" "}
+                                  Inspection Report
+                                </p>
 
                                 <FontAwesomeIcon icon={faCircleInfo} />
                               </div>
@@ -479,7 +482,7 @@ function WatchList() {
                                 <Link href={`/vehicle/${item.id}`}>
                                   <a
                                     target="_blank"
-                                    className="flex items-center text-sm text-blue-800"
+                                    className="flex items-center text-sm font-poppins font-medium text-[#2563EB]"
                                   >
                                     More Details
                                   </a>
@@ -503,8 +506,10 @@ function WatchList() {
 
                           {/* <div className="w-full space-y-2 mt-4"> */}
                           <div className="flex justify-between sm:flex-col md:items-start sm:justify-left text-sm  text-gray-700 ">
-                            <p className="font-semibold">Start Date</p>
-                            <p className=" ">
+                            <p className="text-[#646464] text-sm font-poppins">
+                              Start Date
+                            </p>
+                            <p className="font-semibold font-poppins ">
                               {item?.event?.startDate
                                 ? moment(item?.event?.startDate).format(
                                     "MMMM Do, YYYY ddd h:mm a"
@@ -513,8 +518,10 @@ function WatchList() {
                             </p>
                           </div>
                           <div className="flex justify-between sm:flex-col md:items-start text-sm  text-gray-700">
-                            <p className="font-semibold">End Date</p>
-                            <p className="items-start">
+                            <p className="text-[#646464] text-sm font-poppins">
+                              End Date
+                            </p>
+                            <p className="items-start font-semibold font-poppins">
                               {item?.bidTimeExpire
                                 ? moment(item?.bidTimeExpire).format(
                                     "MMMM Do, YYYY ddd h:mm a"
@@ -528,44 +535,76 @@ function WatchList() {
                       {/* BID TIMING SHOW ENDS HERE */}
 
                       {/* BID BOX FOR MOBILE VIEW STARTS HERE */}
-                      <div
-                        id={`innerContainer-${index}`}
-                        className=" sm:hidden sticky bottom-0 left-0 w-full  bg-gray-200  border-4  "
-                      >
+
+                      <div className=" sticky bottom-4 left-0 w-full mt-4  bg-[#E5E9F9] rounded-lg">
                         <div className="px-4 py-2">
-                          <h2 className="text-sm font-semibold text-gray-900">
+                          <h2 className="text-base  text-gray-900  text-center font-poppins font-bold">
                             Bid Details
                           </h2>
 
-                          <div className="space-y-2 mt-2">
-                            <div className="flex items-center justify-between text-xs text-gray-700">
-                              <span>Start Price</span>
-                              <span>{item?.startPrice}</span>
+                          <div className="space-y-2 mt-2 text-sm">
+                            <div className="flex items-center justify-between  text-gray-700">
+                              <span className="font-poppins font-medium text-sm text-[#646464]">
+                                Start Price
+                              </span>
+                              <span className="font-bold text-base">
+                                ₹ {item?.startPrice}
+                              </span>
                             </div>
-                            <div className="flex items-center justify-between text-xs text-gray-700">
-                              <span>Reserve Price</span>
-                              <span>{item?.reservePrice}</span>
+                            <div className="flex items-center justify-between  text-gray-700">
+                              <span className="font-poppins font-medium text-sm text-[#646464]">
+                                Reserve Price
+                              </span>
+                              <span className="font-bold text-base">
+                                ₹ {item?.reservePrice}
+                              </span>
                             </div>
-                            <div className="flex items-center justify-between text-xs text-gray-700">
-                              <span>Quote Increment</span>
-                              <span>{item?.quoteIncreament}</span>
+                            <div className="flex items-center justify-between  text-gray-700">
+                              <span className="font-poppins font-medium text-sm text-[#646464]">
+                                Quote Increment
+                              </span>
+                              <span className="font-bold text-base">
+                                ₹ {item?.quoteIncreament}
+                              </span>
                             </div>
-                            <div className="flex items-center justify-between text-xs text-gray-700">
-                              <span>Current Status</span>
+                            <div className="flex items-center justify-between  text-gray-700">
+                              <span className="font-bold">Current Status</span>
                               {item?.userVehicleBidsCount && item?.myBidRank ? (
                                 item?.myBidRank == 1 ? (
-                                  <span style={{ color: "#00CC00" }}>
+                                  <p className="space-x-2">
+                                       <FontAwesomeIcon icon={faThumbsUp} />
+<span
+                                    style={{ color: "#00CC00" }}
+                                    className="font-bold text-base"
+                                  >
                                     Winning
                                   </span>
+                                  </p>
+                                  
                                 ) : (
-                                  <span style={{ color: "#FF3333" }}>
+                                  <p className="space-x-2">
+                                    <FontAwesomeIcon
+                                            icon={faThumbsDown}
+                                          />{" "}
+                                  <span
+                                    style={{ color: "#FF3333" }}
+                                    className="font-bold text-base"
+                                  >
                                     Losing
                                   </span>
+                                  </p>
+                                  
                                 )
                               ) : (
-                                <span style={{ color: "#CCCC00" }}>
-                                  Not Enrolled
-                                </span>
+                                <p className="space-x-2">
+                                  <FontAwesomeIcon icon={faUserSlash} />{" "}
+                                  <span
+                                    style={{ color: "#CCCC00" }}
+                                    className="font-bold text-base"
+                                  >
+                                    Not Enrolled
+                                  </span>
+                                </p>
                               )}
                             </div>
                           </div>
