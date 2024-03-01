@@ -1,10 +1,12 @@
 import DashboardTemplate from "../../components/templates/DashboardTemplate";
 import withPrivateRoute from "../../utils/withPrivateRoute";
 import Image from "next/image";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import {
   faThumbsUp,
-faThumbsDown,
-faUserSlash
+  faThumbsDown,
+  faUserSlash,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -76,7 +78,7 @@ function Vehicle() {
       setserverTime(timeData.time);
     }
   }, [timeData]);
-  
+
   const callCreateBid = useCreateBidMutation<CreateBidMutationVariables>(
     graphQLClient({ Authorization: `Bearer ${accessToken}` })
   );
@@ -100,9 +102,15 @@ function Vehicle() {
     }
   );
 
-
-
-  
+  const options = {
+    rewind: true,
+    gap: 1, // Adjust gap as needed
+    autoplay: true,
+    interval: 2000, // Set autoplay interval in milliseconds
+    pauseOnHover: false,
+    resetProgress: false,
+    pagination: false,
+  };
 
   let [tabs] = useState({
     "General ": [],
@@ -118,13 +126,9 @@ function Vehicle() {
   }, [data]);
 
   useEffect(() => {
-     
-       setImages((vehicle?.frontImage)?.split(','))
-  } , [vehicle]);
+    setImages(vehicle?.frontImage?.split(","));
+  }, [vehicle]);
 
-
-  
-  
   async function CallBid(amount, vehicleId) {
     const confirmed = await Swal.fire({
       text: "Are you sure to bid for Rs. " + amount + "?",
@@ -162,11 +166,10 @@ function Vehicle() {
   function IsCompleted() {
     try {
       let bidTime = data.vehicles[0].bidTimeExpire;
-   
+
       const expiryTime = moment(bidTime);
       const currentTime = moment(serverTime).add(tick, "seconds");
       const diff = expiryTime.diff(currentTime, "seconds");
-    
 
       if (diff > 0) {
         return true;
@@ -176,7 +179,6 @@ function Vehicle() {
     } catch {}
     return true;
   }
- 
 
   return (
     <DashboardTemplate>
@@ -205,7 +207,7 @@ function Vehicle() {
       </div>
       <div className="mt-2 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
         <div className="space-y-6 lg:col-start-1 lg:col-span-2">
-          <section>
+          <section className="hidden sm:block">
             <Tab.Group
               as="div"
               className="flex flex-col max-w-2xl justify-between"
@@ -260,16 +262,33 @@ function Vehicle() {
             </Tab.Group>
           </section>
 
+          <section className="sm:hidden">
+            <div className="w-96 h-fit border-2 rounded-lg  ">
+              <Splide options={options} aria-label="React Splide Example">
+                {images?.map((image, index) => (
+                  <SplideSlide key={index}>
+                    <Image
+                      alt={`image${index}`}
+                      src={image.trim()}
+                      className="w-full h-full object-center object-cover rounded-lg "
+                      width={500}
+                      height={300}
+                    />
+                  </SplideSlide>
+                ))}
+              </Splide>
+            </div>
+          </section>
+
           <section>
             <div>
               <div className="mb-4 text-xl font-semibold text-gray-900">
                 Specifications
               </div>
               <div className="w-full  mt-4">
-                
-                <Tab.Group  >
+                <Tab.Group>
                   <Tab.List className="flex justify-between space-x-1 rounded-xl">
-                  {/* <div className="flex bg-amber-500"> */}
+                    {/* <div className="flex bg-amber-500"> */}
                     {Object.keys(tabs).map((tab) => (
                       <Tab
                         key={tab}
@@ -288,7 +307,7 @@ function Vehicle() {
                     ))}
                     {/* </div> */}
                   </Tab.List>
-              
+
                   <Tab.Panels className="mt-4">
                     <Tab.Panel
                       className={"rounded-xl bg-white focus:outline-none"}
@@ -311,15 +330,13 @@ function Vehicle() {
                       <OtherDetailsTab vehicle={vehicle} />
                     </Tab.Panel>
                   </Tab.Panels>
-              
                 </Tab.Group>
-                
               </div>
             </div>
           </section>
         </div>
 
-        <section className="lg:col-start-3 lg:col-span-1">
+        <section className="lg:col-start-3 lg:col-span-1 ">
           <div className="bg-indigo-700 rounded-lg shadow mb-6">
             <div className="px-4 py-6">
               <h2 className="text-lg font-semibold text-white">Bid Details</h2>
@@ -369,7 +386,7 @@ function Vehicle() {
                 </div>
               </div>
 
-              <dl className="mt-6 space-y-4">
+              <dl className="mt-6 space-y-4 ">
                 <div className="flex items-center justify-between">
                   <dt className="text-sm text-gray-200">Start Price</dt>
                   <dd className="text-sm font-medium text-gray-200">
@@ -425,11 +442,11 @@ function Vehicle() {
                   </dd>
                 </div>
               </dl>
-              {IsCompleted() && ( 
+              {IsCompleted() && (
                 <input
                   className="mt-6 w-full border-white px-5 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white rounded-md"
                   placeholder="Enter bid amount"
-                  value={bidAmount}              
+                  value={bidAmount}
                   onChange={(e) => {
                     setBidAmount(e.target.value.replace(/\D/g, ""));
                   }}
@@ -438,79 +455,78 @@ function Vehicle() {
               {IsCompleted() && (
                 <button
                   type="submit"
-                  onClick={() =>
-                    {
-                      if (parseInt(bidAmount) % 100 != 0) {
-                        Swal.fire({
-                          title: "Bid amount should be multiple of 100",
-                          confirmButtonText: "OK",
-                          position: "top",
-                        });
-                      } else if (
-                        vehicle?.event?.bidLock === "locked" &&
-                        vehicle?.currentBidAmount >= parseInt(bidAmount)
-                      ) {
-                        Swal.fire({
-                          title: "Bid amount should be greater than last bid",
-                          confirmButtonText: "OK",
-                          position: "top",
-                        });
-                      }
-                      //  else if (
-                      //   vehicle?.event?.bidLock != "locked" &&
-                      //   vehicle?.userVehicleBids?.length &&
-                      //   vehicle?.userVehicleBids[0].amount >= parseInt(bidAmount)
-                      // ) {
-                      //   Swal.fire({
-                      //     title: "Bid amount should be greater than last bid",
-                      //     confirmButtonText: "OK",
-                      //     position: "top",
-                      //   });
-                      // }
-                       else if (
-                        //vehicle?.event?.bidLock === "locked" &&
-                        
-                        parseInt(bidAmount) %  vehicle?.quoteIncreament !==0
-                      ) {
-                        Swal.fire({
-                          title:
-                            "Bid amount should be greater than minimum quote increment.",
-                          confirmButtonText: "OK",
-                          position: "top",
-                        });
-                      }
-                      // else if(   vehicle?.event?.bidLock  != "locked" &&
-                      // vehicle?.userVehicleBids?.length &&
-                      // vehicle.quoteIncreament >
-                      //   parseInt(bidAmount) - vehicle?.userVehicleBids[0].amount){
-                      //     Swal.fire({
-                      //       title:
-                      //         "Bid amount should be greater than minimum quote increment.",
-                      //       confirmButtonText: "OK",
-                      //       position: "top",
-                      //     });
-  
-                      // }
-                       else if (vehicle?.startPrice > parseInt(bidAmount)) {
-                        Swal.fire({
-                          title: "Bid amount should be greater than start price.",
-                          confirmButtonText: "OK",
-                          position: "top",
-                        });
-                      } else if (parseInt(bidAmount) > 2147483647) {
-                        Swal.fire({
-                          title: "Bid amount exceeded the limit.",
-                          confirmButtonText: "OK",
-                          position: "top",
-                        });
-                      } else {
-                        CallBid(bidAmount, vehicle?.id);
-                        setTimeout(() => {
-                          // setBidAmount("");
-                        }, 1000);
-                      }
+                  onClick={() => {
+                    if (parseInt(bidAmount) % 100 != 0) {
+                      Swal.fire({
+                        title: "Bid amount should be multiple of 100",
+                        confirmButtonText: "OK",
+                        position: "top",
+                      });
+                    } else if (
+                      vehicle?.event?.bidLock === "locked" &&
+                      vehicle?.currentBidAmount >= parseInt(bidAmount)
+                    ) {
+                      Swal.fire({
+                        title: "Bid amount should be greater than last bid",
+                        confirmButtonText: "OK",
+                        position: "top",
+                      });
                     }
-                }
+                    //  else if (
+                    //   vehicle?.event?.bidLock != "locked" &&
+                    //   vehicle?.userVehicleBids?.length &&
+                    //   vehicle?.userVehicleBids[0].amount >= parseInt(bidAmount)
+                    // ) {
+                    //   Swal.fire({
+                    //     title: "Bid amount should be greater than last bid",
+                    //     confirmButtonText: "OK",
+                    //     position: "top",
+                    //   });
+                    // }
+                    else if (
+                      //vehicle?.event?.bidLock === "locked" &&
+
+                      parseInt(bidAmount) % vehicle?.quoteIncreament !==
+                      0
+                    ) {
+                      Swal.fire({
+                        title:
+                          "Bid amount should be greater than minimum quote increment.",
+                        confirmButtonText: "OK",
+                        position: "top",
+                      });
+                    }
+                    // else if(   vehicle?.event?.bidLock  != "locked" &&
+                    // vehicle?.userVehicleBids?.length &&
+                    // vehicle.quoteIncreament >
+                    //   parseInt(bidAmount) - vehicle?.userVehicleBids[0].amount){
+                    //     Swal.fire({
+                    //       title:
+                    //         "Bid amount should be greater than minimum quote increment.",
+                    //       confirmButtonText: "OK",
+                    //       position: "top",
+                    //     });
+
+                    // }
+                    else if (vehicle?.startPrice > parseInt(bidAmount)) {
+                      Swal.fire({
+                        title: "Bid amount should be greater than start price.",
+                        confirmButtonText: "OK",
+                        position: "top",
+                      });
+                    } else if (parseInt(bidAmount) > 2147483647) {
+                      Swal.fire({
+                        title: "Bid amount exceeded the limit.",
+                        confirmButtonText: "OK",
+                        position: "top",
+                      });
+                    } else {
+                      CallBid(bidAmount, vehicle?.id);
+                      setTimeout(() => {
+                        // setBidAmount("");
+                      }, 1000);
+                    }
+                  }}
                   className="mt-3 w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white"
                 >
                   BID NOW
@@ -526,21 +542,26 @@ function Vehicle() {
                 ) : (
                   <span style={{ color: "#CCCC00" }}>Not Enrolled</span>
                 )} */}
-                 <div
-                  className="mt-4 w-full border-white text-center bg-white px-5 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white rounded-md">
-                  
-                  
-                 {vehicle?.userVehicleBidsCount && vehicle?.myBidRank ? (
+                <div className="mt-4 w-full border-white text-center bg-white px-5 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white rounded-md">
+                  {vehicle?.userVehicleBidsCount && vehicle?.myBidRank ? (
                     vehicle?.myBidRank == 1 ? (
-                     <p className="text-green-500 font-bold text-base space-x-1"><FontAwesomeIcon icon={faThumbsUp} /> <span className="text-green-500"> Winning</span></p>
+                      <p className="text-green-500 font-bold text-base space-x-1">
+                        <FontAwesomeIcon icon={faThumbsUp} />{" "}
+                        <span className="text-green-500"> Winning</span>
+                      </p>
                     ) : (
-                     <p className="text-red-500 font-bold text-base space-x-1"><FontAwesomeIcon icon={faThumbsDown} /> <span style={{ color: "#FF3333" }}>Losing</span></p>
+                      <p className="text-red-500 font-bold text-base space-x-1">
+                        <FontAwesomeIcon icon={faThumbsDown} />{" "}
+                        <span style={{ color: "#FF3333" }}>Losing</span>
+                      </p>
                     )
                   ) : (
-                    <p className="text-black font-bold text-base space-x-1"><FontAwesomeIcon icon={faUserSlash} /><span className="text-black"> Not  Enrolled </span></p>
-                  )}              
-               
-               </div>
+                    <p className="text-black font-bold text-base space-x-1">
+                      <FontAwesomeIcon icon={faUserSlash} />
+                      <span className="text-black"> Not Enrolled </span>
+                    </p>
+                  )}
+                </div>
               </p>
             </div>
           </div>

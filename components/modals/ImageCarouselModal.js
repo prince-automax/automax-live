@@ -19,7 +19,7 @@ export default function ImageCarouselModal({ open, close, ...props }) {
     <Transition appear show={open} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed z-10 inset-0 overflow-y-auto"
+        className="fixed z-10 inset-0 overflow-y-auto "
         onClose={close}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -50,19 +50,19 @@ export default function ImageCarouselModal({ open, close, ...props }) {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left shadow-xl transform transition-all  sm:align-middle sm:max-w-lg sm:pt-2">
-              <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
+            <div className="inline-block align-bottom bg-white rounded-lg text-left shadow-xl transform transition-all  sm:align-middle sm:max-w-lg ">
+              <div className=" sm:block absolute top-0 right-0 p-1 sm:pt-2 sm:pr-4">
                 <button
                   type="button"
                   className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none"
                   onClick={close}
                 >
                   <span className="sr-only">Close</span>
-                  <XIcon className="h-6 w-6" aria-hidden="true" />
+                  <XIcon className="h-6 w-6 text-black" aria-hidden="true" />
                 </button>
               </div>
               <div className="sm:flex sm:items-start">
-                <div className="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <div className="w-full mt-3 text-center sm:mt-0 sm:ml-3 sm:text-left">
                   {props.title && (
                     <Dialog.Title
                       as="h3"

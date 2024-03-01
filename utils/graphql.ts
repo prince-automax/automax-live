@@ -2268,12 +2268,14 @@ export type NestedStringNullableFilter = {
 export type Notification = {
   __typename?: 'Notification';
   deviceToken?: Maybe<Scalars['String']>;
+  eventId?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   user?: Maybe<User>;
 };
 
 export type NotificationCreateInput = {
   deviceToken?: InputMaybe<Scalars['String']>;
+  eventId?: InputMaybe<Scalars['String']>;
   user?: InputMaybe<UserRelateToOneForCreateInput>;
 };
 
@@ -2285,6 +2287,7 @@ export type NotificationManyRelationFilter = {
 
 export type NotificationOrderByInput = {
   deviceToken?: InputMaybe<OrderDirection>;
+  eventId?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
 };
 
@@ -2307,6 +2310,7 @@ export type NotificationUpdateArgs = {
 
 export type NotificationUpdateInput = {
   deviceToken?: InputMaybe<Scalars['String']>;
+  eventId?: InputMaybe<Scalars['String']>;
   user?: InputMaybe<UserRelateToOneForUpdateInput>;
 };
 
@@ -2315,6 +2319,7 @@ export type NotificationWhereInput = {
   NOT?: InputMaybe<Array<NotificationWhereInput>>;
   OR?: InputMaybe<Array<NotificationWhereInput>>;
   deviceToken?: InputMaybe<StringFilter>;
+  eventId?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
   user?: InputMaybe<UserWhereInput>;
 };
@@ -3123,6 +3128,7 @@ export type Seller = {
   events?: Maybe<Array<Event>>;
   eventsCount?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
+  logo?: Maybe<Scalars['String']>;
   mobile?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   nationalHead?: Maybe<Scalars['String']>;
@@ -3176,6 +3182,7 @@ export type SellerCreateInput = {
   billingContactPerson?: InputMaybe<Scalars['String']>;
   contactPerson?: InputMaybe<Scalars['String']>;
   events?: InputMaybe<EventRelateToManyForCreateInput>;
+  logo?: InputMaybe<Scalars['String']>;
   mobile?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   nationalHead?: InputMaybe<Scalars['String']>;
@@ -3194,6 +3201,7 @@ export type SellerOrderByInput = {
   contactPerson?: InputMaybe<OrderDirection>;
   createdAt?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
+  logo?: InputMaybe<OrderDirection>;
   mobile?: InputMaybe<OrderDirection>;
   name?: InputMaybe<OrderDirection>;
   nationalHead?: InputMaybe<OrderDirection>;
@@ -3234,6 +3242,7 @@ export type SellerUpdateInput = {
   billingContactPerson?: InputMaybe<Scalars['String']>;
   contactPerson?: InputMaybe<Scalars['String']>;
   events?: InputMaybe<EventRelateToManyForUpdateInput>;
+  logo?: InputMaybe<Scalars['String']>;
   mobile?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   nationalHead?: InputMaybe<Scalars['String']>;
@@ -3251,6 +3260,7 @@ export type SellerWhereInput = {
   createdAt?: InputMaybe<DateTimeNullableFilter>;
   events?: InputMaybe<EventManyRelationFilter>;
   id?: InputMaybe<IdFilter>;
+  logo?: InputMaybe<StringFilter>;
   mobile?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   nationalHead?: InputMaybe<StringFilter>;
@@ -3492,6 +3502,7 @@ export type User = {
   states?: Maybe<Array<State>>;
   statesCount?: Maybe<Scalars['Int']>;
   status?: Maybe<UserStatusType>;
+  tempToken?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   userCategory?: Maybe<Scalars['String']>;
   username?: Maybe<Scalars['String']>;
@@ -3751,6 +3762,7 @@ export type UserCreateInput = {
   state?: InputMaybe<Scalars['String']>;
   states?: InputMaybe<StateRelateToManyForCreateInput>;
   status?: InputMaybe<UserStatusType>;
+  tempToken?: InputMaybe<Scalars['Int']>;
   userCategory?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
   vehicleBuyingLimit?: InputMaybe<Scalars['Int']>;
@@ -3799,6 +3811,7 @@ export type UserOrderByInput = {
   specialVehicleBuyingLimit?: InputMaybe<OrderDirection>;
   state?: InputMaybe<OrderDirection>;
   status?: InputMaybe<OrderDirection>;
+  tempToken?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
   userCategory?: InputMaybe<OrderDirection>;
   username?: InputMaybe<OrderDirection>;
@@ -3902,6 +3915,7 @@ export type UserUpdateInput = {
   state?: InputMaybe<Scalars['String']>;
   states?: InputMaybe<StateRelateToManyForUpdateInput>;
   status?: InputMaybe<UserStatusType>;
+  tempToken?: InputMaybe<Scalars['Int']>;
   userCategory?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
   vehicleBuyingLimit?: InputMaybe<Scalars['Int']>;
@@ -3950,6 +3964,7 @@ export type UserWhereInput = {
   state?: InputMaybe<StringFilter>;
   states?: InputMaybe<StateManyRelationFilter>;
   status?: InputMaybe<UserStatusTypeNullableFilter>;
+  tempToken?: InputMaybe<IntNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userCategory?: InputMaybe<StringFilter>;
   username?: InputMaybe<StringFilter>;
@@ -3962,6 +3977,7 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
   idNo?: InputMaybe<Scalars['Int']>;
   mobile?: InputMaybe<Scalars['String']>;
+  tempToken?: InputMaybe<Scalars['Int']>;
   username?: InputMaybe<Scalars['String']>;
 };
 
