@@ -692,7 +692,7 @@ function Events() {
                             {/* bid timing showing Ends here */}
 
                             {/* bid box  starts here */}
-                            <div className=" sticky bottom-4 left-0 w-full mt-4  bg-[#E5E9F9] rounded-lg">
+                            <div className=" sticky bottom-0 left-0 w-full mt-4  bg-[#E5E9F9] rounded-lg">
                               <div className="px-4 py-2">
                                 <h2 className="text-base  text-gray-900  text-center font-poppins font-bold">
                                   Bid Details
