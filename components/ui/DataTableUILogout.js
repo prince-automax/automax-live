@@ -14,16 +14,16 @@ import {
   }) => {
     return (
       <div className=" w-full  flex justify-center items-center mt-4 ">
-        <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-2 rounded-lg mx-2 space-y-1  ">
+        <div className="grid grid-cols-1 gap-1 w-96 border-2 border-[#536DD9] p-2 rounded-lg mx-2 space-y-1  ">
           <div className="grid grid-cols-3 gap-1 space-x-2">
-            <p className="flex justify-between text-sm ">
+          <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
               Event <span>:</span>
             </p>
   
-            <p className="col-span-2 text-sm flex">{event?.seller?.name}</p>
+            <p className="col-span-2 text-sm flex  font-poppins font-medium text-[#0F172A]">{event?.seller?.name}</p>
           </div>
           <div className="grid grid-cols-3 gap-1 space-x-2 ">
-            <p className="flex justify-between text-sm  ">
+          <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
               Location <span>:</span>
             </p>
   
@@ -33,7 +33,7 @@ import {
             </p>
           </div>
           <div className="grid grid-cols-3 gap-1 space-x-2 ">
-            <p className="flex justify-between text-sm">
+          <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
               Start Time <span>:</span>
             </p>
   
@@ -44,7 +44,7 @@ import {
             </p>
           </div>
           <div className="grid grid-cols-3 gap-1 space-x-2">
-            <p className="flex justify-between text-sm">
+          <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
               Close Time <span>:</span>
             </p>
   
