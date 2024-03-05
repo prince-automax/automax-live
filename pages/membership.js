@@ -76,34 +76,9 @@ export default function Membership() {
 
           <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-12">
             <div className="relative lg:grid  lg:grid-cols-12 max-sm:space-y-6">
-              <div className="mx-auto max-w-md lg:mx-0 lg:max-w-none  lg:col-start-10 lg:col-end-13 lg:row-start-2 lg:row-end-3">
-                <div className="h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-l-lg">
-                  <div className="flex-1 flex flex-col">
-                    <div className="bg-white px-6 py-10">
-                      <div>
-                        <h3
-                          className="text-center text-2xl font-medium text-gray-900"
-                          id="tier-hobby"
-                        >
-                          QR Code
-                        </h3>
-                        <p className="block w-full text-center font-bold rounded-lg border border-transparent bg-white px-6 py-3 text-base  text-black hover:bg-gray-50">
-                          Automax Solutions India Pvt. Ltd.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
-                   
-                      <Image
-                        src={qr}
-                        alt="auto bse"
-                        className="w-full h-full object-center object-cover"
-                      />
-                   
-                    </div>
-                  </div>
-                </div>
-              </div>
+             
+             
+             
 
               <div className="mt-10 max-w-lg mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-start-4 lg:col-end-10 lg:row-start-1 lg:row-end-4">
                 <div className="relative z-10 rounded-lg shadow-xl">
@@ -214,6 +189,37 @@ export default function Membership() {
                   </div>
                 </div>
               </div>
+
+
+              <div className="mx-auto max-w-md lg:mx-0 lg:max-w-none  lg:col-start-10 lg:col-end-13 lg:row-start-2 lg:row-end-3">
+                <div className="h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-r-lg">
+                  <div className="flex-1 flex flex-col">
+                    <div className="bg-white px-6 py-10">
+                      <div>
+                        <h3
+                          className="text-center text-2xl font-medium text-gray-900"
+                          id="tier-hobby"
+                        >
+                          QR Code
+                        </h3>
+                        <p className="block w-full text-center font-bold rounded-lg border border-transparent bg-white px-6 py-3 text-base  text-black hover:bg-gray-50">
+                          Automax Solutions India Pvt. Ltd.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
+                   
+                      <Image
+                        src={qr}
+                        alt="auto bse"
+                        className="w-full h-full object-center object-cover"
+                      />
+                   
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -257,34 +263,7 @@ export default function Membership() {
             </div>
           </div>
 
-          {/* <div className="mx-auto max-w-md lg:mx-0 lg:max-w-none  lg:col-start-7 lg:col-end-12 lg:row-start-2 lg:row-end-3">
-                <div className="h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-l-lg">
-                  <div className="flex-1 flex flex-col">
-                    <div className="bg-white px-6 py-10">
-                      <div>
-                        <h3
-                          className="text-center text-2xl font-medium text-gray-900"
-                          id="tier-hobby"
-                        >
-                          QR Code
-                        </h3>
-                        <p className="block w-full text-center font-bold rounded-lg border border-transparent bg-white px-6 py-3 text-base  text-black hover:bg-gray-50">
-                          Automax Solutions India Pvt. Ltd.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
-                   
-                      <Image
-                        src={qr}
-                        alt="auto bse"
-                        className="w-60 h-60 object-center object-cover"
-                      />
-                   
-                    </div>
-                  </div>
-                </div>
-              </div> */}
+        
 
 
         </div>

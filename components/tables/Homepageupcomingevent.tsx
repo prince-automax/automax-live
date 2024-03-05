@@ -271,42 +271,42 @@ function MobielViewCard({
     <>
       <div className="">
         <div className=" w-full  flex justify-center items-center mt-4 ">
-          <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-2 rounded-lg  space-y-1  ">
+          <div className="grid grid-cols-1 gap-1 w-96 border-2 border-[#536DD9] p-2 rounded-lg  space-y-1  ">
             {/*  */}
             <div className="grid grid-cols-3 gap-1 space-x-2">
-              <p className="flex justify-between text-sm ">
+              <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
                 Event <span>:</span>
               </p>
 
-              <p className="col-span-2 text-sm flex">{event?.seller?.name}</p>
+              <p className="col-span-2 text-sm flex  font-poppins font-medium text-[#0F172A]">{event?.seller?.name}</p>
             </div>
             <div className="grid grid-cols-3 gap-1 space-x-2 ">
-              <p className="flex justify-between text-sm  ">
+              <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold  ">
                 Location <span>:</span>
               </p>
 
-              <p className="col-span-2 text-sm  flex">
+              <p className="col-span-2 text-sm  flex font-poppins font-medium text-[#0F172A] ">
                 {" "}
                 {event?.location?.name}, {event?.location?.state?.name}
               </p>
             </div>
             <div className="grid grid-cols-3 gap-1 space-x-2 ">
-              <p className="flex justify-between text-sm">
+              <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
                 Start Time <span>:</span>
               </p>
 
-              <p className="col-span-2 text-sm flex   justify-start ">
+              <p className="col-span-2 text-sm flex   justify-start font-poppins font-medium text-[#0F172A] ">
                 {" "}
                 {moment(event.startDate).format(" Do-MMMM-YYYY")}{" "}
                 {moment(event.startDate).format(" ")}
               </p>
             </div>
             <div className="grid grid-cols-3 gap-1 space-x-2">
-              <p className="flex justify-between text-sm">
+              <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
                 Close Time <span>:</span>
               </p>
 
-              <p className="col-span-2  text-sm flex">
+              <p className="col-span-2  text-sm flex font-poppins font-medium text-[#0F172A]">
                 {" "}
                 {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
                 {moment(event.endDate).format(" ")}

@@ -82,7 +82,7 @@ export default function WorkBookTable({
         <Link href={`/workbook/${value}`}>
           <a target="_blank">
             <div>
-              <span className="text-emerald-600 font-extrabold">View</span>
+              <span className="text-[#536DD9] font-extrabold">View</span>
             </div>
           </a>
         </Link>
@@ -189,39 +189,39 @@ function MobielViewCard({
     <>
       <div className="overflow-scroll">
         <div className=" w-full  flex justify-center items-center mt-4 ">
-          <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-2 rounded-lg  space-y-1  ">
+          <div className="grid grid-cols-1 gap-1 w-96 border-2 border-[#536DD9] p-2 rounded-lg  space-y-1  ">
             {/*  */}
             <div className="grid grid-cols-3 gap-1 space-x-2">
-              <p className="flex justify-between text-sm ">
+            <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
                 Number <span>:</span>
               </p>
 
-              <p className="col-span-2 text-sm flex">
+              <p className="col-span-2 text-sm flex  font-poppins font-medium text-[#0F172A]">
                 {event?.registrationNumber}
               </p>
             </div>
             <div className="grid grid-cols-3 gap-1 space-x-2 ">
-              <p className="flex justify-between text-sm  ">
+            <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
                 make <span>:</span>
               </p>
 
-              <p className="col-span-2 text-sm  flex"> {event?.make}</p>
+              <p className="col-span-2 text-sm flex  font-poppins font-medium text-[#0F172A]"> {event?.make}</p>
             </div>
             <div className="grid grid-cols-3 gap-1 space-x-2 ">
-              <p className="flex justify-between text-sm">
+            <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
                 model <span>:</span>
               </p>
 
-              <p className="col-span-2 text-sm flex   justify-start ">
+              <p className="col-span-2 text-sm flex  font-poppins font-medium text-[#0F172A] ">
                 {event?.model}
               </p>
             </div>
             <div className="grid grid-cols-3 gap-1 space-x-2">
-              <p className="flex justify-between text-sm">
+            <p className="flex justify-between text-sm font-roboto text-[#646464] font-semibold ">
                 Varient <span>:</span>
               </p>
 
-              <p className="col-span-2  text-sm flex">{event?.varient}</p>
+              <p className="col-span-2 text-sm flex  font-poppins font-medium text-[#0F172A]">{event?.varient}</p>
             </div>
             <hr className="to-black shadow-2xl" />
             <div className="mt-3">
