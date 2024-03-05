@@ -82,10 +82,10 @@ function Datatable(props) {
       )}
 
       {!alternateLayout ? (
-        <div className="mt-2 ring-1 ring-gray-300 rounded-lg overflow-auto max-sm:overflow-scroll max-sm:h-[450px]">
+        <div className="mt-2 ring-1 ring-gray-300 rounded-lg overflow-auto max-sm:overflow-scroll max-sm:h-[450px] ">
           <table
             {...getTableProps()}
-            className="min-w-full divide-y divide-gray-300 relative"
+            className="min-w-full divide-y divide-gray-300 relative max-sm:uppercase"
           >
             <thead className="bg-primary rounded-lg ">
               {headerGroups.map((headerGroup, hgidx) => (

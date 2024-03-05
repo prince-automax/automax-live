@@ -323,7 +323,7 @@ function MobielViewCard({ index1,event, allowDownload,registered,registeredStatu
       <div className="">
        
       <div className=" w-full  flex justify-center items-center mt-4 ">
-    <div className="grid grid-cols-1 gap-1 w-96 border-2 border-orange-400 p-4 rounded-lg  space-y-1  ">
+    <div className="grid grid-cols-1 gap-1 w-96 border-2 border-[#536DD9] p-4 rounded-lg  space-y-1  ">
         {/*  */}
       <div className="grid grid-cols-3 gap-1 space-x-2">
         <p className="flex justify-between text-sm ">
@@ -358,7 +358,7 @@ function MobielViewCard({ index1,event, allowDownload,registered,registeredStatu
       <hr className="to-black shadow-2xl" />
       <div className="mt-3">
            {registered ? <div>  
-            <a  href={`/events/${event.id}?type=c`} target="_blank" rel="noopener noreferrer"><span      className={`border px-4 rounded-md ${index1 % 2==0 ? 'bg-red-600' :'bg-blue-700'} text-white py-1`}>View</span></a>
+            <a  href={`/events/${event.id}?type=c`} target="_blank" rel="noopener noreferrer"><span      className={`border px-4 rounded-md bg-[#536DD9] text-white py-1`}>View</span></a>
            </div>   :<p>
                   Payment Status :{" "}
                   <span className="text-red-500 font-bold">
