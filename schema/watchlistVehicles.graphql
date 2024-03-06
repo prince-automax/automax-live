@@ -3,6 +3,7 @@ query LiveWatchListItem($where: UserWhereUniqueInput!, $watchListWhere2: Vehicle
     watchList(where: $watchListWhere2) {
   id
   registrationNumber
+  
 
 }
 }

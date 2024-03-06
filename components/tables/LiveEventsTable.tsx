@@ -370,6 +370,9 @@ function MobielViewCard({
 }) {
   const [showAlert, setShowAlert] = useState(false);
 
+  
+  
+
   const showAlertModal = () => {
     setShowAlert(true);
   };

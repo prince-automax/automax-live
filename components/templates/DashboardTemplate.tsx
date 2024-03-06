@@ -229,8 +229,8 @@ useEffect(() => {
               </button> */}
               {/* <Welcome /> */}
               <nav className="mt-1 sm:max-lg:mt-8 space-y-4 max-md:w-full  ">
-                <div className=" text-black bg-white lg:hidden flex w-full space-x-4  overflow-x-scroll   scroll ">
-               
+                <div className=" text-black bg-white lg:hidden flex w-full space-x-4  overflow-x-scroll scrollbar-hide ">
+              
 {mobileNavigation.map((item, index) => (
   <ul key={index} className="space-x-4">
     <li className="space-x-4 ">

@@ -341,7 +341,7 @@ function OpenAuctions() {
 
   let [vehicleDetails] = useState({
     Specification: [],
-    Equipment: [],
+    Details: [],
   });
 
   const options = {

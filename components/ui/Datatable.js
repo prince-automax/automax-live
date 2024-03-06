@@ -73,7 +73,7 @@ function Datatable(props) {
               type="text"
               name="text"
               id="text"
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-600 rounded-md"
               placeholder="Search.."
               autoComplete="off"
             />
@@ -82,10 +82,10 @@ function Datatable(props) {
       )}
 
       {!alternateLayout ? (
-        <div className="mt-2 ring-1 ring-gray-300 rounded-lg overflow-auto">
+        <div className="mt-2 ring-1 ring-gray-300 rounded-lg overflow-auto max-sm:overflow-scroll max-sm:h-[450px] ">
           <table
             {...getTableProps()}
-            className="min-w-full divide-y divide-gray-300 "
+            className="min-w-full divide-y divide-gray-300 relative max-sm:uppercase"
           >
             <thead className="bg-primary rounded-lg ">
               {headerGroups.map((headerGroup, hgidx) => (
@@ -100,16 +100,16 @@ function Datatable(props) {
                       {...column.getHeaderProps(column.getSortByToggleProps())}
                       className="py-3.5 pl-1 pr-1 text-sm font-semibold text-gray-100 text-left sm:pl-2"
                     >
-                      <span className="whitespace-nowrap">
+                      <span className="whitespace-nowrap ">
                         {column.render("Header")}
                         {column.isSorted ? (
                           column.isSortedDesc ? (
-                            <SortDescendingIcon className="ml-2 text-yellow-400 inline-flex h-5 w-5" />
+                            <SortDescendingIcon className="ml-2 text-yellow-400 inline-flex h-5 w-5 " />
                           ) : (
-                            <SortAscendingIcon className="ml-2 text-yellow-400 inline-flex h-5 w-5" />
+                            <SortAscendingIcon className="ml-2 text-yellow-400 inline-flex h-5 w-5 " />
                           )
                         ) : (
-                          <SelectorIcon className="ml-2 inline-flex h-5 w-5" />
+                          <SelectorIcon className="ml-2 inline-flex h-5 w-5 " />
                         )}
                       </span>
                     </th>
@@ -128,7 +128,7 @@ function Datatable(props) {
                     className={
                       onRowClickPath
                         ? "divide-x divide-gray-200 cursor-pointer hover:bg-indigo-50"
-                        : "divide-x divide-gray-200"
+                        : "divide-x divide-gray-200 "
                     }
                   >
                     {row.cells.map((cell, cellIdx) => {
@@ -136,7 +136,7 @@ function Datatable(props) {
                         <td
                           key={cellIdx}
                           {...cell.getCellProps()}
-                          className="px-6 py-3.5 text-sm text-gray-800 border-t border-gray-200"
+                          className="px-6 py-3.5 text-sm text-gray-800 border-t max-sm:font-bold border-gray-200  "
                         >
                           {cell.render("Cell")}
                         </td>
@@ -156,7 +156,7 @@ function Datatable(props) {
               <div
                 key={rIdx}
                 {...row.getRowProps()}
-                className={onRowClickPath ? "cursor-pointer" : ""}
+                className={onRowClickPath ? "cursor-pointer " : ""}
               >
                 {row.cells.map((cell, cIdx) => {
                   return (
@@ -189,7 +189,7 @@ function Datatable(props) {
               </p>
             </div>
 
-            <div className="flex-1 flex justify-between sm:justify-end">
+            <div className="flex-1 flex justify-between items-center sm:justify-end">
               <button
                 onClick={() => previousPage()}
                 disabled={!canPreviousPage}
@@ -197,6 +197,13 @@ function Datatable(props) {
               >
                 Previous
               </button>
+              <div className="block sm:hidden">
+              <p className="text-sm text-gray-700">
+                
+                <span className="font-medium"> {pageIndex + 1} </span> of{" "}
+                <span className="font-medium">{pageOptions.length}</span> pages
+              </p>
+            </div>
               <button
                 onClick={() => nextPage()}
                 disabled={!canNextPage}
