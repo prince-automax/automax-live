@@ -186,7 +186,7 @@ export default function EventsTable({
         registered ? (
           <DownloadButton file={value} allowDownload={allowDownload} />
         ) : (
-          <DocumentDownloadIcon className="h-8 w-8 text-gray-600 hover:text-green-600"  onClick={PaymentStatus}/>
+          value && <DocumentDownloadIcon className="h-8 w-8 text-gray-600 hover:text-green-600"  onClick={PaymentStatus}/>
 
         ),
     },
