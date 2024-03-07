@@ -19,6 +19,10 @@ export default function EventsTable({
   allowDownload,
   eventCategory = "online",
 }) {
+
+
+
+
   const [accessToken, setAccessToken] = useState("");
   const [registered, setRegistered] = useState(false);
   const [registeredStatus, setRegisteredStatus] = useState("");
@@ -30,6 +34,8 @@ export default function EventsTable({
       setAccessToken(token);
     }
   }, []);
+
+ 
 
   const variables = {
     skip: 0,

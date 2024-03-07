@@ -20,7 +20,7 @@ import graphQLClient from "@utils/useGQLQuery";
 import Router from "next/router";
 import Link from "next/link";
 import DataTableUILoggedIn from "../ui/DataTableUILoggedIn";
-
+import toast from "react-hot-toast";
 export default function EventsTable({
   showHeadings,
   hideSearch,
@@ -30,6 +30,9 @@ export default function EventsTable({
   const [accessToken, setAccessToken] = useState("");
   const [registered, setRegistered] = useState(false);
   const [registeredStatus, setRegisteredStatus] = useState("");
+  const [showText, setShowText] = useState(false);
+
+
   const id = localStorage.getItem("id");
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -70,6 +73,40 @@ export default function EventsTable({
 
   const payment = userData ? userData["user"]?.payments : "";
 
+
+  const PaymentStatus=()=>{
+    toast("Your Access to this service has been disabled. Please contact Autobse for assistance", {
+      duration: 5000,
+      position: "top-right",
+
+      // Styling
+      // Styling
+      style: {
+        bottom: "80px",
+        background: "rgb(95, 99, 93)",
+        color: "white",
+        border: "rounded",
+        fontSize:"bold"
+      },
+      className: " bg-primary text-white ",
+
+      // Custom Icon
+      icon: " 🚫 ",
+
+      // Change colors of success/error/loading icon
+      iconTheme: {
+        primary: "#0000",
+        secondary: "#fff",
+      },
+
+      // Aria
+      ariaProps: {
+        role: "status",
+        "aria-live": "polite",
+      },
+    });
+
+  }
   
 
   useEffect(() => {
@@ -127,14 +164,20 @@ export default function EventsTable({
       Cell: ({ cell: { value } }) =>
         registered ? (
           View(value, eventCategory)
-        ) : registeredStatus ? (
-          `Registration Staus: ${registeredStatus}`
         ) : (
-          <span className="text-bold text-red-500 text-xs">
-            Selected Auction has not been assigned to you. Please contact{" "}
-            <span className="p-3">9962334455 </span> for more details
-          </span>
-        ),
+          <button className=" bg-primary-hover font-semibold border text-white py-1 w-full px-6 rounded-lg" onClick={PaymentStatus}>
+         BID
+        </button>
+        )
+        
+        // registeredStatus ? (
+        //   `Registration Staus: ${registeredStatus}`
+        // ) : (
+        //   <span className="text-bold text-red-500 text-xs">
+        //     Selected Auction has not been assigned to you. Please contact{" "}
+        //     <span className="p-3">9962334455 </span> for more details
+        //   </span>
+        // ),
     },
     {
       Header: "Download",
@@ -143,9 +186,8 @@ export default function EventsTable({
         registered ? (
           <DownloadButton file={value} allowDownload={allowDownload} />
         ) : (
-          <span className="text-bold text-red-500 text-sm">
-            Pending for Approval{" "}
-          </span>
+          <DocumentDownloadIcon className="h-8 w-8 text-gray-600 hover:text-green-600"  onClick={PaymentStatus}/>
+
         ),
     },
   ];
@@ -193,7 +235,8 @@ export default function EventsTable({
                         allowDownload={allowDownload}
                         registered={registered}
                         registeredStatus={registeredStatus}
-                        // noOfVehicles={event?.v}
+                        
+                        PaymentStatus={PaymentStatus}
                       />
                     );
                   })}
@@ -242,7 +285,7 @@ function View(value, eventCategory) {
       >
         <a target="_blank">
           <div>
-            <span className="text-emerald-600 font-extrabold">Bid Now</span>
+            <span className=" bg-primary-hover font-semibold border text-white py-1 w-full px-6 rounded-lg">BID </span>
           </div>
         </a>
       </Link>
@@ -367,6 +410,7 @@ function MobielViewCard({
   allowDownload,
   registered,
   registeredStatus,
+  PaymentStatus
 }) {
   const [showAlert, setShowAlert] = useState(false);
 
@@ -391,6 +435,7 @@ function MobielViewCard({
           allowDownload={allowDownload}
           registered={registered}
           registeredStatus={registeredStatus}
+          PaymentStatus={PaymentStatus}
         />
       </div>
 
