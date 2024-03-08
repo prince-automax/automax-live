@@ -6,9 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 import moment from "moment";
-import {
-  CalendarIcon, ArrowRightIcon,
-} from "@heroicons/react/outline";
+import { CalendarIcon, ArrowRightIcon } from "@heroicons/react/outline";
 
 import {
   CreateBidMutationVariables,
@@ -19,13 +17,34 @@ import {
   useFindAuctionStateQuery,
   FindAuctionStateQueryVariables,
   OrderDirection,
+  GetUserQueryVariables,
+  useGetUserQuery,
 } from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
+import toast from "react-hot-toast";
+
 
 const Findauction = () => {
   const [queryResult, setQueryResult] = useState(null);
-
   const formikRef = useRef(null);
+  const [accessToken, setAccessToken] = useState("");
+  const [registered, setRegistered] = useState(false);
+  const [id, setId] = useState("");
+  const [registeredStatus, setRegisteredStatus] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      const id = localStorage.getItem("id");
+
+      setAccessToken(token);
+      setId(id);
+    }
+  }, []);
+  
+
+  // console.log("id from find auc",id);
+  
 
   const Category = [
     { value: "vehicle", label: "Vehicle" },
@@ -35,27 +54,96 @@ const Findauction = () => {
     { value: "other", label: "Other" },
   ];
 
+
+
+
+  const { data: userData, isLoading: loading } =
+  useGetUserQuery<GetUserQueryVariables>(
+    graphQLClient({ Authorization: `Bearer ${accessToken}` }),
+    { where: { id } },
+    {
+      enabled: accessToken !== "",
+    }
+  );
+
+  const payment = userData ? userData["user"]?.payments : "";
+
+  console.log("registerd",registered)
+  
+
+
+  const PaymentStatus=()=>{
+    toast("Your Access to this service has been disabled. Please contact Autobse for assistance", {
+      duration: 5000,
+      position: "top-right",
+
+      // Styling
+      // Styling
+      style: {
+        bottom: "80px",
+        background: "rgb(95, 99, 93)",
+        color: "white",
+        border: "rounded",
+        fontSize:"bold"
+      },
+      className: " bg-primary text-white ",
+
+      // Custom Icon
+      icon: " 🚫 ",
+
+      // Change colors of success/error/loading icon
+      iconTheme: {
+        primary: "#0000",
+        secondary: "#fff",
+      },
+
+      // Aria
+      ariaProps: {
+        role: "status",
+        "aria-live": "polite",
+      },
+    });
+
+  }
+  
+
+
+  useEffect(() => {
+    if (payment) {
+      payment?.map((item) => {
+        if (item.paymentFor === "registrations") {
+          // console.log('toiso',new Date(item?.RegistrationExpire)?.toISOString(), "dsfsdafasdfasdf",new Date().toISOString());
+          
+          if (item.status === "success" && new Date(item?.RegistrationExpire)?.toISOString()  > new Date().toISOString()  ) {
+            setRegistered(true);
+          } else {
+            setRegisteredStatus(item.status);
+          }
+
+          // console.log("trueeeee");
+        } else {
+          // console.log("falseeeeeeeeeee");
+        }
+      });
+    }
+  }, [payment]);
+
+
+
   const { data, isLoading: loadingbank } =
     useInstitutionsQuery<InstitutionsQueryVariables>(graphQLClient());
 
   const { data: findAuctionState, isLoading: loadingstate } =
     useFindAuctionStateQuery<FindAuctionStateQueryVariables>(graphQLClient());
 
-    
-    
-
   const variables = {
     skip: 0,
     take: 10,
   };
 
-
-  
   let currentDateWithoutMinutesSeconds = new Date();
-currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
+  currentDateWithoutMinutesSeconds.setMinutes(0, 0, 0);
 
- 
-  
   const { data: findAuction } = useFindAuctionsQuery(graphQLClient(), {
     skip: 0,
     take: 100,
@@ -66,7 +154,6 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
     ],
 
     where: {
-
       auctionEndDate: {
         gte: currentDateWithoutMinutesSeconds.toISOString(),
       },
@@ -106,39 +193,37 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
           lte: new Date(queryResult?.toDate).toISOString(),
         },
       }),
-      ...(queryResult?. minimum && queryResult?.maximum &&{
-        reservePrice: {
-          gte: queryResult?.minimum.toString(),
-        },
-        AND: [
-          {
-            reservePrice: {
-              lte: queryResult?.maximum.toString(),
-            }
-          }
-        ]
-      }),
+      ...(queryResult?.minimum &&
+        queryResult?.maximum && {
+          reservePrice: {
+            gte: queryResult?.minimum.toString(),
+          },
+          AND: [
+            {
+              reservePrice: {
+                lte: queryResult?.maximum.toString(),
+              },
+            },
+          ],
+        }),
 
-
-
-      ...(queryResult?.minimum && !queryResult?.maximum && {
-        reservePrice: {
-          gte: queryResult?.minimum.toString(),
-        },  
-      }),
-      ...(queryResult?.maximum &&  !queryResult?.minimum &&{
-        reservePrice: {
-          lte: queryResult?.maximum.toString(),
-        },
-      }),
-
+      ...(queryResult?.minimum &&
+        !queryResult?.maximum && {
+          reservePrice: {
+            gte: queryResult?.minimum.toString(),
+          },
+        }),
+      ...(queryResult?.maximum &&
+        !queryResult?.minimum && {
+          reservePrice: {
+            lte: queryResult?.maximum.toString(),
+          },
+        }),
     },
   });
 
- 
+  console.log("find auction ", findAuction);
 
-
-  
   const columns = [
     {
       Header: "Listing Id",
@@ -173,7 +258,14 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
     {
       Header: "View Details",
       accessor: "id",
-      Cell: ({ cell: { value } }) => View(value),
+      Cell: ({ cell: { value } }) =>
+        registered ? (
+          View(value)
+        ) : (
+          <button className=" bg-primary-hover font-semibold border text-white py-1 w-full px-6 rounded-lg" onClick={PaymentStatus}>
+         view
+        </button>
+        )
     },
   ];
 
@@ -196,9 +288,9 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
         <Link href={`/openbiddetails/${value}`}>
           <a target="_blank">
             <div className="flex">
-              <span className="  font-medium px-4 py-1 font-poppins mb-6 border text-sm border-[#DC2626] text-[#DC2626] rounded-xl">
+              <span className="  font-medium px-4 py-1 font-poppins mb-6  text-base border-2 border-[#536DD9] text-[#536DD9] rounded-lg">
                 {" "}
-                Enter
+                View
               </span>{" "}
               <div>
                 <ArrowRightIcon />
@@ -229,8 +321,6 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
     );
   }
   function DateFormat(value) {
-
-  
     return (
       <div>
         <div className="flex space-x-2">
@@ -261,11 +351,6 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
 
         {/* Contact section */}
         <section className="relative " aria-labelledby="contact-heading">
-          {/* <div
-            className="absolute w-full h-1/2 bg-gray-50"
-            aria-hidden="true"
-          /> */}
-
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <div className="relative bg-white shadow-md ">
               <div className="grid grid-cols-1 lg:grid-cols-3">
@@ -495,50 +580,29 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
             )}
           </div>
           <div className="md:hidden space-y-4 my-4  flex flex-col justify-center items-center">
-            {/* <div className="overflow-hidden shadow-lg  rounded-lg p-2 my-3 border border-slate-400 mx-4"> */}
-            {/* <div className="grid grid-cols-1 mx-10 border border-slate-300 my-6"> */}
-
-            {/*        
-        {findAuction?.findAuctions.map((item,index)=>( 
-            <div key={index}>
-          <div className="flex flex-col border-b border-slate-300 space-y-2 px-3 py-3 text-black">
-          <div className="flex  justify-center font-bold">  <span>{item?.listingId}</span></div>
-          <span>{item?.state.name}</span>
-            <span>{item?.institution_details.name}</span>
-            
-            <span>{item?.propertyType}</span>
-            <span>{new Date(item?.emdSubmissionDate).toLocaleDateString()}</span>
-          
-            <div className="flex justify-end mx-4">
-           <span className="bg-red-200"><ArrowRightIcon className="bg-black"/></span>  {MobileViewId(item.id)}
-            </div>
-          </div>
-          </div>
-        ))  } */}
-
-            {/* </div> */}
-            {/* </div> */}
             {findAuction?.findAuctions.map((item, index) => {
-            
-
               return (
                 <div
                   key={index}
-                  className="grid grid-cols-1 gap-1 border-2  border-orange-600 rounded-lg mx-2     px-6 py-2 "
+                  className="grid grid-cols-1 gap-1 border-2  border-[#536DD9] rounded-lg mx-2     px-6 py-2 "
                 >
                   <div className="grid grid-cols-3 gap-1 space-x-2   items-center   ">
                     <p className="flex justify-between text-base  ">
                       Listing ID <span className="pl-2">:</span>
                     </p>
 
-                    <p className="col-span-2 text-base pl-2 ">{item?.listingId}</p>
+                    <p className="col-span-2 text-base pl-2 ">
+                      {item?.listingId}
+                    </p>
                   </div>
                   <div className="grid grid-cols-3 gap-1 space-x-2  justify-center items-center   ">
                     <p className="flex justify-between text-base">
                       State <span>:</span>
                     </p>
 
-                    <p className="col-span-2 text-base tracking-wide pl-2">{item?.state?.name}</p>
+                    <p className="col-span-2 text-base tracking-wide pl-2">
+                      {item?.state?.name}
+                    </p>
                   </div>
                   <div className="grid grid-cols-3 gap-1 space-x-2 justify-center items-center ">
                     <p className="flex justify-between text-base">
@@ -554,7 +618,9 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
                       Details <span>:</span>
                     </p>
 
-                    <p className="col-span-2  text-base pl-2 ">{item?.propertyType}</p>
+                    <p className="col-span-2  text-base pl-2 ">
+                      {item?.propertyType}
+                    </p>
                   </div>
                   <div className="grid grid-cols-3 gap-1 space-x-2 justify-center items-center">
                     <p className="flex justify-between text-base">
@@ -562,7 +628,7 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
                     </p>
 
                     <p className="col-span-2  text-base items-end pl-2">
-                      {  DateFormat(item?.emdSubmissionDate)}
+                      {DateFormat(item?.emdSubmissionDate)}
                     </p>
                   </div>
                   <div className="grid grid-cols-3 gap-1 space-x-2 justify-center items-center">
@@ -571,7 +637,7 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
                     </p>
 
                     <p className="col-span-2  text-base pl-2">
-                      { DateFormat(item?.auctionStartDate)}
+                      {DateFormat(item?.auctionStartDate)}
                     </p>
                   </div>
                   <div className="grid grid-cols-3 gap-1 space-x-2 justify-center items-center">
@@ -579,11 +645,19 @@ currentDateWithoutMinutesSeconds.setMinutes(0,0,0);
                       Reserve Price <span className="pl-1">:</span>
                     </p>
 
-                    <p className="col-span-2  text-sm pl-2">₹{item?.reservePrice}</p>
+                    <p className="col-span-2  text-sm pl-2">
+                      ₹{item?.reservePrice}
+                    </p>
                   </div>
                   <hr className="to-black" />
                   <div className="space-x-3 mt-2 flex">
-                    <button className="">{MobileViewId(item?.id)}</button>
+                    {registered ? ( <button className="">{MobileViewId(item?.id)}</button>):(
+                      <span   onClick={PaymentStatus} className="  font-medium px-4 py-1 font-poppins mb-6  text-base border-2 border-[#536DD9] text-[#536DD9] rounded-lg">
+                      {" "}
+                      View
+                    </span>
+                    ) }
+                   
                     <span className=""></span>
                   </div>
                 </div>

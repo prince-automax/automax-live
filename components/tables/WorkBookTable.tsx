@@ -18,6 +18,7 @@ import {
 import graphQLClient from "@utils/useGQLQuery";
 import Router from "next/router";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function WorkBookTable({
   showHeadings,
@@ -25,15 +26,101 @@ export default function WorkBookTable({
   allowDownload,
 }) {
   const [accessToken, setAccessToken] = useState("");
+  const [registered, setRegistered] = useState(false);
+  const [id, setId] = useState("");
+  const [registeredStatus, setRegisteredStatus] = useState("");
 
-  const id = localStorage.getItem("id");
+
+  // const id = localStorage.getItem("id");
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const token = localStorage.getItem("token");
+  //     setAccessToken(token);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
+      const id = localStorage.getItem("id");
+
       setAccessToken(token);
+      setId(id);
     }
   }, []);
+
+  
+  const { data: userData, isLoading: loading } =
+  useGetUserQuery<GetUserQueryVariables>(
+    graphQLClient({ Authorization: `Bearer ${accessToken}` }),
+    { where: { id } },
+    {
+      enabled: accessToken !== "",
+    }
+  );
+
+  const payment = userData ? userData["user"]?.payments : "";
+
+  console.log("registerd",userData)
+  
+
+
+  const PaymentStatus=()=>{
+    toast("Your Access to this service has been disabled. Please contact Autobse for assistance", {
+      duration: 5000,
+      position: "top-right",
+
+      // Styling
+      // Styling
+      style: {
+        bottom: "80px",
+        background: "rgb(95, 99, 93)",
+        color: "white",
+        border: "rounded",
+        fontSize:"bold"
+      },
+      className: " bg-primary text-white ",
+
+      // Custom Icon
+      icon: " 🚫 ",
+
+      // Change colors of success/error/loading icon
+      iconTheme: {
+        primary: "#0000",
+        secondary: "#fff",
+      },
+
+      // Aria
+      ariaProps: {
+        role: "status",
+        "aria-live": "polite",
+      },
+    });
+
+  }
+  
+
+
+  useEffect(() => {
+    if (payment) {
+      payment?.map((item) => {
+        if (item.paymentFor === "registrations") {
+          
+          if (item.status === "success" && new Date(item?.RegistrationExpire)?.toISOString()  > new Date().toISOString()  ) {
+            setRegistered(true);
+          } else {
+            setRegisteredStatus(item.status);
+          }
+
+          // console.log("trueeeee");
+        } else {
+          // console.log("falseeeeeeeeeee");
+        }
+      });
+    }
+  }, [payment]);
+
 
   const { data, isLoading, refetch } =
     useUserWorkBookQuery<UserWorkBookQueryVariables>(
@@ -72,9 +159,18 @@ export default function WorkBookTable({
     {
       Header: "View",
       accessor: "id",
-      Cell: ({ cell: { value } }) => View(value),
+      Cell: ({ cell: { value } }) =>
+        registered ? (
+          View(value)
+        ) : (
+          <button className=" bg-primary-hover font-semibold border text-white py-1  px-6 rounded-lg" onClick={PaymentStatus}>
+         view
+        </button>
+        )
     },
   ];
+
+
 
   function View(value) {
     return (
@@ -82,7 +178,7 @@ export default function WorkBookTable({
         <Link href={`/workbook/${value}`}>
           <a target="_blank">
             <div>
-              <span className="text-[#536DD9] font-extrabold">View</span>
+              <span className=" bg-primary-hover font-semibold border text-white py-1 w-full px-6 rounded-lg">View</span>
             </div>
           </a>
         </Link>
@@ -136,6 +232,8 @@ export default function WorkBookTable({
                         index1={eventIdx}
                         view={View}
                         event={workSheet}
+                        registered={registered}
+                        PaymentStatus={PaymentStatus}
                     
                       />
                     )
@@ -170,7 +268,8 @@ WorkBookTable.defaultProps = {
 function MobielViewCard({
   index1,
   event,
- 
+ PaymentStatus,
+ registered,
   view,
 }) {
   const [showAlert, setShowAlert] = useState(false);
@@ -227,7 +326,8 @@ function MobielViewCard({
             <div className="mt-3">
               <div className="flex w-full  justify-center space-x-2 mt-4 ">
                 <div>
-                  <a className="">{view(event?.id)}</a>
+                {registered ? (<a className="">{view(event?.id)}</a>) : (   <button onClick={PaymentStatus} className=" bg-primary-hover font-semibold border text-white py-1 w-full px-6 rounded-lg">View</button>)}
+                  
                 </div>
               </div>
             </div>
