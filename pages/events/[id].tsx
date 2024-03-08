@@ -310,7 +310,7 @@ function Events() {
                     {/*MOBILE DESIGN*/}
                     <div
                       key={`d${index}`}
-                      className={`sm:hidden sm:max-md:flex-col font-sans border  rounded  ${
+                      className={`sm:hidden sm:max-md:flex-col font-sans border  rounded  mt-4 ${
                         moment(item?.bidTimeExpire).diff(moment(), "s") <=
                           120 &&
                         moment(item?.bidTimeExpire).diff(moment(), "s") > 0
@@ -508,39 +508,11 @@ function Events() {
 
 
                         {/* add to watchlist, more details, inspection report starts here  */}
-                        <div className="flex sm:hidden space-x-4 mt-6 pt-4 pr-1 text-sm font-medium border-t border-slate-200">
+                        <div className="flex sm:hidden space-x-4  pr-1 text-sm font-medium border-t border-slate-200">
                           <div className="flex-auto flex flex-col  justify-center items-center  space-x-4 space-y-6 ">
                             <div className="mt-1 flex   space-x-2 space-y-4  justify-around w-full    ">
                               <>
-                                {/* {IsCompleted(item) && (
-                            <div className="mt-2 flex items-center text-sm text-gray-500">
-                              {!(item.watchedByCount > 0) ? (
-                                <button
-                                  type="button"
-                                  className="inline-flex items-center px-2 py-1 border border-transparent shadow-sm text-sm leading-4 font-medium rounded text-white bg-blue-800 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                  onClick={() => addToWatchList(item.id)}
-                                >
-                                  <PlusIcon
-                                    className="-ml-0.5 mr-2 h-4 w-4"
-                                    aria-hidden="true"
-                                  />
-                                  Add to watchlist
-                                </button>
-                              ) : (
-                                <button
-                                  type="button"
-                                  className="inline-flex items-center px-2 py-1 border border-transparent shadow-sm text-sm leading-4 font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                  onClick={() => removeFromWatchList(item.id)}
-                                >
-                                  <MinusIcon
-                                    className="-ml-0.5 mr-2 h-4 w-4"
-                                    aria-hidden="true"
-                                  />
-                                  from watchlist
-                                </button>
-                              )}
-                            </div>
-                          )} */}
+                              
                               </>
                               <div className="flex flex-col space-y-6 w-64">
                                 {/* INSPECTION REPORT STARTS HERE */}
@@ -692,7 +664,7 @@ function Events() {
                             {/* bid timing showing Ends here */}
 
                             {/* bid box  starts here */}
-                            <div className=" sticky bottom-2 left-0 w-full mt-4  bg-[#E5E9F9] rounded-lg">
+                            <div className="  mt-4 bg-[#E5E9F9] rounded-lg">
                               <div className="px-4 py-2">
                                 <h2 className="text-base  text-gray-900  text-center font-poppins font-bold">
                                   Bid Details

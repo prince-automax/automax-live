@@ -207,6 +207,7 @@ function Vehicle() {
       </div>
       <div className="mt-2 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
         <div className="space-y-6 lg:col-start-1 lg:col-span-2">
+          {/* deskop view for the image vstarts here */}
           <section className="hidden sm:block">
             <Tab.Group
               as="div"
@@ -262,23 +263,35 @@ function Vehicle() {
             </Tab.Group>
           </section>
 
-          <section className="sm:hidden">
-            <div className="w-96 h-fit border-2 rounded-lg  ">
-              <Splide options={options} aria-label="React Splide Example">
-                {images?.map((image, index) => (
-                  <SplideSlide key={index}>
-                    <Image
-                      alt={`image${index}`}
-                      src={image.trim()}
-                      className="w-full h-full object-center object-cover rounded-lg "
-                      width={500}
-                      height={300}
-                    />
-                  </SplideSlide>
-                ))}
-              </Splide>
+          {/* deskop view for the image ends here */}
+
+          {/* mobile view of image starts here*/}
+          {vehicle?.frontImage ? (
+            <section className="sm:hidden">
+              <div className="w-96 h-fit border-2 rounded-lg  ">
+                <Splide options={options} aria-label="React Splide Example">
+                  {images?.map((image, index) => (
+                    <SplideSlide key={index}>
+                      <Image
+                        alt={`image${index}`}
+                        src={image.trim()}
+                        className="w-full h-full object-center object-cover rounded-lg "
+                        width={500}
+                        height={300}
+                      />
+                    </SplideSlide>
+                  ))}
+                </Splide>
+              </div>
+            </section>
+          ) : (
+            <div className=" text-center sm:hidden  ">
+              <p className="font-poppins font-semibold animate-pulse ">
+                No images for this vehicle
+              </p>
             </div>
-          </section>
+          )}
+          {/* mobile view of image ends here*/}
 
           <section>
             <div>
@@ -297,8 +310,8 @@ function Vehicle() {
                             "w-full px-1 rounded-lg py-2.5 text-sm font-medium leading-5 bg-gray-200",
                             "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none",
                             selected
-                              ? "bg-blue-900 text-white shadow"
-                              : "text-gray-700 hover:bg-gray-300 hover:text-gray-900"
+                              ? "bg-blue-900 text-black shadow"
+                              : "text-[#787777] hover:text-gray-900"
                           )
                         }
                       >
