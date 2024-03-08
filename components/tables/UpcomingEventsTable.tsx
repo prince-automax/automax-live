@@ -3,6 +3,8 @@ import Datatable from "../ui/Datatable";
 import Loader from "../ui/Loader";
 import moment from "moment";
 import toast from "react-hot-toast";
+import Image from 'next/image'
+
 
 import {
   CalendarIcon,
@@ -176,7 +178,7 @@ export default function UpcomingEventsTable({
   return (
     <>
       <div className="relative bg-white">
-        <div className="mx-auto max-w-md text-center  sm:max-w-3xl lg:max-w-7xl">
+        { data?.upcomingEvents?.length > 0 ? ( <div className="mx-auto max-w-md text-center  sm:max-w-3xl lg:max-w-7xl">
           {showHeadings && (
             <div className="pt-4 pb-1">
               {data &&
@@ -229,7 +231,13 @@ export default function UpcomingEventsTable({
               {/* )}  */}
             </>
           )}
-        </div>
+        </div>):(
+
+          <div className="w-full h-96 flex items-center justify-center ">
+            <p className="font-poppins font-semibold text-black animate-pulse sm:text-xl">No upcoming events at this moment</p>
+          </div>
+        )}
+       
       </div>
     </>
   );
