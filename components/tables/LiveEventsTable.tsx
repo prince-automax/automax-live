@@ -73,6 +73,9 @@ export default function EventsTable({
 
   const payment = userData ? userData["user"]?.payments : "";
 
+  
+  
+
 
   const PaymentStatus=()=>{
     toast("Your Access to this service has been disabled. Please contact Autobse for assistance", {
@@ -186,7 +189,7 @@ export default function EventsTable({
         registered ? (
           <DownloadButton file={value} allowDownload={allowDownload} />
         ) : (
-          <DocumentDownloadIcon className="h-8 w-8 text-gray-600 hover:text-green-600"  onClick={PaymentStatus}/>
+          value && <DocumentDownloadIcon className="h-8 w-8 text-gray-600 hover:text-green-600"  onClick={PaymentStatus}/>
 
         ),
     },
@@ -195,7 +198,7 @@ export default function EventsTable({
   return (
     <>
       <div className="relative bg-white">
-        <div className="mx-auto max-w-md text-center  sm:max-w-3xl lg:max-w-7xl">
+        {data?.liveEvents?.length > 0  ? (  <div className="mx-auto max-w-md text-center  sm:max-w-3xl lg:max-w-7xl">
           {showHeadings && (
             <div className="pt-8 pb-8">
               {data?.liveEvents?.length == 0 ? (
@@ -235,7 +238,6 @@ export default function EventsTable({
                         allowDownload={allowDownload}
                         registered={registered}
                         registeredStatus={registeredStatus}
-                        
                         PaymentStatus={PaymentStatus}
                       />
                     );
@@ -252,7 +254,10 @@ export default function EventsTable({
               {/* )} */}
             </>
           )}
-        </div>
+        </div>):(<div className="w-full h-72 flex items-center justify-center ">
+            <p className="font-poppins font-semibold text-black animate-pulse sm:text-xl">No Live events at this moment</p>
+          </div>)}
+      
       </div>
     </>
   );

@@ -8,10 +8,16 @@ import {
   PrinterIcon,
 } from "@heroicons/react/outline";
 import AlertModal from "../ui/AlertModal";
-import { useCompliedEventsQuery, CompliedEventsQuery, useGetUserQuery, GetUserQueryVariables, } from "@utils/graphql";
+import {
+  useCompliedEventsQuery,
+  CompliedEventsQuery,
+  useGetUserQuery,
+  GetUserQueryVariables,
+} from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
 import Router from "next/router";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function EventsTable({
   showHeadings,
@@ -19,10 +25,6 @@ export default function EventsTable({
   allowDownload,
   eventCategory = "online",
 }) {
-
-
-
-
   const [accessToken, setAccessToken] = useState("");
   const [registered, setRegistered] = useState(false);
   const [registeredStatus, setRegisteredStatus] = useState("");
@@ -34,8 +36,6 @@ export default function EventsTable({
       setAccessToken(token);
     }
   }, []);
-
- 
 
   const variables = {
     skip: 0,
@@ -51,9 +51,6 @@ export default function EventsTable({
     variables
   );
 
-
-  
-
   const { data: userData, isLoading: loading } =
     useGetUserQuery<GetUserQueryVariables>(
       graphQLClient({ Authorization: `Bearer ${accessToken}` }),
@@ -63,31 +60,61 @@ export default function EventsTable({
       }
     );
 
-
-
   const payment = userData ? userData["user"]?.payments : "";
-
 
   useEffect(() => {
     if (payment) {
-   
-
       payment?.map((item) => {
-      
         if (item.paymentFor === "registrations") {
           if (item.status === "success") {
             setRegistered(true);
           } else {
-            setRegisteredStatus(item.status);
+            item.status;
           }
-
-          
         } else {
-    
         }
       });
     }
   }, [payment]);
+
+  console.log("registered", registered);
+  console.log("setRegisteredStatus", registeredStatus);
+
+  const PaymentStatus = () => {
+    toast(
+      "Your Access to this service has been disabled. Please contact Autobse for assistance",
+      {
+        duration: 5000,
+        position: "top-right",
+
+        // Styling
+        // Styling
+        style: {
+          bottom: "80px",
+          background: "rgb(95, 99, 93)",
+          color: "white",
+          border: "rounded",
+          fontSize: "bold",
+        },
+        className: " bg-primary text-white ",
+
+        // Custom Icon
+        icon: " 🚫 ",
+
+        // Change colors of success/error/loading icon
+        iconTheme: {
+          primary: "#0000",
+          secondary: "#fff",
+        },
+
+        // Aria
+        ariaProps: {
+          role: "status",
+          "aria-live": "polite",
+        },
+      }
+    );
+  };
 
   const columns = [
     {
@@ -124,9 +151,18 @@ export default function EventsTable({
     {
       Header: "Details",
       accessor: "id",
-      Cell: ({ cell: { value } }) => View(value),
+      Cell: ({ cell: { value } }) =>
+        registered ? (
+          View(value)
+        ) : (
+          <button
+            className=" bg-primary-hover font-semibold border text-white py-1 w-full px-6 rounded-lg"
+            onClick={PaymentStatus}
+          >
+            View
+          </button>
+        ),
     },
-  
   ];
 
   return (
@@ -165,6 +201,7 @@ export default function EventsTable({
                           allowDownload={allowDownload}
                           registered={registered}
                           registeredStatus={registeredStatus}
+                          PaymentStatus={PaymentStatus}
                         />
                       );
                     })}
@@ -195,7 +232,9 @@ function View(value) {
   return (
     <div>
       <Link href={`/events/${value}?type=c`}>
-        <a target="_blank"><span className="text-red-600 font-extrabold">View</span></a>
+        <a target="_blank">
+          <span className="border px-4 rounded-md bg-red-600 font-poppins text-white py-1">View</span>
+        </a>
       </Link>
     </div>
   );
@@ -310,7 +349,14 @@ EventsTable.defaultProps = {
   showHeadings: true,
 };
 
-function MobielViewCard({ index1,event, allowDownload,registered,registeredStatus }) {
+function MobielViewCard({
+  index1,
+  event,
+  allowDownload,
+  registered,
+  registeredStatus,
+  PaymentStatus,
+}) {
   const [showAlert, setShowAlert] = useState(false);
 
   const showAlertModal = () => {
@@ -324,82 +370,77 @@ function MobielViewCard({ index1,event, allowDownload,registered,registeredStatu
 
   return (
     <>
-      
-      
       <div className="">
-       
-      <div className=" w-full  flex justify-center items-center mt-4 ">
-    <div className="grid grid-cols-1 gap-1 w-96 border-2 border-[#536DD9] p-4 rounded-lg  space-y-1  ">
-        {/*  */}
-      <div className="grid grid-cols-3 gap-1 space-x-2">
-        <p className="flex justify-between text-sm ">
-          Event <span>:</span>
-        </p>
+        <div className=" w-full  flex justify-center items-center mt-4 ">
+          <div className="grid grid-cols-1 gap-1 w-96 border-2 border-[#536DD9] p-4 rounded-lg  space-y-1  ">
+            {/*  */}
+            <div className="grid grid-cols-3 gap-1 space-x-2">
+              <p className="flex justify-between text-sm ">
+                Event <span>:</span>
+              </p>
 
-        <p className="col-span-2 text-sm flex">{event?.seller?.name}</p>
-      </div>
-      <div className="grid grid-cols-3 gap-1 space-x-2 ">
-        <p className="flex justify-between text-sm  ">
-          Location <span>:</span>
-        </p>
-
-        <p className="col-span-2 text-sm  flex">   {event?.location?.name}, {event?.location?.state?.name}</p>
-      </div>
-      <div className="grid grid-cols-3 gap-1 space-x-2 ">
-        <p className="flex justify-between text-sm">
-          Start Time <span>:</span>
-        </p>
-
-        <p className="col-span-2 text-sm flex   justify-start "> {moment(event.startDate).format(" Do-MMMM-YYYY")}{" "}
-            {moment(event.startDate).format(" ")}</p>
-      </div>
-      <div className="grid grid-cols-3 gap-1 space-x-2">
-        <p className="flex justify-between text-sm">
-          Close Time <span>:</span>
-        </p>
-
-        <p className="col-span-2  text-sm flex"> {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
-            {moment(event.endDate).format(" ")}</p>
-      </div>
-      <hr className="to-black shadow-2xl" />
-      <div className="mt-3">
-           {registered ? <div>  
-            <a  href={`/events/${event.id}?type=c`} target="_blank" rel="noopener noreferrer"><span      className={`border px-4 rounded-md bg-[#536DD9] text-white py-1`}>View</span></a>
-           </div>   :<p>
-                  Payment Status :{" "}
-                  <span className="text-red-500 font-bold">
-                    {registeredStatus}
-                  </span>
-                </p>  }
-            
-              {/* {allowDownload ? (
-                <>
-                  {event.ExcelFile && event?.ExcelFile?.file?.url && (
-                    <a
-                      href={`${process.env.API_URL}${event?.ExcelFile?.file?.url}`}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      <PrinterIcon className="h-8 w-8 text-gray-600 hover:text-green-600" />
-                    </a>
-                  )}
-                </>
-              ) : (
-                <>
-                  <button onClick={() => showAlertModal()}>
-                    <PrinterIcon className="h-8 w-8 text-gray-600 hover:text-green-600" />
-                  </button>
-                </>
-              )} */}
+              <p className="col-span-2 text-sm flex">{event?.seller?.name}</p>
             </div>
-    </div>
-  
-  </div>
+            <div className="grid grid-cols-3 gap-1 space-x-2 ">
+              <p className="flex justify-between text-sm  ">
+                Location <span>:</span>
+              </p>
 
-            
+              <p className="col-span-2 text-sm  flex">
+                {" "}
+                {event?.location?.name}, {event?.location?.state?.name}
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-1 space-x-2 ">
+              <p className="flex justify-between text-sm">
+                Start Time <span>:</span>
+              </p>
+
+              <p className="col-span-2 text-sm flex   justify-start ">
+                {" "}
+                {moment(event.startDate).format(" Do-MMMM-YYYY")}{" "}
+                {moment(event.startDate).format(" ")}
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-1 space-x-2">
+              <p className="flex justify-between text-sm">
+                Close Time <span>:</span>
+              </p>
+
+              <p className="col-span-2  text-sm flex">
+                {" "}
+                {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
+                {moment(event.endDate).format(" ")}
+              </p>
+            </div>
+            <hr className="to-black shadow-2xl" />
+            <div className="mt-3">
+              {registered ? (
+                <div>
+                  <a
+                    href={`/events/${event.id}?type=c`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span
+                      className="border px-4 rounded-md bg-red-600 font-poppins text-white py-1"
+                    >
+                      View
+                    </span>
+                  </a>
+                </div>
+              ) : (
+                <button
+                  className=" bg-primary-hover font-semibold border text-white py-1  px-6 rounded-lg"
+                  onClick={PaymentStatus}
+                >
+                  View
+                </button>
+              )}
+            </div>
           </div>
-       
-    
+        </div>
+      </div>
 
       {showAlert && (
         <AlertModal

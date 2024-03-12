@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import LogoImage from '@assets/logo.png'
+import LogoImage from '@assets/AUTOMAXJPG.jpg'
 
 export default function Logo() {
 
