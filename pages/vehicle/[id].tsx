@@ -206,23 +206,24 @@ function Vehicle() {
         </div> */}
       </div>
       <div className="mt-2 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
-        <div className="space-y-6 lg:col-start-1 lg:col-span-2">
+        <div className="space-y-6 lg:col-start-1 lg:col-span-2 w-full">
           {/* deskop view for the image vstarts here */}
-          <section className="hidden sm:block">
+          <section className="hidden sm:block w-full">
             <Tab.Group
               as="div"
               className="flex flex-col max-w-2xl justify-between"
             >
-              <div className="w-full  max-w-3xl mx-auto sm:block">
+              <div className="w-full border   max-w-3xl mx-auto sm:block">
                 <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
                   {images?.map((image, index) => (
                     <Tab.Panel key={image.id}>
                       <Image
                         alt={`image${index}`}
                         src={image.trim()}
-                        className="w-full h-full object-center object-cover sm:rounded-lg"
+                        className="w-full h-full sm:rounded-lg "
                         width={500}
                         height={300}
+                        objectFit="cover"
                       />
                     </Tab.Panel>
                   ))}
@@ -267,8 +268,8 @@ function Vehicle() {
 
           {/* mobile view of image starts here*/}
           {vehicle?.frontImage ? (
-            <section className="sm:hidden">
-              <div className="w-96 h-fit border-2 rounded-lg  ">
+            <section className="sm:hidden border-2 ">
+              <div className=" h-fit border-2 rounded-lg  ">
                 <Splide options={options} aria-label="React Splide Example">
                   {images?.map((image, index) => (
                     <SplideSlide key={index}>

@@ -78,8 +78,8 @@ export default function Navbar() {
     },
     {
       name: "Open Leads",
-      href: "/findauction",
-      current: router.pathname == "/findauction" ? true : false,
+      href: "/openleads",
+      current: router.pathname == "/openleads" ? true : false,
       icon: <FontAwesomeIcon icon={faHammer} />,
     },
     {
