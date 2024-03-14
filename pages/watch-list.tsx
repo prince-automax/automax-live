@@ -157,7 +157,7 @@ function WatchList() {
         if (diff > 0) {
           return (
             <div className="w-full max-sm:flex items-center justify-between">
-              <div className="text-sm text-[#646464] font-poppins">
+              <div className="text-sm text-[#646464] font-roboto">
                 End's In
               </div>
               <div className="text-base text-red-500">
@@ -471,7 +471,7 @@ function WatchList() {
                           <div className="mt-1 flex flex-row sm:flex-wrap sm:mt-0 space-x-2 sm:space-x-6 justify-around w-full  sm:max-md:justify-around sm:max-md:w-full ">
                             <div className="flex flex-col space-y-2 w-64">
                               <div className=" flex items-center justify-between text-sm text-blue-800 ">
-                                <p className="flex items-center text-sm font-poppins font-medium text-[#2563EB]">
+                                <p className="flex items-center text-sm font-roboto font-medium text-[#2563EB]">
                                   {" "}
                                   Inspection Report
                                 </p>
@@ -482,7 +482,7 @@ function WatchList() {
                                 <Link href={`/vehicle/${item.id}`}>
                                   <a
                                     target="_blank"
-                                    className="flex items-center text-sm font-poppins font-medium text-[#2563EB]"
+                                    className="flex items-center text-sm font-roboto font-medium text-[#2563EB]"
                                   >
                                     More Details
                                   </a>
@@ -506,10 +506,10 @@ function WatchList() {
 
                           {/* <div className="w-full space-y-2 mt-4"> */}
                           <div className="flex justify-between sm:flex-col md:items-start sm:justify-left text-sm  text-gray-700 ">
-                            <p className="text-[#646464] text-sm font-poppins">
+                            <p className="text-[#646464] text-sm font-roboto">
                               Start Date
                             </p>
-                            <p className="font-semibold font-poppins ">
+                            <p className="font-semibold font-roboto ">
                               {item?.event?.startDate
                                 ? moment(item?.event?.startDate).format(
                                     "MMMM Do, YYYY ddd h:mm a"
@@ -518,10 +518,10 @@ function WatchList() {
                             </p>
                           </div>
                           <div className="flex justify-between sm:flex-col md:items-start text-sm  text-gray-700">
-                            <p className="text-[#646464] text-sm font-poppins">
+                            <p className="text-[#646464] text-sm font-roboto">
                               End Date
                             </p>
-                            <p className="items-start font-semibold font-poppins">
+                            <p className="items-start font-semibold font-roboto">
                               {item?.bidTimeExpire
                                 ? moment(item?.bidTimeExpire).format(
                                     "MMMM Do, YYYY ddd h:mm a"
@@ -538,13 +538,13 @@ function WatchList() {
 
                       <div className=" w-full mt-4  bg-[#E5E9F9] rounded-lg">
                         <div className="px-4 py-2">
-                          <h2 className="text-base  text-gray-900  text-center font-poppins font-bold">
+                          <h2 className="text-base  text-gray-900  text-center font-roboto font-bold">
                             Bid Details
                           </h2>
 
                           <div className="space-y-2 mt-2 text-sm">
                             <div className="flex items-center justify-between  text-gray-700">
-                              <span className="font-poppins font-medium text-sm text-[#646464]">
+                              <span className="font-roboto font-medium text-sm text-[#646464]">
                                 Start Price
                               </span>
                               <span className="font-bold text-base">
@@ -552,7 +552,7 @@ function WatchList() {
                               </span>
                             </div>
                             <div className="flex items-center justify-between  text-gray-700">
-                              <span className="font-poppins font-medium text-sm text-[#646464]">
+                              <span className="font-roboto font-medium text-sm text-[#646464]">
                                 Reserve Price
                               </span>
                               <span className="font-bold text-base">
@@ -560,7 +560,7 @@ function WatchList() {
                               </span>
                             </div>
                             <div className="flex items-center justify-between  text-gray-700">
-                              <span className="font-poppins font-medium text-sm text-[#646464]">
+                              <span className="font-roboto font-medium text-sm text-[#646464]">
                                 Quote Increment
                               </span>
                               <span className="font-bold text-base">

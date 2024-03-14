@@ -255,7 +255,7 @@ export default function EventsTable({
             </>
           )}
         </div>):(<div className="w-full h-72 flex items-center justify-center ">
-            <p className="font-poppins font-semibold text-black animate-pulse sm:text-xl">No Live events at this moment</p>
+            <p className="font-roboto font-semibold text-black animate-pulse sm:text-xl">No Live events at this moment</p>
           </div>)}
       
       </div>
