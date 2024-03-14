@@ -145,8 +145,8 @@ function Events() {
         if (diff > 0) {
           return (
             <div className="w-full max-sm:flex items-center justify-between">
-              <div className="text-sm text-[#646464] font-poppins">End's In</div>
-              <div className="text-base text-red-500 font-medium font-poppins">
+              <div className="text-sm text-[#646464] font-roboto">End's In</div>
+              <div className="text-base text-red-500 font-medium font-roboto">
                 {SecondsToDhms(diff)}
               </div>
             </div>
@@ -337,7 +337,7 @@ function Events() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 title="Click here to view the workbook"
-                                className="bg-blue-700 p-2 cursor-pointer rounded-md text-white animate-pulse font-poppins font-medium"
+                                className="bg-blue-700 p-2 cursor-pointer rounded-md text-white animate-pulse font-roboto font-medium"
                               >
                                 WorkBook matched
                               </a>
@@ -347,7 +347,7 @@ function Events() {
                         {/* title of vehicle and seller name */}
                         <div className="sm:flex flex-wrap">
                           <div className="flex-auto">
-                            <h1 className="   text-base  font-poppins font-bold  text-blue-800 uppercase">
+                            <h1 className="   text-base  font-roboto font-bold  text-blue-800 uppercase">
                               {item?.yearOfManufacture} {item?.make} -
                               {item.registrationNumber}
                             </h1>
@@ -517,7 +517,7 @@ function Events() {
                               <div className="flex flex-col space-y-6 w-64">
                                 {/* INSPECTION REPORT STARTS HERE */}
                                 <div
-                                  className=" flex items-center justify-between text-sm font-poppins font-medium text-blue-800 "
+                                  className=" flex items-center justify-between text-sm font-roboto font-medium text-blue-800 "
                                   onClick={() =>
                                     setShowInspectionReportModal(true)
                                   }
@@ -525,7 +525,7 @@ function Events() {
                                   <Link href={item.inspectionLink}>
                                     <a
                                       target="_blank"
-                                      className="flex items-center text-sm font-poppins font-medium text-[#2563EB]"
+                                      className="flex items-center text-sm font-roboto font-medium text-[#2563EB]"
                                     >
                                       Inspection Report
                                     </a>
@@ -562,7 +562,7 @@ function Events() {
                                   ).length > 0 ? (
                                     <button
                                       type="button"
-                                      className="inline-flex items-center px-14 py-4 border border-[#536DD9] shadow-sm text-sm font-poppins  leading-4 font-bold rounded-md text-[#536DD9]   "
+                                      className="inline-flex items-center px-14 py-4 border border-[#536DD9] shadow-sm text-sm font-roboto  leading-4 font-bold rounded-md text-[#536DD9]   "
                                       onClick={() =>
                                         removeFromWatchList(item.id)
                                       }
@@ -576,7 +576,7 @@ function Events() {
                                   ) : (
                                     <button
                                       type="button"
-                                      className="inline-flex items-center px-14 py-4 border border-[#536DD9] shadow-sm text-sm font-poppins  leading-4 font-bold rounded-md text-[#536DD9]   "
+                                      className="inline-flex items-center px-14 py-4 border border-[#536DD9] shadow-sm text-sm font-roboto  leading-4 font-bold rounded-md text-[#536DD9]   "
                                       onClick={() => addToWatchList(item.id)}
                                     >
                                     
@@ -612,8 +612,8 @@ function Events() {
 
                               {/* <div className="w-full space-y-2 mt-4"> */}
                               <div className="flex justify-between sm:flex-col md:items-start sm:justify-left text-sm  text-gray-700 ">
-                                <p className="text-[#646464] text-sm font-poppins">Start Date</p>
-                                <p className="font-semibold font-poppins ">
+                                <p className="text-[#646464] text-sm font-roboto">Start Date</p>
+                                <p className="font-semibold font-roboto ">
                                   {data?.event?.startDate
                                     ? moment(data?.event?.startDate).format(
                                         "MMMM Do, YYYY ddd h:mm a"
@@ -622,8 +622,8 @@ function Events() {
                                 </p>
                               </div>
                               <div className="flex justify-between sm:flex-col md:items-start text-sm  text-gray-700">
-                                <p className="text-[#646464] text-sm font-poppins">End Date</p>
-                                <p className="items-start font-semibold font-poppins">
+                                <p className="text-[#646464] text-sm font-roboto">End Date</p>
+                                <p className="items-start font-semibold font-roboto">
                                   {item?.bidTimeExpire
                                     ? moment(item?.bidTimeExpire).format(
                                         "MMMM Do, YYYY ddd h:mm a"
@@ -666,21 +666,21 @@ function Events() {
                             {/* bid box  starts here */}
                             <div className="  mt-4 bg-[#E5E9F9] rounded-lg">
                               <div className="px-4 py-2">
-                                <h2 className="text-base  text-gray-900  text-center font-poppins font-bold">
+                                <h2 className="text-base  text-gray-900  text-center font-roboto font-bold">
                                   Bid Details
                                 </h2>
 
                                 <div className="space-y-2 mt-2 text-sm">
                                   <div className="flex items-center justify-between">
-                                  <span className="font-poppins font-medium text-sm text-[#646464]" >Start Price</span>
+                                  <span className="font-roboto font-medium text-sm text-[#646464]" >Start Price</span>
                                     <span className="font-bold text-base"> ₹ {item?.startPrice}</span>
                                   </div>
                                   <div className="flex items-center justify-between">
-                                  <span  className="font-poppins font-medium text-sm text-[#646464]">Reserve Price</span>
+                                  <span  className="font-roboto font-medium text-sm text-[#646464]">Reserve Price</span>
                                     <span  className="font-bold text-base">₹ {item?.reservePrice}</span>
                                   </div>
                                   <div className="flex items-center justify-between">
-                                  <span  className="font-poppins font-medium text-sm text-[#646464]">Quote Increment</span>
+                                  <span  className="font-roboto font-medium text-sm text-[#646464]">Quote Increment</span>
                                     <span  className="font-bold text-base">₹ {item?.quoteIncreament}</span>
                                   </div>
                                   <div className="flex  items-center justify-between">
