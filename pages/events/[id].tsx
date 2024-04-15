@@ -7,26 +7,26 @@ import {
 import {
   CreateBidMutationVariables,
   GetEventQuery,
-  LiveWatchListItemQueryVariables,
-  OrderDirection,
+  LiveWatchListItemQueryVariables,                                                                                                                                                                                             
+  OrderDirection,                                                                                                                                                                                                                                                                                              
   QueryQueryVariables,
   useAddToWatchListMutation,
   useCreateBidMutation,
-  useGetEventQuery,
+  useGetEventQuery,                                                            
   useLiveWatchListItemQuery,
   useQueryQuery,
-  useUserWorkBookQuery,
+  useUserWorkBookQuery,                           
   UserWorkBookQueryVariables,
   useFindAuctionsQuery,
 } from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
-import moment from "moment";
+import moment from "moment";                                                                              
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/link";  
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DashboardTemplate from "../../components/templates/DashboardTemplate";
-import Loader from "../../components/ui/Loader";
+import Loader from "../../components/ui/Loader";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 import withPrivateRoute from "../../utils/withPrivateRoute";
 import { useQueryClient } from "react-query";
 import { SecondsToDhms } from "@utils/common";
@@ -39,8 +39,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import TermsAndCondtionsModal from  "@components/modals/TermsAndConditionModal"
 import {
   faThumbsUp,
-  faThumbsDown,
-  faUserSlash,
+  faThumbsDown, 
+  faUserSlash, 
   faCircleInfo,
   faAngleRight,
   faSquarePlus,

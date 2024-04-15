@@ -367,33 +367,35 @@ function OpenAuctions() {
         {liveItem ? (
           <>
             {/* FOR MOBILE VEIW ONLY */}
-            <div className=" sm:hidden  border bg-[#F1F5F9]  ">
+            <div className="  border    md:px-3 px-2 py-5">
               {/* Page header */}
-              <div className="">
+              <div className="lg:hidden">
                 <div className="flex items-center space-x-5">
                   <div className="mt-3">
                     <h1 className="text-base font-bold text-gray-900 pl-3">
                     {liveItem.event.seller.name}
                     </h1>
                   </div>
+                  
                   {/* <div className=" block md:flex md:items-start md:justify-between md:space-x-5">
           
         </div> */}
                 </div>
               </div>
-
-              <div className=" mx-auto grid grid-cols-1 gap-6 lg:grid-flow-col-dense lg:grid-cols-3 ">
+              
+                <div className=" mx-auto grid grid-cols-1 lg:gap-x-16 gap-6 md:grid-cols-2  ">
                 {/* Next Vehicles Details */}
-                <section className="space-y-2  row-start-5 pl-1">
+                {upcoming[0]?.frontImage && (
+                <section className="max-lg:space-y-2  max-md:row-start-7  md:col-start-1 pl-1 ">
                   <div className="text-lg font-semibold pl-3 text-blue-800">
                     Next Vehicle
                   </div>
                   <div>
                     <Tab.Group
                       as="div"
-                      className="flex flex-col max-w-2xl justify-between border border-[#A7C2FF]"
+                      className="flex flex-col max-w-2xl justify-between border border-[#A7C2FF] "
                     >
-                      <div className="w-full max-w-3xl mx-auto grid grid-cols-1 border-2 h-fit px-1">
+                      <div className="w-full max-w-3xl mx-auto grid grid-cols-1 border-2 h-fit px-1 py-6">
                         <Tab.Panels className="w-full  ">
                           {upcoming &&
                             upcoming[0] &&
@@ -438,6 +440,8 @@ function OpenAuctions() {
                       </div>
                     </Tab.Group>
                   </div>
+              
+             
 
                   {/* <div className="text-lg pl-3 font-semibold  text-blue-800 ">
                     Next Vehicle
@@ -493,10 +497,11 @@ function OpenAuctions() {
                     </Tab.Group>
                   </div> */}
                 </section>
+                )}
 
                 {/* Bidding */}
-                <section className="lg:col-span-1 space-y-2 row-start-4 pl-1 bg-[#F1F5F9]">
-                  <div className="text-lg font-semibold pl-3 text-center  ">Bid Details</div>
+                <section className=" space-y-2 md:col-start-2 md:row-start-1 lg:row-start-2 row-start-5 pl-1">
+                  <div className="text-lg font-bold pl-3 text-center  ">Bid Details</div>
 
                   <div className="bg-white px-4 py-5 sm:rounded-lg sm:px-6 border border-[#A7C2FF] space-y-2">
                     <div className="grid grid-cols-2 gap-x-2 gap-y-6">
@@ -568,7 +573,7 @@ function OpenAuctions() {
                     </div>
 
                     <div className="grid  grid-cols-1 ">
-                      <div className="grid grid-cols-3 gap-2">
+                      <div className="grid grid-cols-3 gap-2 lg:gap-4">
                         {incrementAmounts.map((increment, index) => (
                           <button
                             key={index}
@@ -579,7 +584,7 @@ function OpenAuctions() {
                                 bidAmount + increment.value
                               );
                             }}
-                            className="w-[5.1875rem] h-10 inline-flex items-center justify-center border border-transparent text-base font-semibold rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none"
+                            className="  h-10 inline-flex items-center justify-center border border-transparent text-base font-semibold rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none"
                           >
                             {increment.label}
                           </button>
@@ -593,7 +598,7 @@ function OpenAuctions() {
                                 +(e.target as HTMLButtonElement).value
                               )
                             }
-                            className="w-[5.1875rem] h-10 inline-flex items-center justify-center border border-transparent text-base font-bold rounded-md text-green-700 bg-green-50 hover:bg-indigo-200 focus:outline-none"
+                            className="  h-10 inline-flex items-center justify-center border border-transparent text-base font-semibold rounded-md text-green-700 bg-green-50 hover:bg-indigo-200 focus:outline-none"
                             key={i}
                             value={i * liveItem.quoteIncreament}
                           >
@@ -624,8 +629,8 @@ function OpenAuctions() {
 
 
 {/* buttn */}
-                <section className="fixed w-full bottom-0 left-0  bg-[#F1F5F9] z-10">
-                  <div className="grid grid-cols-2 border-3 border-gray-200 h-8 ">
+                <section className="max-md:fixed w-full bottom-0 left-0 md:row-start-2 lg:row-start-3 md:col-start-2  max-sm:bg-[#F1F5F9] lg:pb-4  z-10 md:mt-16 ">
+                  <div className="grid grid-cols-2 border-3 border-gray-200 h-8  ">
                     <div className="bg-violet-100  flex justify-center items-center gap-2 h-8 border-y border-r border-gray-200">
                       <p>
                         <svg
@@ -659,9 +664,8 @@ function OpenAuctions() {
                         your bid{" "}
                       </h2>
                       <div className="flex items-center">
-                      <p className="  pb-px">
-                      <svg className=" h-[10.4px] w-4" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="40 -1 17 250"><path fill="#010101" d="M153 23h41l15-23H55L40 23h26c27 0 52 2 62 25H55L40 71h91v1c0 17-14 43-60 43H48v22l90 113h41L85 133c39-2 75-24 80-62h29l15-23h-45c-1-9-5-18-11-25z"/></svg>
-
+                      <p className="   pb-1">
+                      ₹
                       </p>
 
                       <p className="text-sm font-medium text-blue-800 h-6 flex">
@@ -726,17 +730,29 @@ function OpenAuctions() {
 
 
 {/* lot*/} 
-                <section className="space-y-2 row-start-2 px-3 ">
-                  <div className="grid cols-2 ">
-                    <div className="flex justify-between col-span-2">
-                      <h3 className="text-base  font-medium text-gray-500">
+                <section className=" space-y-2 md:col-start-1 md:row-start-1 lg:col-span-2 lg:col-start-1 px-3 md:mt-[16.2rem] lg:m-auto md:w-full">
+                  <div className="grid cols-2    ">
+                <div className="flex items-center space-x-5 max-lg:hidden">
+                  <div className="">
+                    <h1 className="text-base font-bold text-gray-900 pl-1">
+                    {liveItem.event.seller.name}
+                    </h1>
+                  </div>
+                  
+                  {/* <div className=" block md:flex md:items-start md:justify-between md:space-x-5">
+          
+        </div> */}
+                </div>
+                    
+                    <div className="flex justify-between col-span-2 ">
+                      <h3 className="text-base  font-medium text-gray-500 lg:order-2 lg:mr-2">
                         Bid Status:{" "}
                         <span className=" text-green-600 uppercase font-semibold">
                           {liveItem?.bidStatus}
                         </span>
                       </h3>
 
-                      <p className="text-base font-semibold text-black">
+                      <p className="text-base font-semibold text-black lg:pl-1">
                         <span className=" font-medium  text-gray-500">
                           {" "}
                           LotNo:
@@ -744,13 +760,13 @@ function OpenAuctions() {
                         # {liveItem.vehicleIndexNo}
                       </p>
                     </div>
-                    <div className="col-span-2 w-[11.5624rem] h-7   border border-indigo-400 bg-indigo-100   mt-4 sm:mt-0 pt-px">
+                    <div className="col-span-2 w-fit md:w-full lg:w-fit h-7  lg:col-span-1  border border-indigo-400 bg-indigo-100   mt-4 md:mt-0 pt-px max-lg:px-6 lg:col-start-2 lg:row-start-1 lg:place-self-end lg:mr-2 lg:px-2">
                       {CountdownTimer(SecondsLeft())}
                     </div>
                   </div>
                 </section>
                 {/* main img */}
-                <section className="space-y-2 row-start-1">
+                <section className="space-y-2 row-start-1 lg:row-start-2 md:col-start-1  w-full  border-2">
                   
                   <div>
                     <Tab.Group
@@ -758,7 +774,7 @@ function OpenAuctions() {
                       className="flex flex-col max-w-2xl justify-between"
                     >
                       <div className="w-full max-w-3xl mx-auto sm:block">
-                        <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
+                        <Tab.Panels className="w-full aspect-w-1 ">
                          
                           
 
@@ -774,12 +790,12 @@ function OpenAuctions() {
                               <Image
                                 src={liveItem?.rightImage}
                                 alt="i1"
-                                className="w-full h-full object-center object-cover sm:rounded-lg"
+                                className="w-full h-full  object-center object-contain sm:rounded-lg"
                                 width={1000}
-                                height={600}
+                                height={540}
                               />
                             </div>
-                          )}
+                          )} 
 
                           
                           
@@ -793,7 +809,7 @@ function OpenAuctions() {
 
 
                 {/* Vehicles Details */}
-                <section className="space-y-2 lg:col-span-1 row-start-3 bg-[#F1F5F9] ">
+                <section className="space-y-2 lg:mb-6 lg:px-2 md:col-start-1 md:row-start-1 lg:row-start-2  md:place-self-end  w-full mt-4">
                   {/* <div className="pb-8">
                     <h1 className="text-base  pl-4 pb-3 uppercase font-poppins font-bold">
                     {liveItem.make}    {liveItem.model}
@@ -822,7 +838,7 @@ function OpenAuctions() {
                   </div> */}
 
                   {/* Vehicle Description list*/}
-                  <div className="w-full max-w-md  mt-4 rounded  border border-[#A7C2FF80]">
+                  <div className="w-full max-sm:max-w-md  mt-4 rounded  border border-[#A7C2FF80]">
                     <Tab.Group>
                       <Tab.List className="flex space-x-1 rounded-xl  ">
                         {Object.keys(vehicleDetails).map((detail) => (
@@ -830,7 +846,7 @@ function OpenAuctions() {
                             key={detail}
                             className={({ selected }) =>
                               classNames(
-                                "w-full  py-2.5 text-lg font-bold leading-5",
+                                "w-full     py-2.5 text-lg font-bold leading-5",
                                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                                 selected
                                   ? "bg-gray-700 text-white shadow"
@@ -842,18 +858,18 @@ function OpenAuctions() {
                           </Tab>
                         ))}
                       </Tab.List>
-                      <Tab.Panels className="mt-px border border-gray-200 rounded h-48 overflow-y-scroll">
+                      <Tab.Panels className="mt-px border border-gray-200 rounded h-48 overflow-y-scroll ">
                         <Tab.Panel
                           className={classNames(
                             "rounded-xl bg-white p-3",
                             "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
                           )}
                         >
-                          <div className="">
-                            <dl className="space-y-4">
+                          <div className="bg-white">
+                            <div className="space-y-4">
                               
                               {liveItem.registrationNumber && (
-                                <div className="sm:col-span-1 flex space-x-2">
+                                <div className=" flex space-x-2">
                                   <div className="">
                                     <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                       Reg No.
@@ -866,7 +882,7 @@ function OpenAuctions() {
                               )}
 
                               {liveItem.make && (
-                                <div className="sm:col-span-1 flex space-x-2">
+                                <div className=" flex space-x-2">
                                   <div>
                                     <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                       Make
@@ -878,7 +894,7 @@ function OpenAuctions() {
                                 </div>
                               )}
 
-                              <div className="sm:col-span-1 flex space-x-2">
+                              <div className=" flex space-x-2">
                                 <div>
                                   <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                     Model
@@ -890,7 +906,7 @@ function OpenAuctions() {
                               </div>
 
                               {liveItem.yearOfManufacture && (
-                                <div className="sm:col-span-1 flex space-x-2">
+                                <div className=" flex space-x-2">
                                   <div>
                                     <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                       Year of Manufactor
@@ -903,7 +919,7 @@ function OpenAuctions() {
                               )}
 
                               {liveItem.kmReading && (
-                                <div className="sm:col-span-1 flex space-x-2">
+                                <div className=" flex space-x-2">
                                   <div>
                                     <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                       Odometer (kms)
@@ -916,7 +932,7 @@ function OpenAuctions() {
                               )}
 
                               {liveItem.ownership && (
-                                <div className="sm:col-span-1 flex space-x-2">
+                                <div className=" flex space-x-2">
                                   <div>
                                     <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                       Ownership
@@ -928,7 +944,7 @@ function OpenAuctions() {
                                 </div>
                               )}
 
-                              <div className="sm:col-span-1 flex space-x-2">
+                              <div className=" flex space-x-2">
                                 <div>
                                   <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                     RC Book
@@ -940,7 +956,7 @@ function OpenAuctions() {
                               </div>
 
                               {liveItem.fuel && (
-                                <div className="sm:col-span-1 flex space-x-2">
+                                <div className=" flex space-x-2">
                                   <div>
                                     <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                       Fuel Type
@@ -951,20 +967,20 @@ function OpenAuctions() {
                                   </div>
                                 </div>
                               )}
-                            </dl>
+                            </div>
                           </div>
                         </Tab.Panel>
 
                         <Tab.Panel
                           className={classNames(
-                            "rounded-xl bg-[#EEF1FB] p-3",
+                            "rounded-xl bg-white p-3",
                             "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
                           )}
                         >
                           <div className="bg-white">
                             <dl className="space-y-4">
                               {liveItem.registrationNumber && (
-                                <div className="sm:col-span-1 flex space-x-2">
+                                <div className=" flex space-x-2">
                                   <div>
                                     <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                       Insurance
@@ -977,7 +993,7 @@ function OpenAuctions() {
                               )}
 
                               {liveItem.make && (
-                                <div className="sm:col-span-1 flex space-x-2">
+                                <div className=" flex space-x-2">
                                   <div>
                                     <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                       Type
@@ -995,7 +1011,7 @@ function OpenAuctions() {
                                 </div>
                               )}
 
-                              <div className="sm:col-span-1 flex space-x-2">
+                              <div className=" flex space-x-2">
                                 <div>
                                   <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                     Varient
@@ -1006,7 +1022,7 @@ function OpenAuctions() {
                                 </div>
                               </div>
 
-                              <div className="sm:col-span-1 flex space-x-2">
+                              <div className=" flex space-x-2">
                                 <div>
                                   <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                     Loan Agreement Number
@@ -1017,7 +1033,7 @@ function OpenAuctions() {
                                 </div>
                               </div>
 
-                              <div className="sm:col-span-1 flex space-x-2">
+                              <div className=" flex space-x-2">
                                 <div>
                                   <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                     Yard Location
@@ -1029,7 +1045,7 @@ function OpenAuctions() {
                               </div>
 
                               {liveItem.ownership && (
-                                <div className="sm:col-span-1 flex space-x-2">
+                                <div className=" flex space-x-2">
                                   <div>
                                     <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                       Vehicle Location
@@ -1041,7 +1057,7 @@ function OpenAuctions() {
                                 </div>
                               )}
 
-                              <div className="sm:col-span-1 flex space-x-2">
+                              <div className=" flex space-x-2">
                                 <div>
                                   <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                     Shape
@@ -1052,7 +1068,7 @@ function OpenAuctions() {
                                 </div>
                               </div>
 
-                              <div className="sm:col-span-1 flex space-x-2">
+                              <div className=" flex space-x-2">
                                 <div>
                                   <dt className="text-sm font-roboto text-[#646464] font-semibold">
                                     Chaiss No
@@ -1124,7 +1140,7 @@ function OpenAuctions() {
 
 
             {/* FOR DESKTOP AND TABLET VIEW ONLY */}
-            <div className="max-sm:hidden py-10">
+            <div className="hidden py-10">
               {/* Page header */}
               <div className="md:flex md:items-start md:justify-between md:space-x-5">
                 <div className="flex items-center space-x-5">
@@ -1204,7 +1220,7 @@ function OpenAuctions() {
                                 <Image
                                   src={upcoming[1].rightImage}
                                   alt="i1"
-                                  className="w-full h-full object-center object-cover border border-red-500 border-8   sm:rounded-lg"
+                                  className="w-full h-full object-center object-cover border-red-500 border-8   sm:rounded-lg"
                                   width={500}
                                   height={300}
                                 />
@@ -1273,7 +1289,7 @@ function OpenAuctions() {
                   </div>
 
                   <div className="bg-white px-4 py-5 sm:rounded-lg sm:px-6 border border-gray-200">
-                    <div className="flex-none  text-lg font-semibold pb-4 text-sm">
+                    <div className="flex-none  lg:text-lg font-semibold pb-4 text-sm">
                       Quick Bid - Increment by
                     </div>
                     <div className="grid gap-y-4 grid-cols-1 lg:gap-x-8 lg:items-start">
@@ -1418,8 +1434,8 @@ function OpenAuctions() {
                                 src={liveItem?.rightImage}
                                 alt="i1"
                                 className="w-full h-full object-center object-cover sm:rounded-lg"
-                                width={1000}
-                                height={600}
+                                width={900}
+                                height={500}
                               />
                             </div>
                           )}
@@ -1985,42 +2001,83 @@ function CountdownTimer(hhmmss: string) {
   const timeArray = hhmmss.split(":");
 
   return (
-    <div className="  max-sm:flex max-sm:h-7 flex justify-center  max-sm:grid-cols-2   max-sm:gap-1    md:w-72 text-indigo-500">
-      <div className="max-sm:text-sm   md:text-center md:text-3xl font-bold  ">
+    // <div className="  max-sm:flex max-sm:h-7  justify-center  max-sm:grid-cols-2   max-sm:gap-1    md:w-72 text-indigo-500">
+    //   <div className="max-sm:text-sm   md:text-center md:text-3xl font-bold  ">
+    //     Vehicle Live Time
+    //   </div> 
+    //   <div className=" text-2xl md:text-center flex md:w-full md:items-center md:justify-center">
+    //     <div className="md:w-24 md:mx-1 md:p-2">
+    //       <div className="max-sm:text-sm    font-bold md:text-7xl md:leading-none">
+    //         {timeArray[0]}
+    //       </div>
+    //       {/* <div className="max-sm:hidden mt-2 font-semibold uppercase text-sm md:leading-none">
+    //         Hours
+    //       </div> */}
+    //     </div>
+    //     {/* <div className="max-sm:text-sm   md:text-6xl md:pb-10">
+    //       :
+    //     </div> */}
+    //     <div className="md:w-24 md:mx-1 md:p-2">
+    //       <div className="max-sm:text-sm  font-bold text-7xl md:leading-none">
+    //         {timeArray[1]}
+    //       </div>
+    //       {/* <div className="max-sm:hidden mt-2 font-semibold uppercase text-sm leading-none">
+    //         Minutes
+    //       </div> */}
+    //     </div>
+    //     {/* <div className="max-sm:text-sm  max-sm:leading-7  text-6xl pb-10">
+    //       :
+    //     </div> */}
+    //     <div className="md:w-24 md:mx-1 md:p-2">
+    //       <div className="max-sm:text-sm    font-bold text-7xl leading-none">
+    //         {timeArray[2]}
+    //       </div>
+    //       {/* <div className="max-sm:hidden mt-2 font-semibold uppercase text-sm md:leading-none">
+    //         Seconds
+    //       </div> */}
+    //     </div>
+    //   </div>
+    // </div>
+
+
+
+    <div className="  flex h-7  justify-center       gap-1     text-indigo-500">
+      <div className="text-sm   font-bold  ">
         Vehicle Live Time
-      </div>
-      <div className=" text-2xl md:text-center flex md:w-full md:items-center md:justify-center">
-        <div className="md:w-24 md:mx-1 md:p-2">
-          <div className="max-sm:text-sm    font-bold md:text-7xl md:leading-none">
+      </div> 
+      <div className=" text-2xl  flex  ">
+        <div className="">
+          <div className="text-sm    font-bold ">
             {timeArray[0]}
           </div>
-          <div className="max-sm:hidden mt-2 font-semibold uppercase text-sm md:leading-none">
+          {/* <div className="max-sm:hidden mt-2 font-semibold uppercase text-sm md:leading-none">
             Hours
-          </div>
+          </div> */}
         </div>
-        <div className="max-sm:text-sm   md:text-6xl md:pb-10">
+        <div className="text-base leading-[1.2rem]   ">
           :
         </div>
-        <div className="md:w-24 md:mx-1 md:p-2">
-          <div className="max-sm:text-sm  font-bold text-7xl md:leading-none">
+        <div className="">
+          <div className="text-sm  font-bold ">
             {timeArray[1]}
           </div>
-          <div className="max-sm:hidden mt-2 font-semibold uppercase text-sm leading-none">
+          {/* <div className="max-sm:hidden mt-2 font-semibold uppercase text-sm leading-none">
             Minutes
-          </div>
+          </div> */}
         </div>
-        <div className="max-sm:text-sm  max-sm:leading-7  text-6xl pb-10">
+        <div className="text-base leading-[1.2rem]   ">
           :
         </div>
-        <div className="md:w-24 md:mx-1 md:p-2">
-          <div className="max-sm:text-sm    font-bold text-7xl leading-none">
+        <div className="">
+          <div className="text-sm    font-bold  ">
             {timeArray[2]}
           </div>
-          <div className="max-sm:hidden mt-2 font-semibold uppercase text-sm md:leading-none">
+          {/* <div className="max-sm:hidden mt-2 font-semibold uppercase text-sm md:leading-none">
             Seconds
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
   );
 }
+
