@@ -213,14 +213,14 @@ function Vehicle() {
               as="div"
               className="flex flex-col max-w-2xl justify-between"
             >
-              <div className="w-full border   max-w-3xl mx-auto sm:block">
+              <div className="w-full    max-w-3xl mx-auto sm:block">
                 <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
                   {images?.map((image, index) => (
                     <Tab.Panel key={image.id}>
                       <Image
                         alt={`image${index}`}
                         src={image.trim()}
-                        className="w-full h-full sm:rounded-lg "
+                        className="w-full h-full sm:rounded-lg "  
                         width={500}
                         height={300}
                         objectFit="cover"
