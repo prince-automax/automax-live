@@ -7,26 +7,26 @@ import {
 import {
   CreateBidMutationVariables,
   GetEventQuery,
-  LiveWatchListItemQueryVariables,
-  OrderDirection,
+  LiveWatchListItemQueryVariables,                                                                                                                                                                                             
+  OrderDirection,                                                                                                                                                                                                                                                                                              
   QueryQueryVariables,
   useAddToWatchListMutation,
   useCreateBidMutation,
-  useGetEventQuery,
+  useGetEventQuery,                                                            
   useLiveWatchListItemQuery,
   useQueryQuery,
-  useUserWorkBookQuery,
+  useUserWorkBookQuery,                           
   UserWorkBookQueryVariables,
   useFindAuctionsQuery,
 } from "@utils/graphql";
 import graphQLClient from "@utils/useGQLQuery";
-import moment from "moment";
+import moment from "moment";                                                                              
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/link";  
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DashboardTemplate from "../../components/templates/DashboardTemplate";
-import Loader from "../../components/ui/Loader";
+import Loader from "../../components/ui/Loader";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 import withPrivateRoute from "../../utils/withPrivateRoute";
 import { useQueryClient } from "react-query";
 import { SecondsToDhms } from "@utils/common";
@@ -39,8 +39,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import TermsAndCondtionsModal from  "@components/modals/TermsAndConditionModal"
 import {
   faThumbsUp,
-  faThumbsDown,
-  faUserSlash,
+  faThumbsDown, 
+  faUserSlash, 
   faCircleInfo,
   faAngleRight,
   faSquarePlus,
@@ -1220,27 +1220,48 @@ function Events() {
   );
 }
 
-export default withPrivateRoute(Events);
+export default withPrivateRoute(Events); 
 
 const EnterBid = ({ row, call, event }) => {
   const [bidAmount, setBidAmount] = useState("");
+  console.log('hh',row?.userVehicleBids[0]?.amount+(+row?.quoteIncreament));
+  
+  // const enrolled = row?.userVehicleBidsCount > 0;
 
+
+  
   useEffect(() => {
     if (event.bidLock === "locked") {
-      if (row.currentBidAmount !== null && row.currentBidAmount !== undefined) {
-        setBidAmount(row.currentBidAmount.toString());
+      if (row.currentBidAmount) {
+        setBidAmount(row.currentBidAmount+(+row?.quoteIncreament));
       }
+      else if(row.startPrice){
+        setBidAmount(row.startPrice);
+      }
+      else if(!row?.startPrice){
+        setBidAmount(row?.quoteIncreament)
+      }
+  
     } else {
-      if (row.currentBidAmount !== null && row.currentBidAmount !== undefined) {
+      if (row.currentBidAmount) {
         let amt = row?.userVehicleBids?.length
-          ? row?.userVehicleBids[0].amount
+          ? row?.userVehicleBids[0]?.amount+(+row?.quoteIncreament)
           : row.startPrice;
         setBidAmount(amt.toString());
       }
+         else if(row.startPrice){
+        setBidAmount(row.startPrice);
+      }
+      else if(!row?.startPrice){
+        setBidAmount(row?.quoteIncreament)
+      }
+ 
     }
-  }, [event.bidLock, row.currentBidAmount]);
+  }, [event.bidLock,row]);
 
-  const enrolled = row.userVehicleBidsCount > 0;
+ 
+
+
 
   return (
     <div>

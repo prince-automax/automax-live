@@ -58,7 +58,7 @@ const SellACar = () => {
   const [count, setcount] = useState(0);
   const [formData, setFormData] = useState({
     registrationNumber: "",
-    make: "",
+    make: "",  
     yearOfManufacture: "",
     model: "",
     body: "",
@@ -329,7 +329,7 @@ const SellACar = () => {
       pincode: "",
     });
   };
-
+// scroll
   const handleTabClick = (tabNo) => {
     setActiveTab(tabNo);
     if (activeTab < tabNo) {

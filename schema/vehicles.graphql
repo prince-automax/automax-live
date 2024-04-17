@@ -133,6 +133,7 @@ query OpenAuctionVehicles($where: VehicleWhereInput!) {
     model
     varient
     categoty
+    createdAt
     fuel
     type
     rcStatus
@@ -150,8 +151,7 @@ query OpenAuctionVehicles($where: VehicleWhereInput!) {
     insuranceValidTill
     repoDt
     shape
-    
-    frontImage
+   frontImage
     backImage
     leftImage
     rightImage
@@ -170,6 +170,11 @@ query OpenAuctionVehicles($where: VehicleWhereInput!) {
     gapInBetweenVehicles
     endDate
     status
+    eventNo
+     seller {
+       name 
+       contactPerson
+      }
     }
 }
 }
