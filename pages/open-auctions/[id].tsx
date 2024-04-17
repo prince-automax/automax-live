@@ -629,7 +629,7 @@ function OpenAuctions() {
 
 
 {/* buttn */}
-                <section className="max-md:fixed w-full bottom-0 left-0 md:row-start-2 lg:row-start-3 md:col-start-2  max-sm:bg-[#F1F5F9] lg:pb-4  z-10 md:mt-16 ">
+                <section className="max-md:fixed w-full bottom-0 left-0 md:row-start-2 lg:row-start-3 md:col-start-2  max-md:bg-[#F1F5F9] lg:pb-4  z-10 md:mt-16 ">
                   <div className="grid grid-cols-2 border-3 border-gray-200 h-8  ">
                     <div className="bg-violet-100  flex justify-center items-center gap-2 h-8 border-y border-r border-gray-200">
                       <p>
@@ -766,7 +766,7 @@ function OpenAuctions() {
                   </div>
                 </section>
                 {/* main img */}
-                <section className="space-y-2 row-start-1 lg:row-start-2 md:col-start-1  w-full  border-2">
+                <section className="space-y-2 row-start-1 lg:row-start-2 md:col-start-1  w-full  border-2 ">
                   
                   <div>
                     <Tab.Group
@@ -780,7 +780,7 @@ function OpenAuctions() {
 
                           {liveItem?.rightImage && (
                             <div
-                              className="flex-none min-w-fit relative p-6 hover:cursor-pointer"
+                              className="flex  min-w-fit relative p-6 hover:cursor-pointer"
                               onClick={() => {
                                 // BindVehicleImage(liveItem);
                                 setImages((liveItem?.rightImage).split(","));
@@ -790,7 +790,7 @@ function OpenAuctions() {
                               <Image
                                 src={liveItem?.rightImage}
                                 alt="i1"
-                                className="w-full h-full  object-center object-contain sm:rounded-lg"
+                                className="w-full h-full  object-center object-contain sm:rounded-lg "
                                 width={1000}
                                 height={540}
                               />

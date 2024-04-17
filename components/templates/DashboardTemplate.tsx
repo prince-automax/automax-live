@@ -17,10 +17,14 @@ import {
   UserCircleIcon,
   ReceiptTaxIcon,
   ChevronDownIcon,
-  EyeIcon
+  EyeIcon,
+  DesktopComputerIcon
+
 } from "@heroicons/react/outline";
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCar,faCashRegister,faCog,faImages   } from '@fortawesome/free-solid-svg-icons';
+import { faCar,faCashRegister,faCog,faImages,faHammer} from '@fortawesome/free-solid-svg-icons';
 import graphQLClient from "@utils/useGQLQuery";
 
 
@@ -138,6 +142,8 @@ useEffect(() => {
 
 
   const activityNavigations = [
+
+   
     {
       name: "Work Book",
       href: "/showworkbook",
@@ -157,6 +163,14 @@ useEffect(() => {
       icon: CreditCardIcon,
       current: router.pathname == "/my-quotes" ? true : false,
     },
+    {  
+      name: "Open Leads",
+      href: "/openleads",
+      current: router.pathname == "/openleads" ? true : false,
+   
+      icon: DesktopComputerIcon,
+
+    },
     {
       name: "Buying Limit",
       href: "/buying-limit",
@@ -169,6 +183,7 @@ useEffect(() => {
       icon: CurrencyRupeeIcon,
       current: router.pathname == "/deposits" ? true : false,
     },
+    
   ];
 
   const accountNavigations = [
@@ -254,163 +269,7 @@ useEffect(() => {
   </ul>
 ))}
 
-                 
-                  {/* <ul className="flex flex-col space-y-1">
-                    <li>
-                      <button
-                        className="flex hover:cursor-pointer hover:text-blue-500 px-3 w-32 py-1 text-base font-semibold text-gray-500  tracking-wider  "
-                       onClick={()=>{
-                        setShowEvents((prevEvent)=>!prevEvent)
-                        setShowBids(false)
-                        setShowAccount(false)
-                       }}
-                      >
-                    <span><FontAwesomeIcon className="mr-2" icon={faCar} /> </span>     Events{" "}    
-                        {showEvents ? (
-                          <span>
-                       <ChevronDownIcon className="  h-7 w-4 top-text-gray-400" />
-                          </span>
-                        ) : (
-                          <span>
-                            <ChevronRightIcon className="  h-7 w-4 top-text-gray-400" />
-                          </span>
-                        )}
-                      </button>
-
-                      <ul
-                        className={`block ${showEvents ? "block" : "hidden"}`}
-                      >
-                        <li>
-                          {eventsNavigations.map((item) => (
-                            <Link key={item.name} href={item.href}>
-                              <a
-                                className={classNames(
-                                  item.current
-                                    ? "bg-gray-100 text-orange-600 hover:bg-gray-100"
-                                    : "text-gray-900 hover:text-gray-900 hover:bg-gray-100",
-                                  "group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-                                )}
-                                aria-current={item.current ? "page" : undefined}
-                              >
-                                <item.icon
-                                  className={classNames(
-                                    item.current
-                                      ? "text-orange-500"
-                                      : "text-gray-400 group-hover:text-gray-500",
-                                    "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                                  )}
-                                  aria-hidden="true"
-                                />
-                                <span className="truncate">{item.name}</span>
-                              </a>
-                            </Link>
-                          ))}
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="">
-                      <button
-                        className="flex hover:cursor-pointer hover:text-blue-500 px-3 w-44 py-1 text-base font-semibold text-gray-500  tracking-wider  "
-                        onClick={() => {
-                          setShowBids((prevShowBids) => !prevShowBids); // Toggle showBids
-                          setShowEvents(false); // Always hide showEvents
-                          setShowAccount(false); // Always hide showAccount
-                        }}
-                      >
-                    <span><FontAwesomeIcon className="mr-2" icon={faCashRegister} /> </span>  My Bids{" "}
-                        {showBids ? (
-                          <span>
-                            <ChevronDownIcon className="  h-7 w-4  top-text-gray-400" />
-                          </span>
-                        ) : (
-                          <span>
-                            <ChevronRightIcon className="  h-7 w-4 top-text-gray-400" />
-                          </span>
-                        )}
-                      </button>
-
-                      <ul className={`block ${showBids ? "block" : "hidden"}`}>
-                        <li>
-                          {activityNavigations.map((item) => (
-                            <Link key={item.name} href={item.href}>
-                              <a
-                                className={classNames(
-                                  item.current
-                                    ? "bg-gray-100 text-orange-600 hover:bg-gray-100"
-                                    : "text-gray-900 hover:text-gray-900 hover:bg-gray-100",
-                                  "group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-                                )}
-                                aria-current={item.current ? "page" : undefined}
-                              >
-                                <item.icon
-                                  className={classNames(
-                                    item.current
-                                      ? "text-orange-500"
-                                      : "text-gray-400 group-hover:text-gray-500",
-                                    "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                                  )}
-                                  aria-hidden="true"
-                                />
-                                <span className="truncate">{item.name}</span>
-                              </a>
-                            </Link>
-                          ))}
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <button
-                        className="flex hover:cursor-pointer hover:text-blue-500 px-3 w-44 py-1 text-base font-semibold text-gray-500  tracking-wider "
-                     onClick={()=>{
-                      setShowAccount((prevAccountvalue)=> !prevAccountvalue)
-                      setShowBids(false)
-                      setShowEvents(false)
-                     }}
-                      >
-                    <span><FontAwesomeIcon className="mr-2" icon={faCog } /> </span>       My Account{" "}
-                        {showAccount ? (
-                          <span>
-                            <ChevronDownIcon className="  h-7 w-4  top-text-gray-400" />
-                          </span>
-                        ) : (
-                          <span>
-                            <ChevronRightIcon className="  h-7 w-4 top-text-gray-400" />
-                          </span>
-                        )}
-                      </button>
-
-                      <ul
-                        className={`block ${showAccount ? "block" : "hidden"}`}
-                      >
-                        <li>
-                          {accountNavigations.map((item) => (
-                            <Link key={item.name} href={item.href}>
-                              <a
-                                className={classNames(
-                                  item.current
-                                    ? "bg-gray-100 text-orange-600 hover:bg-gray-100"
-                                    : "text-gray-900 hover:text-gray-900 hover:bg-gray-100",
-                                  "group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-                                )}
-                                aria-current={item.current ? "page" : undefined}
-                              >
-                                <item.icon
-                                  className={classNames(
-                                    item.current
-                                      ? "text-orange-500"
-                                      : "text-gray-400 group-hover:text-gray-500",
-                                    "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                                  )}
-                                  aria-hidden="true"
-                                />
-                                <span className="truncate">{item.name}</span>
-                              </a>
-                            </Link>
-                          ))}
-                        </li>
-                      </ul>
-                    </li>
-                  </ul> */}
+              
                 </div>
                 
                 <div className="hidden lg:block">

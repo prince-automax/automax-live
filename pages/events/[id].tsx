@@ -1220,7 +1220,7 @@ function Events() {
   );
 }
 
-export default withPrivateRoute(Events);
+export default withPrivateRoute(Events); 
 
 const EnterBid = ({ row, call, event }) => {
   const [bidAmount, setBidAmount] = useState("");
@@ -1229,11 +1229,12 @@ const EnterBid = ({ row, call, event }) => {
     if (event.bidLock === "locked") {
       if (row.currentBidAmount !== null && row.currentBidAmount !== undefined) {
         setBidAmount(row.currentBidAmount.toString());
+        // console.log('hi',row)
       }
     } else {
       if (row.currentBidAmount !== null && row.currentBidAmount !== undefined) {
         let amt = row?.userVehicleBids?.length
-          ? row?.userVehicleBids[0].amount
+          ? upAmount
           : row.startPrice;
         setBidAmount(amt.toString());
       }
@@ -1241,6 +1242,9 @@ const EnterBid = ({ row, call, event }) => {
   }, [event.bidLock, row.currentBidAmount]);
 
   const enrolled = row.userVehicleBidsCount > 0;
+ let upAmount=  row?.userVehicleBids[0].amount+ row?.quoteIncreament
+
+
 
   return (
     <div>
@@ -1250,7 +1254,7 @@ const EnterBid = ({ row, call, event }) => {
           className="w-full border border-gray-500 px-5 py-2 placeholder-gray-500 focus:outline-none rounded-md"
           placeholder="Enter amount"
           // defaultValue={row.currentBidAmount !==0 ? row.currentBidAmount  :row.startPrice }
-          value={bidAmount !== "0" ? bidAmount : row.startPrice}
+          value={bidAmount !== "0" ? bidAmount : upAmount}
           onChange={(e) => {
             setBidAmount(e.target.value.replace(/\D/g, ""));
           }}
@@ -1261,7 +1265,7 @@ const EnterBid = ({ row, call, event }) => {
           className="w-full border border-gray-400 px-5 py-2 placeholder-gray-500 focus:outline-none rounded-md"
           placeholder="Enter amount"
           // defaultValue={row.currentBidAmount !==0 ? row.currentBidAmount  :row.startPrice }
-          value={bidAmount !== "0" ? bidAmount : row.startPrice}
+          value={bidAmount !== "0" ? bidAmount : upAmount}
           onChange={(e) => {
             setBidAmount(e.target.value.replace(/\D/g, ""));
           }}
