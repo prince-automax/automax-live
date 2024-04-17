@@ -4916,7 +4916,7 @@ export type OpenAuctionVehiclesQueryVariables = Exact<{
 }>;
 
 
-export type OpenAuctionVehiclesQuery = { __typename?: 'Query', vehicles?: Array<{ __typename?: 'Vehicle', vehicleEventStatus?: VehicleEventStatus | null, registrationNumber?: string | null, make?: string | null, model?: string | null, varient?: string | null, categoty?: string | null, fuel?: string | null, type?: string | null, rcStatus?: string | null, yearOfManufacture?: number | null, ownership?: number | null, kmReading?: number | null, insuranceStatus?: string | null, loanAgreementNo?: string | null, mileage?: number | null, yardLocation?: string | null, veicleLocation?: string | null, vehicleRemarks?: string | null, engineNo?: string | null, chassisNo?: string | null, insuranceValidTill?: any | null, repoDt?: any | null, shape?: string | null, frontImage?: string | null, backImage?: string | null, leftImage?: string | null, rightImage?: string | null, currentBidAmount?: number | null, bidStartTime?: any | null, bidTimeExpire?: any | null, vehicleIndexNo?: number | null, myBidRank?: number | null, id: string, bidStatus?: VehicleBidStatusType | null, quoteIncreament?: number | null, startBidAmount?: number | null, startPrice?: number | null, event?: { __typename?: 'Event', gapInBetweenVehicles?: number | null, endDate?: any | null, status?: EventStatusType | null } | null }> | null };
+export type OpenAuctionVehiclesQuery = { __typename?: 'Query', vehicles?: Array<{ __typename?: 'Vehicle', vehicleEventStatus?: VehicleEventStatus | null, registrationNumber?: string | null, make?: string | null, model?: string | null, varient?: string | null, categoty?: string | null, createdAt?: any | null, fuel?: string | null, type?: string | null, rcStatus?: string | null, yearOfManufacture?: number | null, ownership?: number | null, kmReading?: number | null, insuranceStatus?: string | null, loanAgreementNo?: string | null, mileage?: number | null, yardLocation?: string | null, veicleLocation?: string | null, vehicleRemarks?: string | null, engineNo?: string | null, chassisNo?: string | null, insuranceValidTill?: any | null, repoDt?: any | null, shape?: string | null, frontImage?: string | null, backImage?: string | null, leftImage?: string | null, rightImage?: string | null, currentBidAmount?: number | null, bidStartTime?: any | null, bidTimeExpire?: any | null, vehicleIndexNo?: number | null, myBidRank?: number | null, id: string, bidStatus?: VehicleBidStatusType | null, quoteIncreament?: number | null, startBidAmount?: number | null, startPrice?: number | null, event?: { __typename?: 'Event', gapInBetweenVehicles?: number | null, endDate?: any | null, status?: EventStatusType | null, eventNo?: number | null, seller?: { __typename?: 'Seller', name?: string | null, contactPerson?: string | null } | null } | null }> | null };
 
 export type LiveWatchListItemQueryVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -6306,6 +6306,7 @@ export const OpenAuctionVehiclesDocument = `
     model
     varient
     categoty
+    createdAt
     fuel
     type
     rcStatus
@@ -6341,6 +6342,11 @@ export const OpenAuctionVehiclesDocument = `
       gapInBetweenVehicles
       endDate
       status
+      eventNo
+      seller {
+        name
+        contactPerson
+      }
     }
   }
 }

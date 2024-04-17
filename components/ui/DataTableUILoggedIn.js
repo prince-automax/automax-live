@@ -98,14 +98,14 @@ import moment from "moment";
 {registered ? (
             <div>
               <a
-                className={`font-poppins font-semibold px-4 rounded-md py-1`}
+                className={`font-poppins font-semibold px-4 rounded-md py-1 border border-black`}
                 href={`/${
                   event.eventCategory === "open" ? "open-auctions" : "events"
                 }/${event.id}?type=l`}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-            More Details
+            Bid Now
               </a>
             </div>
           ) :(<p onClick={PaymentStatus} className=" font-poppins font-semibold px-4 rounded-md py-1">More Details</p>)}
