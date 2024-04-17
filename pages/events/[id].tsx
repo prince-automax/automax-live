@@ -1224,25 +1224,42 @@ export default withPrivateRoute(Events);
 
 const EnterBid = ({ row, call, event }) => {
   const [bidAmount, setBidAmount] = useState("");
+  console.log('hh',row?.userVehicleBids[0]?.amount+(+row?.quoteIncreament));
+  
+  // const enrolled = row?.userVehicleBidsCount > 0;
 
+
+  
   useEffect(() => {
     if (event.bidLock === "locked") {
-      if (row.currentBidAmount !== null && row.currentBidAmount !== undefined) {
-        setBidAmount(row.currentBidAmount.toString());
-        // console.log('hi',row)
+      if (row.currentBidAmount) {
+        setBidAmount(row.currentBidAmount+(+row?.quoteIncreament));
       }
+      else if(row.startPrice){
+        setBidAmount(row.startPrice);
+      }
+      else if(!row?.startPrice){
+        setBidAmount(row?.quoteIncreament)
+      }
+  
     } else {
-      if (row.currentBidAmount !== null && row.currentBidAmount !== undefined) {
+      if (row.currentBidAmount) {
         let amt = row?.userVehicleBids?.length
-          ? upAmount
+          ? row?.userVehicleBids[0]?.amount+(+row?.quoteIncreament)
           : row.startPrice;
         setBidAmount(amt.toString());
       }
+         else if(row.startPrice){
+        setBidAmount(row.startPrice);
+      }
+      else if(!row?.startPrice){
+        setBidAmount(row?.quoteIncreament)
+      }
+ 
     }
-  }, [event.bidLock, row.currentBidAmount]);
+  }, [event.bidLock,row]);
 
-  const enrolled = row.userVehicleBidsCount > 0;
- let upAmount=  row?.userVehicleBids[0].amount+ row?.quoteIncreament
+ 
 
 
 
@@ -1254,7 +1271,7 @@ const EnterBid = ({ row, call, event }) => {
           className="w-full border border-gray-500 px-5 py-2 placeholder-gray-500 focus:outline-none rounded-md"
           placeholder="Enter amount"
           // defaultValue={row.currentBidAmount !==0 ? row.currentBidAmount  :row.startPrice }
-          value={bidAmount !== "0" ? bidAmount : upAmount}
+          value={bidAmount !== "0" ? bidAmount : row.startPrice}
           onChange={(e) => {
             setBidAmount(e.target.value.replace(/\D/g, ""));
           }}
@@ -1265,7 +1282,7 @@ const EnterBid = ({ row, call, event }) => {
           className="w-full border border-gray-400 px-5 py-2 placeholder-gray-500 focus:outline-none rounded-md"
           placeholder="Enter amount"
           // defaultValue={row.currentBidAmount !==0 ? row.currentBidAmount  :row.startPrice }
-          value={bidAmount !== "0" ? bidAmount : upAmount}
+          value={bidAmount !== "0" ? bidAmount : row.startPrice}
           onChange={(e) => {
             setBidAmount(e.target.value.replace(/\D/g, ""));
           }}
