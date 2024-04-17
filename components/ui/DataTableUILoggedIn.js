@@ -98,7 +98,7 @@ import moment from "moment";
 {registered ? (
             <div>
               <a
-                className={`font-poppins font-semibold px-4 rounded-md py-1 border border-black`}
+                className={`font-poppins  px-4 rounded-md py-1  border  bg-green-400`}
                 href={`/${
                   event.eventCategory === "open" ? "open-auctions" : "events"
                 }/${event.id}?type=l`}
@@ -108,7 +108,7 @@ import moment from "moment";
             Bid Now
               </a>
             </div>
-          ) :(<p onClick={PaymentStatus} className=" font-poppins font-semibold px-4 rounded-md py-1">More Details</p>)}
+          ) :(<p onClick={PaymentStatus} className=" font-poppins  px-4 rounded-md py-1 border  bg-green-400"> Bid Now</p>)}
         </div>
       </div>
     </div>
