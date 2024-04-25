@@ -42,7 +42,7 @@ function Vehicle() {
   const { id } = router.query;
   const [accessToken, setAccessToken] = useState("");
   const [userId, setUserId] = useState("");
-  const [interval, setAPIInterval] = useState(10000);
+  const [interval, setAPIInterval] = useState(1000);
   const [vehicle, setVehicle] = useState(null);
   const queryClient = useQueryClient();
   const [images, setImages] = useState([]);
@@ -179,6 +179,38 @@ function Vehicle() {
     } catch {}
     return true;
   }
+
+
+
+  useEffect(() => {
+    if (vehicle?.event?.bidLock === "locked") {
+      if (vehicle?.currentBidAmount) {
+        setBidAmount(vehicle?.currentBidAmount+(+vehicle?.quoteIncreament));
+      }
+      else if(vehicle?.startPrice){
+        setBidAmount(vehicle?.startPrice);
+      }
+      else if(!vehicle?.startPrice){
+        setBidAmount(vehicle?.quoteIncreament)
+      }
+  
+    } else {
+      if (vehicle?.currentBidAmount) {
+        let amt = vehicle?.userVehicleBids?.length
+          ? vehicle?.userVehicleBids[0]?.amount+(+vehicle?.quoteIncreament)
+          : vehicle?.startPrice;
+        setBidAmount(amt.toString());
+      }
+         else if(vehicle?.startPrice){
+        setBidAmount(vehicle?.startPrice);
+      }
+      else if(!vehicle?.startPrice){
+        setBidAmount(vehicle?.quoteIncreament)
+      }
+ 
+    }
+  }, [vehicle?.event?.bidLock,vehicle]);
+
 
   return (
     <DashboardTemplate>
@@ -407,7 +439,7 @@ function Vehicle() {
                     {vehicle?.startPrice}
                   </dd>
                 </div>
-                {vehicle?.event.bidLock === "locked" ? (
+                {vehicle?.event?.bidLock === "locked" ? (
                   <div className="flex items-center justify-between">
                     <dt className="text-sm text-gray-200">Current Quote</dt>
                     <dd className="text-sm font-medium text-gray-200">
@@ -460,7 +492,7 @@ function Vehicle() {
                 <input
                   className="mt-6 w-full border-white px-5 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white rounded-md"
                   placeholder="Enter bid amount"
-                  value={bidAmount}
+                  value={bidAmount !== "0" ? bidAmount : vehicle?.startPrice}
                   onChange={(e) => {
                     setBidAmount(e.target.value.replace(/\D/g, ""));
                   }}

@@ -122,7 +122,7 @@ function WatchList() {
     },
     {
       cacheTime: 5,
-      refetchInterval: 10000,
+      refetchInterval: 1000,
       enabled: accessToken !== "" && userId !== "",
     }
   );
@@ -957,24 +957,32 @@ const EnterBid = ({ row, call, event }) => {
 
   useEffect(() => {
     if (event?.bidLock === "locked") {
-      if (
-        row?.currentBidAmount !== null &&
-        row?.currentBidAmount !== undefined
-      ) {
-        setBidAmount(row?.currentBidAmount?.toString());
+      if (row.currentBidAmount) {
+        setBidAmount(row.currentBidAmount+(+row?.quoteIncreament));
       }
+      else if(row.startPrice){
+        setBidAmount(row.startPrice);
+      }
+      else if(!row?.startPrice){
+        setBidAmount(row?.quoteIncreament)
+      }
+  
     } else {
-      if (
-        row?.currentBidAmount !== null &&
-        row?.currentBidAmount !== undefined
-      ) {
+      if (row.currentBidAmount) {
         let amt = row?.userVehicleBids?.length
-          ? row?.userVehicleBids[0].amount
-          : row?.startPrice;
+          ? row?.userVehicleBids[0]?.amount+(+row?.quoteIncreament)
+          : row.startPrice;
         setBidAmount(amt.toString());
       }
+         else if(row.startPrice){
+        setBidAmount(row.startPrice);
+      }
+      else if(!row?.startPrice){
+        setBidAmount(row?.quoteIncreament)
+      }
+ 
     }
-  }, [event?.bidLock, row?.currentBidAmount]);
+  }, [event?.bidLock,row]);
 
   const enrolled = row.userVehicleBidsCount > 0;
 
