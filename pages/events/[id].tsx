@@ -1231,7 +1231,7 @@ const EnterBid = ({ row, call, event }) => {
 
   
   useEffect(() => {
-    if (event.bidLock === "locked") {
+    if (event?.bidLock === "locked") {
       if (row.currentBidAmount) {
         setBidAmount(row.currentBidAmount+(+row?.quoteIncreament));
       }
@@ -1257,7 +1257,7 @@ const EnterBid = ({ row, call, event }) => {
       }
  
     }
-  }, [event.bidLock,row]);
+  }, [event?.bidLock,row]);
 
  
 
