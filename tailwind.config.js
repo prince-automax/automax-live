@@ -5,6 +5,7 @@
     ],
     theme: {
         extend: {
+           
             colors: {
                 'primary': {
                     DEFAULT: '#1E3A8A',
