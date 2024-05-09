@@ -345,7 +345,7 @@ const Findauction = () => {
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 capitalize">
       <main className="overflow-hidden max-w-7xl mx-auto">
         {/* Header */}
 
@@ -384,13 +384,13 @@ const Findauction = () => {
                           >
                             Location
                           </label>
-                          <div className="mt-1">
+                          <div className="mt-1 capitalize">
                             <Field
                               as="select"
                               name="state"
                               id="state"
                               autoComplete="family-name"
-                              className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                              className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md capitalize"
                               placeholder="List of Banks"
                             >
                               <option>Select</option>
@@ -448,7 +448,7 @@ const Findauction = () => {
                               name="category"
                               as="select"
                               autoComplete="email"
-                              className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                              className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md capitalize"
                             >
                               <option>select</option>
                               {Category.map((category, index) => (
