@@ -3,11 +3,11 @@ import Link from 'next/link';
 export const Terms   = ({ acceptTerms, rejectTerms }) => {
 
   return (
-    <div className="fixed inset-1 flex  items-center justify-center bg-gray-800 bg-opacity-50 z-50 w-full md:px-20 md:py-48 py-10 px-5  lg:px-30 xl:px-40">
-      <div className="bg-white  rounded-2xl  h-fit w-full lg:w-10/12  xl:w-1/2 max-md:h-fit pb-6 relative" >
+    <div className="fixed inset-0 flex  items-center justify-center bg-gray-800 bg-opacity-50 z-50 w-full md:px-20 md:py-48 py-10 px-5  lg:px-30 xl:px-40">
+      <div className="bg-white  rounded-2xl  h-[600px] w-full lg:w-10/12  xl:w-2/3 max-md:h-fit pb-6 relative" >
     {/* <img src= alt="no image" className='w-full  object-cover absolute mix-blend-overlay'/> */}
         <h2 className="bg-blue-800 md:text-2xl text-lg  mb-4 text-center font-bold uppercase rounded-t-xl p-4 text-white ">Terms and Conditions</h2>
-        <ul className=" max-md:h-[330px]  md:h-[500px]  overflow-y-auto    md:text-lg font-semibold   px-6 mt-3 bg-cover"  >
+        <ul className=" max-md:h-[330px]  md:h-[390px] overflow-y-auto     md:text-lg font-semibold   px-6 mt-3 bg-cover"  >
           <li className="mb-2">All vehicles are sold on "As is where is basis"</li>
           <li className="mb-2">All vehicles to be inspected by the bidder / buyer before the auction & bidding</li>
           <li className='mb-2'> The bidder will be liable for transfer of vehicle.</li>
@@ -27,7 +27,7 @@ export const Terms   = ({ acceptTerms, rejectTerms }) => {
 
    
         </ul>
-        <h2 className="md:text-xl font-bold uppercase text-center pb-4 max-md:mt-4">i agree to the terms of service and i read the privacy notice</h2>
+        <h2 className="md:text-lg px-3  font-bold uppercase text-center pb-4 max-md:mt-4 md:py-2">i agree to the terms of service and i read the privacy notice</h2>
         <div className="flex justify-center gap-8">
           <button onClick={acceptTerms} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-800">Accept</button><Link href="/open-auctions/"><button onClick={rejectTerms}  className="px-4 py-2 bg-gray-400  text-white rounded hover:bg-gray-600">Reject</button></Link>
           
