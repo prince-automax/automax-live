@@ -8,7 +8,7 @@ export default function Header() {
                     About Us
                 </p>
                 <p className="mt-4 text-lg text-gray-500">
-                    Transforming the Way in India Automotive Buys,Sells & Exchange Owns and Uses Vehicles
+                    Transforming the Way India Buys, Sells, Exchanges, Owns, and Uses Automotive Vehicles.
                 </p>
             </div>
         </div>

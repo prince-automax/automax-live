@@ -5,10 +5,10 @@ const nextConfig = {
     swcMinify: true,
     trailingSlash: true,
     env: {
-        // BASE_URL: "https://api-dev.autobse.com",
-        // API_URL: "https://api-dev.autobse.com/api/graphql",
-       BASE_URL: "https://api.autobse.com",
-       API_URL: "https://api.autobse.com/api/graphql",
+        BASE_URL: "https://api-dev.autobse.com",
+        API_URL: "https://api-dev.autobse.com/api/graphql",
+    //    BASE_URL: "https://api.autobse.com",
+    //    API_URL: "https://api.autobse.com/api/graphql",
      },
     images: {
         domains: [

@@ -168,8 +168,8 @@ export default function EventsTable({
         registered ? (
           View(value, eventCategory)
         ) : (
-          <button className=" bg-primary-hover font-semibold border text-white py-1 w-full px-6 rounded-lg" onClick={PaymentStatus}>
-         BID
+          <button className=" bg-primary-hover font-semibold border text-white py-1 w-full rounded-lg px-6 whitespace-nowrap"  onClick={PaymentStatus}>
+         BID NOW
         </button>
         )
         
@@ -179,7 +179,7 @@ export default function EventsTable({
         //   <span className="text-bold text-red-500 text-xs">
         //     Selected Auction has not been assigned to you. Please contact{" "}
         //     <span className="p-3">9962334455 </span> for more details
-        //   </span>
+        //   </span> 
         // ),
     },
     {
@@ -290,7 +290,7 @@ function View(value, eventCategory) {
       >
         <a target="_blank">
           <div>
-            <span className=" bg-primary-hover font-semibold border text-white py-1 w-full px-6 rounded-lg">BID </span>
+            <span className=" bg-primary-hover font-semibold border text-white py-1 w-full px-6 rounded-lg whitespace-nowrap">BID NOW </span>
           </div>
         </a>
       </Link>
