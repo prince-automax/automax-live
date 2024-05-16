@@ -100,6 +100,9 @@ function OpenAuctions() {
   const [showTerms, setShowTerms] = useState(localStorage.getItem('termsAccepted') === 'true');
 
 
+            
+          
+         
   const acceptTerms = () => {
     setShowTerms(true);
     localStorage.setItem('termsAccepted', 'true'); // Save acceptance state in local storage
@@ -196,12 +199,12 @@ function OpenAuctions() {
     return 0;
   }
   const handleIncrease = () => {
-    setBidAmount(prevAmount => prevAmount + 500);
+    setBidAmount(prevAmount => prevAmount +  liveItem?.quoteIncreament);
   };
 
   const handleDecrease = () => {
     if (bidAmount > 500) {
-      setBidAmount(prevAmount => prevAmount - 500);
+      setBidAmount(prevAmount => prevAmount - liveItem?.quoteIncreament);
     }
   };
 
@@ -226,7 +229,7 @@ function OpenAuctions() {
         // {
         const strtprice =
           live.currentBidAmount !== 0
-            ? live.currentBidAmount
+            ?( live.currentBidAmount + live.quoteIncreament)
             : live.startBidAmount;
 
         setBidAmount(strtprice);
@@ -349,11 +352,11 @@ function OpenAuctions() {
           alt: "Left Image.",
         });
       }
-      if (vehicle.rightImage !== "") {
+      if (vehicle.frontImage !== "") {
         tempImages.push({
           id: 4,
           name: "Right Image",
-          src: vehicle.rightImage,
+          src: vehicle.frontImage,
           alt: "Right Image.",
         });
       }
@@ -430,7 +433,7 @@ function OpenAuctions() {
                             upcoming[0]?.frontImage && (
                               <Tab.Panel key="i1">
                                    <div className="grid grid-cols-2 gap-y-2 pl-2">
-                                  <div className="text-xs py-2 col-span-2 font-bold text-gray-400 pl-1">
+                                  <div className="text-xs py-2 col-span-2 font-bold text-black pl-1">
                                    
                                    
                                     <span className="text-black uppercase">
@@ -446,17 +449,17 @@ function OpenAuctions() {
                                     height={100}
                                   />
                                   <ul className="pl-2 grid grid-cols-3  gap-0  text-xs font-medium">
-                                  <li className=" w-11  flex justify-between text-gray-400">
+                                  <li className=" w-11  flex justify-between text-black">
                                       Reg no <span className="">:</span>
                                     </li>
                                     <li className=" col-span-2 text-[12px] font-bold">
                                       {upcoming[0]?.registrationNumber}{" "}
                                     </li>
-                                    <li className=" w-11 flex justify-between text-gray-400">
+                                    <li className=" w-11 flex justify-between text-black">
                                       Model <span className="">:</span>
                                     </li>
                                     <li className="col-span-2 text-[12px] font-bold">{upcoming[0]?.model}</li>
-                                    <li className=" w-11 flex justify-between text-gray-400">
+                                    <li className=" w-11 flex justify-between text-black">
                                       Make <span className="">:</span>
                                     </li>
                                     <li className="col-span-2 text-[12px] font-bold"> {upcoming[0]?.make}</li>
@@ -484,10 +487,10 @@ function OpenAuctions() {
                         <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
                           {upcoming &&
                             upcoming[1] &&
-                            upcoming[1].rightImage && (
+                            upcoming[1].frontImage && (
                               <Tab.Panel key="i1">
                                 <div className="grid grid-cols-2 gap-y-2 pl-2">
-                                  <div className="text-sm py-2 col-span-2 font-bold text-gray-400 pl-1">
+                                  <div className="text-sm py-2 col-span-2 font-bold text-black pl-1">
                                  
                                     <span className="text-black uppercase text-xs">
                                       {upcoming[1].make}  {upcoming[1].model}
@@ -502,17 +505,17 @@ function OpenAuctions() {
                                     height={100}
                                   />
                                   <ul className="pl-2 grid grid-cols-3  gap-0  text-xs font-medium">
-                                    <li className=" w-11  flex justify-between text-gray-400">
+                                    <li className=" w-11  flex justify-between text-black">
                                       Reg no <span className="">:</span>
                                     </li>
                                     <li className=" col-span-2 text-[12px] font-bold">
                                       {upcoming[1].registrationNumber}{" "}
                                     </li>
-                                    <li className=" w-11 flex justify-between text-gray-400">
+                                    <li className=" w-11 flex justify-between text-black">
                                       Model <span className="">:</span>
                                     </li>
                                     <li className="col-span-2 text-[12px] font-bold">{upcoming[1].model}</li>
-                                    <li className=" w-11 flex justify-between text-gray-400">
+                                    <li className=" w-11 flex justify-between text-black">
                                       Make <span className="">:</span>
                                     </li>
                                     <li className="col-span-2 text-[12px] font-bold"> {upcoming[1].make}</li>
@@ -684,7 +687,7 @@ function OpenAuctions() {
                     </div>
                     <div className="bg-blue-200  flex justify-center gap-2 items-center  border-y border-r max-h-8 border-gray-200 ">
                       <h2 className="text-sm font-normal text-gray-900 h-6">
-                        your bid{" "}
+                        Current bid{" "}
                       </h2>
                       <div className="flex items-center">
                       <p className=" text-sm  pb-1">
@@ -692,6 +695,7 @@ function OpenAuctions() {
                       </p>
 
                       <p className="text-sm font-medium text-blue-800 h-6 flex pl-1">
+                       
                       {liveItem?.currentBidAmount}
 
                       </p>
@@ -793,7 +797,7 @@ function OpenAuctions() {
                     </div>
                     <div className="bg-blue-200  flex justify-center gap-2 items-center  border-y border-r max-h-8 border-gray-200 ">
                       <h2 className="text-sm font-normal text-gray-900 h-6">
-                        your bid{" "}
+                        Current bid{" "}
                       </h2>
                       <div className="flex items-center">
                       <p className=" text-sm  pb-1">
@@ -896,9 +900,9 @@ function OpenAuctions() {
                         # {liveItem.vehicleIndexNo}
                       </p>
                     </div>
-                    <div className="lg:hidden col-span-2 w-fit md:w-full lg:w-fit h-7  lg:col-span-1  border border-indigo-400 bg-indigo-100   mt-4 md:mt-0 pt-px max-lg:px-6 lg:col-start-2 lg:row-start-1 lg:place-self-end lg:mr-2 lg:px-2">
-                      {CountdownTimer(SecondsLeft())}
-                    </div>
+                    <div className="lg:hidden col-span-2 w-fit md:w-full lg:w-fit h-7 lg:col-span-1 border border-indigo-400 bg-indigo-100 mt-4 md:mt-0 max-lg:px-6 lg:col-start-2 lg:row-start-1 lg:place-self-end lg:mr-2 lg:px-2 flex items-center ">
+  {CountdownTimer(SecondsLeft())}
+</div>
                   </div>
                 </section>
                 {/* main img */}
@@ -925,19 +929,19 @@ function OpenAuctions() {
                          
                           
 
-                          {liveItem?.rightImage && (
+                          {liveItem?.frontImage && (
                             <div
-                              className="flex  min-w-fit relative p-6 hover:cursor-pointer"
+                              className="flex  min-w-fit relative p-4 hover:cursor-pointer"
                               onClick={() => {
                                 // BindVehicleImage(liveItem);
-                                setImages((liveItem?.rightImage).split(","));
+                                setImages((liveItem?.frontImage).split(","));
                                 setShowImageCarouselModal(true);
                               }}
                             >
                               <Image
-                                src={liveItem?.rightImage}
+                                src={liveItem?.frontImage}
                                 alt="i1"
-                                className="w-full h-full  object-center object-contain sm:rounded-lg "
+                                className="w-full h-full  object-center object-cover sm:rounded-lg "
                                 width={1000}
                                 height={540}
                               />
@@ -982,12 +986,12 @@ function OpenAuctions() {
                         # {liveItem?.vehicleIndexNo}
                       </p>
                     </div>
-                    <div className="lg:hidden col-span-2 w-fit md:w-full lg:w-fit h-7  lg:col-span-1  border border-indigo-400 bg-indigo-100   mt-4 md:mt-0 pt-px max-lg:px-6 lg:col-start-2 lg:row-start-1 lg:place-self-end lg:mr-2 lg:px-2">
+                    <div className="lg:hidden col-span-2 w-fit md:w-full lg:w-fit h-7  lg:col-span-1  border border-indigo-400 bg-indigo-100   mt-4 md:mt-0 pt-px max-lg:px-6 lg:col-start-2 lg:row-start-1 lg:place-self-end lg:mr-2 lg:px-2 flex items-center justify-center">
                       {CountdownTimer(SecondsLeft())}
                     </div>
                   </div>
                 </div>
-                  <div className="pt-4"><div className=" max-lg:hidden col-span-2    h-7    border border-indigo-400 bg-indigo-100    md:mt-0 pt-px max-lg:px-6 ">
+                  <div className="pt-4"><div className=" max-lg:hidden col-span-2    h-7    border border-indigo-400 bg-indigo-100    md:mt-0 pt-px max-lg:px-6 flex items-center justify-center">
                       {CountdownTimer(SecondsLeft())}
                     </div></div>
                   <div className="pb-8 max-md:hidden pt-8 ">
@@ -1660,13 +1664,13 @@ function OpenAuctions() {
                         <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
                           {upcoming &&
                             upcoming[1] &&
-                            upcoming[1].rightImage && (
+                            upcoming[1].frontImage && (
                               <Tab.Panel key="i1">
                                 <div className="text-sm py-2">
                                   Reg No. : {upcoming[1].registrationNumber}
                                 </div>
                                 <Image
-                                  src={upcoming[1].rightImage}
+                                  src={upcoming[1].frontImage}
                                   alt="i1"
                                   className="w-full h-full object-center object-cover border-red-500 border-8   sm:rounded-lg"
                                   width={500}
@@ -1869,17 +1873,17 @@ function OpenAuctions() {
                     </Tab.Panel>
                   )} */}
 
-                          {liveItem?.rightImage && (
+                          {liveItem?.frontImage && (
                             <div
                               className="flex-none min-w-fit relative p-6 hover:cursor-pointer"
                               onClick={() => {
                                 // BindVehicleImage(liveItem);
-                                setImages((liveItem?.rightImage).split(","));
+                                setImages((liveItem?.frontImage).split(","));
                                 setShowImageCarouselModal(true);
                               }}
                             >
                               <Image
-                                src={liveItem?.rightImage}
+                                src={liveItem?.frontImage}
                                 alt="i1"
                                 className="w-full h-full object-center object-cover sm:rounded-lg"
                                 width={900}
@@ -1912,11 +1916,11 @@ function OpenAuctions() {
                       />
                     </Tab.Panel>
                   )} */}
-                          {/* {liveItem.rightImage && (
+                          {/* {liveItem.frontImage && (
                     <Tab.Panel key="i4">
-                       <a href={liveItem.rightImage} target="_blank" rel="noopener noreferrer"></a>
+                       <a href={liveItem.frontImage} target="_blank" rel="noopener noreferrer"></a>
                       <Image
-                        src={liveItem.rightImage}
+                        src={liveItem.frontImage}
                         alt="i4"
                         className="w-full h-full object-center object-cover sm:rounded-lg"
                         width={500}
@@ -2024,7 +2028,7 @@ function OpenAuctions() {
                       )}
                     </Tab>
                   )}
-                  {liveItem.rightImage && (
+                  {liveItem.frontImage && (
                     <Tab
                       key="it4"
                       className="relative h-12 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
@@ -2034,7 +2038,7 @@ function OpenAuctions() {
                           <span className="absolute inset-0 rounded-md overflow-hidden">
                           <a href={liveItem.leftImage} target="_blank" rel="noopener noreferrer">
                             <Image
-                              src={liveItem.rightImage}
+                              src={liveItem.frontImage}
                               alt="altii4"
                               className="w-full h-full object-center object-cover"
                               width={100}
@@ -2411,7 +2415,8 @@ function BidHistory(data, liveItem) {
   // let dons=don.split(':')[0].trim()
 
   // console.log('004',dons);
-
+ 
+      
   return (
     <div>
       <div className="flow-root bg-white px-4 py-5 sm:rounded-lg sm:px-6 border border-gray-200">
@@ -2426,6 +2431,7 @@ function BidHistory(data, liveItem) {
                       {bid.name.split(":")[0].trim() === username
                         ? name
                         : "Dealer"}
+                        
                     </p>
                   </div>
                   <div>
@@ -2489,7 +2495,7 @@ function CountdownTimer(hhmmss: string) {
 
 
 
-    <div className="  flex h-7  justify-center       gap-1     text-indigo-500">
+    <div className="  flex   justify-center       gap-1     text-indigo-500">
       <div className="text-sm   font-bold uppercase ">
        Ends In
       </div> 
