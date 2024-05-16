@@ -83,7 +83,7 @@ export default function Navbar() {
       icon: <FontAwesomeIcon icon={faHammer} />,
     },
     {
-      name: "Selling Truck",
+      name: "Sell My Truck",
       href: "/sellacar",
       current: router.pathname == "/sellacar" ? true : false,
       icon: <FontAwesomeIcon icon={faCar} />,
