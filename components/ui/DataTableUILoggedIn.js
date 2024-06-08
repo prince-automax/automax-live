@@ -35,7 +35,7 @@ import moment from "moment";
 
           <p className="col-span-2 text-sm  flex">
             {" "}
-            {event?.location?.name}, {event?.location?.state?.name}
+            {event?.location?.state?.name}
           </p>
         </div>
         <div className="grid grid-cols-3 gap-1 space-x-2 ">
