@@ -42,7 +42,7 @@ export default function Example() {
      <HomePageEventCalender/>
 {/* <AllEventsTable/> */}
       <Cards />
-      <RecentlySold />
+      {/* <RecentlySold /> */}
       <LogoCloud />
       <DelearBenefits />
       <Advantages />
