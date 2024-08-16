@@ -348,7 +348,7 @@ function Events() {
                         <div className="sm:flex flex-wrap">
                           <div className="flex-auto">
                             <h1 className="   text-base  font-roboto font-bold  text-blue-800 uppercase">
-                              {item?.yearOfManufacture} {item?.make} -
+                              {item?.yearOfManufacture} {item?.model} -
                               {item.registrationNumber}
                             </h1>
                             <div className="text-sm font-medium text-black">
@@ -869,7 +869,7 @@ function Events() {
                         <div className="sm:flex flex-wrap">
                           <div className="flex-auto">
                             <h1 className="   text-base sm:text-lg   font-bold sm:font-semibold text-blue-800 uppercase">
-                              {item?.yearOfManufacture} {item?.make} -
+                              {item?.yearOfManufacture} {item?.model} -
                               {item.registrationNumber}
                             </h1>
                             <div className="text-sm font-medium text-black">
