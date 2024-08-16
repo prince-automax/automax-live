@@ -323,7 +323,7 @@ function WatchList() {
                         <div className="flex-auto">
                           <h1 className="   text-base sm:text-lg   font-bold sm:font-semibold text-blue-800 uppercase">
                             {item?.yearOfManufacture}
-                            {item?.make}
+                            {item?.model}
                             {/* {item?.model} -{" "} */}
                             {item.registrationNumber}
                           </h1>
@@ -687,7 +687,7 @@ function WatchList() {
                         <div className="flex-auto">
                           <h1 className="   text-base sm:text-lg   font-bold sm:font-semibold text-blue-800 uppercase">
                             {item?.yearOfManufacture}
-                            {item?.make}
+                            {item?.model}
                             {/* {item?.model} -{" "} */}
                             {item.registrationNumber}
                           </h1>
