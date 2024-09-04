@@ -44,6 +44,7 @@ query LiveEvents($take: Int!, $skip: Int!, $where: EventWhereInput) {
     startDate
     endDate
     noOfBids
+    firstVehicleBidTimeExpire
     location {
       name
       country
@@ -83,6 +84,7 @@ query UpcomingEvents($take: Int, $skip: Int!, $where: EventWhereInput) {
     eventCategory
     startDate
     noOfBids
+    firstVehicleBidTimeExpire
     endDate
     location {
       name

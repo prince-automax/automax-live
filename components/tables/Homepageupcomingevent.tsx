@@ -45,6 +45,9 @@ export function UpcomingEventHomePage({
       variables
     );
 
+ console.log("data table on upcoming event",data);
+ 
+
   useEffect(() => {
     refetch();
   }, [data]);
@@ -78,7 +81,7 @@ export function UpcomingEventHomePage({
     },
     {
       Header: "Closing Date",
-      accessor: "endDate",
+      accessor: "firstVehicleBidTimeExpire",
       Cell: ({ cell: { value } }) => EndDate(value),
     },
     
@@ -298,7 +301,7 @@ function MobielViewCard({
               <p className="col-span-2 text-sm flex   justify-start font-poppins font-medium text-[#0F172A] ">
                 {" "}
                 {moment(event.startDate).format(" Do-MMMM-YYYY")}{" "}
-                {moment(event.startDate).format(" ")}
+                {moment(event.startDate).format(" h:mm a")}
               </p>
             </div>
             <div className="grid grid-cols-3 gap-1 space-x-2">
@@ -308,8 +311,8 @@ function MobielViewCard({
 
               <p className="col-span-2  text-sm flex font-poppins font-medium text-[#0F172A]">
                 {" "}
-                {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
-                {moment(event.endDate).format(" ")}
+                {moment(event.firstVehicleBidTimeExpire).format(" Do-MMMM-YYYY")}{" "}
+                {moment(event.firstVehicleBidTimeExpire).format(" h:mm a")}
               </p>
             </div>
             <hr className="to-black shadow-2xl" />
