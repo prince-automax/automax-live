@@ -100,7 +100,7 @@ export default function AllEventsTable({
     },
     {
       Header: "Closing Date",
-      accessor: "endDate",
+      accessor: "firstVehicleBidTimeExpire",
       Cell: ({ cell: { value } }) => EndDate(value),
     },
   ];
