@@ -50,12 +50,14 @@ export default function EventsTable({
       },
     },
   };
-  const { data, isLoading, refetch } = useLiveEventsQuery<LiveEventsQuery>(
+  const { data, isLoading, refetch,isFetching } = useLiveEventsQuery<LiveEventsQuery>(
     graphQLClient({ Authorization: `Bearer ${accessToken}` }),
-    variables
+    variables,
+    {enabled:accessToken!="",refetchOnWindowFocus:false}
   );
 
 
+  console.log("Live event table", data);
   
 
   useEffect(() => {
@@ -158,7 +160,7 @@ export default function EventsTable({
     },
     {
       Header: "Closing Date",
-      accessor: "endDate",
+      accessor: "firstVehicleBidTimeExpire",
       Cell: ({ cell: { value } }) => EndDate(value),
     },
     {

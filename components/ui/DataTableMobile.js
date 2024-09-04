@@ -36,8 +36,8 @@ const DataTableMobile = ({ index1, event, allowDownload,showAlertModal,setShowAl
               Close Time <span>:</span>
             </p>
   
-            <p className="col-span-2  text-sm flex"> {moment(event.endDate).format(" Do-MMMM-YYYY")}{" "}
-                {moment(event.endDate).format(" h:mm a")}</p>
+            <p className="col-span-2  text-sm flex"> {moment(event.firstVehicleBidTimeExpire).format(" Do-MMMM-YYYY")}{" "}
+                {moment(event.firstVehicleBidTimeExpire).format(" h:mm a")}</p>
           </div>
           <hr className="to-black" />
           <div className="space-x-3 flex items-center   " >

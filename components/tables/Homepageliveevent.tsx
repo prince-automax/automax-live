@@ -61,6 +61,7 @@ export  function LiveEventHomePage({
     variablesLive
   );
 
+  console.log('evebt ',data);
   
 
   useEffect(() => {
@@ -91,7 +92,7 @@ export  function LiveEventHomePage({
     },
     {
       Header: "Closing Date",
-      accessor: "endDate",
+      accessor: "firstVehicleBidTimeExpire",
       Cell: ({ cell: { value } }) => EndDate(value),
     },
   ];
