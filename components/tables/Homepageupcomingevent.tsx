@@ -105,28 +105,35 @@ export function UpcomingEventHomePage({
                 </p>)
 }
               <>
-                <div className="sm:hidden">
-                  {data?.upcomingEvents?.map((event, eventIdx) => {
-                    return (
-                      <MobielViewCard
-                        key={eventIdx}
-                        index1={eventIdx}
-                        event={event}
-                        registered={registered}
-                        registeredStatus={registeredStatus}
-                        allowDownload={
-                          accessToken !== null && accessToken !== ""
-                        }
-                      />
-                    );
-                  })}
-                </div>
+              <div className="sm:hidden">
+  {data?.upcomingEvents?.map((event, eventIdx) => {
+    // Ensure the conditional logic is correctly placed
+    if (data?.upcomingEvents) {
+      return (
+        <MobielViewCard
+          key={eventIdx}
+          index1={eventIdx}
+          event={event}
+          registered={registered}
+          registeredStatus={registeredStatus}
+          allowDownload={
+            accessToken !== null && accessToken !== ""
+          }
+        />
+      );
+    }
+    return null; // Return null if the condition is not met
+  })}
+</div>
+
                 <div className="hidden sm:block">
-                  <Datatable
-                    hideSearch={hideSearch}
-                    tableData={data?.upcomingEvents}
-                    tableColumns={columns}
-                  />
+                {data?.upcomingEvents && (
+                   <Datatable
+                   hideSearch={hideSearch}
+                   tableData={data?.upcomingEvents || []}
+                   tableColumns={columns}
+                 />
+              )} 
                 </div>
               </>
               {/* )}  */}

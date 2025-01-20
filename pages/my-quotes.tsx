@@ -3,7 +3,6 @@ import DashboardTemplate from "../components/templates/DashboardTemplate";
 import withPrivateRoute from "../utils/withPrivateRoute";
 import Datatable from "../components/ui/Datatable";
 import Loader from "../components/ui/Loader";
-
 import {
   useActiveBidsQuery,
   ActiveBidsQueryVariables,
@@ -11,7 +10,7 @@ import {
   ActiveBidsQuery,
   UpdateVehicleMutationVariables,
   useUpdateVehicleMutation,
-  useMyQuotesQuery,      
+  useMyQuotesQuery,
   MyQuotesQuery,
   useQueryQuery,
   QueryQueryVariables,
@@ -19,7 +18,7 @@ import {
 import graphQLClient from "@utils/useGQLQuery";
 import moment from "moment";
 
-function MyQuotes() {
+const  MyQuotes=()=> {
   const [accessToken, setAccessToken] = useState("");
   const [userId, setUserId] = useState("");
   const [apiInterval, setAPIInterval] = useState(60000);
@@ -91,6 +90,9 @@ function MyQuotes() {
       enabled: accessToken != "" && userId != "",
     }
   );
+
+  console.log('data',data);
+  
 
   const callUpdateVehicle =
     useUpdateVehicleMutation<UpdateVehicleMutationVariables>(
