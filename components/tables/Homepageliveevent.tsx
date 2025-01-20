@@ -142,11 +142,13 @@ export  function LiveEventHomePage({
                   })}
                 </div>
                 <div className="hidden sm:block">
-                  <Datatable
+              {data?.liveEvents && ( 
+                <Datatable
                     hideSearch={hideSearch}
-                    tableData={data?.liveEvents}
+                    tableData={data?.liveEvents || []}
                     tableColumns={columns}
                   />
+                )}
                 </div>
               </>
               {/* )} */}
