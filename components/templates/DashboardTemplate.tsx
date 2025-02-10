@@ -68,6 +68,7 @@ export default function DashboardTemplate({ children, heading, subHeading }) {
     graphQLClient({ Authorization: `Bearer ${accessToken}` }),
   )
   
+ console.log('upcoming',upcoming);
  
 
 
