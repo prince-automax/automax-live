@@ -40,7 +40,7 @@ export  function LiveEventHomePage({
 
   const variablesLive = {
     skip: 0,
-    take: 10,
+    take: 100,
     where: {
       OR: [
         {

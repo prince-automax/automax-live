@@ -39,7 +39,7 @@ export default function EventsTable({
 
   const variables = {
     skip: 0,
-    take: 10,
+    take: 100,
     where: {
       eventCategory: {
         equals: eventCategory,
