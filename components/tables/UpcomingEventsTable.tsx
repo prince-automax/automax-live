@@ -39,10 +39,13 @@ export default function UpcomingEventsTable({
     }
   }, []);
 
+  
   const variables = {
     skip: 0,
-    take: 10,
+    take: 100,
   };
+
+
   const { data, isLoading, refetch } =
     useUpcomingEventsQuery<UpcomingEventsQuery>(
       graphQLClient({ Authorization: `Bearer ${accessToken}` }),

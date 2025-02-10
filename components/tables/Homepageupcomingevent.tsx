@@ -37,7 +37,7 @@ export function UpcomingEventHomePage({
 
   const variables = {
     skip: 0,
-    take: 10,
+    take: 100,
   };
   const { data, isLoading, refetch } =
     useUpcomingEventsQuery<UpcomingEventsQuery>(
