@@ -303,6 +303,8 @@ function DownloadButton({ file, allowDownload }) {
   const showAlertModal = () => {
     setShowAlert(true);
   };
+  console.log('testing');
+  
 
   const redirectToLoginPage = () => {
     setShowAlert(false);
